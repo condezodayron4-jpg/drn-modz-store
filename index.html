@@ -11,49 +11,31 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
-/* ============================================
-   𝘿𝙍𝙉 𝙈𝙊𝘿𝕃 — CORE VARIABLES
-============================================ */
 :root{
-  --bg:#050505;
-  --bg-2:#0a0a0a;
-  --bg-3:#111;
-  --panel:#0c0c0c;
-  --border:#1a1a1a;
-  --border-hi:#00FF66;
-  --neon:#00FF66;
-  --neon-2:#00e0ff;
+  --bg:#050505;--bg-2:#0a0a0a;--bg-3:#111;--panel:#0c0c0c;--border:#1a1a1a;
+  --border-hi:#00FF66;--neon:#00FF66;--neon-2:#00e0ff;
   --verify:#1d9bf0;
   --verify-glow:0 0 8px rgba(29,155,240,.6), 0 0 20px rgba(29,155,240,.3);
-  --danger:#ff2a55;
-  --warn:#ffb400;
-  --text:#d8d8d8;
-  --text-dim:#7a7a7a;
-  --text-bright:#ffffff;
+  --danger:#ff2a55;--warn:#ffb400;
+  --text:#d8d8d8;--text-dim:#7a7a7a;--text-bright:#ffffff;
   --glow:0 0 8px rgba(0,255,102,.55), 0 0 22px rgba(0,255,102,.25);
   --glow-cyan:0 0 8px rgba(0,224,255,.55), 0 0 22px rgba(0,224,255,.25);
   --font-mono:'JetBrains Mono', ui-monospace, Menlo, monospace;
   --font-display:'Orbitron', sans-serif;
   --font-cyber:'Share Tech Mono', monospace;
 }
-
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
 body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:var(--font-mono);
-  font-size:14px;
-  overflow-x:hidden;
-  min-height:100vh;
+  background:var(--bg);color:var(--text);font-family:var(--font-mono);font-size:14px;
+  overflow-x:hidden;min-height:100vh;
   background-image:
     radial-gradient(ellipse at 20% 0%, rgba(0,255,102,.05), transparent 60%),
     radial-gradient(ellipse at 80% 100%, rgba(0,224,255,.04), transparent 60%),
     linear-gradient(180deg,#050505 0%,#070707 100%);
 }
 body::before{
-  content:"";
-  position:fixed;inset:0;
+  content:"";position:fixed;inset:0;
   background:repeating-linear-gradient(0deg, rgba(255,255,255,.015) 0 1px, transparent 1px 3px);
   pointer-events:none;z-index:1;
 }
@@ -65,66 +47,48 @@ input,textarea,select{font-family:inherit;color:inherit}
 ::-webkit-scrollbar-thumb{background:#1a1a1a;border-radius:3px}
 ::-webkit-scrollbar-thumb:hover{background:var(--neon)}
 
-/* ============================================
-   LAYOUT
-============================================ */
-#app{
-  position:relative;z-index:2;
-  max-width:720px;margin:0 auto;
-  padding:0 0 90px 0;min-height:100vh;
-}
+#app{position:relative;z-index:2;max-width:720px;margin:0 auto;padding:0 0 90px 0;min-height:100vh}
 
-/* CONFIG ERROR BANNER */
-.config-error{
-  position:fixed;top:0;left:0;right:0;
-  background:linear-gradient(135deg,#1a0a0a,#0a0a0a);
-  border-bottom:2px solid var(--danger);
-  padding:14px 16px;
-  z-index:1000;
+/* STATUS BANNER */
+.status-banner{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:10px 14px;
   display:none;
   animation:slideDown .4s;
+  font-size:11px;letter-spacing:1px;
+  border-bottom:1px solid;
 }
-.config-error.show{display:block}
+.status-banner.show{display:block}
+.status-banner.demo{
+  background:linear-gradient(135deg,rgba(255,180,0,.15),rgba(255,180,0,.05));
+  border-color:var(--warn);color:var(--warn);
+}
+.status-banner.error{
+  background:linear-gradient(135deg,rgba(255,42,85,.15),rgba(255,42,85,.05));
+  border-color:var(--danger);color:var(--danger);
+}
+.status-banner.ok{
+  background:linear-gradient(135deg,rgba(0,255,102,.12),rgba(0,255,102,.04));
+  border-color:var(--neon);color:var(--neon);
+}
+.status-banner i{margin-right:6px}
+.status-banner .dismiss{
+  float:right;opacity:.7;margin-left:10px;
+}
+.status-banner .dismiss:hover{opacity:1}
 @keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
-.config-error .content{
-  max-width:720px;margin:0 auto;
-  display:flex;align-items:flex-start;gap:12px;
-}
-.config-error i{
-  color:var(--danger);font-size:20px;
-  text-shadow:0 0 8px rgba(255,42,85,.6);
-  flex-shrink:0;margin-top:2px;
-}
-.config-error .text{flex:1}
-.config-error h4{
-  font-family:var(--font-display);
-  font-size:12px;letter-spacing:2px;
-  color:var(--danger);margin-bottom:6px;
-}
-.config-error p{
-  font-size:11px;color:var(--text);line-height:1.5;
-}
-.config-error code{
-  background:#0a0a0a;padding:2px 6px;border-radius:3px;
-  color:var(--neon);font-size:10px;
-}
 
-/* HEADER */
 .topbar{
   position:sticky;top:0;z-index:50;
-  background:rgba(5,5,5,.88);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:rgba(5,5,5,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid var(--border);
   padding:12px 14px;
   display:flex;align-items:center;justify-content:space-between;gap:10px;
 }
 .brand{
-  font-family:var(--font-display);
-  font-weight:900;font-size:18px;letter-spacing:2px;
-  color:var(--text-bright);
-  cursor:pointer;user-select:none;
-  display:flex;align-items:center;gap:8px;
-  transition:transform .2s;
+  font-family:var(--font-display);font-weight:900;font-size:18px;letter-spacing:2px;
+  color:var(--text-bright);cursor:pointer;user-select:none;
+  display:flex;align-items:center;gap:8px;transition:transform .2s;
 }
 .brand:hover{transform:translateY(-1px)}
 .brand .dot{
@@ -132,49 +96,36 @@ input,textarea,select{font-family:inherit;color:inherit}
   background:var(--neon);box-shadow:var(--glow);
   animation:pulse 1.6s infinite;
 }
-@keyframes pulse{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:.4;transform:scale(.8)}
-}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
 .brand .accent{color:var(--neon);text-shadow:var(--glow)}
 .brand-tag{
-  font-size:9px;letter-spacing:2px;
-  color:var(--text-dim);
-  border:1px solid var(--border);
-  padding:2px 6px;border-radius:3px;
-  margin-left:4px;
+  font-size:9px;letter-spacing:2px;color:var(--text-dim);
+  border:1px solid var(--border);padding:2px 6px;border-radius:3px;margin-left:4px;
 }
-
 .top-actions{display:flex;gap:8px;align-items:center}
 .icon-btn{
   width:38px;height:38px;border-radius:10px;
   background:var(--panel);border:1px solid var(--border);
-  display:grid;place-items:center;
-  color:var(--text);transition:all .2s;font-size:14px;
+  display:grid;place-items:center;color:var(--text);transition:all .2s;font-size:14px;
 }
 .icon-btn:hover{border-color:var(--neon);color:var(--neon);box-shadow:var(--glow)}
 .icon-btn.search{
   background:linear-gradient(135deg,rgba(0,255,102,.1),rgba(0,224,255,.08));
-  border-color:rgba(0,255,102,.4);
-  color:var(--neon);
+  border-color:rgba(0,255,102,.4);color:var(--neon);
 }
-
 .top-avatar{
   width:36px;height:36px;border-radius:50%;
   background:#1a1a1a;border:1.5px solid var(--neon);
   background-size:cover;background-position:center;
   display:grid;place-items:center;
   color:var(--neon);font-weight:800;font-size:13px;
-  font-family:var(--font-cyber);
-  cursor:pointer;transition:all .2s;
-  position:relative;overflow:hidden;
-  text-shadow:var(--glow);
+  font-family:var(--font-cyber);cursor:pointer;transition:all .2s;
+  position:relative;overflow:hidden;text-shadow:var(--glow);
 }
 .top-avatar:hover{transform:scale(1.05);box-shadow:var(--glow)}
 .top-avatar::after{
   content:"\f030";font-family:"Font Awesome 6 Free";font-weight:900;
-  position:absolute;inset:0;
-  background:rgba(0,0,0,.75);color:var(--neon);
+  position:absolute;inset:0;background:rgba(0,0,0,.75);color:var(--neon);
   display:grid;place-items:center;font-size:12px;
   opacity:0;transition:opacity .2s;
 }
@@ -192,8 +143,7 @@ input,textarea,select{font-family:inherit;color:inherit}
 .auth-card{
   width:100%;max-width:420px;
   background:linear-gradient(180deg,#0a0a0a,#070707);
-  border:1px solid var(--border);
-  border-radius:14px;padding:28px 22px;
+  border:1px solid var(--border);border-radius:14px;padding:28px 22px;
   position:relative;overflow:hidden;
 }
 .auth-card::before{
@@ -203,8 +153,7 @@ input,textarea,select{font-family:inherit;color:inherit}
 }
 .auth-logo{text-align:center;margin-bottom:22px}
 .auth-logo .big{
-  font-family:var(--font-display);
-  font-size:28px;font-weight:900;letter-spacing:4px;
+  font-family:var(--font-display);font-size:28px;font-weight:900;letter-spacing:4px;
   color:var(--text-bright);
 }
 .auth-logo .big .g{color:var(--neon);text-shadow:var(--glow)}
@@ -219,18 +168,15 @@ input,textarea,select{font-family:inherit;color:inherit}
 }
 .auth-tabs button{
   flex:1;padding:10px;border-radius:8px;
-  font-size:12px;letter-spacing:2px;
-  color:var(--text-dim);transition:all .2s;
+  font-size:12px;letter-spacing:2px;color:var(--text-dim);transition:all .2s;
 }
 .auth-tabs button.active{
-  background:var(--neon);color:#000;font-weight:700;
-  box-shadow:var(--glow);
+  background:var(--neon);color:#000;font-weight:700;box-shadow:var(--glow);
 }
 .field{margin-bottom:14px}
 .field label{
   display:block;font-size:10px;letter-spacing:2px;
-  color:var(--text-dim);margin-bottom:6px;
-  text-transform:uppercase;
+  color:var(--text-dim);margin-bottom:6px;text-transform:uppercase;
 }
 .field input, .field textarea{
   width:100%;padding:12px 14px;
@@ -239,8 +185,7 @@ input,textarea,select{font-family:inherit;color:inherit}
   font-size:13px;outline:none;transition:all .2s;
 }
 .field input:focus, .field textarea:focus{
-  border-color:var(--neon);
-  box-shadow:0 0 0 3px rgba(0,255,102,.12);
+  border-color:var(--neon);box-shadow:0 0 0 3px rgba(0,255,102,.12);
 }
 .btn-primary{
   width:100%;padding:13px;
@@ -248,15 +193,17 @@ input,textarea,select{font-family:inherit;color:inherit}
   font-weight:800;letter-spacing:3px;font-size:12px;
   border-radius:8px;text-transform:uppercase;
   transition:all .2s;box-shadow:var(--glow);
+  display:flex;align-items:center;justify-content:center;gap:8px;
 }
-.btn-primary:hover{transform:translateY(-1px);filter:brightness(1.1)}
-.btn-primary:disabled{opacity:.5;cursor:not-allowed}
+.btn-primary:hover:not(:disabled){transform:translateY(-1px);filter:brightness(1.1)}
+.btn-primary:disabled{opacity:.6;cursor:not-allowed}
 .auth-msg{
   font-size:11px;text-align:center;margin-top:12px;
   min-height:16px;line-height:1.5;
 }
 .auth-msg.err{color:var(--danger)}
 .auth-msg.ok{color:var(--neon)}
+.auth-msg.warn{color:var(--warn)}
 
 .sec-head{
   display:flex;align-items:center;justify-content:space-between;
@@ -264,22 +211,16 @@ input,textarea,select{font-family:inherit;color:inherit}
   border-bottom:1px dashed var(--border);
 }
 .sec-title{
-  font-family:var(--font-display);
-  font-size:13px;letter-spacing:3px;
-  color:var(--text-bright);
-  display:flex;align-items:center;gap:10px;
+  font-family:var(--font-display);font-size:13px;letter-spacing:3px;
+  color:var(--text-bright);display:flex;align-items:center;gap:10px;
 }
 .sec-title i{color:var(--neon);text-shadow:var(--glow)}
 .sec-title::before{content:">";color:var(--neon)}
 
-.search-bar{
-  display:flex;gap:8px;margin-bottom:16px;
-  position:relative;
-}
+.search-bar{display:flex;gap:8px;margin-bottom:16px;position:relative}
 .search-bar i.search-icon{
   position:absolute;left:14px;top:50%;transform:translateY(-50%);
-  color:var(--neon);font-size:14px;text-shadow:var(--glow);
-  pointer-events:none;
+  color:var(--neon);font-size:14px;text-shadow:var(--glow);pointer-events:none;
 }
 .search-bar input{
   flex:1;padding:12px 14px 12px 40px;
@@ -299,43 +240,32 @@ input,textarea,select{font-family:inherit;color:inherit}
   background:rgba(0,0,0,.3);
 }
 .empty-state i{
-  font-size:42px;color:var(--neon);
-  text-shadow:var(--glow);margin-bottom:14px;
-  animation:float 3s ease-in-out infinite;
+  font-size:42px;color:var(--neon);text-shadow:var(--glow);
+  margin-bottom:14px;animation:float 3s ease-in-out infinite;
 }
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .empty-state h3{
-  font-family:var(--font-display);
-  font-size:14px;letter-spacing:3px;
+  font-family:var(--font-display);font-size:14px;letter-spacing:3px;
   color:var(--text-bright);margin-bottom:8px;
 }
 .empty-state p{font-size:11px;color:var(--text-dim);letter-spacing:1px}
 
 .post-card{
   background:linear-gradient(180deg,#0a0a0a,#070707);
-  border:1px solid var(--border);
-  border-radius:14px;margin-bottom:14px;
-  overflow:hidden;transition:all .25s;
-  position:relative;
+  border:1px solid var(--border);border-radius:14px;margin-bottom:14px;
+  overflow:hidden;transition:all .25s;position:relative;
 }
 .post-card:hover{border-color:#2a2a2a;transform:translateY(-2px)}
-
 .post-cover{
-  width:100%;aspect-ratio:1/1;
-  background:#0a0a0a;
-  position:relative;overflow:hidden;
-  border-bottom:1px solid var(--border);
+  width:100%;aspect-ratio:1/1;background:#0a0a0a;
+  position:relative;overflow:hidden;border-bottom:1px solid var(--border);
 }
-.post-cover img{
-  width:100%;height:100%;
-  object-fit:cover;object-position:center;
-  display:block;
-}
+.post-cover img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .post-cover.no-cover{
   display:grid;place-items:center;
   background:linear-gradient(135deg,#0a0a0a 25%,#111 50%,#0a0a0a 75%);
 }
-.post-cover.no-cover i{font-size:48px;color:#1a1a1a;}
+.post-cover.no-cover i{font-size:48px;color:#1a1a1a}
 .post-cover::after{
   content:"";position:absolute;inset:0;
   background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.7));
@@ -343,33 +273,20 @@ input,textarea,select{font-family:inherit;color:inherit}
 }
 .post-size-badge{
   position:absolute;top:10px;right:10px;z-index:2;
-  background:rgba(0,0,0,.8);
-  border:1px solid var(--neon);
-  color:var(--neon);
-  padding:4px 8px;border-radius:4px;
+  background:rgba(0,0,0,.8);border:1px solid var(--neon);
+  color:var(--neon);padding:4px 8px;border-radius:4px;
   font-size:10px;letter-spacing:1px;font-weight:700;
-  text-shadow:var(--glow);
-  backdrop-filter:blur(4px);
+  text-shadow:var(--glow);backdrop-filter:blur(4px);
 }
-
 .post-body{padding:14px}
-.post-head{
-  display:flex;align-items:center;gap:10px;margin-bottom:10px;
-}
-
+.post-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .avatar{
-  width:40px;height:40px;border-radius:50%;
-  background:#1a1a1a;
-  border:1.5px solid var(--border);
-  background-size:cover;background-position:center;
-  flex-shrink:0;
-  display:grid;place-items:center;
-  font-weight:800;font-size:14px;
-  font-family:var(--font-cyber);
-  color:var(--neon);
-  text-shadow:var(--glow);
-  position:relative;overflow:hidden;
-  transition:all .2s;
+  width:40px;height:40px;border-radius:50%;background:#1a1a1a;
+  border:1.5px solid var(--border);background-size:cover;background-position:center;
+  flex-shrink:0;display:grid;place-items:center;
+  font-weight:800;font-size:14px;font-family:var(--font-cyber);
+  color:var(--neon);text-shadow:var(--glow);
+  position:relative;overflow:hidden;transition:all .2s;
   background-image:
     linear-gradient(135deg, rgba(0,255,102,.15), rgba(0,224,255,.1)),
     radial-gradient(circle at 30% 30%, rgba(0,255,102,.2), transparent 60%);
@@ -380,54 +297,38 @@ input,textarea,select{font-family:inherit;color:inherit}
 .avatar.clickable:hover{transform:scale(1.05);box-shadow:var(--glow)}
 .avatar.clickable::after{
   content:"\f030";font-family:"Font Awesome 6 Free";font-weight:900;
-  position:absolute;inset:0;
-  background:rgba(0,0,0,.75);color:var(--neon);
+  position:absolute;inset:0;background:rgba(0,0,0,.75);color:var(--neon);
   display:grid;place-items:center;font-size:14px;
   opacity:0;transition:opacity .2s;
 }
 .avatar.clickable:hover::after{opacity:1}
 .avatar.lg.clickable::after{font-size:22px}
-
-.avatar:not(.has-img){animation:cyberShift 6s ease-in-out infinite;}
+.avatar:not(.has-img){animation:cyberShift 6s ease-in-out infinite}
 @keyframes cyberShift{
   0%,100%{text-shadow:0 0 6px rgba(0,255,102,.6)}
   50%{text-shadow:0 0 12px rgba(0,255,102,.9), 2px 0 0 rgba(0,224,255,.3), -2px 0 0 rgba(255,42,85,.2)}
 }
-
 .post-user{display:flex;flex-direction:column;flex:1;min-width:0}
 .post-user .name{
   font-size:13px;color:var(--text-bright);font-weight:600;
-  display:flex;align-items:center;gap:6px;
-  cursor:pointer;
+  display:flex;align-items:center;gap:6px;cursor:pointer;
 }
 .post-user .name:hover{color:var(--neon)}
 .verified{color:var(--verify);font-size:12px;text-shadow:var(--verify-glow)}
 .post-user .meta{font-size:10px;color:var(--text-dim);letter-spacing:1px}
-.post-title{
-  font-size:15px;font-weight:700;color:var(--text-bright);
-  margin-bottom:6px;line-height:1.35;
-}
-.post-desc{
-  font-size:12px;color:var(--text);line-height:1.55;
-  margin-bottom:12px;word-wrap:break-word;
-}
-.post-actions{
-  display:flex;gap:8px;padding-top:10px;
-  border-top:1px dashed var(--border);
-}
+.post-title{font-size:15px;font-weight:700;color:var(--text-bright);margin-bottom:6px;line-height:1.35}
+.post-desc{font-size:12px;color:var(--text);line-height:1.55;margin-bottom:12px;word-wrap:break-word}
+.post-actions{display:flex;gap:8px;padding-top:10px;border-top:1px dashed var(--border)}
 .btn{
   flex:1;padding:10px;border-radius:8px;
-  font-size:11px;letter-spacing:2px;font-weight:700;
-  text-transform:uppercase;
-  border:1px solid var(--border);
-  background:#070707;color:var(--text);
+  font-size:11px;letter-spacing:2px;font-weight:700;text-transform:uppercase;
+  border:1px solid var(--border);background:#070707;color:var(--text);
   transition:all .2s;
   display:flex;align-items:center;justify-content:center;gap:6px;
 }
 .btn:hover{border-color:var(--neon);color:var(--neon)}
 .btn.download{
-  background:var(--neon);color:#000;border-color:var(--neon);
-  box-shadow:var(--glow);
+  background:var(--neon);color:#000;border-color:var(--neon);box-shadow:var(--glow);
 }
 .btn.download:hover{filter:brightness(1.15)}
 .btn.danger{color:var(--danger);border-color:#2a0a12}
@@ -435,26 +336,16 @@ input,textarea,select{font-family:inherit;color:inherit}
 
 .upload-card{
   background:linear-gradient(180deg,#0a0a0a,#070707);
-  border:1px solid var(--border);
-  border-radius:14px;padding:18px;
+  border:1px solid var(--border);border-radius:14px;padding:18px;
 }
 .drop-zone{
-  border:2px dashed var(--border);
-  border-radius:12px;padding:30px 16px;
-  text-align:center;transition:all .25s;
-  cursor:pointer;background:rgba(0,0,0,.3);
+  border:2px dashed var(--border);border-radius:12px;padding:30px 16px;
+  text-align:center;transition:all .25s;cursor:pointer;background:rgba(0,0,0,.3);
 }
-.drop-zone:hover,.drop-zone.drag{
-  border-color:var(--neon);
-  background:rgba(0,255,102,.04);
-}
-.drop-zone i{
-  font-size:36px;color:var(--neon);
-  text-shadow:var(--glow);margin-bottom:10px;
-}
+.drop-zone:hover,.drop-zone.drag{border-color:var(--neon);background:rgba(0,255,102,.04)}
+.drop-zone i{font-size:36px;color:var(--neon);text-shadow:var(--glow);margin-bottom:10px}
 .drop-zone h4{
-  font-family:var(--font-display);
-  font-size:12px;letter-spacing:2px;
+  font-family:var(--font-display);font-size:12px;letter-spacing:2px;
   color:var(--text-bright);margin-bottom:4px;
 }
 .drop-zone p{font-size:10px;color:var(--text-dim);letter-spacing:1px}
@@ -474,62 +365,43 @@ input,textarea,select{font-family:inherit;color:inherit}
 }
 .progress.show{display:block}
 .progress-bar{
-  height:100%;background:var(--neon);
-  box-shadow:var(--glow);width:0%;
+  height:100%;background:var(--neon);box-shadow:var(--glow);width:0%;
   transition:width .3s;
 }
 
 .profile-head{
   background:linear-gradient(180deg,#0a0a0a,#070707);
-  border:1px solid var(--border);
-  border-radius:14px;overflow:hidden;
-  margin-bottom:14px;
+  border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:14px;
 }
 .cover{
   height:140px;background:#0a0a0a;
-  background-size:cover;background-position:center;
-  position:relative;
+  background-size:cover;background-position:center;position:relative;
 }
 .cover::after{
   content:"";position:absolute;inset:0;
   background:linear-gradient(180deg,transparent 40%,rgba(5,5,5,.9));
 }
 .profile-info{
-  padding:0 18px 18px;
-  display:flex;align-items:flex-end;gap:14px;
+  padding:0 18px 18px;display:flex;align-items:flex-end;gap:14px;
   margin-top:-44px;position:relative;z-index:2;
 }
-.profile-info .avatar{
-  border:3px solid var(--bg);
-  box-shadow:0 0 0 1px var(--border);
-}
+.profile-info .avatar{border:3px solid var(--bg);box-shadow:0 0 0 1px var(--border)}
 .profile-meta{flex:1;min-width:0;padding-bottom:4px}
 .profile-meta h2{
-  font-family:var(--font-display);
-  font-size:16px;letter-spacing:2px;
-  color:var(--text-bright);
-  display:flex;align-items:center;gap:6px;
-  word-break:break-word;
+  font-family:var(--font-display);font-size:16px;letter-spacing:2px;
+  color:var(--text-bright);display:flex;align-items:center;gap:6px;word-break:break-word;
 }
 .profile-meta .email{font-size:10px;color:var(--text-dim);letter-spacing:1px;margin-top:2px}
-.stats{
-  display:flex;gap:16px;padding:0 18px 14px;
-  border-bottom:1px dashed var(--border);
-}
+.stats{display:flex;gap:16px;padding:0 18px 14px;border-bottom:1px dashed var(--border)}
 .stat{text-align:center;flex:1}
-.stat .n{
-  font-size:16px;font-weight:800;color:var(--neon);
-  text-shadow:var(--glow);
-}
+.stat .n{font-size:16px;font-weight:800;color:var(--neon);text-shadow:var(--glow)}
 .stat .l{font-size:9px;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
 .profile-actions{padding:14px 18px;display:flex;gap:8px}
 
 .bottom-nav{
   position:fixed;bottom:0;left:0;right:0;
-  background:rgba(5,5,5,.95);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-top:1px solid var(--border);
-  z-index:40;
+  background:rgba(5,5,5,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-top:1px solid var(--border);z-index:40;
   display:flex;justify-content:space-around;
   padding:8px 4px calc(8px + env(safe-area-inset-bottom));
   max-width:720px;margin:0 auto;
@@ -546,48 +418,35 @@ input,textarea,select{font-family:inherit;color:inherit}
 .nav-btn.upload-btn i{
   background:var(--neon);color:#000;
   width:42px;height:42px;border-radius:50%;
-  display:grid;place-items:center;
-  box-shadow:var(--glow);
+  display:grid;place-items:center;box-shadow:var(--glow);
   margin-top:-18px;font-size:18px;
 }
 
 .modal-bg{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,.88);
+  position:fixed;inset:0;background:rgba(0,0,0,.88);
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  z-index:100;
-  display:none;align-items:center;justify-content:center;
-  padding:16px;
-  animation:fadeIn .25s;
+  z-index:100;display:none;align-items:center;justify-content:center;
+  padding:16px;animation:fadeIn .25s;
 }
 .modal-bg.show{display:flex}
 .modal{
   background:linear-gradient(180deg,#0a0a0a,#050505);
-  border:1px solid var(--neon);
-  border-radius:14px;padding:22px;
-  width:100%;max-width:420px;
-  box-shadow:0 0 40px rgba(0,255,102,.2);
-  animation:modalIn .3s;
-  max-height:90vh;overflow-y:auto;
+  border:1px solid var(--neon);border-radius:14px;padding:22px;
+  width:100%;max-width:420px;box-shadow:0 0 40px rgba(0,255,102,.2);
+  animation:modalIn .3s;max-height:90vh;overflow-y:auto;
 }
 @keyframes modalIn{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
 .modal h3{
-  font-family:var(--font-display);
-  font-size:14px;letter-spacing:3px;
-  color:var(--neon);text-shadow:var(--glow);
-  margin-bottom:14px;
+  font-family:var(--font-display);font-size:14px;letter-spacing:3px;
+  color:var(--neon);text-shadow:var(--glow);margin-bottom:14px;
   display:flex;align-items:center;gap:10px;
 }
-.modal-close{
-  float:right;color:var(--text-dim);
-  font-size:18px;padding:4px;
-}
+.modal-close{float:right;color:var(--text-dim);font-size:18px;padding:4px}
 .modal-close:hover{color:var(--danger)}
 
 .ad-container{
   background:#000;border:1px solid var(--neon);
-  border-radius:10px;padding:20px;
-  text-align:center;margin:14px 0;
+  border-radius:10px;padding:20px;text-align:center;margin:14px 0;
   position:relative;overflow:hidden;
 }
 .ad-container::before{
@@ -596,23 +455,15 @@ input,textarea,select{font-family:inherit;color:inherit}
   animation:sweep 2s infinite;
 }
 @keyframes sweep{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-.ad-container .ad-label{
-  font-size:9px;letter-spacing:3px;color:var(--text-dim);
-  margin-bottom:10px;
-}
+.ad-container .ad-label{font-size:9px;letter-spacing:3px;color:var(--text-dim);margin-bottom:10px}
 .ad-slot{
-  min-height:200px;
-  background:#0a0a0a;
-  border:1px dashed var(--border);
-  border-radius:8px;
+  min-height:200px;background:#0a0a0a;
+  border:1px dashed var(--border);border-radius:8px;
   display:grid;place-items:center;
   color:var(--text-dim);font-size:11px;letter-spacing:2px;
   position:relative;z-index:1;
 }
-.ad-timer{
-  margin-top:12px;font-size:11px;color:var(--neon);
-  letter-spacing:2px;
-}
+.ad-timer{margin-top:12px;font-size:11px;color:var(--neon);letter-spacing:2px}
 .ad-timer i{margin-right:6px}
 .download-ready{display:none;margin-top:14px;animation:fadeIn .4s}
 .download-ready.show{display:block}
@@ -620,8 +471,7 @@ input,textarea,select{font-family:inherit;color:inherit}
 .admin-user{
   display:flex;align-items:center;gap:10px;
   padding:10px;background:#070707;
-  border:1px solid var(--border);
-  border-radius:10px;margin-bottom:8px;
+  border:1px solid var(--border);border-radius:10px;margin-bottom:8px;
   transition:all .2s;
 }
 .admin-user:hover{border-color:#2a2a2a}
@@ -638,8 +488,7 @@ input,textarea,select{font-family:inherit;color:inherit}
 .toggle{
   width:44px;height:24px;border-radius:12px;
   background:#1a1a1a;border:1px solid var(--border);
-  position:relative;cursor:pointer;transition:all .2s;
-  flex-shrink:0;
+  position:relative;cursor:pointer;transition:all .2s;flex-shrink:0;
 }
 .toggle::after{
   content:"";position:absolute;top:2px;left:2px;
@@ -654,12 +503,12 @@ input,textarea,select{font-family:inherit;color:inherit}
   background:#0a0a0a;border:1px solid var(--neon);
   padding:12px 20px;border-radius:10px;
   font-size:11px;letter-spacing:2px;color:var(--neon);
-  box-shadow:var(--glow);
-  z-index:200;transition:transform .3s;
+  box-shadow:var(--glow);z-index:200;transition:transform .3s;
   max-width:90vw;text-align:center;
 }
 .toast.show{transform:translateX(-50%) translateY(0)}
 .toast.err{border-color:var(--danger);color:var(--danger);box-shadow:0 0 8px rgba(255,42,85,.5)}
+.toast.warn{border-color:var(--warn);color:var(--warn)}
 
 .loader{
   display:inline-block;width:14px;height:14px;
@@ -680,15 +529,10 @@ input,textarea,select{font-family:inherit;color:inherit}
 </head>
 <body>
 
-<!-- CONFIG ERROR BANNER -->
-<div class="config-error" id="configError">
-  <div class="content">
-    <i class="fa-solid fa-triangle-exclamation"></i>
-    <div class="text">
-      <h4>ERROR DE CONFIGURACIÓN FIREBASE</h4>
-      <p id="configErrorMsg">Las credenciales de Firebase no están configuradas correctamente. Edita el archivo y completa el objeto <code>firebaseConfig</code> al inicio del script.</p>
-    </div>
-  </div>
+<!-- STATUS BANNER -->
+<div class="status-banner" id="statusBanner">
+  <span id="statusText"></span>
+  <button class="dismiss" id="dismissBanner"><i class="fa-solid fa-xmark"></i></button>
 </div>
 
 <div id="app">
@@ -697,10 +541,10 @@ input,textarea,select{font-family:inherit;color:inherit}
     <div class="brand" id="brandLogo" title="DRN MODZ">
       <span class="dot"></span>
       <span>DRN <span class="accent">MODZ</span></span>
-      <span class="brand-tag">v3.1</span>
+      <span class="brand-tag">v3.2</span>
     </div>
     <div class="top-actions">
-      <button class="icon-btn search" id="btnSearch" title="Buscar usuarios"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button class="icon-btn search" id="btnSearch" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
       <div class="top-avatar" id="topAvatar" title="Cambiar avatar">U</div>
       <button class="icon-btn" id="btnLogout" title="Salir"><i class="fa-solid fa-right-from-bracket"></i></button>
     </div>
@@ -724,10 +568,12 @@ input,textarea,select{font-family:inherit;color:inherit}
             <input type="email" id="loginEmail" required placeholder="user@darknet.io" />
           </div>
           <div class="field">
-            <label>Contraseña</label>
+            <label>Contraseña (cualquier longitud)</label>
             <input type="password" id="loginPass" required placeholder="••••••••" />
           </div>
-          <button class="btn-primary" type="submit">INICIAR SESIÓN</button>
+          <button class="btn-primary" type="submit" id="loginBtn">
+            <i class="fa-solid fa-right-to-bracket"></i> ACCEDER
+          </button>
           <div class="auth-msg" id="loginMsg"></div>
         </form>
 
@@ -745,10 +591,12 @@ input,textarea,select{font-family:inherit;color:inherit}
             <input type="email" id="regEmail" required placeholder="user@darknet.io" />
           </div>
           <div class="field">
-            <label>Contraseña</label>
-            <input type="password" id="regPass" required minlength="6" placeholder="mínimo 6 caracteres" />
+            <label>Contraseña (cualquier longitud)</label>
+            <input type="password" id="regPass" required placeholder="libre elección" />
           </div>
-          <button class="btn-primary" type="submit">CREAR CUENTA</button>
+          <button class="btn-primary" type="submit" id="regBtn">
+            <i class="fa-solid fa-user-plus"></i> CREAR CUENTA
+          </button>
           <div class="auth-msg" id="regMsg"></div>
         </form>
       </div>
@@ -764,9 +612,7 @@ input,textarea,select{font-family:inherit;color:inherit}
   </section>
 
   <section class="view" id="viewSearch">
-    <div class="sec-head">
-      <div class="sec-title">BUSCAR USUARIOS</div>
-    </div>
+    <div class="sec-head"><div class="sec-title">BUSCAR USUARIOS</div></div>
     <div class="search-bar">
       <i class="fa-solid fa-magnifying-glass search-icon"></i>
       <input type="text" id="searchInput" placeholder="@usuario, nombre o correo..." />
@@ -776,9 +622,7 @@ input,textarea,select{font-family:inherit;color:inherit}
   </section>
 
   <section class="view" id="viewUpload">
-    <div class="sec-head">
-      <div class="sec-title">PUBLICAR ARCHIVO</div>
-    </div>
+    <div class="sec-head"><div class="sec-title">PUBLICAR ARCHIVO</div></div>
     <div class="upload-card">
       <div class="drop-zone" id="dropZone">
         <i class="fa-solid fa-cloud-arrow-up"></i>
@@ -799,10 +643,10 @@ input,textarea,select{font-family:inherit;color:inherit}
       </div>
       <div class="field">
         <label>Descripción detallada</label>
-        <textarea id="postDesc" rows="3" placeholder="Detalles del archivo, instrucciones, versión..."></textarea>
+        <textarea id="postDesc" rows="3" placeholder="Detalles del archivo..."></textarea>
       </div>
       <div class="field">
-        <label>Foto de portada (opcional · se ajustará automáticamente)</label>
+        <label>Foto de portada (opcional)</label>
         <input type="file" id="coverInput" accept="image/*" style="font-size:11px;color:var(--text-dim)" />
       </div>
       <button class="btn-primary" id="publishBtn">PUBLICAR</button>
@@ -826,16 +670,12 @@ input,textarea,select{font-family:inherit;color:inherit}
       </div>
       <div class="profile-actions" id="profileActions"></div>
     </div>
-    <div class="sec-head">
-      <div class="sec-title">APORTES</div>
-    </div>
+    <div class="sec-head"><div class="sec-title">APORTES</div></div>
     <div id="profilePosts"></div>
   </section>
 
   <section class="view" id="viewEdit">
-    <div class="sec-head">
-      <div class="sec-title">EDITAR PERFIL</div>
-    </div>
+    <div class="sec-head"><div class="sec-title">EDITAR PERFIL</div></div>
     <div class="upload-card">
       <div class="field">
         <label>Nombre</label>
@@ -851,7 +691,7 @@ input,textarea,select{font-family:inherit;color:inherit}
       </div>
       <button class="btn-primary" id="saveProfileBtn">GUARDAR CAMBIOS</button>
       <p style="font-size:10px;color:var(--text-dim);margin-top:12px;text-align:center;letter-spacing:1px">
-        <i class="fa-solid fa-circle-info"></i> Toca tu avatar en cualquier parte para cambiar tu foto de perfil.
+        <i class="fa-solid fa-circle-info"></i> Toca tu avatar para cambiar tu foto de perfil.
       </p>
     </div>
   </section>
@@ -871,14 +711,14 @@ input,textarea,select{font-family:inherit;color:inherit}
     <button class="modal-close" data-close="modalAd"><i class="fa-solid fa-xmark"></i></button>
     <h3><i class="fa-solid fa-shield-halved"></i> DESCARGA PROTEGIDA</h3>
     <p style="font-size:11px;color:var(--text-dim);margin-bottom:10px;line-height:1.5">
-      Para liberar el archivo, visualiza el anuncio patrocinado. Esto apoya a la comunidad DRN MODZ.
+      Visualiza el anuncio para liberar el archivo.
     </p>
     <div class="ad-container">
       <div class="ad-label">PUBLICIDAD · ADSENSE</div>
       <div class="ad-slot" id="adSlot">
         <div id="adsensePlaceholder">
           <i class="fa-solid fa-rectangle-ad" style="font-size:28px;color:var(--neon);margin-bottom:8px;display:block;text-shadow:var(--glow)"></i>
-          CARGANDO ANUNCIO...
+          ESPACIO PUBLICITARIO
         </div>
       </div>
       <div class="ad-timer" id="adTimer"><i class="fa-solid fa-clock"></i> Espera <span id="adCount">5</span>s</div>
@@ -893,7 +733,7 @@ input,textarea,select{font-family:inherit;color:inherit}
   <div class="modal">
     <button class="modal-close" data-close="modalAdminLogin"><i class="fa-solid fa-xmark"></i></button>
     <h3><i class="fa-solid fa-lock"></i> ACCESO RESTRINGIDO</h3>
-    <p style="font-size:11px;color:var(--text-dim);margin-bottom:14px">Introduce la clave maestra del sistema.</p>
+    <p style="font-size:11px;color:var(--text-dim);margin-bottom:14px">Introduce la clave maestra.</p>
     <div class="field">
       <label>Clave de administrador</label>
       <input type="password" id="adminKey" placeholder="••••••••••••••••" />
@@ -907,146 +747,204 @@ input,textarea,select{font-family:inherit;color:inherit}
   <div class="modal" style="max-width:560px">
     <button class="modal-close" data-close="modalAdminPanel"><i class="fa-solid fa-xmark"></i></button>
     <h3><i class="fa-solid fa-terminal"></i> PANEL DE ADMINISTRACIÓN</h3>
-    <p style="font-size:11px;color:var(--text-dim);margin-bottom:14px">Gestiona la verificación de usuarios registrados.</p>
+    <p style="font-size:11px;color:var(--text-dim);margin-bottom:14px">Gestiona verificaciones.</p>
     <div id="adminUserList"></div>
   </div>
 </div>
 
 <input type="file" id="globalAvatarInput" accept="image/*" style="display:none" />
-
 <div class="toast" id="toast"></div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-  signOut, onAuthStateChanged, updateProfile as fbUpdateProfile
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import {
-  getFirestore, doc, setDoc, getDoc, updateDoc, collection,
-  query, orderBy, limit, onSnapshot, where, getDocs, addDoc,
-  serverTimestamp, deleteDoc, arrayUnion, arrayRemove, increment
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import {
-  getStorage, ref as sRef, uploadBytesResumable, getDownloadURL, deleteObject
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+/* ════════════════════════════════════════════════════════════════
+   🔥 FIREBASE SDK (opcional — si falla, modo demo automático)
+   ════════════════════════════════════════════════════════════════ */
+let fbModules = null;
+let fbApp = null, fbAuth = null, fbDb = null, fbStorage = null;
+let FIREBASE_OK = false;
 
 /* ════════════════════════════════════════════════════════════════
-   🔥 CONFIGURACIÓN FIREBASE — EDITA ESTOS VALORES
+   🔧 CONFIGURACIÓN FIREBASE — EDITA ESTOS VALORES
    ════════════════════════════════════════════════════════════════
-   
-   INSTRUCCIONES:
-   1. Ve a https://console.firebase.google.com/
-   2. Crea o selecciona tu proyecto
-   3. Ve a Configuración del proyecto → Tus apps → Web
-   4. Copia el objeto firebaseConfig y reemplaza los valores abajo
-   
-   IMPORTANTE: Todos los campos son obligatorios
+   Si dejas los valores por defecto, la app funcionará en MODO DEMO
+   (datos guardados en localStorage del navegador).
+   Para usar Firebase real, reemplaza estos valores con los de tu
+   proyecto en https://console.firebase.google.com/
    ════════════════════════════════════════════════════════════════ */
-
 const firebaseConfig = {
-  apiKey: "TU_API_KEY_AQUI",                    // ← REEMPLAZAR
-  authDomain: "TU_PROYECTO.firebaseapp.com",     // ← REEMPLAZAR
-  projectId: "TU_PROYECTO",                      // ← REEMPLAZAR
-  storageBucket: "TU_PROYECTO.appspot.com",      // ← REEMPLAZAR
-  messagingSenderId: "123456789",                // ← REEMPLAZAR
-  appId: "1:123456789:web:abc123def456"          // ← REEMPLAZAR
+  apiKey: "TU_API_KEY_AQUI",
+  authDomain: "TU_PROYECTO.firebaseapp.com",
+  projectId: "TU_PROYECTO",
+  storageBucket: "TU_PROYECTO.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "1:123456789:web:abc123def456"
 };
 
 /* ════════════════════════════════════════════════════════════════
-   VALIDACIÓN DE CREDENCIALES
+   DETECCIÓN DE CONFIGURACIÓN
    ════════════════════════════════════════════════════════════════ */
-
-function validateFirebaseConfig(config) {
-  const required = ['apiKey', 'authDomain', 'projectId', 'storageBucket', 'messagingSenderId', 'appId'];
-  const missing = [];
-  
-  for (const key of required) {
-    if (!config[key] || config[key].includes('TU_') || config[key].includes('XXX') || config[key] === '123456789') {
-      missing.push(key);
-    }
+function isConfigValid(cfg){
+  const required = ['apiKey','authDomain','projectId','storageBucket','messagingSenderId','appId'];
+  for (const k of required){
+    if (!cfg[k] || String(cfg[k]).startsWith('TU_') || cfg[k]==='123456789' || String(cfg[k]).includes('XXX')) return false;
   }
-  
-  return {
-    valid: missing.length === 0,
-    missing
-  };
+  return true;
 }
-
-const configValidation = validateFirebaseConfig(firebaseConfig);
-
-if (!configValidation.valid) {
-  console.error('%c ════════════════════════════════════════════════════════════════ ', 'background:#ff2a55;color:#000;font-size:14px;padding:8px');
-  console.error('%c ERROR: Configuración de Firebase incompleta ', 'background:#1a0a0a;color:#ff2a55;font-size:13px;padding:6px 12px');
-  console.error('%c ════════════════════════════════════════════════════════════════ ', 'background:#ff2a55;color:#000;font-size:14px;padding:8px');
-  console.error('%c Campos faltantes o inválidos: ', 'color:#ff2a55;font-weight:bold', configValidation.missing);
-  console.error('%c Por favor, edita el objeto firebaseConfig al inicio del script y reemplaza los valores de ejemplo con tus credenciales reales de Firebase.', 'color:#d8d8d8');
-  console.error('%c ════════════════════════════════════════════════════════════════ ', 'background:#ff2a55;color:#000;font-size:14px;padding:8px');
-  
-  const errorBanner = document.getElementById('configError');
-  const errorMsg = document.getElementById('configErrorMsg');
-  errorMsg.innerHTML = `
-    Las credenciales de Firebase no están configuradas.<br>
-    <strong>Campos faltantes:</strong> <code>${configValidation.missing.join(', ')}</code><br>
-    Edita el objeto <code>firebaseConfig</code> al inicio del script con tus credenciales reales.
-  `;
-  errorBanner.classList.add('show');
-  
-  // Detener ejecución
-  throw new Error('Firebase config incomplete');
-}
-
-console.log('%c ✓ Configuración de Firebase validada ', 'background:#00FF66;color:#000;font-size:12px;padding:4px 12px;border-radius:4px');
+const CONFIG_VALID = isConfigValid(firebaseConfig);
 
 /* ════════════════════════════════════════════════════════════════
-   INICIALIZAR FIREBASE
+   INICIALIZACIÓN FIREBASE (con fallback silencioso)
    ════════════════════════════════════════════════════════════════ */
-
-let app, auth, db, storage;
-
-try {
-  app = initializeApp(firebaseConfig);
-  auth = getAuth(app);
-  db = getFirestore(app);
-  storage = getStorage(app);
-  console.log('%c ✓ Firebase inicializado correctamente ', 'background:#00FF66;color:#000;font-size:12px;padding:4px 12px;border-radius:4px');
-} catch (error) {
-  console.error('%c ERROR al inicializar Firebase: ', 'background:#ff2a55;color:#fff;padding:4px 12px', error);
-  const errorBanner = document.getElementById('configError');
-  const errorMsg = document.getElementById('configErrorMsg');
-  errorMsg.innerHTML = `Error al inicializar Firebase: <code>${error.message}</code><br>Verifica que tus credenciales sean correctas.`;
-  errorBanner.classList.add('show');
-  throw error;
+async function tryInitFirebase(){
+  if (!CONFIG_VALID){
+    console.warn('%c ⚠ Firebase no configurado → Modo Demo activado ', 'background:#ffb400;color:#000;padding:4px 10px;border-radius:4px');
+    return false;
+  }
+  try {
+    fbModules = {
+      app: await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"),
+      auth: await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"),
+      firestore: await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"),
+      storage: await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js")
+    };
+    fbApp = fbModules.app.initializeApp(firebaseConfig);
+    fbAuth = fbModules.auth.getAuth(fbApp);
+    fbDb = fbModules.firestore.getFirestore(fbApp);
+    fbStorage = fbModules.storage.getStorage(fbApp);
+    
+    // Verificar conexión real intentando una operación simple
+    await new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => reject(new Error('timeout')), 5000);
+      fbModules.auth.onAuthStateChanged(fbAuth, () => {
+        clearTimeout(timeout);
+        resolve();
+      }, reject);
+    });
+    
+    console.log('%c ✓ Firebase conectado ', 'background:#00FF66;color:#000;padding:4px 10px;border-radius:4px');
+    return true;
+  } catch (err){
+    console.error('%c ✗ Firebase falló → Modo Demo ', 'background:#ff2a55;color:#fff;padding:4px 10px;border-radius:4px', err.message);
+    return false;
+  }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   MODO DEMO (localStorage) — Fallback completo
+   ════════════════════════════════════════════════════════════════ */
+const LS = {
+  USERS: 'drn_modz_users_v3',
+  POSTS: 'drn_modz_posts_v3',
+  SESSION: 'drn_modz_session_v3'
+};
+
+const DemoDB = {
+  getUsers(){ return JSON.parse(localStorage.getItem(LS.USERS) || '[]'); },
+  saveUsers(u){ localStorage.setItem(LS.USERS, JSON.stringify(u)); },
+  getPosts(){ return JSON.parse(localStorage.getItem(LS.POSTS) || '[]'); },
+  savePosts(p){ localStorage.setItem(LS.POSTS, JSON.stringify(p)); },
+  getSession(){ return JSON.parse(localStorage.getItem(LS.SESSION) || 'null'); },
+  saveSession(s){ 
+    if (s) localStorage.setItem(LS.SESSION, JSON.stringify(s));
+    else localStorage.removeItem(LS.SESSION);
+  },
+  
+  createUser({name, lastName, email, password}){
+    const users = this.getUsers();
+    if (users.find(u => u.email === email)) {
+      throw new Error('Este correo ya está registrado');
+    }
+    const user = {
+      uid: 'demo_' + Date.now() + '_' + Math.random().toString(36).substr(2,6),
+      name, lastName, email, password, // En demo se guarda plano (solo local)
+      avatar: '', cover: '', verified: false,
+      followers: [], following: [], postCount: 0,
+      createdAt: Date.now()
+    };
+    users.push(user);
+    this.saveUsers(users);
+    return user;
+  },
+  
+  findUserByEmail(email){
+    return this.getUsers().find(u => u.email === email);
+  },
+  
+  findUserById(uid){
+    return this.getUsers().find(u => u.uid === uid);
+  },
+  
+  updateUser(uid, updates){
+    const users = this.getUsers();
+    const idx = users.findIndex(u => u.uid === uid);
+    if (idx === -1) throw new Error('Usuario no encontrado');
+    users[idx] = { ...users[idx], ...updates };
+    this.saveUsers(users);
+    return users[idx];
+  },
+  
+  createPost(post){
+    const posts = this.getPosts();
+    const newPost = {
+      id: 'post_' + Date.now() + '_' + Math.random().toString(36).substr(2,6),
+      ...post,
+      createdAt: Date.now()
+    };
+    posts.unshift(newPost);
+    this.savePosts(posts);
+    // Actualizar contador
+    const user = this.findUserById(post.authorId);
+    if (user) this.updateUser(post.authorId, { postCount: (user.postCount||0) + 1 });
+    return newPost;
+  },
+  
+  deletePost(postId, authorId){
+    let posts = this.getPosts();
+    posts = posts.filter(p => p.id !== postId);
+    this.savePosts(posts);
+    const user = this.findUserById(authorId);
+    if (user) this.updateUser(authorId, { postCount: Math.max(0, (user.postCount||1) - 1) });
+  },
+  
+  getAllPosts(){
+    return this.getPosts().sort((a,b) => b.createdAt - a.createdAt);
+  },
+  
+  getPostsByUser(uid){
+    return this.getPosts().filter(p => p.authorId === uid).sort((a,b) => b.createdAt - a.createdAt);
+  }
+};
 
 /* ════════════════════════════════════════════════════════════════
    ESTADO GLOBAL
    ════════════════════════════════════════════════════════════════ */
-
 const state = {
-  user: null,
-  profile: null,
+  user: null,           // { uid, name, lastName, email, avatar, ... }
+  profile: null,        // igual que user pero con todos los datos
   viewingUserId: null,
   selectedFile: null,
   brandClicks: 0,
   brandTimer: null,
   currentDownloadUrl: null,
+  currentDownloadName: null,
   unsubFeed: null,
-  unsubProfilePosts: null
+  unsubProfilePosts: null,
+  authenticating: false, // 🔒 CLAVE: evita bucles y submits múltiples
+  feedListener: null
 };
 
 /* ════════════════════════════════════════════════════════════════
    UTILIDADES
    ════════════════════════════════════════════════════════════════ */
-
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 
-const toast = (msg, err=false) => {
+const toast = (msg, type='ok') => {
   const t = $("#toast");
   t.textContent = msg;
-  t.classList.toggle("err", err);
-  t.classList.add("show");
+  t.className = 'toast show';
+  if (type === 'err') t.classList.add('err');
+  else if (type === 'warn') t.classList.add('warn');
   setTimeout(()=>t.classList.remove("show"), 2800);
 };
 
@@ -1059,7 +957,7 @@ const fmtSize = b => {
 
 const fmtDate = ts => {
   if(!ts) return "";
-  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  const d = typeof ts === 'number' ? new Date(ts) : (ts.toDate ? ts.toDate() : new Date(ts));
   return d.toLocaleDateString("es-ES",{day:"2-digit",month:"short",year:"numeric"});
 };
 
@@ -1091,34 +989,34 @@ function applyAvatar(el, url, name){
 }
 
 /* ════════════════════════════════════════════════════════════════
-   MANEJO DE ERRORES DE FIREBASE AUTH
+   STATUS BANNER
    ════════════════════════════════════════════════════════════════ */
+function showBanner(msg, type='ok'){
+  const banner = $("#statusBanner");
+  const text = $("#statusText");
+  const icons = { ok:'fa-circle-check', err:'fa-triangle-exclamation', warn:'fa-circle-info', demo:'fa-flask' };
+  text.innerHTML = `<i class="fa-solid ${icons[type]||'fa-info'}"></i> ${msg}`;
+  banner.className = `status-banner show ${type}`;
+}
+$("#dismissBanner").addEventListener("click", () => {
+  $("#statusBanner").classList.remove("show");
+});
 
-function getAuthErrorMessage(error) {
-  const code = error.code || '';
-  
-  const messages = {
-    'auth/invalid-api-key': 'La API Key de Firebase es inválida. Verifica firebaseConfig.apiKey',
-    'auth/api-key-not-valid': 'La API Key no es válida. Revisa tus credenciales de Firebase',
-    'auth/invalid-email': 'El formato del correo electrónico es inválido',
-    'auth/user-disabled': 'Esta cuenta ha sido deshabilitada por un administrador',
-    'auth/user-not-found': 'No existe una cuenta con este correo. Regístrate primero',
-    'auth/wrong-password': 'Contraseña incorrecta. Verifica e intenta de nuevo',
-    'auth/email-already-in-use': 'Este correo ya está registrado. Inicia sesión o usa otro',
-    'auth/weak-password': 'La contraseña debe tener al menos 6 caracteres',
-    'auth/network-request-failed': 'Error de red. Verifica tu conexión a internet',
-    'auth/too-many-requests': 'Demasiados intentos. Espera unos minutos e intenta de nuevo',
-    'auth/operation-not-allowed': 'El método de autenticación no está habilitado en Firebase',
-    'auth/invalid-credential': 'Credenciales inválidas. Verifica correo y contraseña'
-  };
-  
-  return messages[code] || `Error: ${error.message || 'Error desconocido'}`;
+/* ════════════════════════════════════════════════════════════════
+   🔑 PASSWORD PADDING — Permite cualquier longitud
+   Firebase Auth exige mínimo 6 caracteres. Para liberar esta
+   restricción sin romper Firebase, añadimos padding transparente.
+   ════════════════════════════════════════════════════════════════ */
+function padPassword(pass){
+  const MIN = 6;
+  if (!pass) return '______';
+  if (pass.length >= MIN) return pass;
+  return pass + '_'.repeat(MIN - pass.length);
 }
 
 /* ════════════════════════════════════════════════════════════════
-   NAVEGACIÓN ENTRE VISTAS
+   NAVEGACIÓN
    ════════════════════════════════════════════════════════════════ */
-
 function showView(id){
   $$(".view").forEach(v=>v.classList.remove("active"));
   $("#"+id).classList.add("active");
@@ -1141,24 +1039,40 @@ $("#btnSearch").addEventListener("click",()=>showView("viewSearch"));
 
 $("#btnLogout").addEventListener("click", async () => {
   try {
-    await signOut(auth);
+    if (FIREBASE_OK && fbAuth){
+      await fbModules.auth.signOut(fbAuth);
+    }
+    DemoDB.saveSession(null);
+    state.user = null;
+    state.profile = null;
+    if (state.feedListener) state.feedListener();
+    showAuthScreen();
     toast("Sesión cerrada");
-  } catch (error) {
-    console.error('Error al cerrar sesión:', error);
-    toast("Error al cerrar sesión", true);
+  } catch (err){
+    console.error(err);
+    toast("Error al cerrar sesión", 'err');
   }
 });
 
-/* ════════════════════════════════════════════════════════════════
-   AVATAR GLOBAL Clicable
-   ════════════════════════════════════════════════════════════════ */
-
-function openAvatarPicker(){
-  $("#globalAvatarInput").click();
+function showAuthScreen(){
+  $("#topbar").style.display = "none";
+  $("#bottomNav").style.display = "none";
+  $$(".view").forEach(v=>v.classList.remove("active"));
+  $("#viewAuth").classList.add("active");
 }
 
-$("#topAvatar").addEventListener("click", openAvatarPicker);
+function showMainApp(){
+  $("#topbar").style.display = "flex";
+  $("#bottomNav").style.display = "flex";
+  $("#viewAuth").classList.remove("active");
+  showView("viewFeed");
+}
 
+/* ════════════════════════════════════════════════════════════════
+   AVATAR GLOBAL
+   ════════════════════════════════════════════════════════════════ */
+function openAvatarPicker(){ $("#globalAvatarInput").click(); }
+$("#topAvatar").addEventListener("click", openAvatarPicker);
 $("#profileAvatar").addEventListener("click", () => {
   if(state.viewingUserId === state.user.uid) openAvatarPicker();
 });
@@ -1166,27 +1080,41 @@ $("#profileAvatar").addEventListener("click", () => {
 $("#globalAvatarInput").addEventListener("change", async e => {
   const file = e.target.files[0];
   if(!file || !state.user) return;
-  
-  if(!file.type.startsWith("image/")){ 
-    toast("Selecciona una imagen",true); 
-    return; 
-  }
+  if(!file.type.startsWith("image/")){ toast("Selecciona una imagen",'err'); return; }
   
   try{
     toast("Actualizando avatar...");
-    const r = sRef(storage, `avatars/${state.user.uid}/${Date.now()}_${file.name}`);
-    await uploadBytesResumable(r, file);
-    const url = await getDownloadURL(r);
-    await updateDoc(doc(db,"users",state.user.uid), { avatar: url });
-    state.profile.avatar = url;
+    
+    if (FIREBASE_OK){
+      const r = fbModules.storage.ref(fbStorage, `avatars/${state.user.uid}/${Date.now()}_${file.name}`);
+      await fbModules.storage.uploadBytesResumable(r, file);
+      const url = await fbModules.storage.getDownloadURL(r);
+      await fbModules.firestore.updateDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid), { avatar: url });
+      state.profile.avatar = url;
+    } else {
+      // Modo demo: convertir a dataURL
+      const dataUrl = await fileToDataURL(file);
+      DemoDB.updateUser(state.user.uid, { avatar: dataUrl });
+      state.profile.avatar = dataUrl;
+    }
+    
     refreshAllAvatars();
-    toast("Avatar actualizado");
+    toast("✓ Avatar actualizado");
   }catch(err){
-    console.error('Error al subir avatar:', err);
-    toast("Error al subir avatar: " + err.message, true);
+    console.error(err);
+    toast("Error al subir avatar", 'err');
   }
   e.target.value = "";
 });
+
+function fileToDataURL(file){
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
 
 function refreshAllAvatars(){
   if(!state.profile) return;
@@ -1197,9 +1125,8 @@ function refreshAllAvatars(){
 }
 
 /* ════════════════════════════════════════════════════════════════
-   AUTH: TABS
+   AUTH TABS
    ════════════════════════════════════════════════════════════════ */
-
 $$(".auth-tabs button").forEach(b=>{
   b.addEventListener("click",()=>{
     $$(".auth-tabs button").forEach(x=>x.classList.remove("active"));
@@ -1207,60 +1134,74 @@ $$(".auth-tabs button").forEach(b=>{
     const tab = b.dataset.tab;
     $("#formLogin").style.display = tab==="login"?"block":"none";
     $("#formRegister").style.display = tab==="register"?"block":"none";
-    // Limpiar mensajes
     $("#loginMsg").textContent = "";
     $("#regMsg").textContent = "";
   });
 });
 
 /* ════════════════════════════════════════════════════════════════
-   AUTH: REGISTRO con manejo de errores robusto
+   🔐 REGISTRO — Blindado contra bucles
    ════════════════════════════════════════════════════════════════ */
-
 $("#formRegister").addEventListener("submit", async e => {
   e.preventDefault();
+  
+  // 🔒 Protección contra submits múltiples
+  if (state.authenticating) return;
   
   const name = $("#regName").value.trim();
   const last = $("#regLast").value.trim();
   const email = $("#regEmail").value.trim().toLowerCase();
   const pass = $("#regPass").value;
   const msg = $("#regMsg");
+  const btn = $("#regBtn");
   
   // Validación frontend
-  if(!name || !last || !email || !pass) {
-    msg.textContent = "Todos los campos son obligatorios";
-    msg.className = "auth-msg err";
+  if(!name || !last || !email || !pass){
+    msg.textContent = "⚠ Todos los campos son obligatorios";
+    msg.className = "auth-msg warn";
     return;
   }
   
-  if(pass.length < 6) {
-    msg.textContent = "La contraseña debe tener al menos 6 caracteres";
-    msg.className = "auth-msg err";
+  // Email válido
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    msg.textContent = "⚠ Correo electrónico inválido";
+    msg.className = "auth-msg warn";
     return;
   }
   
-  msg.textContent = "Creando cuenta...";
-  msg.className = "auth-msg";
+  state.authenticating = true;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="loader"></span> CREANDO...';
+  msg.textContent = "";
   
-  try{
-    const cred = await createUserWithEmailAndPassword(auth, email, pass);
-    await fbUpdateProfile(cred.user, { displayName: `${name} ${last}` });
+  try {
+    if (FIREBASE_OK){
+      // Firebase real
+      const paddedPass = padPassword(pass);
+      const cred = await fbModules.auth.createUserWithEmailAndPassword(fbAuth, email, paddedPass);
+      await fbModules.auth.updateProfile(cred.user, { displayName: `${name} ${last}` });
+      
+      await fbModules.firestore.setDoc(fbModules.firestore.doc(fbDb,"users",cred.user.uid), {
+        uid: cred.user.uid, name, lastName: last, email,
+        avatar: "", cover: "", verified: false,
+        followers: [], following: [], postCount: 0,
+        createdAt: fbModules.firestore.serverTimestamp()
+      });
+      
+      state.user = { uid: cred.user.uid, email };
+      await loadMyProfile();
+    } else {
+      // Modo demo
+      const user = DemoDB.createUser({ name, lastName: last, email, password: pass });
+      state.user = { uid: user.uid, email: user.email };
+      state.profile = user;
+      DemoDB.saveSession({ uid: user.uid });
+    }
     
-    await setDoc(doc(db,"users",cred.user.uid), {
-      uid: cred.user.uid,
-      name, 
-      lastName: last,
-      email,
-      avatar: "",
-      cover: "",
-      verified: false,
-      followers: [],
-      following: [],
-      postCount: 0,
-      createdAt: serverTimestamp()
-    });
-    
-    toast("✓ Cuenta creada · Bienvenido a DRN MODZ");
+    // ✅ ÉXITO → Redirección automática al feed
+    toast("✓ ¡Bienvenido a DRN MODZ!");
+    msg.textContent = "✓ Cuenta creada · Redirigiendo...";
+    msg.className = "auth-msg ok";
     
     // Limpiar formulario
     $("#regName").value = "";
@@ -1268,177 +1209,221 @@ $("#formRegister").addEventListener("submit", async e => {
     $("#regEmail").value = "";
     $("#regPass").value = "";
     
-  }catch(err){
+    // Redirección automática
+    setTimeout(() => {
+      showMainApp();
+      subscribeFeed();
+      prefillEditForm();
+      refreshAllAvatars();
+    }, 600);
+    
+  } catch (err){
     console.error('Error en registro:', err);
-    const errorMsg = getAuthErrorMessage(err);
+    const errorMsg = getFriendlyAuthError(err);
     msg.textContent = errorMsg;
     msg.className = "auth-msg err";
-    toast(errorMsg, true);
+    toast(errorMsg, 'err');
+  } finally {
+    // 🔓 SIEMPRE liberar el flag — NUNCA dejar la UI bloqueada
+    state.authenticating = false;
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-user-plus"></i> CREAR CUENTA';
   }
 });
 
 /* ════════════════════════════════════════════════════════════════
-   AUTH: LOGIN con manejo de errores robusto
+   🔐 LOGIN — Blindado contra bucles
    ════════════════════════════════════════════════════════════════ */
-
 $("#formLogin").addEventListener("submit", async e => {
   e.preventDefault();
+  
+  if (state.authenticating) return;
   
   const email = $("#loginEmail").value.trim().toLowerCase();
   const pass = $("#loginPass").value;
   const msg = $("#loginMsg");
+  const btn = $("#loginBtn");
   
-  // Validación frontend
-  if(!email || !pass) {
-    msg.textContent = "Correo y contraseña son obligatorios";
-    msg.className = "auth-msg err";
+  if(!email || !pass){
+    msg.textContent = "⚠ Correo y contraseña son obligatorios";
+    msg.className = "auth-msg warn";
     return;
   }
   
-  msg.textContent = "Conectando...";
-  msg.className = "auth-msg";
+  state.authenticating = true;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="loader"></span> CONECTANDO...';
+  msg.textContent = "";
   
-  try{
-    await signInWithEmailAndPassword(auth, email, pass);
-    toast("✓ Sesión iniciada");
+  try {
+    if (FIREBASE_OK){
+      const paddedPass = padPassword(pass);
+      const cred = await fbModules.auth.signInWithEmailAndPassword(fbAuth, email, paddedPass);
+      state.user = { uid: cred.user.uid, email: cred.user.email };
+      await loadMyProfile();
+    } else {
+      // Modo demo
+      const user = DemoDB.findUserByEmail(email);
+      if (!user){
+        throw new Error('No existe una cuenta con este correo');
+      }
+      if (user.password !== pass){
+        throw new Error('Contraseña incorrecta');
+      }
+      state.user = { uid: user.uid, email: user.email };
+      state.profile = user;
+      DemoDB.saveSession({ uid: user.uid });
+    }
     
-    // Limpiar formulario
+    toast("✓ Sesión iniciada");
+    msg.textContent = "✓ Conectado · Redirigiendo...";
+    msg.className = "auth-msg ok";
+    
     $("#loginEmail").value = "";
     $("#loginPass").value = "";
     
-  }catch(err){
+    setTimeout(() => {
+      showMainApp();
+      subscribeFeed();
+      prefillEditForm();
+      refreshAllAvatars();
+    }, 500);
+    
+  } catch (err){
     console.error('Error en login:', err);
-    const errorMsg = getAuthErrorMessage(err);
+    const errorMsg = getFriendlyAuthError(err);
     msg.textContent = errorMsg;
     msg.className = "auth-msg err";
-    toast(errorMsg, true);
+    toast(errorMsg, 'err');
+  } finally {
+    state.authenticating = false;
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> ACCEDER';
   }
 });
 
 /* ════════════════════════════════════════════════════════════════
-   AUTH STATE → CARGAR PERFIL
+   MENSAJES DE ERROR AMIGABLES
    ════════════════════════════════════════════════════════════════ */
-
-onAuthStateChanged(auth, async user => {
-  if(user){
-    state.user = user;
-    $("#topbar").style.display = "flex";
-    $("#bottomNav").style.display = "flex";
-    $("#viewAuth").classList.remove("active");
-    showView("viewFeed");
-    
-    try {
-      await loadMyProfile();
-      subscribeFeed();
-      prefillEditForm();
-      refreshAllAvatars();
-    } catch (error) {
-      console.error('Error al cargar perfil:', error);
-      toast("Error al cargar perfil", true);
-    }
-  } else {
-    state.user = null;
-    state.profile = null;
-    $("#topbar").style.display = "none";
-    $("#bottomNav").style.display = "none";
-    $$(".view").forEach(v=>v.classList.remove("active"));
-    $("#viewAuth").classList.add("active");
-    if(state.unsubFeed) state.unsubFeed();
+function getFriendlyAuthError(err){
+  const code = err.code || '';
+  const msg = err.message || '';
+  
+  const map = {
+    'auth/invalid-api-key': '⚠ Error de configuración. Contacta al administrador.',
+    'auth/api-key-not-valid': '⚠ Error de configuración. Contacta al administrador.',
+    'auth/invalid-email': '⚠ Correo electrónico inválido',
+    'auth/user-disabled': '⚠ Esta cuenta ha sido deshabilitada',
+    'auth/user-not-found': '⚠ No existe una cuenta con este correo',
+    'auth/wrong-password': '⚠ Contraseña incorrecta',
+    'auth/invalid-credential': '⚠ Correo o contraseña incorrectos',
+    'auth/email-already-in-use': '⚠ Este correo ya está registrado. Intenta acceder',
+    'auth/weak-password': '⚠ La contraseña es demasiado débil',
+    'auth/network-request-failed': '⚠ Sin conexión a internet. Revisa tu red',
+    'auth/too-many-requests': '⚠ Demasiados intentos. Espera unos minutos',
+    'auth/operation-not-allowed': '⚠ Método de acceso no habilitado',
+    'auth/internal-error': '⚠ Error interno. Intenta de nuevo'
+  };
+  
+  if (map[code]) return map[code];
+  
+  // Errores personalizados del modo demo
+  if (msg.includes('No existe') || msg.includes('Contraseña incorrecta') || msg.includes('ya está registrado')){
+    return '⚠ ' + msg;
   }
-});
+  
+  return '⚠ Ocurrió un error. Intenta de nuevo.';
+}
 
+/* ════════════════════════════════════════════════════════════════
+   CARGAR PERFIL
+   ════════════════════════════════════════════════════════════════ */
 async function loadMyProfile(){
   try {
-    const snap = await getDoc(doc(db,"users",state.user.uid));
-    
-    if(snap.exists()){
-      state.profile = snap.data();
+    if (FIREBASE_OK){
+      const snap = await fbModules.firestore.getDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid));
+      if(snap.exists()){
+        state.profile = snap.data();
+      } else {
+        const n = fbAuth.currentUser?.displayName || "Usuario";
+        const parts = n.split(" ");
+        const name = parts[0];
+        const last = parts.slice(1).join(" ") || "";
+        await fbModules.firestore.setDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid), {
+          uid: state.user.uid, name, lastName: last,
+          email: state.user.email, avatar:"", cover:"",
+          verified:false, followers:[], following:[],
+          postCount:0, createdAt: fbModules.firestore.serverTimestamp()
+        });
+        state.profile = { uid:state.user.uid, name, lastName:last, email:state.user.email,
+          avatar:"",cover:"",verified:false,followers:[],following:[],postCount:0 };
+      }
     } else {
-      // Crear perfil si no existe (migración)
-      const n = state.user.displayName || "Usuario";
-      const parts = n.split(" ");
-      const name = parts[0];
-      const last = parts.slice(1).join(" ") || "";
-      
-      await setDoc(doc(db,"users",state.user.uid), {
-        uid: state.user.uid, 
-        name, 
-        lastName: last,
-        email: state.user.email, 
-        avatar:"", 
-        cover:"",
-        verified:false, 
-        followers:[], 
-        following:[],
-        postCount:0, 
-        createdAt: serverTimestamp()
-      });
-      
-      state.profile = { 
-        uid:state.user.uid, 
-        name, 
-        lastName:last, 
-        email:state.user.email,
-        avatar:"",
-        cover:"",
-        verified:false,
-        followers:[],
-        following:[],
-        postCount:0 
-      };
+      const user = DemoDB.findUserById(state.user.uid);
+      if (user) state.profile = user;
     }
-  } catch (error) {
-    console.error('Error en loadMyProfile:', error);
-    throw error;
+  } catch (err){
+    console.error('Error al cargar perfil:', err);
+    toast("Error al cargar perfil", 'err');
   }
 }
 
 /* ════════════════════════════════════════════════════════════════
-   FEED: SUSCRIPCIÓN EN TIEMPO REAL
+   FEED
    ════════════════════════════════════════════════════════════════ */
-
 function subscribeFeed(){
-  if(state.unsubFeed) state.unsubFeed();
+  if (state.feedListener){ state.feedListener(); state.feedListener = null; }
   
-  try {
-    const q = query(collection(db,"posts"), orderBy("createdAt","desc"), limit(50));
-    
-    state.unsubFeed = onSnapshot(q, snap => {
-      const list = $("#feedList");
-      list.innerHTML = "";
-      $("#feedCount").textContent = `${snap.size} POSTS`;
-      
-      if(snap.empty){
-        list.innerHTML = `
-          <div class="empty-state">
-            <i class="fa-solid fa-satellite-dish"></i>
-            <h3>FEED VACÍO</h3>
-            <p>La red está en silencio. Sé el primero en publicar.</p>
-          </div>`;
-        return;
-      }
-      
-      snap.forEach(d => {
-        try {
-          list.appendChild(renderPost(d.data(), d.id));
-        } catch (err) {
-          console.error('Error al renderizar post:', err);
-        }
+  if (FIREBASE_OK){
+    try {
+      const q = fbModules.firestore.query(
+        fbModules.firestore.collection(fbDb,"posts"),
+        fbModules.firestore.orderBy("createdAt","desc"),
+        fbModules.firestore.limit(50)
+      );
+      state.feedListener = fbModules.firestore.onSnapshot(q, snap => {
+        renderFeed(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+      }, err => {
+        console.error('Feed error:', err);
+        toast("Error al cargar feed", 'err');
       });
-    }, error => {
-      console.error('Error en snapshot del feed:', error);
-      toast("Error al cargar el feed", true);
-    });
-  } catch (error) {
-    console.error('Error al suscribirse al feed:', error);
-    toast("Error al cargar el feed", true);
+    } catch (err){
+      console.error(err);
+      toast("Error al suscribirse al feed", 'err');
+    }
+  } else {
+    // Modo demo: render directo
+    renderFeed(DemoDB.getAllPosts());
   }
+}
+
+function renderFeed(posts){
+  const list = $("#feedList");
+  list.innerHTML = "";
+  $("#feedCount").textContent = `${posts.length} POSTS`;
+  
+  if(!posts.length){
+    list.innerHTML = `
+      <div class="empty-state">
+        <i class="fa-solid fa-satellite-dish"></i>
+        <h3>FEED VACÍO</h3>
+        <p>La red está en silencio. Sé el primero en publicar.</p>
+      </div>`;
+    return;
+  }
+  
+  posts.forEach(p => {
+    try {
+      list.appendChild(renderPost(p, p.id));
+    } catch (err){
+      console.error('Error render post:', err);
+    }
+  });
 }
 
 /* ════════════════════════════════════════════════════════════════
    RENDER POST
    ════════════════════════════════════════════════════════════════ */
-
 function renderPost(p, id){
   const el = document.createElement("div");
   el.className = "post-card";
@@ -1451,7 +1436,6 @@ function renderPost(p, id){
   }
   const coverClass = p.cover ? "post-cover" : "post-cover no-cover";
 
-  const initial = getInitials(p.authorName||"U");
   const verified = p.authorVerified ? `<span class="verified" title="Verificado"><i class="fa-solid fa-circle-check"></i></span>` : "";
 
   el.innerHTML = `
@@ -1461,7 +1445,7 @@ function renderPost(p, id){
     </div>
     <div class="post-body">
       <div class="post-head">
-        <div class="avatar clickable" data-uid="${p.authorId}" data-name="${escapeHtml(p.authorName||'U')}" data-avatar="${escapeHtml(p.authorAvatar||'')}"></div>
+        <div class="avatar" data-uid="${p.authorId}"></div>
         <div class="post-user">
           <div class="name" data-uid="${p.authorId}">${escapeHtml(p.authorName||"Anon")} ${verified}</div>
           <div class="meta">${fmtDate(p.createdAt)}</div>
@@ -1470,7 +1454,7 @@ function renderPost(p, id){
       <div class="post-title">${escapeHtml(p.title||"Sin título")}</div>
       <div class="post-desc">${escapeHtml(p.description||"")}</div>
       <div class="post-actions">
-        <button class="btn download" data-id="${id}" data-url="${p.fileUrl||""}">
+        <button class="btn download" data-url="${escapeHtml(p.fileUrl||'')}" data-name="${escapeHtml(p.fileName||'archivo')}">
           <i class="fa-solid fa-download"></i> DESCARGAR
         </button>
         ${p.authorId===state.user.uid ? `<button class="btn danger" data-del="${id}"><i class="fa-solid fa-trash"></i></button>` : ""}
@@ -1482,16 +1466,15 @@ function renderPost(p, id){
   
   if(p.authorId === state.user.uid){
     avEl.classList.add("clickable");
-    avEl.addEventListener("click", openAvatarPicker);
+    avEl.addEventListener("click", e => { e.stopPropagation(); openAvatarPicker(); });
   } else {
-    avEl.classList.remove("clickable");
     avEl.addEventListener("click", () => openProfile(p.authorId));
   }
 
   el.querySelector(".post-user .name").addEventListener("click", () => openProfile(p.authorId));
   
   const dlBtn = el.querySelector(".btn.download");
-  if(dlBtn) dlBtn.addEventListener("click", () => startDownload(p.fileUrl, p.title));
+  if(dlBtn) dlBtn.addEventListener("click", () => startDownload(dlBtn.dataset.url, dlBtn.dataset.name));
   
   const delBtn = el.querySelector("[data-del]");
   if(delBtn) delBtn.addEventListener("click", () => deletePost(delBtn.dataset.del, p.fileUrl));
@@ -1502,66 +1485,55 @@ function renderPost(p, id){
 /* ════════════════════════════════════════════════════════════════
    DELETE POST
    ════════════════════════════════════════════════════════════════ */
-
 async function deletePost(id, fileUrl){
   if(!confirm("¿Eliminar esta publicación?")) return;
   
   try{
-    await deleteDoc(doc(db,"posts",id));
-    
-    if(fileUrl){
-      try{
-        const path = decodeURIComponent(new URL(fileUrl).pathname.split("/o/")[1].split("?")[0]);
-        await deleteObject(sRef(storage, path));
-      }catch(e){
-        console.warn("No se pudo borrar archivo del storage",e);
+    if (FIREBASE_OK){
+      await fbModules.firestore.deleteDoc(fbModules.firestore.doc(fbDb,"posts",id));
+      if(fileUrl){
+        try{
+          const path = decodeURIComponent(new URL(fileUrl).pathname.split("/o/")[1].split("?")[0]);
+          await fbModules.storage.deleteObject(fbModules.storage.ref(fbStorage, path));
+        }catch(e){ console.warn("No se pudo borrar archivo",e); }
       }
+      await fbModules.firestore.updateDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid), 
+        { postCount: fbModules.firestore.increment(-1) });
+    } else {
+      DemoDB.deletePost(id, state.user.uid);
+      subscribeFeed(); // refrescar
     }
-    
-    await updateDoc(doc(db,"users",state.user.uid), { postCount: increment(-1) });
-    toast("Publicación eliminada");
+    toast("✓ Publicación eliminada");
   }catch(e){
-    console.error('Error al eliminar post:', e);
-    toast("Error al eliminar: " + e.message, true);
+    console.error(e);
+    toast("Error al eliminar", 'err');
   }
 }
 
 /* ════════════════════════════════════════════════════════════════
-   UPLOAD: DRAG & DROP + SELECT
+   UPLOAD
    ════════════════════════════════════════════════════════════════ */
-
 const dropZone = $("#dropZone");
 const fileInput = $("#fileInput");
-
 dropZone.addEventListener("click",()=>fileInput.click());
-
-dropZone.addEventListener("dragover",e=>{
-  e.preventDefault();
-  dropZone.classList.add("drag");
-});
-
+dropZone.addEventListener("dragover",e=>{e.preventDefault();dropZone.classList.add("drag")});
 dropZone.addEventListener("dragleave",()=>dropZone.classList.remove("drag"));
-
 dropZone.addEventListener("drop",e=>{
-  e.preventDefault();
-  dropZone.classList.remove("drag");
+  e.preventDefault();dropZone.classList.remove("drag");
   if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
 });
-
 fileInput.addEventListener("change",e=>{
   if(e.target.files[0]) handleFile(e.target.files[0]);
 });
 
 function handleFile(f){
-  const MAX = 300 * 1024 * 1024; // 300 MB estrictos
-  
+  const MAX = 300 * 1024 * 1024;
   if(f.size > MAX){
-    toast("Límite estricto: 300 MB", true);
+    toast("Límite estricto: 300 MB", 'err');
     state.selectedFile = null;
     $("#fileInfo").classList.remove("show");
     return;
   }
-  
   state.selectedFile = f;
   $("#fileName").textContent = f.name;
   $("#fileSize").textContent = fmtSize(f.size);
@@ -1569,92 +1541,89 @@ function handleFile(f){
 }
 
 /* ════════════════════════════════════════════════════════════════
-   PUBLISH con manejo de errores
+   PUBLISH
    ════════════════════════════════════════════════════════════════ */
-
 $("#publishBtn").addEventListener("click", async () => {
-  if(!state.selectedFile){ 
-    toast("Selecciona un archivo",true); 
-    return; 
-  }
-  
+  if(!state.selectedFile){ toast("Selecciona un archivo",'err'); return; }
   const title = $("#postTitle").value.trim();
   const desc  = $("#postDesc").value.trim();
-  
-  if(!title){ 
-    toast("Añade un título",true); 
-    return; 
-  }
+  if(!title){ toast("Añade un título",'err'); return; }
 
   const btn = $("#publishBtn");
-  btn.disabled = true; 
+  btn.disabled = true;
   btn.innerHTML = '<span class="loader"></span> SUBIENDO...';
   $("#uploadProgress").classList.add("show");
 
   try{
-    // Subir archivo principal
-    const fileRef = sRef(storage, `files/${state.user.uid}/${Date.now()}_${state.selectedFile.name}`);
-    const task = uploadBytesResumable(fileRef, state.selectedFile);
+    let fileUrl = '';
+    let coverUrl = '';
     
-    const fileUrl = await new Promise((res,rej)=>{
-      task.on("state_changed",
-        s => {
-          const p = (s.bytesLoaded/s.totalBytes)*100;
-          $("#uploadBar").style.width = p+"%";
-        },
-        err => {
-          console.error('Error en upload:', err);
-          rej(err);
-        },
-        async () => res(await getDownloadURL(task.snapshot.ref))
-      );
-    });
-
-    // Subir portada (opcional)
-    let coverUrl = "";
-    const coverFile = $("#coverInput").files[0];
-    if(coverFile){
-      const cRef = sRef(storage, `covers/${state.user.uid}/${Date.now()}_${coverFile.name}`);
-      await uploadBytesResumable(cRef, coverFile);
-      coverUrl = await getDownloadURL(cRef);
+    if (FIREBASE_OK){
+      // Subir archivo
+      const fileRef = fbModules.storage.ref(fbStorage, `files/${state.user.uid}/${Date.now()}_${state.selectedFile.name}`);
+      const task = fbModules.storage.uploadBytesResumable(fileRef, state.selectedFile);
+      fileUrl = await new Promise((res,rej)=>{
+        task.on("state_changed",
+          s => { $("#uploadBar").style.width = ((s.bytesLoaded/s.totalBytes)*100)+"%"; },
+          rej,
+          async () => res(await fbModules.storage.getDownloadURL(task.snapshot.ref))
+        );
+      });
+      // Cover
+      const coverFile = $("#coverInput").files[0];
+      if(coverFile){
+        const cRef = fbModules.storage.ref(fbStorage, `covers/${state.user.uid}/${Date.now()}_${coverFile.name}`);
+        await fbModules.storage.uploadBytesResumable(cRef, coverFile);
+        coverUrl = await fbModules.storage.getDownloadURL(cRef);
+      }
+      // Crear post
+      await fbModules.firestore.addDoc(fbModules.firestore.collection(fbDb,"posts"), {
+        title, description: desc, fileUrl, fileName: state.selectedFile.name,
+        size: state.selectedFile.size || 0, cover: coverUrl,
+        authorId: state.user.uid,
+        authorName: `${state.profile.name} ${state.profile.lastName}`,
+        authorEmail: state.profile.email,
+        authorAvatar: state.profile.avatar || "",
+        authorVerified: !!state.profile.verified,
+        downloads: 0,
+        createdAt: fbModules.firestore.serverTimestamp()
+      });
+      await fbModules.firestore.updateDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid), 
+        { postCount: fbModules.firestore.increment(1) });
+    } else {
+      // Modo demo: convertir archivo a dataURL (limitado a archivos pequeños para demo)
+      if (state.selectedFile.size > 5 * 1024 * 1024){
+        toast("Modo Demo: archivos hasta 5 MB. Configura Firebase para archivos grandes.", 'warn');
+      }
+      fileUrl = await fileToDataURL(state.selectedFile);
+      const coverFile = $("#coverInput").files[0];
+      if(coverFile) coverUrl = await fileToDataURL(coverFile);
+      
+      DemoDB.createPost({
+        title, description: desc, fileUrl, fileName: state.selectedFile.name,
+        size: state.selectedFile.size || 0, cover: coverUrl,
+        authorId: state.user.uid,
+        authorName: `${state.profile.name} ${state.profile.lastName}`,
+        authorEmail: state.profile.email,
+        authorAvatar: state.profile.avatar || "",
+        authorVerified: !!state.profile.verified,
+        downloads: 0
+      });
+      subscribeFeed();
     }
 
-    // Crear post en Firestore
-    await addDoc(collection(db,"posts"), {
-      title, 
-      description: desc,
-      fileUrl, 
-      fileName: state.selectedFile.name,
-      size: state.selectedFile.size || 0,
-      cover: coverUrl,
-      authorId: state.user.uid,
-      authorName: `${state.profile.name} ${state.profile.lastName}`,
-      authorEmail: state.profile.email,
-      authorAvatar: state.profile.avatar || "",
-      authorVerified: !!state.profile.verified,
-      downloads: 0,
-      createdAt: serverTimestamp()
-    });
-
-    await updateDoc(doc(db,"users",state.user.uid), { postCount: increment(1) });
-
     toast("✓ Publicación creada");
-    
-    // Reset
     state.selectedFile = null;
-    $("#postTitle").value=""; 
-    $("#postDesc").value="";
-    $("#coverInput").value=""; 
-    $("#fileInput").value="";
+    $("#postTitle").value=""; $("#postDesc").value="";
+    $("#coverInput").value=""; $("#fileInput").value="";
     $("#fileInfo").classList.remove("show");
     $("#uploadProgress").classList.remove("show");
     $("#uploadBar").style.width="0%";
-    
     showView("viewFeed");
     
   }catch(e){
-    console.error('Error al publicar:', e);
-    toast("Error al publicar: " + e.message, true);
+    console.error(e);
+    toast("Error al publicar: " + e.message, 'err');
   }finally{
     btn.disabled=false; 
     btn.innerHTML="PUBLICAR";
@@ -1662,27 +1631,19 @@ $("#publishBtn").addEventListener("click", async () => {
 });
 
 /* ════════════════════════════════════════════════════════════════
-   DOWNLOAD + ADSENSE GATE
+   DOWNLOAD + ADSENSE
    ════════════════════════════════════════════════════════════════ */
-
-function startDownload(url, title){
-  if(!url){
-    toast("URL de descarga no disponible", true);
-    return;
-  }
-  
+function startDownload(url, name){
+  if(!url){ toast("URL no disponible", 'err'); return; }
   state.currentDownloadUrl = url;
+  state.currentDownloadName = name || 'archivo';
   openModal("modalAd");
-  
-  $("#adsensePlaceholder").innerHTML = `
-    <i class="fa-solid fa-rectangle-ad" style="font-size:28px;color:var(--neon);margin-bottom:8px;display:block;text-shadow:var(--glow)"></i>
-    <div style="font-size:10px;letter-spacing:2px;color:var(--text-dim)">ESPACIO PUBLICITARIO</div>
-    <div style="font-size:9px;color:var(--text-dim);margin-top:4px">Reemplaza este bloque con tu código de AdSense</div>`;
   
   let sec = 5;
   $("#adCount").textContent = sec;
   $("#downloadReady").classList.remove("show");
   $("#adTimer").style.display="block";
+  $("#adTimer").innerHTML = `<i class="fa-solid fa-clock"></i> Espera <span id="adCount">${sec}</span>s`;
   
   const iv = setInterval(()=>{
     sec--;
@@ -1697,51 +1658,43 @@ function startDownload(url, title){
 
 $("#btnFinalDownload").addEventListener("click", ()=>{
   if(!state.currentDownloadUrl) return;
-  
   try {
     const a = document.createElement("a");
     a.href = state.currentDownloadUrl;
     a.target = "_blank";
     a.rel = "noopener";
-    a.download = "";
-    document.body.appendChild(a); 
-    a.click(); 
-    a.remove();
+    a.download = state.currentDownloadName;
+    document.body.appendChild(a); a.click(); a.remove();
     closeModal("modalAd");
     toast("✓ Descarga iniciada");
-  } catch (error) {
-    console.error('Error al descargar:', error);
-    toast("Error al iniciar descarga", true);
+  } catch (err){
+    console.error(err);
+    toast("Error al descargar", 'err');
   }
 });
 
 /* ════════════════════════════════════════════════════════════════
-   PROFILE PÚBLICO
+   PROFILE
    ════════════════════════════════════════════════════════════════ */
-
 async function openProfile(uid){
   state.viewingUserId = uid;
   
   try {
-    const snap = await getDoc(doc(db,"users",uid));
-    
-    if(!snap.exists()){ 
-      toast("Usuario no encontrado",true); 
-      return; 
+    let u;
+    if (FIREBASE_OK){
+      const snap = await fbModules.firestore.getDoc(fbModules.firestore.doc(fbDb,"users",uid));
+      if(!snap.exists()){ toast("Usuario no encontrado",'err'); return; }
+      u = snap.data();
+    } else {
+      u = DemoDB.findUserById(uid);
+      if(!u){ toast("Usuario no encontrado",'err'); return; }
     }
-    
-    const u = snap.data();
 
     $("#profileCover").style.backgroundImage = u.cover ? `url('${u.cover}')` : "";
-
     const av = $("#profileAvatar");
     applyAvatar(av, u.avatar, `${u.name} ${u.lastName||""}`);
-    
-    if(uid === state.user.uid){
-      av.classList.add("clickable");
-    } else {
-      av.classList.remove("clickable");
-    }
+    if(uid === state.user.uid) av.classList.add("clickable");
+    else av.classList.remove("clickable");
 
     $("#profileName").innerHTML = escapeHtml(`${u.name} ${u.lastName||""}`) +
       (u.verified ? ` <span class="verified"><i class="fa-solid fa-circle-check"></i></span>` : "");
@@ -1749,34 +1702,38 @@ async function openProfile(uid){
     $("#statFollowers").textContent = (u.followers||[]).length;
     $("#statFollowing").textContent = (u.following||[]).length;
 
-    if(state.unsubProfilePosts) state.unsubProfilePosts();
-    
-    const q = query(collection(db,"posts"), where("authorId","==",uid), orderBy("createdAt","desc"));
-    
-    state.unsubProfilePosts = onSnapshot(q, snap2 => {
-      $("#statPosts").textContent = snap2.size;
+    // Posts
+    if (state.feedListener) state.feedListener();
+    if (FIREBASE_OK){
+      const q = fbModules.firestore.query(
+        fbModules.firestore.collection(fbDb,"posts"),
+        fbModules.firestore.where("authorId","==",uid),
+        fbModules.firestore.orderBy("createdAt","desc")
+      );
+      state.feedListener = fbModules.firestore.onSnapshot(q, snap2 => {
+        $("#statPosts").textContent = snap2.size;
+        const list = $("#profilePosts");
+        list.innerHTML = "";
+        if(snap2.empty){
+          list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-inbox"></i><h3>SIN APORTES</h3><p>Sin publicaciones aún.</p></div>`;
+          return;
+        }
+        snap2.forEach(d => list.appendChild(renderPost(d.data(), d.id)));
+      });
+    } else {
+      const posts = DemoDB.getPostsByUser(uid);
+      $("#statPosts").textContent = posts.length;
       const list = $("#profilePosts");
       list.innerHTML = "";
-      
-      if(snap2.empty){
-        list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-inbox"></i><h3>SIN APORTES</h3><p>Este usuario aún no ha publicado nada.</p></div>`;
-        return;
+      if(!posts.length){
+        list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-inbox"></i><h3>SIN APORTES</h3><p>Sin publicaciones aún.</p></div>`;
+      } else {
+        posts.forEach(p => list.appendChild(renderPost(p, p.id)));
       }
-      
-      snap2.forEach(d => {
-        try {
-          list.appendChild(renderPost(d.data(), d.id));
-        } catch (err) {
-          console.error('Error al renderizar post en perfil:', err);
-        }
-      });
-    }, error => {
-      console.error('Error en snapshot de posts del perfil:', error);
-    });
+    }
 
     const actions = $("#profileActions");
     actions.innerHTML = "";
-    
     if(uid === state.user.uid){
       actions.innerHTML = `<button class="btn" id="btnGoEdit"><i class="fa-solid fa-pen"></i> EDITAR PERFIL</button>`;
       actions.querySelector("#btnGoEdit").addEventListener("click",()=>showView("viewEdit"));
@@ -1791,42 +1748,53 @@ async function openProfile(uid){
     }
 
     showView("viewProfile");
-    
-  } catch (error) {
-    console.error('Error al abrir perfil:', error);
-    toast("Error al cargar perfil", true);
+  } catch (err){
+    console.error(err);
+    toast("Error al cargar perfil", 'err');
   }
 }
 
 async function toggleFollow(uid){
   if(!state.profile) return;
-  
-  const meRef = doc(db,"users",state.user.uid);
-  const themRef = doc(db,"users",uid);
   const isFollowing = (state.profile.following||[]).includes(uid);
   
   try{
-    if(isFollowing){
-      await updateDoc(meRef, { following: arrayRemove(uid) });
-      await updateDoc(themRef, { followers: arrayRemove(state.user.uid) });
-      toast("Dejaste de seguir");
+    if (FIREBASE_OK){
+      const meRef = fbModules.firestore.doc(fbDb,"users",state.user.uid);
+      const themRef = fbModules.firestore.doc(fbDb,"users",uid);
+      if(isFollowing){
+        await fbModules.firestore.updateDoc(meRef, { following: fbModules.firestore.arrayRemove(uid) });
+        await fbModules.firestore.updateDoc(themRef, { followers: fbModules.firestore.arrayRemove(state.user.uid) });
+      } else {
+        await fbModules.firestore.updateDoc(meRef, { following: fbModules.firestore.arrayUnion(uid) });
+        await fbModules.firestore.updateDoc(themRef, { followers: fbModules.firestore.arrayUnion(state.user.uid) });
+      }
     } else {
-      await updateDoc(meRef, { following: arrayUnion(uid) });
-      await updateDoc(themRef, { followers: arrayUnion(state.user.uid) });
-      toast("Ahora sigues a este usuario");
+      const me = DemoDB.findUserById(state.user.uid);
+      const them = DemoDB.findUserById(uid);
+      if(isFollowing){
+        me.following = (me.following||[]).filter(x => x !== uid);
+        them.followers = (them.followers||[]).filter(x => x !== state.user.uid);
+      } else {
+        me.following = [...(me.following||[]), uid];
+        them.followers = [...(them.followers||[]), state.user.uid];
+      }
+      DemoDB.updateUser(state.user.uid, { following: me.following });
+      DemoDB.updateUser(uid, { followers: them.followers });
     }
+    
     await loadMyProfile();
+    toast(isFollowing ? "Dejaste de seguir" : "Ahora sigues a este usuario");
     openProfile(uid);
   }catch(e){
-    console.error('Error al toggle follow:', e);
-    toast("Error: " + e.message, true);
+    console.error(e);
+    toast("Error", 'err');
   }
 }
 
 /* ════════════════════════════════════════════════════════════════
    SEARCH
    ════════════════════════════════════════════════════════════════ */
-
 async function doSearch(){
   const q = $("#searchInput").value.trim().toLowerCase();
   const out = $("#searchResults");
@@ -1838,14 +1806,20 @@ async function doSearch(){
   }
   
   try{
-    const snap = await getDocs(collection(db,"users"));
-    const results = [];
-    
-    snap.forEach(d=>{
-      const u = d.data();
-      const full = `${u.name} ${u.lastName||""} ${u.email||""}`.toLowerCase();
-      if(full.includes(q)) results.push(u);
-    });
+    let results = [];
+    if (FIREBASE_OK){
+      const snap = await fbModules.firestore.getDocs(fbModules.firestore.collection(fbDb,"users"));
+      snap.forEach(d=>{
+        const u = d.data();
+        const full = `${u.name} ${u.lastName||""} ${u.email||""}`.toLowerCase();
+        if(full.includes(q)) results.push(u);
+      });
+    } else {
+      DemoDB.getUsers().forEach(u => {
+        const full = `${u.name} ${u.lastName||""} ${u.email||""}`.toLowerCase();
+        if(full.includes(q)) results.push(u);
+      });
+    }
     
     if(!results.length){
       out.innerHTML = `<div class="empty-state"><i class="fa-solid fa-ghost"></i><h3>SIN RESULTADOS</h3><p>Ningún usuario coincide.</p></div>`;
@@ -1857,7 +1831,6 @@ async function doSearch(){
       el.className = "admin-user";
       el.style.cursor = "pointer";
       const verified = u.verified?'<span class="verified"><i class="fa-solid fa-circle-check"></i></span>':"";
-      
       el.innerHTML = `
         <div class="avatar"></div>
         <div class="info">
@@ -1865,24 +1838,21 @@ async function doSearch(){
           <div class="e">${escapeHtml(u.email||"")}</div>
         </div>
         <i class="fa-solid fa-chevron-right" style="color:var(--text-dim)"></i>`;
-      
       applyAvatar(el.querySelector(".avatar"), u.avatar, `${u.name} ${u.lastName||""}`);
       el.addEventListener("click",()=>openProfile(u.uid));
       out.appendChild(el);
     });
   }catch(e){
-    console.error('Error en búsqueda:', e);
-    toast("Error de búsqueda",true);
+    console.error(e);
+    toast("Error de búsqueda",'err');
   }
 }
-
 $("#searchBtn").addEventListener("click", doSearch);
 $("#searchInput").addEventListener("keydown", e => { if(e.key==="Enter") doSearch(); });
 
 /* ════════════════════════════════════════════════════════════════
    EDIT PROFILE
    ════════════════════════════════════════════════════════════════ */
-
 function prefillEditForm(){
   if(!state.profile) return;
   $("#editName").value = state.profile.name || "";
@@ -1892,11 +1862,7 @@ function prefillEditForm(){
 $("#saveProfileBtn").addEventListener("click", async () => {
   const name = $("#editName").value.trim();
   const last = $("#editLast").value.trim();
-  
-  if(!name){ 
-    toast("El nombre es obligatorio",true); 
-    return; 
-  }
+  if(!name){ toast("El nombre es obligatorio",'err'); return; }
   
   const btn = $("#saveProfileBtn");
   btn.disabled = true; 
@@ -1905,23 +1871,30 @@ $("#saveProfileBtn").addEventListener("click", async () => {
   try{
     const updates = { name, lastName: last };
     
-    const cvFile = $("#coverEditInput").files[0];
-    if(cvFile){
-      const r = sRef(storage, `covers/${state.user.uid}/${Date.now()}_profile_${cvFile.name}`);
-      await uploadBytesResumable(r, cvFile);
-      updates.cover = await getDownloadURL(r);
+    if (FIREBASE_OK){
+      const cvFile = $("#coverEditInput").files[0];
+      if(cvFile){
+        const r = fbModules.storage.ref(fbStorage, `covers/${state.user.uid}/${Date.now()}_profile_${cvFile.name}`);
+        await fbModules.storage.uploadBytesResumable(r, cvFile);
+        updates.cover = await fbModules.storage.getDownloadURL(r);
+      }
+      await fbModules.firestore.updateDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid), updates);
+      await fbModules.auth.updateProfile(fbAuth.currentUser, { displayName: `${name} ${last}` });
+    } else {
+      const cvFile = $("#coverEditInput").files[0];
+      if(cvFile){
+        updates.cover = await fileToDataURL(cvFile);
+      }
+      DemoDB.updateUser(state.user.uid, updates);
     }
     
-    await updateDoc(doc(db,"users",state.user.uid), updates);
-    await fbUpdateProfile(state.user, { displayName: `${name} ${last}` });
     await loadMyProfile();
     refreshAllAvatars();
-    
     toast("✓ Perfil actualizado");
     $("#coverEditInput").value="";
   }catch(e){
-    console.error('Error al guardar perfil:', e);
-    toast("Error al guardar: " + e.message, true);
+    console.error(e);
+    toast("Error al guardar", 'err');
   }finally{
     btn.disabled=false; 
     btn.innerHTML="GUARDAR CAMBIOS";
@@ -1931,12 +1904,10 @@ $("#saveProfileBtn").addEventListener("click", async () => {
 /* ════════════════════════════════════════════════════════════════
    🥚 EASTER EGG: 10 CLICKS → ADMIN
    ════════════════════════════════════════════════════════════════ */
-
 $("#brandLogo").addEventListener("click", () => {
   state.brandClicks++;
   clearTimeout(state.brandTimer);
   state.brandTimer = setTimeout(()=>state.brandClicks=0, 2500);
-  
   if(state.brandClicks >= 10){
     state.brandClicks = 0;
     openModal("modalAdminLogin");
@@ -1948,7 +1919,6 @@ $("#brandLogo").addEventListener("click", () => {
 $("#adminLoginBtn").addEventListener("click", () => {
   const k = $("#adminKey").value;
   const msg = $("#adminMsg");
-  
   if(k === "AdminCodix2026*"){
     msg.textContent = "✓ Acceso Autorizado";
     msg.className = "auth-msg ok";
@@ -1961,14 +1931,7 @@ $("#adminLoginBtn").addEventListener("click", () => {
     msg.className = "auth-msg err";
   }
 });
-
-$("#adminKey").addEventListener("keydown", e => { 
-  if(e.key==="Enter") $("#adminLoginBtn").click(); 
-});
-
-/* ════════════════════════════════════════════════════════════════
-   ADMIN PANEL
-   ════════════════════════════════════════════════════════════════ */
+$("#adminKey").addEventListener("keydown", e => { if(e.key==="Enter") $("#adminLoginBtn").click(); });
 
 async function openAdminPanel(){
   openModal("modalAdminPanel");
@@ -1976,20 +1939,24 @@ async function openAdminPanel(){
   list.innerHTML = '<div style="text-align:center;padding:20px"><span class="loader"></span></div>';
   
   try{
-    const snap = await getDocs(collection(db,"users"));
-    list.innerHTML = "";
+    let users = [];
+    if (FIREBASE_OK){
+      const snap = await fbModules.firestore.getDocs(fbModules.firestore.collection(fbDb,"users"));
+      snap.forEach(d => users.push(d.data()));
+    } else {
+      users = DemoDB.getUsers();
+    }
     
-    if(snap.empty){ 
+    list.innerHTML = "";
+    if(!users.length){ 
       list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-users-slash"></i><h3>SIN USUARIOS</h3></div>`; 
       return; 
     }
     
-    snap.forEach(d=>{
-      const u = d.data();
+    users.forEach(u=>{
       const el = document.createElement("div");
       el.className = "admin-user";
       const verified = u.verified?'<span class="verified"><i class="fa-solid fa-circle-check"></i></span>':"";
-      
       el.innerHTML = `
         <div class="avatar"></div>
         <div class="info">
@@ -1997,37 +1964,96 @@ async function openAdminPanel(){
           <div class="e">${escapeHtml(u.email||"")}</div>
         </div>
         <div class="toggle ${u.verified?"on":""}" data-uid="${u.uid}"></div>`;
-      
       applyAvatar(el.querySelector(".avatar"), u.avatar, `${u.name} ${u.lastName||""}`);
-      
       el.querySelector(".toggle").addEventListener("click", async (e)=>{
         const t = e.currentTarget;
         const uid = t.dataset.uid;
-        
         try {
-          const userSnap = await getDoc(doc(db,"users",uid));
-          const current = userSnap.data().verified || false;
-          await updateDoc(doc(db,"users",uid), { verified: !current });
+          let current = false;
+          if (FIREBASE_OK){
+            const s = await fbModules.firestore.getDoc(fbModules.firestore.doc(fbDb,"users",uid));
+            current = s.data().verified || false;
+            await fbModules.firestore.updateDoc(fbModules.firestore.doc(fbDb,"users",uid), { verified: !current });
+          } else {
+            const user = DemoDB.findUserById(uid);
+            current = user.verified || false;
+            DemoDB.updateUser(uid, { verified: !current });
+          }
           t.classList.toggle("on");
           toast(`Verificación ${!current?"activada":"desactivada"}`);
-          openAdminPanel();
-        } catch (error) {
-          console.error('Error al toggle verificación:', error);
-          toast("Error al actualizar verificación", true);
+        } catch (err){
+          console.error(err);
+          toast("Error", 'err');
         }
       });
-      
       list.appendChild(el);
     });
   }catch(e){
-    console.error('Error en admin panel:', e);
-    list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><h3>ERROR</h3><p>${escapeHtml(e.message)}</p></div>`;
+    console.error(e);
+    list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><h3>ERROR</h3></div>`;
   }
 }
 
 /* ════════════════════════════════════════════════════════════════
-   INIT
+   🚀 ARRANQUE
    ════════════════════════════════════════════════════════════════ */
+(async function init(){
+  console.log("%c ═══ 𝘿𝙍𝙉 𝙈𝙊𝘿𝕃 v3.2 ═══ ", 'background:#00FF66;color:#000;font-size:14px;padding:6px 12px');
+  
+  // 1. Intentar inicializar Firebase
+  FIREBASE_OK = await tryInitFirebase();
+  
+  // 2. Mostrar banner de estado
+  if (FIREBASE_OK){
+    showBanner('Modo Cloud activo · Firebase conectado', 'ok');
+  } else {
+    showBanner('Modo Demo activo · Datos guardados localmente · Configura Firebase para modo Cloud', 'demo');
+  }
+  
+  // 3. Restaurar sesión si existe
+  if (FIREBASE_OK){
+    // Firebase maneja la sesión automáticamente via onAuthStateChanged
+    fbModules.auth.onAuthStateChanged(fbAuth, async (user) => {
+      try {
+        if (user){
+          state.user = { uid: user.uid, email: user.email };
+          await loadMyProfile();
+          showMainApp();
+          subscribeFeed();
+          prefillEditForm();
+          refreshAllAvatars();
+        } else {
+          showAuthScreen();
+        }
+      } catch (err){
+        console.error('Auth state error:', err);
+        showAuthScreen();
+      }
+    });
+  } else {
+    // Modo demo: sesión manual
+    const session = DemoDB.getSession();
+    if (session){
+      const user = DemoDB.findUserById(session.uid);
+      if (user){
+        state.user = { uid: user.uid, email: user.email };
+        state.profile = user;
+        showMainApp();
+        subscribeFeed();
+        prefillEditForm();
+        refreshAllAvatars();
+      } else {
+        DemoDB.saveSession(null);
+        showAuthScreen();
+      }
+    } else {
+      showAuthScreen();
+    }
+  }
+  
+  console.log("%c ✓ Sistema listo ", 'background:#00FF66;color:#000;padding:4px 10px;border-radius:4px');
+})();
+</script>
 
-console.log("%c ════════════════════════════════════════════════════════════════ ", 'background:#00FF66;color:#000;font-size:14px;padding:8px');
-console.log("%c
+</body>
+   </html>
