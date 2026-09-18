@@ -23,7 +23,7 @@
   --border-hi:#00FF66;
   --neon:#00FF66;
   --neon-2:#00e0ff;
-  --verify:#1d9bf0;          /* Check azul */
+  --verify:#1d9bf0;
   --verify-glow:0 0 8px rgba(29,155,240,.6), 0 0 20px rgba(29,155,240,.3);
   --danger:#ff2a55;
   --warn:#ffb400;
@@ -72,6 +72,41 @@ input,textarea,select{font-family:inherit;color:inherit}
   position:relative;z-index:2;
   max-width:720px;margin:0 auto;
   padding:0 0 90px 0;min-height:100vh;
+}
+
+/* CONFIG ERROR BANNER */
+.config-error{
+  position:fixed;top:0;left:0;right:0;
+  background:linear-gradient(135deg,#1a0a0a,#0a0a0a);
+  border-bottom:2px solid var(--danger);
+  padding:14px 16px;
+  z-index:1000;
+  display:none;
+  animation:slideDown .4s;
+}
+.config-error.show{display:block}
+@keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+.config-error .content{
+  max-width:720px;margin:0 auto;
+  display:flex;align-items:flex-start;gap:12px;
+}
+.config-error i{
+  color:var(--danger);font-size:20px;
+  text-shadow:0 0 8px rgba(255,42,85,.6);
+  flex-shrink:0;margin-top:2px;
+}
+.config-error .text{flex:1}
+.config-error h4{
+  font-family:var(--font-display);
+  font-size:12px;letter-spacing:2px;
+  color:var(--danger);margin-bottom:6px;
+}
+.config-error p{
+  font-size:11px;color:var(--text);line-height:1.5;
+}
+.config-error code{
+  background:#0a0a0a;padding:2px 6px;border-radius:3px;
+  color:var(--neon);font-size:10px;
 }
 
 /* HEADER */
@@ -124,7 +159,6 @@ input,textarea,select{font-family:inherit;color:inherit}
   color:var(--neon);
 }
 
-/* TOPBAR AVATAR (clicable) */
 .top-avatar{
   width:36px;height:36px;border-radius:50%;
   background:#1a1a1a;border:1.5px solid var(--neon);
@@ -146,12 +180,10 @@ input,textarea,select{font-family:inherit;color:inherit}
 }
 .top-avatar:hover::after{opacity:1}
 
-/* VIEWS */
 .view{display:none;padding:14px;animation:fadeIn .35s ease}
 .view.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* AUTH VIEW */
 .auth-wrap{
   min-height:calc(100vh - 70px);
   display:flex;flex-direction:column;justify-content:center;align-items:center;
@@ -219,11 +251,13 @@ input,textarea,select{font-family:inherit;color:inherit}
 }
 .btn-primary:hover{transform:translateY(-1px);filter:brightness(1.1)}
 .btn-primary:disabled{opacity:.5;cursor:not-allowed}
-.auth-msg{font-size:11px;text-align:center;margin-top:12px;min-height:16px}
+.auth-msg{
+  font-size:11px;text-align:center;margin-top:12px;
+  min-height:16px;line-height:1.5;
+}
 .auth-msg.err{color:var(--danger)}
 .auth-msg.ok{color:var(--neon)}
 
-/* SECTION HEADERS */
 .sec-head{
   display:flex;align-items:center;justify-content:space-between;
   margin-bottom:14px;padding-bottom:10px;
@@ -238,7 +272,6 @@ input,textarea,select{font-family:inherit;color:inherit}
 .sec-title i{color:var(--neon);text-shadow:var(--glow)}
 .sec-title::before{content:">";color:var(--neon)}
 
-/* SEARCH BAR */
 .search-bar{
   display:flex;gap:8px;margin-bottom:16px;
   position:relative;
@@ -260,7 +293,6 @@ input,textarea,select{font-family:inherit;color:inherit}
   border-radius:10px;font-weight:700;
 }
 
-/* FEED */
 .empty-state{
   text-align:center;padding:60px 20px;
   border:1px dashed var(--border);border-radius:12px;
@@ -288,7 +320,6 @@ input,textarea,select{font-family:inherit;color:inherit}
 }
 .post-card:hover{border-color:#2a2a2a;transform:translateY(-2px)}
 
-/* COVER CUADRADO CON OBJECT-FIT */
 .post-cover{
   width:100%;aspect-ratio:1/1;
   background:#0a0a0a;
@@ -302,12 +333,9 @@ input,textarea,select{font-family:inherit;color:inherit}
 }
 .post-cover.no-cover{
   display:grid;place-items:center;
-  background:
-    linear-gradient(135deg,#0a0a0a 25%,#111 50%,#0a0a0a 75%);
+  background:linear-gradient(135deg,#0a0a0a 25%,#111 50%,#0a0a0a 75%);
 }
-.post-cover.no-cover i{
-  font-size:48px;color:#1a1a1a;
-}
+.post-cover.no-cover i{font-size:48px;color:#1a1a1a;}
 .post-cover::after{
   content:"";position:absolute;inset:0;
   background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.7));
@@ -329,7 +357,6 @@ input,textarea,select{font-family:inherit;color:inherit}
   display:flex;align-items:center;gap:10px;margin-bottom:10px;
 }
 
-/* AVATAR CYBERPUNK */
 .avatar{
   width:40px;height:40px;border-radius:50%;
   background:#1a1a1a;
@@ -361,10 +388,7 @@ input,textarea,select{font-family:inherit;color:inherit}
 .avatar.clickable:hover::after{opacity:1}
 .avatar.lg.clickable::after{font-size:22px}
 
-/* Efecto glitch sutil en iniciales */
-.avatar:not(.has-img){
-  animation:cyberShift 6s ease-in-out infinite;
-}
+.avatar:not(.has-img){animation:cyberShift 6s ease-in-out infinite;}
 @keyframes cyberShift{
   0%,100%{text-shadow:0 0 6px rgba(0,255,102,.6)}
   50%{text-shadow:0 0 12px rgba(0,255,102,.9), 2px 0 0 rgba(0,224,255,.3), -2px 0 0 rgba(255,42,85,.2)}
@@ -409,7 +433,6 @@ input,textarea,select{font-family:inherit;color:inherit}
 .btn.danger{color:var(--danger);border-color:#2a0a12}
 .btn.danger:hover{background:var(--danger);color:#fff}
 
-/* UPLOAD */
 .upload-card{
   background:linear-gradient(180deg,#0a0a0a,#070707);
   border:1px solid var(--border);
@@ -456,7 +479,6 @@ input,textarea,select{font-family:inherit;color:inherit}
   transition:width .3s;
 }
 
-/* PROFILE */
 .profile-head{
   background:linear-gradient(180deg,#0a0a0a,#070707);
   border:1px solid var(--border);
@@ -502,7 +524,6 @@ input,textarea,select{font-family:inherit;color:inherit}
 .stat .l{font-size:9px;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
 .profile-actions{padding:14px 18px;display:flex;gap:8px}
 
-/* BOTTOM NAV */
 .bottom-nav{
   position:fixed;bottom:0;left:0;right:0;
   background:rgba(5,5,5,.95);
@@ -530,7 +551,6 @@ input,textarea,select{font-family:inherit;color:inherit}
   margin-top:-18px;font-size:18px;
 }
 
-/* MODAL */
 .modal-bg{
   position:fixed;inset:0;
   background:rgba(0,0,0,.88);
@@ -564,7 +584,6 @@ input,textarea,select{font-family:inherit;color:inherit}
 }
 .modal-close:hover{color:var(--danger)}
 
-/* ADSENSE CONTAINER */
 .ad-container{
   background:#000;border:1px solid var(--neon);
   border-radius:10px;padding:20px;
@@ -598,7 +617,6 @@ input,textarea,select{font-family:inherit;color:inherit}
 .download-ready{display:none;margin-top:14px;animation:fadeIn .4s}
 .download-ready.show{display:block}
 
-/* ADMIN LIST */
 .admin-user{
   display:flex;align-items:center;gap:10px;
   padding:10px;background:#070707;
@@ -631,7 +649,6 @@ input,textarea,select{font-family:inherit;color:inherit}
 .toggle.on{background:rgba(29,155,240,.15);border-color:var(--verify)}
 .toggle.on::after{left:22px;background:var(--verify);box-shadow:var(--verify-glow)}
 
-/* TOAST */
 .toast{
   position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);
   background:#0a0a0a;border:1px solid var(--neon);
@@ -644,7 +661,6 @@ input,textarea,select{font-family:inherit;color:inherit}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .toast.err{border-color:var(--danger);color:var(--danger);box-shadow:0 0 8px rgba(255,42,85,.5)}
 
-/* LOADER */
 .loader{
   display:inline-block;width:14px;height:14px;
   border:2px solid var(--border);border-top-color:var(--neon);
@@ -652,7 +668,6 @@ input,textarea,select{font-family:inherit;color:inherit}
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* RESPONSIVE */
 @media (max-width:480px){
   .brand{font-size:15px;letter-spacing:1.5px}
   .brand-tag{display:none}
@@ -665,14 +680,24 @@ input,textarea,select{font-family:inherit;color:inherit}
 </head>
 <body>
 
+<!-- CONFIG ERROR BANNER -->
+<div class="config-error" id="configError">
+  <div class="content">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <div class="text">
+      <h4>ERROR DE CONFIGURACIÓN FIREBASE</h4>
+      <p id="configErrorMsg">Las credenciales de Firebase no están configuradas correctamente. Edita el archivo y completa el objeto <code>firebaseConfig</code> al inicio del script.</p>
+    </div>
+  </div>
+</div>
+
 <div id="app">
 
-  <!-- ========== TOPBAR ========== -->
   <header class="topbar" id="topbar" style="display:none">
     <div class="brand" id="brandLogo" title="DRN MODZ">
       <span class="dot"></span>
       <span>DRN <span class="accent">MODZ</span></span>
-      <span class="brand-tag">v3.0</span>
+      <span class="brand-tag">v3.1</span>
     </div>
     <div class="top-actions">
       <button class="icon-btn search" id="btnSearch" title="Buscar usuarios"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -681,7 +706,6 @@ input,textarea,select{font-family:inherit;color:inherit}
     </div>
   </header>
 
-  <!-- ========== AUTH VIEW ========== -->
   <section class="view active" id="viewAuth">
     <div class="auth-wrap">
       <div class="auth-card">
@@ -694,7 +718,6 @@ input,textarea,select{font-family:inherit;color:inherit}
           <button data-tab="register">REGISTRO</button>
         </div>
 
-        <!-- LOGIN -->
         <form id="formLogin" autocomplete="on">
           <div class="field">
             <label>Correo</label>
@@ -708,7 +731,6 @@ input,textarea,select{font-family:inherit;color:inherit}
           <div class="auth-msg" id="loginMsg"></div>
         </form>
 
-        <!-- REGISTER -->
         <form id="formRegister" style="display:none" autocomplete="on">
           <div class="field">
             <label>Nombre</label>
@@ -733,7 +755,6 @@ input,textarea,select{font-family:inherit;color:inherit}
     </div>
   </section>
 
-  <!-- ========== FEED VIEW ========== -->
   <section class="view" id="viewFeed">
     <div class="sec-head">
       <div class="sec-title">FEED GLOBAL</div>
@@ -742,7 +763,6 @@ input,textarea,select{font-family:inherit;color:inherit}
     <div id="feedList"></div>
   </section>
 
-  <!-- ========== SEARCH VIEW ========== -->
   <section class="view" id="viewSearch">
     <div class="sec-head">
       <div class="sec-title">BUSCAR USUARIOS</div>
@@ -755,7 +775,6 @@ input,textarea,select{font-family:inherit;color:inherit}
     <div id="searchResults"></div>
   </section>
 
-  <!-- ========== UPLOAD VIEW ========== -->
   <section class="view" id="viewUpload">
     <div class="sec-head">
       <div class="sec-title">PUBLICAR ARCHIVO</div>
@@ -790,7 +809,6 @@ input,textarea,select{font-family:inherit;color:inherit}
     </div>
   </section>
 
-  <!-- ========== PROFILE VIEW ========== -->
   <section class="view" id="viewProfile">
     <div class="profile-head">
       <div class="cover" id="profileCover"></div>
@@ -814,7 +832,6 @@ input,textarea,select{font-family:inherit;color:inherit}
     <div id="profilePosts"></div>
   </section>
 
-  <!-- ========== EDIT PROFILE VIEW ========== -->
   <section class="view" id="viewEdit">
     <div class="sec-head">
       <div class="sec-title">EDITAR PERFIL</div>
@@ -841,7 +858,6 @@ input,textarea,select{font-family:inherit;color:inherit}
 
 </div>
 
-<!-- ========== BOTTOM NAV ========== -->
 <nav class="bottom-nav" id="bottomNav" style="display:none">
   <button class="nav-btn active" data-view="viewFeed"><i class="fa-solid fa-house"></i><span>FEED</span></button>
   <button class="nav-btn" data-view="viewSearch"><i class="fa-solid fa-magnifying-glass"></i><span>BUSCAR</span></button>
@@ -850,7 +866,6 @@ input,textarea,select{font-family:inherit;color:inherit}
   <button class="nav-btn" data-view="viewEdit"><i class="fa-solid fa-gear"></i><span>EDITAR</span></button>
 </nav>
 
-<!-- ========== MODAL: ADSENSE DOWNLOAD ========== -->
 <div class="modal-bg" id="modalAd">
   <div class="modal">
     <button class="modal-close" data-close="modalAd"><i class="fa-solid fa-xmark"></i></button>
@@ -874,7 +889,6 @@ input,textarea,select{font-family:inherit;color:inherit}
   </div>
 </div>
 
-<!-- ========== MODAL: ADMIN LOGIN ========== -->
 <div class="modal-bg" id="modalAdminLogin">
   <div class="modal">
     <button class="modal-close" data-close="modalAdminLogin"><i class="fa-solid fa-xmark"></i></button>
@@ -889,7 +903,6 @@ input,textarea,select{font-family:inherit;color:inherit}
   </div>
 </div>
 
-<!-- ========== MODAL: ADMIN PANEL ========== -->
 <div class="modal-bg" id="modalAdminPanel">
   <div class="modal" style="max-width:560px">
     <button class="modal-close" data-close="modalAdminPanel"><i class="fa-solid fa-xmark"></i></button>
@@ -899,15 +912,10 @@ input,textarea,select{font-family:inherit;color:inherit}
   </div>
 </div>
 
-<!-- Hidden input para cambiar avatar desde cualquier lugar -->
 <input type="file" id="globalAvatarInput" accept="image/*" style="display:none" />
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- ============================================
-     FIREBASE SDK (v10 modular via CDN)
-============================================ -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
@@ -923,26 +931,98 @@ import {
   getStorage, ref as sRef, uploadBytesResumable, getDownloadURL, deleteObject
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-/* ============================================
-   🔧 CONFIGURA AQUÍ TUS CREDENCIALES DE FIREBASE
-============================================ */
+/* ════════════════════════════════════════════════════════════════
+   🔥 CONFIGURACIÓN FIREBASE — EDITA ESTOS VALORES
+   ════════════════════════════════════════════════════════════════
+   
+   INSTRUCCIONES:
+   1. Ve a https://console.firebase.google.com/
+   2. Crea o selecciona tu proyecto
+   3. Ve a Configuración del proyecto → Tus apps → Web
+   4. Copia el objeto firebaseConfig y reemplaza los valores abajo
+   
+   IMPORTANTE: Todos los campos son obligatorios
+   ════════════════════════════════════════════════════════════════ */
+
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_PROYECTO.firebaseapp.com",
-  projectId: "TU_PROYECTO",
-  storageBucket: "TU_PROYECTO.appspot.com",
-  messagingSenderId: "XXXXXXXXXX",
-  appId: "TU_APP_ID"
+  apiKey: "TU_API_KEY_AQUI",                    // ← REEMPLAZAR
+  authDomain: "TU_PROYECTO.firebaseapp.com",     // ← REEMPLAZAR
+  projectId: "TU_PROYECTO",                      // ← REEMPLAZAR
+  storageBucket: "TU_PROYECTO.appspot.com",      // ← REEMPLAZAR
+  messagingSenderId: "123456789",                // ← REEMPLAZAR
+  appId: "1:123456789:web:abc123def456"          // ← REEMPLAZAR
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db   = getFirestore(app);
-const storage = getStorage(app);
+/* ════════════════════════════════════════════════════════════════
+   VALIDACIÓN DE CREDENCIALES
+   ════════════════════════════════════════════════════════════════ */
 
-/* ============================================
+function validateFirebaseConfig(config) {
+  const required = ['apiKey', 'authDomain', 'projectId', 'storageBucket', 'messagingSenderId', 'appId'];
+  const missing = [];
+  
+  for (const key of required) {
+    if (!config[key] || config[key].includes('TU_') || config[key].includes('XXX') || config[key] === '123456789') {
+      missing.push(key);
+    }
+  }
+  
+  return {
+    valid: missing.length === 0,
+    missing
+  };
+}
+
+const configValidation = validateFirebaseConfig(firebaseConfig);
+
+if (!configValidation.valid) {
+  console.error('%c ════════════════════════════════════════════════════════════════ ', 'background:#ff2a55;color:#000;font-size:14px;padding:8px');
+  console.error('%c ERROR: Configuración de Firebase incompleta ', 'background:#1a0a0a;color:#ff2a55;font-size:13px;padding:6px 12px');
+  console.error('%c ════════════════════════════════════════════════════════════════ ', 'background:#ff2a55;color:#000;font-size:14px;padding:8px');
+  console.error('%c Campos faltantes o inválidos: ', 'color:#ff2a55;font-weight:bold', configValidation.missing);
+  console.error('%c Por favor, edita el objeto firebaseConfig al inicio del script y reemplaza los valores de ejemplo con tus credenciales reales de Firebase.', 'color:#d8d8d8');
+  console.error('%c ════════════════════════════════════════════════════════════════ ', 'background:#ff2a55;color:#000;font-size:14px;padding:8px');
+  
+  const errorBanner = document.getElementById('configError');
+  const errorMsg = document.getElementById('configErrorMsg');
+  errorMsg.innerHTML = `
+    Las credenciales de Firebase no están configuradas.<br>
+    <strong>Campos faltantes:</strong> <code>${configValidation.missing.join(', ')}</code><br>
+    Edita el objeto <code>firebaseConfig</code> al inicio del script con tus credenciales reales.
+  `;
+  errorBanner.classList.add('show');
+  
+  // Detener ejecución
+  throw new Error('Firebase config incomplete');
+}
+
+console.log('%c ✓ Configuración de Firebase validada ', 'background:#00FF66;color:#000;font-size:12px;padding:4px 12px;border-radius:4px');
+
+/* ════════════════════════════════════════════════════════════════
+   INICIALIZAR FIREBASE
+   ════════════════════════════════════════════════════════════════ */
+
+let app, auth, db, storage;
+
+try {
+  app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  db = getFirestore(app);
+  storage = getStorage(app);
+  console.log('%c ✓ Firebase inicializado correctamente ', 'background:#00FF66;color:#000;font-size:12px;padding:4px 12px;border-radius:4px');
+} catch (error) {
+  console.error('%c ERROR al inicializar Firebase: ', 'background:#ff2a55;color:#fff;padding:4px 12px', error);
+  const errorBanner = document.getElementById('configError');
+  const errorMsg = document.getElementById('configErrorMsg');
+  errorMsg.innerHTML = `Error al inicializar Firebase: <code>${error.message}</code><br>Verifica que tus credenciales sean correctas.`;
+  errorBanner.classList.add('show');
+  throw error;
+}
+
+/* ════════════════════════════════════════════════════════════════
    ESTADO GLOBAL
-============================================ */
+   ════════════════════════════════════════════════════════════════ */
+
 const state = {
   user: null,
   profile: null,
@@ -955,11 +1035,13 @@ const state = {
   unsubProfilePosts: null
 };
 
-/* ============================================
+/* ════════════════════════════════════════════════════════════════
    UTILIDADES
-============================================ */
+   ════════════════════════════════════════════════════════════════ */
+
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
+
 const toast = (msg, err=false) => {
   const t = $("#toast");
   t.textContent = msg;
@@ -967,23 +1049,26 @@ const toast = (msg, err=false) => {
   t.classList.add("show");
   setTimeout(()=>t.classList.remove("show"), 2800);
 };
+
 const fmtSize = b => {
   if(!b || b<1024) return (b||0)+" B";
   if(b<1048576) return (b/1024).toFixed(1)+" KB";
   if(b<1073741824) return (b/1048576).toFixed(1)+" MB";
   return (b/1073741824).toFixed(2)+" GB";
 };
+
 const fmtDate = ts => {
   if(!ts) return "";
   const d = ts.toDate ? ts.toDate() : new Date(ts);
   return d.toLocaleDateString("es-ES",{day:"2-digit",month:"short",year:"numeric"});
 };
+
 const openModal = id => $("#"+id).classList.add("show");
 const closeModal = id => $("#"+id).classList.remove("show");
 $$("[data-close]").forEach(b=>b.addEventListener("click",()=>closeModal(b.dataset.close)));
+
 const escapeHtml = s => String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-/* Genera iniciales cyberpunk */
 function getInitials(name){
   if(!name) return "?";
   const parts = name.trim().split(/\s+/);
@@ -992,7 +1077,6 @@ function getInitials(name){
   return first + last;
 }
 
-/* Aplica avatar a un elemento (con iniciales cyberpunk si no hay imagen) */
 function applyAvatar(el, url, name){
   if(!el) return;
   if(url){
@@ -1006,15 +1090,42 @@ function applyAvatar(el, url, name){
   }
 }
 
-/* ============================================
+/* ════════════════════════════════════════════════════════════════
+   MANEJO DE ERRORES DE FIREBASE AUTH
+   ════════════════════════════════════════════════════════════════ */
+
+function getAuthErrorMessage(error) {
+  const code = error.code || '';
+  
+  const messages = {
+    'auth/invalid-api-key': 'La API Key de Firebase es inválida. Verifica firebaseConfig.apiKey',
+    'auth/api-key-not-valid': 'La API Key no es válida. Revisa tus credenciales de Firebase',
+    'auth/invalid-email': 'El formato del correo electrónico es inválido',
+    'auth/user-disabled': 'Esta cuenta ha sido deshabilitada por un administrador',
+    'auth/user-not-found': 'No existe una cuenta con este correo. Regístrate primero',
+    'auth/wrong-password': 'Contraseña incorrecta. Verifica e intenta de nuevo',
+    'auth/email-already-in-use': 'Este correo ya está registrado. Inicia sesión o usa otro',
+    'auth/weak-password': 'La contraseña debe tener al menos 6 caracteres',
+    'auth/network-request-failed': 'Error de red. Verifica tu conexión a internet',
+    'auth/too-many-requests': 'Demasiados intentos. Espera unos minutos e intenta de nuevo',
+    'auth/operation-not-allowed': 'El método de autenticación no está habilitado en Firebase',
+    'auth/invalid-credential': 'Credenciales inválidas. Verifica correo y contraseña'
+  };
+  
+  return messages[code] || `Error: ${error.message || 'Error desconocido'}`;
+}
+
+/* ════════════════════════════════════════════════════════════════
    NAVEGACIÓN ENTRE VISTAS
-============================================ */
+   ════════════════════════════════════════════════════════════════ */
+
 function showView(id){
   $$(".view").forEach(v=>v.classList.remove("active"));
   $("#"+id).classList.add("active");
   $$(".nav-btn").forEach(b=>b.classList.toggle("active", b.dataset.view===id));
   window.scrollTo({top:0,behavior:"smooth"});
 }
+
 $$(".nav-btn").forEach(b=>{
   b.addEventListener("click",()=>{
     const v = b.dataset.view;
@@ -1025,19 +1136,29 @@ $$(".nav-btn").forEach(b=>{
     }
   });
 });
+
 $("#btnSearch").addEventListener("click",()=>showView("viewSearch"));
+
 $("#btnLogout").addEventListener("click", async () => {
-  await signOut(auth);
-  toast("Sesión cerrada");
+  try {
+    await signOut(auth);
+    toast("Sesión cerrada");
+  } catch (error) {
+    console.error('Error al cerrar sesión:', error);
+    toast("Error al cerrar sesión", true);
+  }
 });
 
-/* ============================================
-   AVATAR GLOBAL Clicable (topbar + perfil propio)
-============================================ */
+/* ════════════════════════════════════════════════════════════════
+   AVATAR GLOBAL Clicable
+   ════════════════════════════════════════════════════════════════ */
+
 function openAvatarPicker(){
   $("#globalAvatarInput").click();
 }
+
 $("#topAvatar").addEventListener("click", openAvatarPicker);
+
 $("#profileAvatar").addEventListener("click", () => {
   if(state.viewingUserId === state.user.uid) openAvatarPicker();
 });
@@ -1045,7 +1166,12 @@ $("#profileAvatar").addEventListener("click", () => {
 $("#globalAvatarInput").addEventListener("change", async e => {
   const file = e.target.files[0];
   if(!file || !state.user) return;
-  if(!file.type.startsWith("image/")){ toast("Selecciona una imagen",true); return; }
+  
+  if(!file.type.startsWith("image/")){ 
+    toast("Selecciona una imagen",true); 
+    return; 
+  }
+  
   try{
     toast("Actualizando avatar...");
     const r = sRef(storage, `avatars/${state.user.uid}/${Date.now()}_${file.name}`);
@@ -1056,8 +1182,8 @@ $("#globalAvatarInput").addEventListener("change", async e => {
     refreshAllAvatars();
     toast("Avatar actualizado");
   }catch(err){
-    console.error(err);
-    toast("Error al subir avatar",true);
+    console.error('Error al subir avatar:', err);
+    toast("Error al subir avatar: " + err.message, true);
   }
   e.target.value = "";
 });
@@ -1070,9 +1196,10 @@ function refreshAllAvatars(){
   }
 }
 
-/* ============================================
+/* ════════════════════════════════════════════════════════════════
    AUTH: TABS
-============================================ */
+   ════════════════════════════════════════════════════════════════ */
+
 $$(".auth-tabs button").forEach(b=>{
   b.addEventListener("click",()=>{
     $$(".auth-tabs button").forEach(x=>x.classList.remove("active"));
@@ -1080,28 +1207,49 @@ $$(".auth-tabs button").forEach(b=>{
     const tab = b.dataset.tab;
     $("#formLogin").style.display = tab==="login"?"block":"none";
     $("#formRegister").style.display = tab==="register"?"block":"none";
+    // Limpiar mensajes
+    $("#loginMsg").textContent = "";
+    $("#regMsg").textContent = "";
   });
 });
 
-/* ============================================
-   AUTH: REGISTRO
-============================================ */
+/* ════════════════════════════════════════════════════════════════
+   AUTH: REGISTRO con manejo de errores robusto
+   ════════════════════════════════════════════════════════════════ */
+
 $("#formRegister").addEventListener("submit", async e => {
   e.preventDefault();
+  
   const name = $("#regName").value.trim();
   const last = $("#regLast").value.trim();
   const email = $("#regEmail").value.trim().toLowerCase();
   const pass = $("#regPass").value;
   const msg = $("#regMsg");
-  msg.textContent="";msg.className="auth-msg";
-  if(!name||!last||!email||!pass) return;
+  
+  // Validación frontend
+  if(!name || !last || !email || !pass) {
+    msg.textContent = "Todos los campos son obligatorios";
+    msg.className = "auth-msg err";
+    return;
+  }
+  
+  if(pass.length < 6) {
+    msg.textContent = "La contraseña debe tener al menos 6 caracteres";
+    msg.className = "auth-msg err";
+    return;
+  }
+  
+  msg.textContent = "Creando cuenta...";
+  msg.className = "auth-msg";
+  
   try{
-    msg.textContent = "Creando cuenta...";
     const cred = await createUserWithEmailAndPassword(auth, email, pass);
     await fbUpdateProfile(cred.user, { displayName: `${name} ${last}` });
+    
     await setDoc(doc(db,"users",cred.user.uid), {
       uid: cred.user.uid,
-      name, lastName: last,
+      name, 
+      lastName: last,
       email,
       avatar: "",
       cover: "",
@@ -1111,35 +1259,66 @@ $("#formRegister").addEventListener("submit", async e => {
       postCount: 0,
       createdAt: serverTimestamp()
     });
-    toast("Cuenta creada · Bienvenido a DRN MODZ");
+    
+    toast("✓ Cuenta creada · Bienvenido a DRN MODZ");
+    
+    // Limpiar formulario
+    $("#regName").value = "";
+    $("#regLast").value = "";
+    $("#regEmail").value = "";
+    $("#regPass").value = "";
+    
   }catch(err){
-    msg.textContent = err.message;
-    msg.classList.add("err");
+    console.error('Error en registro:', err);
+    const errorMsg = getAuthErrorMessage(err);
+    msg.textContent = errorMsg;
+    msg.className = "auth-msg err";
+    toast(errorMsg, true);
   }
 });
 
-/* ============================================
-   AUTH: LOGIN
-============================================ */
+/* ════════════════════════════════════════════════════════════════
+   AUTH: LOGIN con manejo de errores robusto
+   ════════════════════════════════════════════════════════════════ */
+
 $("#formLogin").addEventListener("submit", async e => {
   e.preventDefault();
+  
   const email = $("#loginEmail").value.trim().toLowerCase();
   const pass = $("#loginPass").value;
   const msg = $("#loginMsg");
-  msg.textContent="";msg.className="auth-msg";
+  
+  // Validación frontend
+  if(!email || !pass) {
+    msg.textContent = "Correo y contraseña son obligatorios";
+    msg.className = "auth-msg err";
+    return;
+  }
+  
+  msg.textContent = "Conectando...";
+  msg.className = "auth-msg";
+  
   try{
-    msg.textContent = "Conectando...";
     await signInWithEmailAndPassword(auth, email, pass);
-    toast("Sesión iniciada");
+    toast("✓ Sesión iniciada");
+    
+    // Limpiar formulario
+    $("#loginEmail").value = "";
+    $("#loginPass").value = "";
+    
   }catch(err){
-    msg.textContent = "Credenciales inválidas";
-    msg.classList.add("err");
+    console.error('Error en login:', err);
+    const errorMsg = getAuthErrorMessage(err);
+    msg.textContent = errorMsg;
+    msg.className = "auth-msg err";
+    toast(errorMsg, true);
   }
 });
 
-/* ============================================
+/* ════════════════════════════════════════════════════════════════
    AUTH STATE → CARGAR PERFIL
-============================================ */
+   ════════════════════════════════════════════════════════════════ */
+
 onAuthStateChanged(auth, async user => {
   if(user){
     state.user = user;
@@ -1147,10 +1326,16 @@ onAuthStateChanged(auth, async user => {
     $("#bottomNav").style.display = "flex";
     $("#viewAuth").classList.remove("active");
     showView("viewFeed");
-    await loadMyProfile();
-    subscribeFeed();
-    prefillEditForm();
-    refreshAllAvatars();
+    
+    try {
+      await loadMyProfile();
+      subscribeFeed();
+      prefillEditForm();
+      refreshAllAvatars();
+    } catch (error) {
+      console.error('Error al cargar perfil:', error);
+      toast("Error al cargar perfil", true);
+    }
   } else {
     state.user = null;
     state.profile = null;
@@ -1163,56 +1348,101 @@ onAuthStateChanged(auth, async user => {
 });
 
 async function loadMyProfile(){
-  const snap = await getDoc(doc(db,"users",state.user.uid));
-  if(snap.exists()){
-    state.profile = snap.data();
-  } else {
-    const n = state.user.displayName || "Usuario";
-    const parts = n.split(" ");
-    const name = parts[0];
-    const last = parts.slice(1).join(" ") || "";
-    await setDoc(doc(db,"users",state.user.uid), {
-      uid: state.user.uid, name, lastName: last,
-      email: state.user.email, avatar:"", cover:"",
-      verified:false, followers:[], following:[],
-      postCount:0, createdAt: serverTimestamp()
-    });
-    state.profile = { uid:state.user.uid, name, lastName:last, email:state.user.email,
-      avatar:"",cover:"",verified:false,followers:[],following:[],postCount:0 };
+  try {
+    const snap = await getDoc(doc(db,"users",state.user.uid));
+    
+    if(snap.exists()){
+      state.profile = snap.data();
+    } else {
+      // Crear perfil si no existe (migración)
+      const n = state.user.displayName || "Usuario";
+      const parts = n.split(" ");
+      const name = parts[0];
+      const last = parts.slice(1).join(" ") || "";
+      
+      await setDoc(doc(db,"users",state.user.uid), {
+        uid: state.user.uid, 
+        name, 
+        lastName: last,
+        email: state.user.email, 
+        avatar:"", 
+        cover:"",
+        verified:false, 
+        followers:[], 
+        following:[],
+        postCount:0, 
+        createdAt: serverTimestamp()
+      });
+      
+      state.profile = { 
+        uid:state.user.uid, 
+        name, 
+        lastName:last, 
+        email:state.user.email,
+        avatar:"",
+        cover:"",
+        verified:false,
+        followers:[],
+        following:[],
+        postCount:0 
+      };
+    }
+  } catch (error) {
+    console.error('Error en loadMyProfile:', error);
+    throw error;
   }
 }
 
-/* ============================================
+/* ════════════════════════════════════════════════════════════════
    FEED: SUSCRIPCIÓN EN TIEMPO REAL
-============================================ */
+   ════════════════════════════════════════════════════════════════ */
+
 function subscribeFeed(){
   if(state.unsubFeed) state.unsubFeed();
-  const q = query(collection(db,"posts"), orderBy("createdAt","desc"), limit(50));
-  state.unsubFeed = onSnapshot(q, snap => {
-    const list = $("#feedList");
-    list.innerHTML = "";
-    $("#feedCount").textContent = `${snap.size} POSTS`;
-    if(snap.empty){
-      list.innerHTML = `
-        <div class="empty-state">
-          <i class="fa-solid fa-satellite-dish"></i>
-          <h3>FEED VACÍO</h3>
-          <p>La red está en silencio. Sé el primero en publicar.</p>
-        </div>`;
-      return;
-    }
-    snap.forEach(d => list.appendChild(renderPost(d.data(), d.id)));
-  });
+  
+  try {
+    const q = query(collection(db,"posts"), orderBy("createdAt","desc"), limit(50));
+    
+    state.unsubFeed = onSnapshot(q, snap => {
+      const list = $("#feedList");
+      list.innerHTML = "";
+      $("#feedCount").textContent = `${snap.size} POSTS`;
+      
+      if(snap.empty){
+        list.innerHTML = `
+          <div class="empty-state">
+            <i class="fa-solid fa-satellite-dish"></i>
+            <h3>FEED VACÍO</h3>
+            <p>La red está en silencio. Sé el primero en publicar.</p>
+          </div>`;
+        return;
+      }
+      
+      snap.forEach(d => {
+        try {
+          list.appendChild(renderPost(d.data(), d.id));
+        } catch (err) {
+          console.error('Error al renderizar post:', err);
+        }
+      });
+    }, error => {
+      console.error('Error en snapshot del feed:', error);
+      toast("Error al cargar el feed", true);
+    });
+  } catch (error) {
+    console.error('Error al suscribirse al feed:', error);
+    toast("Error al cargar el feed", true);
+  }
 }
 
-/* ============================================
+/* ════════════════════════════════════════════════════════════════
    RENDER POST
-============================================ */
+   ════════════════════════════════════════════════════════════════ */
+
 function renderPost(p, id){
   const el = document.createElement("div");
   el.className = "post-card";
 
-  // Cover con object-fit automático
   let coverHTML;
   if(p.cover){
     coverHTML = `<img src="${p.cover}" alt="cover" loading="lazy" />`;
@@ -1247,10 +1477,9 @@ function renderPost(p, id){
       </div>
     </div>`;
 
-  // Aplicar avatar cyberpunk
   const avEl = el.querySelector(".avatar");
   applyAvatar(avEl, p.authorAvatar||"", p.authorName||"U");
-  // Solo clicable si es mi propio post
+  
   if(p.authorId === state.user.uid){
     avEl.classList.add("clickable");
     avEl.addEventListener("click", openAvatarPicker);
@@ -1260,84 +1489,123 @@ function renderPost(p, id){
   }
 
   el.querySelector(".post-user .name").addEventListener("click", () => openProfile(p.authorId));
+  
   const dlBtn = el.querySelector(".btn.download");
   if(dlBtn) dlBtn.addEventListener("click", () => startDownload(p.fileUrl, p.title));
+  
   const delBtn = el.querySelector("[data-del]");
   if(delBtn) delBtn.addEventListener("click", () => deletePost(delBtn.dataset.del, p.fileUrl));
+  
   return el;
 }
 
-/* ============================================
+/* ════════════════════════════════════════════════════════════════
    DELETE POST
-============================================ */
+   ════════════════════════════════════════════════════════════════ */
+
 async function deletePost(id, fileUrl){
   if(!confirm("¿Eliminar esta publicación?")) return;
+  
   try{
     await deleteDoc(doc(db,"posts",id));
+    
     if(fileUrl){
       try{
         const path = decodeURIComponent(new URL(fileUrl).pathname.split("/o/")[1].split("?")[0]);
         await deleteObject(sRef(storage, path));
-      }catch(e){console.warn("No se pudo borrar archivo",e)}
+      }catch(e){
+        console.warn("No se pudo borrar archivo del storage",e);
+      }
     }
+    
     await updateDoc(doc(db,"users",state.user.uid), { postCount: increment(-1) });
     toast("Publicación eliminada");
-  }catch(e){toast("Error al eliminar",true)}
+  }catch(e){
+    console.error('Error al eliminar post:', e);
+    toast("Error al eliminar: " + e.message, true);
+  }
 }
 
-/* ============================================
+/* ════════════════════════════════════════════════════════════════
    UPLOAD: DRAG & DROP + SELECT
-============================================ */
+   ════════════════════════════════════════════════════════════════ */
+
 const dropZone = $("#dropZone");
 const fileInput = $("#fileInput");
+
 dropZone.addEventListener("click",()=>fileInput.click());
-dropZone.addEventListener("dragover",e=>{e.preventDefault();dropZone.classList.add("drag")});
+
+dropZone.addEventListener("dragover",e=>{
+  e.preventDefault();
+  dropZone.classList.add("drag");
+});
+
 dropZone.addEventListener("dragleave",()=>dropZone.classList.remove("drag"));
+
 dropZone.addEventListener("drop",e=>{
-  e.preventDefault();dropZone.classList.remove("drag");
+  e.preventDefault();
+  dropZone.classList.remove("drag");
   if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
 });
+
 fileInput.addEventListener("change",e=>{
   if(e.target.files[0]) handleFile(e.target.files[0]);
 });
+
 function handleFile(f){
   const MAX = 300 * 1024 * 1024; // 300 MB estrictos
+  
   if(f.size > MAX){
     toast("Límite estricto: 300 MB", true);
     state.selectedFile = null;
     $("#fileInfo").classList.remove("show");
     return;
   }
+  
   state.selectedFile = f;
   $("#fileName").textContent = f.name;
   $("#fileSize").textContent = fmtSize(f.size);
   $("#fileInfo").classList.add("show");
 }
 
-/* ============================================
-   PUBLISH
-============================================ */
+/* ════════════════════════════════════════════════════════════════
+   PUBLISH con manejo de errores
+   ════════════════════════════════════════════════════════════════ */
+
 $("#publishBtn").addEventListener("click", async () => {
-  if(!state.selectedFile){ toast("Selecciona un archivo",true); return; }
+  if(!state.selectedFile){ 
+    toast("Selecciona un archivo",true); 
+    return; 
+  }
+  
   const title = $("#postTitle").value.trim();
   const desc  = $("#postDesc").value.trim();
-  if(!title){ toast("Añade un título",true); return; }
+  
+  if(!title){ 
+    toast("Añade un título",true); 
+    return; 
+  }
 
   const btn = $("#publishBtn");
-  btn.disabled = true; btn.innerHTML = '<span class="loader"></span> SUBIENDO...';
+  btn.disabled = true; 
+  btn.innerHTML = '<span class="loader"></span> SUBIENDO...';
   $("#uploadProgress").classList.add("show");
 
   try{
     // Subir archivo principal
     const fileRef = sRef(storage, `files/${state.user.uid}/${Date.now()}_${state.selectedFile.name}`);
     const task = uploadBytesResumable(fileRef, state.selectedFile);
+    
     const fileUrl = await new Promise((res,rej)=>{
       task.on("state_changed",
         s => {
           const p = (s.bytesLoaded/s.totalBytes)*100;
           $("#uploadBar").style.width = p+"%";
         },
-        rej,
+        err => {
+          console.error('Error en upload:', err);
+          rej(err);
+        },
         async () => res(await getDownloadURL(task.snapshot.ref))
       );
     });
@@ -1353,8 +1621,10 @@ $("#publishBtn").addEventListener("click", async () => {
 
     // Crear post en Firestore
     await addDoc(collection(db,"posts"), {
-      title, description: desc,
-      fileUrl, fileName: state.selectedFile.name,
+      title, 
+      description: desc,
+      fileUrl, 
+      fileName: state.selectedFile.name,
       size: state.selectedFile.size || 0,
       cover: coverUrl,
       authorId: state.user.uid,
@@ -1368,36 +1638,52 @@ $("#publishBtn").addEventListener("click", async () => {
 
     await updateDoc(doc(db,"users",state.user.uid), { postCount: increment(1) });
 
-    toast("Publicación creada");
+    toast("✓ Publicación creada");
+    
+    // Reset
     state.selectedFile = null;
-    $("#postTitle").value=""; $("#postDesc").value="";
-    $("#coverInput").value=""; $("#fileInput").value="";
+    $("#postTitle").value=""; 
+    $("#postDesc").value="";
+    $("#coverInput").value=""; 
+    $("#fileInput").value="";
     $("#fileInfo").classList.remove("show");
     $("#uploadProgress").classList.remove("show");
     $("#uploadBar").style.width="0%";
+    
     showView("viewFeed");
+    
   }catch(e){
-    console.error(e);
-    toast("Error al publicar",true);
+    console.error('Error al publicar:', e);
+    toast("Error al publicar: " + e.message, true);
   }finally{
-    btn.disabled=false; btn.innerHTML="PUBLICAR";
+    btn.disabled=false; 
+    btn.innerHTML="PUBLICAR";
   }
 });
 
-/* ============================================
+/* ════════════════════════════════════════════════════════════════
    DOWNLOAD + ADSENSE GATE
-============================================ */
+   ════════════════════════════════════════════════════════════════ */
+
 function startDownload(url, title){
+  if(!url){
+    toast("URL de descarga no disponible", true);
+    return;
+  }
+  
   state.currentDownloadUrl = url;
   openModal("modalAd");
+  
   $("#adsensePlaceholder").innerHTML = `
     <i class="fa-solid fa-rectangle-ad" style="font-size:28px;color:var(--neon);margin-bottom:8px;display:block;text-shadow:var(--glow)"></i>
     <div style="font-size:10px;letter-spacing:2px;color:var(--text-dim)">ESPACIO PUBLICITARIO</div>
     <div style="font-size:9px;color:var(--text-dim);margin-top:4px">Reemplaza este bloque con tu código de AdSense</div>`;
+  
   let sec = 5;
   $("#adCount").textContent = sec;
   $("#downloadReady").classList.remove("show");
   $("#adTimer").style.display="block";
+  
   const iv = setInterval(()=>{
     sec--;
     $("#adCount").textContent = sec;
@@ -1408,83 +1694,117 @@ function startDownload(url, title){
     }
   },1000);
 }
+
 $("#btnFinalDownload").addEventListener("click", ()=>{
   if(!state.currentDownloadUrl) return;
-  const a = document.createElement("a");
-  a.href = state.currentDownloadUrl;
-  a.target = "_blank";
-  a.rel = "noopener";
-  a.download = "";
-  document.body.appendChild(a); a.click(); a.remove();
-  closeModal("modalAd");
-  toast("Descarga iniciada");
+  
+  try {
+    const a = document.createElement("a");
+    a.href = state.currentDownloadUrl;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.download = "";
+    document.body.appendChild(a); 
+    a.click(); 
+    a.remove();
+    closeModal("modalAd");
+    toast("✓ Descarga iniciada");
+  } catch (error) {
+    console.error('Error al descargar:', error);
+    toast("Error al iniciar descarga", true);
+  }
 });
 
-/* ============================================
+/* ════════════════════════════════════════════════════════════════
    PROFILE PÚBLICO
-============================================ */
+   ════════════════════════════════════════════════════════════════ */
+
 async function openProfile(uid){
   state.viewingUserId = uid;
-  const snap = await getDoc(doc(db,"users",uid));
-  if(!snap.exists()){ toast("Usuario no encontrado",true); return; }
-  const u = snap.data();
-
-  // Cover
-  $("#profileCover").style.backgroundImage = u.cover ? `url('${u.cover}')` : "";
-
-  // Avatar (clicable si es mi perfil)
-  const av = $("#profileAvatar");
-  applyAvatar(av, u.avatar, `${u.name} ${u.lastName||""}`);
-  if(uid === state.user.uid){
-    av.classList.add("clickable");
-  } else {
-    av.classList.remove("clickable");
-  }
-
-  $("#profileName").innerHTML = escapeHtml(`${u.name} ${u.lastName||""}`) +
-    (u.verified ? ` <span class="verified"><i class="fa-solid fa-circle-check"></i></span>` : "");
-  $("#profileEmail").textContent = u.email || "";
-  $("#statFollowers").textContent = (u.followers||[]).length;
-  $("#statFollowing").textContent = (u.following||[]).length;
-
-  // Posts del usuario
-  if(state.unsubProfilePosts) state.unsubProfilePosts();
-  const q = query(collection(db,"posts"), where("authorId","==",uid), orderBy("createdAt","desc"));
-  state.unsubProfilePosts = onSnapshot(q, snap2 => {
-    $("#statPosts").textContent = snap2.size;
-    const list = $("#profilePosts");
-    list.innerHTML = "";
-    if(snap2.empty){
-      list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-inbox"></i><h3>SIN APORTES</h3><p>Este usuario aún no ha publicado nada.</p></div>`;
-      return;
+  
+  try {
+    const snap = await getDoc(doc(db,"users",uid));
+    
+    if(!snap.exists()){ 
+      toast("Usuario no encontrado",true); 
+      return; 
     }
-    snap2.forEach(d => list.appendChild(renderPost(d.data(), d.id)));
-  });
+    
+    const u = snap.data();
 
-  // Acciones
-  const actions = $("#profileActions");
-  actions.innerHTML = "";
-  if(uid === state.user.uid){
-    actions.innerHTML = `<button class="btn" id="btnGoEdit"><i class="fa-solid fa-pen"></i> EDITAR PERFIL</button>`;
-    actions.querySelector("#btnGoEdit").addEventListener("click",()=>showView("viewEdit"));
-  } else {
-    const isFollowing = (state.profile.following||[]).includes(uid);
-    actions.innerHTML = `
-      <button class="btn ${isFollowing?"":"download"}" id="btnFollow">
-        <i class="fa-solid ${isFollowing?"fa-user-check":"fa-user-plus"}"></i>
-        ${isFollowing?"SIGUIENDO":"SEGUIR"}
-      </button>`;
-    actions.querySelector("#btnFollow").addEventListener("click",()=>toggleFollow(uid));
+    $("#profileCover").style.backgroundImage = u.cover ? `url('${u.cover}')` : "";
+
+    const av = $("#profileAvatar");
+    applyAvatar(av, u.avatar, `${u.name} ${u.lastName||""}`);
+    
+    if(uid === state.user.uid){
+      av.classList.add("clickable");
+    } else {
+      av.classList.remove("clickable");
+    }
+
+    $("#profileName").innerHTML = escapeHtml(`${u.name} ${u.lastName||""}`) +
+      (u.verified ? ` <span class="verified"><i class="fa-solid fa-circle-check"></i></span>` : "");
+    $("#profileEmail").textContent = u.email || "";
+    $("#statFollowers").textContent = (u.followers||[]).length;
+    $("#statFollowing").textContent = (u.following||[]).length;
+
+    if(state.unsubProfilePosts) state.unsubProfilePosts();
+    
+    const q = query(collection(db,"posts"), where("authorId","==",uid), orderBy("createdAt","desc"));
+    
+    state.unsubProfilePosts = onSnapshot(q, snap2 => {
+      $("#statPosts").textContent = snap2.size;
+      const list = $("#profilePosts");
+      list.innerHTML = "";
+      
+      if(snap2.empty){
+        list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-inbox"></i><h3>SIN APORTES</h3><p>Este usuario aún no ha publicado nada.</p></div>`;
+        return;
+      }
+      
+      snap2.forEach(d => {
+        try {
+          list.appendChild(renderPost(d.data(), d.id));
+        } catch (err) {
+          console.error('Error al renderizar post en perfil:', err);
+        }
+      });
+    }, error => {
+      console.error('Error en snapshot de posts del perfil:', error);
+    });
+
+    const actions = $("#profileActions");
+    actions.innerHTML = "";
+    
+    if(uid === state.user.uid){
+      actions.innerHTML = `<button class="btn" id="btnGoEdit"><i class="fa-solid fa-pen"></i> EDITAR PERFIL</button>`;
+      actions.querySelector("#btnGoEdit").addEventListener("click",()=>showView("viewEdit"));
+    } else {
+      const isFollowing = (state.profile.following||[]).includes(uid);
+      actions.innerHTML = `
+        <button class="btn ${isFollowing?"":"download"}" id="btnFollow">
+          <i class="fa-solid ${isFollowing?"fa-user-check":"fa-user-plus"}"></i>
+          ${isFollowing?"SIGUIENDO":"SEGUIR"}
+        </button>`;
+      actions.querySelector("#btnFollow").addEventListener("click",()=>toggleFollow(uid));
+    }
+
+    showView("viewProfile");
+    
+  } catch (error) {
+    console.error('Error al abrir perfil:', error);
+    toast("Error al cargar perfil", true);
   }
-
-  showView("viewProfile");
 }
 
 async function toggleFollow(uid){
   if(!state.profile) return;
+  
   const meRef = doc(db,"users",state.user.uid);
   const themRef = doc(db,"users",uid);
   const isFollowing = (state.profile.following||[]).includes(uid);
+  
   try{
     if(isFollowing){
       await updateDoc(meRef, { following: arrayRemove(uid) });
@@ -1497,37 +1817,47 @@ async function toggleFollow(uid){
     }
     await loadMyProfile();
     openProfile(uid);
-  }catch(e){toast("Error",true)}
+  }catch(e){
+    console.error('Error al toggle follow:', e);
+    toast("Error: " + e.message, true);
+  }
 }
 
-/* ============================================
+/* ════════════════════════════════════════════════════════════════
    SEARCH
-============================================ */
+   ════════════════════════════════════════════════════════════════ */
+
 async function doSearch(){
   const q = $("#searchInput").value.trim().toLowerCase();
   const out = $("#searchResults");
   out.innerHTML = "";
+  
   if(!q){
     out.innerHTML = `<div class="empty-state"><i class="fa-solid fa-magnifying-glass"></i><h3>BUSCA USUARIOS</h3><p>Escribe un nombre o correo.</p></div>`;
     return;
   }
+  
   try{
     const snap = await getDocs(collection(db,"users"));
     const results = [];
+    
     snap.forEach(d=>{
       const u = d.data();
       const full = `${u.name} ${u.lastName||""} ${u.email||""}`.toLowerCase();
       if(full.includes(q)) results.push(u);
     });
+    
     if(!results.length){
       out.innerHTML = `<div class="empty-state"><i class="fa-solid fa-ghost"></i><h3>SIN RESULTADOS</h3><p>Ningún usuario coincide.</p></div>`;
       return;
     }
+    
     results.forEach(u=>{
       const el = document.createElement("div");
       el.className = "admin-user";
       el.style.cursor = "pointer";
       const verified = u.verified?'<span class="verified"><i class="fa-solid fa-circle-check"></i></span>':"";
+      
       el.innerHTML = `
         <div class="avatar"></div>
         <div class="info">
@@ -1535,59 +1865,78 @@ async function doSearch(){
           <div class="e">${escapeHtml(u.email||"")}</div>
         </div>
         <i class="fa-solid fa-chevron-right" style="color:var(--text-dim)"></i>`;
+      
       applyAvatar(el.querySelector(".avatar"), u.avatar, `${u.name} ${u.lastName||""}`);
       el.addEventListener("click",()=>openProfile(u.uid));
       out.appendChild(el);
     });
-  }catch(e){toast("Error de búsqueda",true)}
+  }catch(e){
+    console.error('Error en búsqueda:', e);
+    toast("Error de búsqueda",true);
+  }
 }
+
 $("#searchBtn").addEventListener("click", doSearch);
 $("#searchInput").addEventListener("keydown", e => { if(e.key==="Enter") doSearch(); });
 
-/* ============================================
-   EDIT PROFILE (nombre/apellido + portada)
-   El avatar se cambia tocando el avatar en cualquier parte
-============================================ */
+/* ════════════════════════════════════════════════════════════════
+   EDIT PROFILE
+   ════════════════════════════════════════════════════════════════ */
+
 function prefillEditForm(){
   if(!state.profile) return;
   $("#editName").value = state.profile.name || "";
   $("#editLast").value = state.profile.lastName || "";
 }
+
 $("#saveProfileBtn").addEventListener("click", async () => {
   const name = $("#editName").value.trim();
   const last = $("#editLast").value.trim();
-  if(!name){ toast("El nombre es obligatorio",true); return; }
+  
+  if(!name){ 
+    toast("El nombre es obligatorio",true); 
+    return; 
+  }
+  
   const btn = $("#saveProfileBtn");
-  btn.disabled = true; btn.innerHTML = '<span class="loader"></span> GUARDANDO...';
+  btn.disabled = true; 
+  btn.innerHTML = '<span class="loader"></span> GUARDANDO...';
+  
   try{
     const updates = { name, lastName: last };
+    
     const cvFile = $("#coverEditInput").files[0];
     if(cvFile){
       const r = sRef(storage, `covers/${state.user.uid}/${Date.now()}_profile_${cvFile.name}`);
       await uploadBytesResumable(r, cvFile);
       updates.cover = await getDownloadURL(r);
     }
+    
     await updateDoc(doc(db,"users",state.user.uid), updates);
     await fbUpdateProfile(state.user, { displayName: `${name} ${last}` });
     await loadMyProfile();
     refreshAllAvatars();
-    toast("Perfil actualizado");
+    
+    toast("✓ Perfil actualizado");
     $("#coverEditInput").value="";
   }catch(e){
-    console.error(e);
-    toast("Error al guardar",true);
+    console.error('Error al guardar perfil:', e);
+    toast("Error al guardar: " + e.message, true);
   }finally{
-    btn.disabled=false; btn.innerHTML="GUARDAR CAMBIOS";
+    btn.disabled=false; 
+    btn.innerHTML="GUARDAR CAMBIOS";
   }
 });
 
-/* ============================================
+/* ════════════════════════════════════════════════════════════════
    🥚 EASTER EGG: 10 CLICKS → ADMIN
-============================================ */
+   ════════════════════════════════════════════════════════════════ */
+
 $("#brandLogo").addEventListener("click", () => {
   state.brandClicks++;
   clearTimeout(state.brandTimer);
   state.brandTimer = setTimeout(()=>state.brandClicks=0, 2500);
+  
   if(state.brandClicks >= 10){
     state.brandClicks = 0;
     openModal("modalAdminLogin");
@@ -1599,6 +1948,7 @@ $("#brandLogo").addEventListener("click", () => {
 $("#adminLoginBtn").addEventListener("click", () => {
   const k = $("#adminKey").value;
   const msg = $("#adminMsg");
+  
   if(k === "AdminCodix2026*"){
     msg.textContent = "✓ Acceso Autorizado";
     msg.className = "auth-msg ok";
@@ -1611,24 +1961,35 @@ $("#adminLoginBtn").addEventListener("click", () => {
     msg.className = "auth-msg err";
   }
 });
-$("#adminKey").addEventListener("keydown", e => { if(e.key==="Enter") $("#adminLoginBtn").click(); });
 
-/* ============================================
+$("#adminKey").addEventListener("keydown", e => { 
+  if(e.key==="Enter") $("#adminLoginBtn").click(); 
+});
+
+/* ════════════════════════════════════════════════════════════════
    ADMIN PANEL
-============================================ */
+   ════════════════════════════════════════════════════════════════ */
+
 async function openAdminPanel(){
   openModal("modalAdminPanel");
   const list = $("#adminUserList");
   list.innerHTML = '<div style="text-align:center;padding:20px"><span class="loader"></span></div>';
+  
   try{
     const snap = await getDocs(collection(db,"users"));
     list.innerHTML = "";
-    if(snap.empty){ list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-users-slash"></i><h3>SIN USUARIOS</h3></div>`; return; }
+    
+    if(snap.empty){ 
+      list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-users-slash"></i><h3>SIN USUARIOS</h3></div>`; 
+      return; 
+    }
+    
     snap.forEach(d=>{
       const u = d.data();
       const el = document.createElement("div");
       el.className = "admin-user";
       const verified = u.verified?'<span class="verified"><i class="fa-solid fa-circle-check"></i></span>':"";
+      
       el.innerHTML = `
         <div class="avatar"></div>
         <div class="info">
@@ -1636,30 +1997,37 @@ async function openAdminPanel(){
           <div class="e">${escapeHtml(u.email||"")}</div>
         </div>
         <div class="toggle ${u.verified?"on":""}" data-uid="${u.uid}"></div>`;
+      
       applyAvatar(el.querySelector(".avatar"), u.avatar, `${u.name} ${u.lastName||""}`);
+      
       el.querySelector(".toggle").addEventListener("click", async (e)=>{
         const t = e.currentTarget;
         const uid = t.dataset.uid;
-        const userSnap = await getDoc(doc(db,"users",uid));
-        const current = userSnap.data().verified || false;
-        await updateDoc(doc(db,"users",uid), { verified: !current });
-        t.classList.toggle("on");
-        toast(`Verificación ${!current?"activada":"desactivada"}`);
-        openAdminPanel();
+        
+        try {
+          const userSnap = await getDoc(doc(db,"users",uid));
+          const current = userSnap.data().verified || false;
+          await updateDoc(doc(db,"users",uid), { verified: !current });
+          t.classList.toggle("on");
+          toast(`Verificación ${!current?"activada":"desactivada"}`);
+          openAdminPanel();
+        } catch (error) {
+          console.error('Error al toggle verificación:', error);
+          toast("Error al actualizar verificación", true);
+        }
       });
+      
       list.appendChild(el);
     });
   }catch(e){
+    console.error('Error en admin panel:', e);
     list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><h3>ERROR</h3><p>${escapeHtml(e.message)}</p></div>`;
   }
 }
 
-/* ============================================
+/* ════════════════════════════════════════════════════════════════
    INIT
-============================================ */
-console.log("%c 𝘿𝙍𝙉 𝙈𝙊𝘿𝕃 // ELITE DARKNET HUB ","background:#050505;color:#00FF66;font-size:14px;padding:6px 12px;border:1px solid #00FF66");
-console.log("%c v3.0 · Firebase + Firestore + Storage ","color:#888;font-size:10px");
-</script>
+   ════════════════════════════════════════════════════════════════ */
 
-</body>
-</html>
+console.log("%c ════════════════════════════════════════════════════════════════ ", 'background:#00FF66;color:#000;font-size:14px;padding:8px');
+console.log("%c
