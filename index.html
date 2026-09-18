@@ -166,41 +166,18 @@ input,textarea,select{font-family:inherit;color:inherit}
   overflow:hidden;transition:all .25s;position:relative;
 }
 .post-card:hover{border-color:#2a2a2a;transform:translateY(-2px)}
-
-/* ════════════════════════════════════════════════════════════════
-   🔧 CORRECCIÓN: POST COVER CON ALTURA FIJA Y OBJECT-FIT
-   Se establece una altura fija de 320px y se fuerza object-fit: cover
-   para que la imagen se recorte sin deformarse, respetando sus
-   proporciones originales.
-   ════════════════════════════════════════════════════════════════ */
 .post-cover{
-  width:100%;
-  height:320px;
-  background:#0a0a0a;
-  position:relative;
-  overflow:hidden;
-  border-bottom:1px solid var(--border);
-  display:block;
+  width:100%;height:320px;background:#0a0a0a;
+  position:relative;overflow:hidden;border-bottom:1px solid var(--border);display:block;
 }
 .post-cover img{
-  width:100% !important;
-  height:100% !important;
-  object-fit:cover !important;
-  object-position:center center !important;
-  display:block;
-  background:#0a0a0a;
+  width:100% !important;height:100% !important;
+  object-fit:cover !important;object-position:center center !important;
+  display:block;background:#0a0a0a;
 }
-.post-cover.no-cover{
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,#0a0a0a 25%,#111 50%,#0a0a0a 75%);
-}
+.post-cover.no-cover{display:grid;place-items:center;background:linear-gradient(135deg,#0a0a0a 25%,#111 50%,#0a0a0a 75%)}
 .post-cover.no-cover i{font-size:48px;color:#1a1a1a}
-.post-cover::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.7));
-  pointer-events:none;
-}
+.post-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.7));pointer-events:none}
 .post-size-badge{
   position:absolute;top:10px;right:10px;z-index:2;
   background:rgba(0,0,0,.8);border:1px solid var(--neon);color:var(--neon);
@@ -211,23 +188,13 @@ input,textarea,select{font-family:inherit;color:inherit}
 .post-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 
 .verified-seal {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  vertical-align: middle;
-  margin-left: 4px;
-  position: relative;
-  top: -1px;
-  flex-shrink: 0;
+  display: inline-flex;align-items: center;justify-content: center;
+  width: 20px;height: 20px;vertical-align: middle;margin-left: 4px;
+  position: relative;top: -1px;flex-shrink: 0;
   transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: default;
 }
-.verified-seal:hover {
-  transform: scale(1.2) rotate(5deg);
-  filter: drop-shadow(0 0 8px rgba(0, 224, 255, 0.9));
-}
+.verified-seal:hover { transform: scale(1.2) rotate(5deg); filter: drop-shadow(0 0 8px rgba(0, 224, 255, 0.9)); }
 .verified-seal svg { width: 100%; height: 100%; display: block; }
 
 .avatar{
@@ -277,27 +244,13 @@ input,textarea,select{font-family:inherit;color:inherit}
 
 .firestore-info-alert{
   background:linear-gradient(135deg,rgba(0,224,255,.08),rgba(29,155,240,.04));
-  border:1px solid var(--verify);
-  border-radius:10px;
-  padding:16px;
-  margin-bottom:14px;
-  display:flex;
-  align-items:flex-start;
-  gap:12px;
+  border:1px solid var(--verify);border-radius:10px;padding:16px;margin-bottom:14px;
+  display:flex;align-items:flex-start;gap:12px;
 }
-.firestore-info-alert i{
-  color:var(--verify);font-size:20px;
-  text-shadow:var(--verify-glow);
-  flex-shrink:0;margin-top:2px;
-}
+.firestore-info-alert i{color:var(--verify);font-size:20px;text-shadow:var(--verify-glow);flex-shrink:0;margin-top:2px}
 .firestore-info-alert .content{flex:1}
-.firestore-info-alert h4{
-  font-family:var(--font-display);font-size:11px;letter-spacing:2px;
-  color:var(--verify);margin-bottom:6px;
-}
-.firestore-info-alert p{
-  font-size:10px;color:var(--text);line-height:1.5;
-}
+.firestore-info-alert h4{font-family:var(--font-display);font-size:11px;letter-spacing:2px;color:var(--verify);margin-bottom:6px}
+.firestore-info-alert p{font-size:10px;color:var(--text);line-height:1.5}
 
 .drop-zone{border:2px dashed var(--border);border-radius:12px;padding:30px 16px;text-align:center;transition:all .25s;cursor:pointer;background:rgba(0,0,0,.3)}
 .drop-zone:hover,.drop-zone.drag{border-color:var(--neon);background:rgba(0,255,102,.04)}
@@ -323,8 +276,20 @@ input,textarea,select{font-family:inherit;color:inherit}
 .profile-meta h2{font-family:var(--font-display);font-size:16px;letter-spacing:2px;color:var(--text-bright);display:flex;align-items:center;gap:2px;word-break:break-word;flex-wrap:wrap}
 .stats{display:flex;gap:16px;padding:0 18px 14px;border-bottom:1px dashed var(--border)}
 .stat{text-align:center;flex:1}
-.stat .n{font-size:16px;font-weight:800;color:var(--neon);text-shadow:var(--glow)}
+.stat .n{
+  font-size:16px;font-weight:800;color:var(--neon);text-shadow:var(--glow);
+}
 .stat .l{font-size:9px;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+
+/* ════════════════════════════════════════════════════════════════
+   🔧 CONTADORES CLICKEABLES (Seguidores / Siguiendo)
+   ════════════════════════════════════════════════════════════════ */
+.stat.clickable{cursor:pointer;transition:all .2s;border-radius:8px;padding:6px 4px}
+.stat.clickable:hover{background:rgba(0,255,102,.05)}
+.stat.clickable:hover .n{transform:scale(1.1)}
+.stat.clickable .n{transition:transform .2s}
+.stat.disabled{cursor:default;opacity:.7}
+
 .profile-actions{padding:14px 18px;display:flex;gap:8px}
 
 .bottom-nav{
@@ -383,6 +348,57 @@ input,textarea,select{font-family:inherit;color:inherit}
 .toggle.on{background:rgba(29,155,240,.15);border-color:var(--verify)}
 .toggle.on::after{left:22px;background:var(--verify);box-shadow:var(--verify-glow)}
 
+/* ════════════════════════════════════════════════════════════════
+   🔧 MODAL DE LISTA DE USUARIOS (Seguidores / Siguiendo)
+   ════════════════════════════════════════════════════════════════ */
+.follow-list-modal{max-width:480px}
+.follow-list-tabs{
+  display:flex;gap:4px;margin-bottom:14px;
+  background:#070707;border:1px solid var(--border);
+  border-radius:10px;padding:4px;
+}
+.follow-list-tabs button{
+  flex:1;padding:10px;border-radius:8px;
+  font-size:11px;letter-spacing:2px;color:var(--text-dim);
+  transition:all .2s;font-weight:600;
+}
+.follow-list-tabs button.active{
+  background:var(--neon);color:#000;box-shadow:var(--glow);
+}
+.follow-list-content{max-height:50vh;overflow-y:auto;padding-right:4px}
+.follow-user-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px;background:#070707;
+  border:1px solid var(--border);border-radius:10px;
+  margin-bottom:8px;transition:all .2s;
+}
+.follow-user-item:hover{border-color:#2a2a2a}
+.follow-user-item .info{flex:1;min-width:0;cursor:pointer}
+.follow-user-item .info .n{
+  font-size:12px;color:var(--text-bright);font-weight:600;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  display:flex;align-items:center;gap:4px;
+}
+.follow-user-item .info:hover .n{color:var(--neon)}
+.btn-follow-mini{
+  padding:6px 12px;border-radius:6px;
+  font-size:10px;letter-spacing:1px;font-weight:700;
+  text-transform:uppercase;cursor:pointer;
+  border:1px solid var(--neon);
+  background:transparent;color:var(--neon);
+  transition:all .2s;flex-shrink:0;
+}
+.btn-follow-mini:hover{background:rgba(0,255,102,.1)}
+.btn-follow-mini.following{
+  background:var(--neon);color:#000;
+  box-shadow:var(--glow);
+}
+.btn-follow-mini.following:hover{
+  background:var(--danger);border-color:var(--danger);color:#fff;
+  box-shadow:0 0 8px rgba(255,42,85,.5);
+}
+.btn-follow-mini:disabled{opacity:.5;cursor:not-allowed}
+
 .toast{
   position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);
   background:#0a0a0a;border:1px solid var(--neon);padding:12px 20px;border-radius:10px;
@@ -404,6 +420,8 @@ input,textarea,select{font-family:inherit;color:inherit}
   .profile-info{flex-direction:column;align-items:flex-start;gap:10px}
   .profile-info .avatar{margin-top:-34px}
   .top-avatar{width:34px;height:34px;font-size:12px}
+  .follow-list-modal{max-width:100%}
+  .follow-list-content{max-height:45vh}
 }
 </style>
 </head>
@@ -420,7 +438,7 @@ input,textarea,select{font-family:inherit;color:inherit}
     <div class="brand" id="brandLogo" title="DRN MODZ">
       <span class="dot"></span>
       <span>DRN <span class="accent">MODZ</span></span>
-      <span class="brand-tag">v4.1</span>
+      <span class="brand-tag">v4.2</span>
     </div>
     <div class="top-actions">
       <button class="icon-btn search" id="btnSearch" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -507,10 +525,7 @@ input,textarea,select{font-family:inherit;color:inherit}
       <i class="fa-solid fa-database"></i>
       <div class="content">
         <h4>ALMACENAMIENTO DIRECTO EN FIRESTORE</h4>
-        <p>
-          Para funcionar sin costos de Cloud Storage, los archivos y portadas se convierten a Base64 y se guardan en la base de datos.<br>
-          <strong>Límite estricto:</strong> El archivo no debe superar los <strong>800 KB</strong> para respetar el límite de 1 MB por documento de Firestore.
-        </p>
+        <p>Los archivos y portadas se convierten a Base64 y se guardan en la base de datos. Límite: <strong>800 KB</strong> por documento.</p>
       </div>
     </div>
     
@@ -554,9 +569,18 @@ input,textarea,select{font-family:inherit;color:inherit}
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><div class="n" id="statPosts">0</div><div class="l">Posts</div></div>
-        <div class="stat"><div class="n" id="statFollowers">0</div><div class="l">Seguidores</div></div>
-        <div class="stat"><div class="n" id="statFollowing">0</div><div class="l">Siguiendo</div></div>
+        <div class="stat clickable" id="statPostsBox" title="Ver aportes">
+          <div class="n" id="statPosts">0</div>
+          <div class="l">Posts</div>
+        </div>
+        <div class="stat clickable" id="statFollowersBox" title="Ver seguidores">
+          <div class="n" id="statFollowers">0</div>
+          <div class="l">Seguidores</div>
+        </div>
+        <div class="stat clickable" id="statFollowingBox" title="Ver seguidos">
+          <div class="n" id="statFollowing">0</div>
+          <div class="l">Siguiendo</div>
+        </div>
       </div>
       <div class="profile-actions" id="profileActions"></div>
     </div>
@@ -571,7 +595,7 @@ input,textarea,select{font-family:inherit;color:inherit}
       <i class="fa-solid fa-database"></i>
       <div class="content">
         <h4>ALMACENAMIENTO DIRECTO EN FIRESTORE</h4>
-        <p>Tu avatar y portada se comprimen automáticamente y se guardan como texto en la base de datos, sin costos adicionales.</p>
+        <p>Tu avatar y portada se comprimen automáticamente y se guardan como texto en la base de datos.</p>
       </div>
     </div>
     
@@ -609,9 +633,7 @@ input,textarea,select{font-family:inherit;color:inherit}
   <div class="modal">
     <button class="modal-close" data-close="modalAd"><i class="fa-solid fa-xmark"></i></button>
     <h3><i class="fa-solid fa-shield-halved"></i> DESCARGA PROTEGIDA</h3>
-    <p style="font-size:11px;color:var(--text-dim);margin-bottom:10px;line-height:1.5">
-      Visualiza el anuncio para liberar el archivo.
-    </p>
+    <p style="font-size:11px;color:var(--text-dim);margin-bottom:10px;line-height:1.5">Visualiza el anuncio para liberar el archivo.</p>
     <div class="ad-container">
       <div class="ad-label">PUBLICIDAD · ADSENSE</div>
       <div class="ad-slot" id="adSlot">
@@ -624,6 +646,29 @@ input,textarea,select{font-family:inherit;color:inherit}
     </div>
     <div class="download-ready" id="downloadReady">
       <button class="btn-primary" id="btnFinalDownload"><i class="fa-solid fa-download"></i> DESCARGAR AHORA</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     🔧 NUEVO: MODAL DE LISTA DE SEGUIDORES / SEGUIDOS
+     ════════════════════════════════════════════════════════════════ -->
+<div class="modal-bg" id="modalFollowList">
+  <div class="modal follow-list-modal">
+    <button class="modal-close" data-close="modalFollowList"><i class="fa-solid fa-xmark"></i></button>
+    <h3 id="followListTitle"><i class="fa-solid fa-users"></i> USUARIOS</h3>
+    
+    <div class="follow-list-tabs">
+      <button class="active" data-follow-tab="followers">
+        <i class="fa-solid fa-user-group"></i> SEGUIDORES
+      </button>
+      <button data-follow-tab="following">
+        <i class="fa-solid fa-user-plus"></i> SIGUIENDO
+      </button>
+    </div>
+    
+    <div class="follow-list-content" id="followListContent">
+      <div style="text-align:center;padding:20px"><span class="loader"></span></div>
     </div>
   </div>
 </div>
@@ -658,7 +703,7 @@ input,textarea,select{font-family:inherit;color:inherit}
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, query, orderBy, limit, onSnapshot, where, getDocs, addDoc, serverTimestamp, deleteDoc, arrayUnion, arrayRemove, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, query, where, onSnapshot, getDocs, addDoc, serverTimestamp, deleteDoc, arrayUnion, arrayRemove, increment, limit } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 let fbApp = null, fbAuth = null, fbDb = null;
 let FIREBASE_OK = false;
@@ -728,28 +773,18 @@ function compressImageToBase64(file, maxWidth, maxHeight, quality = 0.7) {
         const canvas = document.createElement('canvas');
         let width = img.width;
         let height = img.height;
-
         if (width > height) {
-          if (width > maxWidth) {
-            height = Math.round(height * (maxWidth / width));
-            width = maxWidth;
-          }
+          if (width > maxWidth) { height = Math.round(height * (maxWidth / width)); width = maxWidth; }
         } else {
-          if (height > maxHeight) {
-            width = Math.round(width * (maxHeight / height));
-            height = maxHeight;
-          }
+          if (height > maxHeight) { width = Math.round(width * (maxHeight / height)); height = maxHeight; }
         }
-
         canvas.width = width;
         canvas.height = height;
         const ctx = canvas.getContext('2d');
         ctx.fillStyle = '#FFFFFF';
         ctx.fillRect(0, 0, width, height);
         ctx.drawImage(img, 0, 0, width, height);
-        
-        const base64 = canvas.toDataURL('image/jpeg', quality);
-        resolve(base64);
+        resolve(canvas.toDataURL('image/jpeg', quality));
       };
       img.onerror = () => reject(new Error("Error al cargar la imagen"));
     };
@@ -757,11 +792,7 @@ function compressImageToBase64(file, maxWidth, maxHeight, quality = 0.7) {
   });
 }
 
-const LS = {
-  USERS: 'drn_modz_users_v3',
-  POSTS: 'drn_modz_posts_v3',
-  SESSION: 'drn_modz_session_v3'
-};
+const LS = { USERS: 'drn_modz_users_v3', POSTS: 'drn_modz_posts_v3', SESSION: 'drn_modz_session_v3' };
 
 const DemoDB = {
   getUsers(){ return JSON.parse(localStorage.getItem(LS.USERS) || '[]'); },
@@ -769,20 +800,11 @@ const DemoDB = {
   getPosts(){ return JSON.parse(localStorage.getItem(LS.POSTS) || '[]'); },
   savePosts(p){ localStorage.setItem(LS.POSTS, JSON.stringify(p)); },
   getSession(){ return JSON.parse(localStorage.getItem(LS.SESSION) || 'null'); },
-  saveSession(s){ 
-    if (s) localStorage.setItem(LS.SESSION, JSON.stringify(s));
-    else localStorage.removeItem(LS.SESSION);
-  },
+  saveSession(s){ if (s) localStorage.setItem(LS.SESSION, JSON.stringify(s)); else localStorage.removeItem(LS.SESSION); },
   createUser({name, lastName, email, password}){
     const users = this.getUsers();
     if (users.find(u => u.email === email)) throw new Error('Este correo ya está registrado');
-    const user = {
-      uid: 'demo_' + Date.now() + '_' + Math.random().toString(36).substr(2,6),
-      name, lastName, email, password,
-      avatar: '', cover: '', verified: false,
-      followers: [], following: [], postCount: 0,
-      createdAt: Date.now()
-    };
+    const user = { uid: 'demo_' + Date.now() + '_' + Math.random().toString(36).substr(2,6), name, lastName, email, password, avatar: '', cover: '', verified: false, followers: [], following: [], postCount: 0, createdAt: Date.now() };
     users.push(user);
     this.saveUsers(users);
     return user;
@@ -820,7 +842,8 @@ const DemoDB = {
 const state = {
   user: null, profile: null, viewingUserId: null, selectedFile: null,
   brandClicks: 0, brandTimer: null, currentDownloadData: null,
-  feedListener: null, authenticating: false
+  feedListener: null, profilePostsListener: null, authenticating: false,
+  followListContext: { uid: null, type: 'followers' }
 };
 
 const $ = s => document.querySelector(s);
@@ -895,17 +918,11 @@ function getVerifiedSealSVG(idSuffix = ''){
   return `
     <span class="verified-seal" title="Usuario Verificado">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="sealGrad${idSuffix}" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#1d9bf0"/>
-            <stop offset="1" stop-color="#00e0ff"/>
-          </linearGradient>
-        </defs>
+        <defs><linearGradient id="sealGrad${idSuffix}" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#1d9bf0"/><stop offset="1" stop-color="#00e0ff"/></linearGradient></defs>
         <path d="M12 2L14.3 8.3L21 9.3L16.1 14.2L17.2 21L12 17.6L6.8 21L7.9 14.2L3 9.3L9.7 8.3L12 2Z" fill="url(#sealGrad${idSuffix})" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/>
         <path d="M9 12.5L11 14.5L15.5 9.5" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-    </span>
-  `;
+    </span>`;
 }
 
 function showView(id){
@@ -931,6 +948,7 @@ $("#btnLogout").addEventListener("click", async () => {
     DemoDB.saveSession(null);
     state.user = null; state.profile = null;
     if (state.feedListener) state.feedListener();
+    if (state.profilePostsListener) state.profilePostsListener();
     showAuthScreen();
     toast("Sesión cerrada");
   } catch (err){
@@ -953,9 +971,7 @@ function showMainApp(){
   showView("viewFeed");
 }
 
-function openAvatarPicker(){
-  $("#globalAvatarInput").click();
-}
+function openAvatarPicker(){ $("#globalAvatarInput").click(); }
 
 $("#topAvatar").addEventListener("click", openAvatarPicker);
 $("#profileAvatar").addEventListener("click", () => {
@@ -966,17 +982,10 @@ $("#globalAvatarInput").addEventListener("change", async e => {
   const file = e.target.files[0];
   if(!file || !state.user) return;
   if(!file.type.startsWith("image/")){ toast("Selecciona una imagen",'err'); return; }
-  
-  if (file.size > 2 * 1024 * 1024) {
-    toast("La imagen es demasiado grande. Máx 2MB antes de compresión.", 'err');
-    e.target.value = "";
-    return;
-  }
-
+  if (file.size > 2 * 1024 * 1024) { toast("La imagen es demasiado grande. Máx 2MB.", 'err'); e.target.value = ""; return; }
   try {
     toast("Comprimiendo y guardando en Firestore...");
     const base64 = await compressImageToBase64(file, 300, 300, 0.8);
-    
     if (FIREBASE_OK) {
       await updateDoc(doc(fbDb, "users", state.user.uid), { avatar: base64 });
       state.profile.avatar = base64;
@@ -984,13 +993,9 @@ $("#globalAvatarInput").addEventListener("change", async e => {
       DemoDB.updateUser(state.user.uid, { avatar: base64 });
       state.profile.avatar = base64;
     }
-    
     refreshAllAvatars();
-    toast("✓ Avatar actualizado correctamente");
-  } catch (err) {
-    console.error(err);
-    toast("Error al procesar el avatar", 'err');
-  }
+    toast("✓ Avatar actualizado");
+  } catch (err) { console.error(err); toast("Error al procesar el avatar", 'err'); }
   e.target.value = "";
 });
 
@@ -1017,41 +1022,24 @@ $$(".auth-tabs button").forEach(b=>{
 $("#formRegister").addEventListener("submit", async e => {
   e.preventDefault();
   if (state.authenticating) return;
-  
   const name = $("#regName").value.trim();
   const last = $("#regLast").value.trim();
   const email = $("#regEmail").value.trim().toLowerCase();
   const pass = $("#regPass").value;
   const msg = $("#regMsg");
   const btn = $("#regBtn");
-  
-  if(!name || !last || !email || !pass){
-    msg.textContent = "⚠ Todos los campos son obligatorios";
-    msg.className = "auth-msg warn";
-    return;
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-    msg.textContent = "⚠ Correo electrónico inválido";
-    msg.className = "auth-msg warn";
-    return;
-  }
-  
+  if(!name || !last || !email || !pass){ msg.textContent = "⚠ Todos los campos son obligatorios"; msg.className = "auth-msg warn"; return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ msg.textContent = "⚠ Correo inválido"; msg.className = "auth-msg warn"; return; }
   state.authenticating = true;
   btn.disabled = true;
   btn.innerHTML = '<span class="loader"></span> CREANDO...';
   msg.textContent = "";
-  
   try {
     if (FIREBASE_OK){
       const paddedPass = padPassword(pass);
       const cred = await createUserWithEmailAndPassword(fbAuth, email, paddedPass);
       await updateProfile(cred.user, { displayName: `${name} ${last}` });
-      await setDoc(doc(fbDb,"users",cred.user.uid), {
-        uid: cred.user.uid, name, lastName: last, email,
-        avatar: "", cover: "", verified: false,
-        followers: [], following: [], postCount: 0,
-        createdAt: serverTimestamp()
-      });
+      await setDoc(doc(fbDb,"users",cred.user.uid), { uid: cred.user.uid, name, lastName: last, email, avatar: "", cover: "", verified: false, followers: [], following: [], postCount: 0, createdAt: serverTimestamp() });
       state.user = { uid: cred.user.uid, email };
       await loadMyProfile();
     } else {
@@ -1060,27 +1048,16 @@ $("#formRegister").addEventListener("submit", async e => {
       state.profile = user;
       DemoDB.saveSession({ uid: user.uid });
     }
-    
     toast("✓ ¡Bienvenido a DRN MODZ!");
     msg.textContent = "✓ Cuenta creada · Redirigiendo...";
     msg.className = "auth-msg ok";
-    
-    $("#regName").value = ""; $("#regLast").value = "";
-    $("#regEmail").value = ""; $("#regPass").value = "";
-    
-    setTimeout(() => {
-      showMainApp();
-      subscribeFeed();
-      prefillEditForm();
-      refreshAllAvatars();
-    }, 600);
-    
+    $("#regName").value = ""; $("#regLast").value = ""; $("#regEmail").value = ""; $("#regPass").value = "";
+    setTimeout(() => { showMainApp(); subscribeFeed(); prefillEditForm(); refreshAllAvatars(); }, 600);
   } catch (err){
     console.error('Error en registro:', err);
-    const errorMsg = getFriendlyAuthError(err);
-    msg.textContent = errorMsg;
+    msg.textContent = getFriendlyAuthError(err);
     msg.className = "auth-msg err";
-    toast(errorMsg, 'err');
+    toast(getFriendlyAuthError(err), 'err');
   } finally {
     state.authenticating = false;
     btn.disabled = false;
@@ -1091,23 +1068,15 @@ $("#formRegister").addEventListener("submit", async e => {
 $("#formLogin").addEventListener("submit", async e => {
   e.preventDefault();
   if (state.authenticating) return;
-  
   const email = $("#loginEmail").value.trim().toLowerCase();
   const pass = $("#loginPass").value;
   const msg = $("#loginMsg");
   const btn = $("#loginBtn");
-  
-  if(!email || !pass){
-    msg.textContent = "⚠ Correo y contraseña son obligatorios";
-    msg.className = "auth-msg warn";
-    return;
-  }
-  
+  if(!email || !pass){ msg.textContent = "⚠ Correo y contraseña obligatorios"; msg.className = "auth-msg warn"; return; }
   state.authenticating = true;
   btn.disabled = true;
   btn.innerHTML = '<span class="loader"></span> CONECTANDO...';
   msg.textContent = "";
-  
   try {
     if (FIREBASE_OK){
       const paddedPass = padPassword(pass);
@@ -1122,27 +1091,16 @@ $("#formLogin").addEventListener("submit", async e => {
       state.profile = user;
       DemoDB.saveSession({ uid: user.uid });
     }
-    
     toast("✓ Sesión iniciada");
     msg.textContent = "✓ Conectado · Redirigiendo...";
     msg.className = "auth-msg ok";
-    
-    $("#loginEmail").value = "";
-    $("#loginPass").value = "";
-    
-    setTimeout(() => {
-      showMainApp();
-      subscribeFeed();
-      prefillEditForm();
-      refreshAllAvatars();
-    }, 500);
-    
+    $("#loginEmail").value = ""; $("#loginPass").value = "";
+    setTimeout(() => { showMainApp(); subscribeFeed(); prefillEditForm(); refreshAllAvatars(); }, 500);
   } catch (err){
     console.error('Error en login:', err);
-    const errorMsg = getFriendlyAuthError(err);
-    msg.textContent = errorMsg;
+    msg.textContent = getFriendlyAuthError(err);
     msg.className = "auth-msg err";
-    toast(errorMsg, 'err');
+    toast(getFriendlyAuthError(err), 'err');
   } finally {
     state.authenticating = false;
     btn.disabled = false;
@@ -1156,17 +1114,17 @@ function getFriendlyAuthError(err){
   const map = {
     'auth/invalid-api-key': '⚠ Error de configuración.',
     'auth/api-key-not-valid': '⚠ Error de configuración.',
-    'auth/invalid-email': '⚠ Correo electrónico inválido',
-    'auth/user-disabled': '⚠ Esta cuenta ha sido deshabilitada',
+    'auth/invalid-email': '⚠ Correo inválido',
+    'auth/user-disabled': '⚠ Cuenta deshabilitada',
     'auth/user-not-found': '⚠ No existe una cuenta con este correo',
     'auth/wrong-password': '⚠ Contraseña incorrecta',
     'auth/invalid-credential': '⚠ Correo o contraseña incorrectos',
-    'auth/email-already-in-use': '⚠ Este correo ya está registrado. Intenta acceder',
-    'auth/weak-password': '⚠ La contraseña es demasiado débil',
-    'auth/network-request-failed': '⚠ Sin conexión a internet. Revisa tu red',
+    'auth/email-already-in-use': '⚠ Este correo ya está registrado',
+    'auth/weak-password': '⚠ Contraseña demasiado débil',
+    'auth/network-request-failed': '⚠ Sin conexión a internet',
     'auth/too-many-requests': '⚠ Demasiados intentos. Espera unos minutos',
-    'auth/operation-not-allowed': '⚠ Método de acceso no habilitado',
-    'auth/internal-error': '⚠ Error interno. Intenta de nuevo'
+    'auth/operation-not-allowed': '⚠ Método no habilitado',
+    'auth/internal-error': '⚠ Error interno'
   };
   if (map[code]) return map[code];
   if (msg.includes('No existe') || msg.includes('Contraseña incorrecta') || msg.includes('ya está registrado')) return '⚠ ' + msg;
@@ -1177,48 +1135,37 @@ async function loadMyProfile(){
   try {
     if (FIREBASE_OK){
       const snap = await getDoc(doc(fbDb,"users",state.user.uid));
-      if(snap.exists()){
-        state.profile = snap.data();
-      } else {
+      if(snap.exists()){ state.profile = snap.data(); }
+      else {
         const n = fbAuth.currentUser?.displayName || "Usuario";
         const parts = n.split(" ");
         const name = parts[0];
         const last = parts.slice(1).join(" ") || "";
-        await setDoc(doc(fbDb,"users",state.user.uid), {
-          uid: state.user.uid, name, lastName: last, email: state.user.email, 
-          avatar:"", cover:"", verified:false, followers:[], following:[], postCount:0, 
-          createdAt: serverTimestamp()
-        });
+        await setDoc(doc(fbDb,"users",state.user.uid), { uid: state.user.uid, name, lastName: last, email: state.user.email, avatar:"", cover:"", verified:false, followers:[], following:[], postCount:0, createdAt: serverTimestamp() });
         state.profile = { uid:state.user.uid, name, lastName:last, email:state.user.email, avatar:"",cover:"",verified:false,followers:[],following:[],postCount:0 };
       }
     } else {
       const user = DemoDB.findUserById(state.user.uid);
       if (user) state.profile = user;
     }
-  } catch (err){
-    console.error('Error al cargar perfil:', err);
-    toast("Error al cargar perfil", 'err');
-  }
+  } catch (err){ console.error('Error al cargar perfil:', err); toast("Error al cargar perfil", 'err'); }
 }
 
 function subscribeFeed(){
   if (state.feedListener){ state.feedListener(); state.feedListener = null; }
   if (FIREBASE_OK){
     try {
-      const q = query(collection(fbDb,"posts"), orderBy("createdAt","desc"), limit(50));
+      const q = query(collection(fbDb,"posts"), limit(50));
       state.feedListener = onSnapshot(q, snap => {
-        renderFeed(snap.docs.map(d => ({ id: d.id, ...d.data() })));
-      }, err => {
-        console.error('Feed error:', err);
-        toast("Error al cargar feed", 'err');
-      });
-    } catch (err){
-      console.error(err);
-      toast("Error al suscribirse al feed", 'err');
-    }
-  } else {
-    renderFeed(DemoDB.getAllPosts());
-  }
+        const posts = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a,b) => {
+          const ta = a.createdAt?.toMillis?.() || a.createdAt || 0;
+          const tb = b.createdAt?.toMillis?.() || b.createdAt || 0;
+          return tb - ta;
+        });
+        renderFeed(posts);
+      }, err => { console.error('Feed error:', err); toast("Error al cargar feed", 'err'); });
+    } catch (err){ console.error(err); toast("Error al suscribirse al feed", 'err'); }
+  } else { renderFeed(DemoDB.getAllPosts()); }
 }
 
 function renderFeed(posts){
@@ -1229,10 +1176,7 @@ function renderFeed(posts){
     list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-satellite-dish"></i><h3>FEED VACÍO</h3><p>La red está en silencio. Sé el primero en publicar.</p></div>`;
     return;
   }
-  posts.forEach(p => {
-    try { list.appendChild(renderPost(p, p.id)); } 
-    catch (err){ console.error('Error render post:', err); }
-  });
+  posts.forEach(p => { try { list.appendChild(renderPost(p, p.id)); } catch (err){ console.error('Error render post:', err); } });
 }
 
 let sealCounter = 0;
@@ -1240,19 +1184,12 @@ let sealCounter = 0;
 function renderPost(p, id){
   const el = document.createElement("div");
   el.className = "post-card";
-  
   let coverHTML;
-  if(p.coverData && p.coverData.startsWith('data:image')){
-    coverHTML = `<img src="${p.coverData}" alt="cover" loading="lazy" />`;
-  } else if (p.cover && p.cover.startsWith('http')) {
-    coverHTML = `<img src="${p.cover}" alt="cover" loading="lazy" />`;
-  } else {
-    coverHTML = `<i class="fa-solid fa-cube"></i>`;
-  }
+  if(p.coverData && p.coverData.startsWith('data:image')){ coverHTML = `<img src="${p.coverData}" alt="cover" loading="lazy" />`; }
+  else if (p.cover && p.cover.startsWith('http')) { coverHTML = `<img src="${p.cover}" alt="cover" loading="lazy" />`; }
+  else { coverHTML = `<i class="fa-solid fa-cube"></i>`; }
   const coverClass = (p.coverData || (p.cover && p.cover.startsWith('http'))) ? "post-cover" : "post-cover no-cover";
-  
   const verifiedSeal = p.authorVerified ? getVerifiedSealSVG('_' + (sealCounter++)) : "";
-
   el.innerHTML = `
     <div class="${coverClass}">
       ${coverHTML}
@@ -1269,38 +1206,24 @@ function renderPost(p, id){
       <div class="post-title">${escapeHtml(p.title||"Sin título")}</div>
       <div class="post-desc">${escapeHtml(p.description||"")}</div>
       <div class="post-actions">
-        <button class="btn download" data-id="${id}">
-          <i class="fa-solid fa-download"></i> DESCARGAR
-        </button>
+        <button class="btn download" data-id="${id}"><i class="fa-solid fa-download"></i> DESCARGAR</button>
         ${p.authorId===state.user.uid ? `<button class="btn danger" data-del="${id}"><i class="fa-solid fa-trash"></i></button>` : ""}
       </div>
     </div>`;
-
   const avEl = el.querySelector(".avatar");
   const avUrl = p.authorAvatar || "";
   applyAvatar(avEl, (avUrl.startsWith('http') || avUrl.startsWith('data:image')) ? avUrl : "", p.authorName||"U");
-  
   if(p.authorId === state.user.uid){
     avEl.classList.add("clickable");
     avEl.addEventListener("click", e => { e.stopPropagation(); openAvatarPicker(); });
   } else {
     avEl.addEventListener("click", () => openProfile(p.authorId));
   }
-
   el.querySelector(".post-user .name").addEventListener("click", () => openProfile(p.authorId));
-  
   const dlBtn = el.querySelector(".btn.download");
-  if(dlBtn) {
-    dlBtn.addEventListener("click", () => startDownload({
-      fileData: p.fileData,
-      fileName: p.fileName,
-      fileType: p.fileType || 'application/octet-stream'
-    }));
-  }
-  
+  if(dlBtn) dlBtn.addEventListener("click", () => startDownload({ fileData: p.fileData, fileName: p.fileName, fileType: p.fileType || 'application/octet-stream' }));
   const delBtn = el.querySelector("[data-del]");
   if(delBtn) delBtn.addEventListener("click", () => deletePost(delBtn.dataset.del));
-  
   return el;
 }
 
@@ -1310,46 +1233,22 @@ async function deletePost(id){
     if (FIREBASE_OK){
       await deleteDoc(doc(fbDb,"posts",id));
       await updateDoc(doc(fbDb,"users",state.user.uid), { postCount: increment(-1) });
-    } else {
-      DemoDB.deletePost(id, state.user.uid);
-      subscribeFeed();
-    }
+    } else { DemoDB.deletePost(id, state.user.uid); subscribeFeed(); }
     toast("✓ Publicación eliminada");
-  }catch(e){
-    console.error(e);
-    toast("Error al eliminar", 'err');
-  }
+  }catch(e){ console.error(e); toast("Error al eliminar", 'err'); }
 }
 
 const dropZone = $("#dropZone");
 const fileInput = $("#fileInput");
-
-dropZone.addEventListener("click", e => {
-  fileInput.click();
-});
-
-dropZone.addEventListener("dragover",e=>{
-  e.preventDefault();
-  dropZone.classList.add("drag");
-});
+dropZone.addEventListener("click", () => fileInput.click());
+dropZone.addEventListener("dragover",e=>{ e.preventDefault(); dropZone.classList.add("drag"); });
 dropZone.addEventListener("dragleave",()=>dropZone.classList.remove("drag"));
-dropZone.addEventListener("drop",e=>{
-  e.preventDefault();
-  dropZone.classList.remove("drag");
-  if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
-});
-fileInput.addEventListener("change",e=>{
-  if(e.target.files[0]) handleFile(e.target.files[0]);
-});
+dropZone.addEventListener("drop",e=>{ e.preventDefault(); dropZone.classList.remove("drag"); if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
+fileInput.addEventListener("change",e=>{ if(e.target.files[0]) handleFile(e.target.files[0]); });
 
 function handleFile(f){
   const MAX = 800 * 1024;
-  if(f.size > MAX){
-    toast(`Límite estricto: ${fmtSize(MAX)} (Requisito de Firestore)`, 'err');
-    state.selectedFile = null;
-    $("#fileInfo").classList.remove("show");
-    return;
-  }
+  if(f.size > MAX){ toast(`Límite estricto: ${fmtSize(MAX)}`, 'err'); state.selectedFile = null; $("#fileInfo").classList.remove("show"); return; }
   state.selectedFile = f;
   $("#fileName").textContent = f.name;
   $("#fileSize").textContent = fmtSize(f.size);
@@ -1357,81 +1256,46 @@ function handleFile(f){
 }
 
 $("#publishBtn").addEventListener("click", async () => {
-  if (!FIREBASE_OK) {
-    toast("⚠ Configura Firebase para publicar", 'err');
-    return;
-  }
-  
+  if (!FIREBASE_OK) { toast("⚠ Configura Firebase para publicar", 'err'); return; }
   if(!state.selectedFile){ toast("Selecciona un archivo",'err'); return; }
   const title = $("#postTitle").value.trim();
   const desc  = $("#postDesc").value.trim();
   if(!title){ toast("Añade un título",'err'); return; }
-
   const btn = $("#publishBtn");
   btn.disabled = true;
   btn.innerHTML = '<span class="loader"></span> PROCESANDO...';
   $("#uploadProgress").classList.add("show");
-
   try {
     toast("Convirtiendo archivo a Base64...");
     const fileBase64 = await fileToBase64(state.selectedFile);
-    
     let coverBase64 = '';
     const coverFile = $("#coverInput").files[0];
-    if (coverFile) {
-      toast("Procesando portada...");
-      coverBase64 = await compressImageToBase64(coverFile, 600, 600, 0.7);
-    }
-
+    if (coverFile) { toast("Procesando portada..."); coverBase64 = await compressImageToBase64(coverFile, 600, 600, 0.7); }
     await addDoc(collection(fbDb, "posts"), {
-      title, 
-      description: desc, 
-      fileData: fileBase64,
-      fileName: state.selectedFile.name,
-      fileType: state.selectedFile.type,
-      size: state.selectedFile.size, 
-      coverData: coverBase64,
-      authorId: state.user.uid,
-      authorName: `${state.profile.name} ${state.profile.lastName}`,
-      authorAvatar: state.profile.avatar || "",
-      authorVerified: !!state.profile.verified,
-      downloads: 0,
-      createdAt: serverTimestamp()
+      title, description: desc, fileData: fileBase64, fileName: state.selectedFile.name,
+      fileType: state.selectedFile.type, size: state.selectedFile.size, coverData: coverBase64,
+      authorId: state.user.uid, authorName: `${state.profile.name} ${state.profile.lastName}`,
+      authorAvatar: state.profile.avatar || "", authorVerified: !!state.profile.verified,
+      downloads: 0, createdAt: serverTimestamp()
     });
-    
-    await updateDoc(doc(fbDb, "users", state.user.uid), { 
-      postCount: increment(1) 
-    });
-
-    toast("✓ Publicación creada en la base de datos");
+    await updateDoc(doc(fbDb, "users", state.user.uid), { postCount: increment(1) });
+    toast("✓ Publicación creada");
     state.selectedFile = null;
-    $("#postTitle").value = ""; 
-    $("#postDesc").value = "";
-    $("#coverInput").value = ""; 
-    $("#fileInput").value = "";
+    $("#postTitle").value = ""; $("#postDesc").value = ""; $("#coverInput").value = ""; $("#fileInput").value = "";
     $("#fileInfo").classList.remove("show");
     $("#uploadProgress").classList.remove("show");
     $("#uploadBar").style.width = "0%";
     showView("viewFeed");
-    
   } catch (e) {
     console.error('Error al publicar:', e);
     if (e.message && (e.message.includes('1MiB') || e.message.includes('1 MB'))) {
-      toast("Error: El documento supera el límite de 1MB de Firestore. Usa un archivo más pequeño.", 'err');
-    } else {
-      toast("Error al publicar: " + e.message, 'err');
-    }
-  } finally {
-    btn.disabled = false; 
-    btn.innerHTML = "PUBLICAR";
-  }
+      toast("Error: Supera el límite de 1MB de Firestore.", 'err');
+    } else { toast("Error al publicar: " + e.message, 'err'); }
+  } finally { btn.disabled = false; btn.innerHTML = "PUBLICAR"; }
 });
 
 function startDownload(postData) {
-  if (!postData || !postData.fileData) { 
-    toast("⚠ Archivo no disponible", 'warn'); 
-    return; 
-  }
+  if (!postData || !postData.fileData) { toast("⚠ Archivo no disponible", 'warn'); return; }
   state.currentDownloadData = postData;
   openModal("modalAd");
   let sec = 5;
@@ -1442,11 +1306,7 @@ function startDownload(postData) {
   const iv = setInterval(()=>{
     sec--;
     $("#adCount").textContent = sec;
-    if(sec<=0){
-      clearInterval(iv);
-      $("#adTimer").innerHTML = '<i class="fa-solid fa-check"></i> Anuncio completado';
-      $("#downloadReady").classList.add("show");
-    }
+    if(sec<=0){ clearInterval(iv); $("#adTimer").innerHTML = '<i class="fa-solid fa-check"></i> Anuncio completado'; $("#downloadReady").classList.add("show"); }
   },1000);
 }
 
@@ -1458,29 +1318,25 @@ $("#btnFinalDownload").addEventListener("click", ()=>{
     const base64WithoutHeader = base64Data.split(',')[1];
     const byteCharacters = atob(base64WithoutHeader);
     const byteNumbers = new Array(byteCharacters.length);
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
+    for (let i = 0; i < byteCharacters.length; i++) byteNumbers[i] = byteCharacters.charCodeAt(i);
     const byteArray = new Uint8Array(byteNumbers);
     const blob = new Blob([byteArray], { type: mimeType });
-    
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
     a.download = state.currentDownloadData.fileName || 'archivo_descargado';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+    document.body.appendChild(a); a.click(); a.remove();
     URL.revokeObjectURL(url);
-    
     closeModal("modalAd");
     toast("✓ Descarga iniciada");
-  } catch (err){
-    console.error(err);
-    toast("Error al procesar la descarga", 'err');
-  }
+  } catch (err){ console.error(err); toast("Error al procesar la descarga", 'err'); }
 });
 
+/* ════════════════════════════════════════════════════════════════
+   🔧 openProfile CORREGIDO: Carga aportes sin índice compuesto
+   Se elimina orderBy("createdAt") para evitar el error de índice
+   compuesto en Firestore. Se ordena en cliente.
+   ════════════════════════════════════════════════════════════════ */
 async function openProfile(uid){
   state.viewingUserId = uid;
   try {
@@ -1498,10 +1354,8 @@ async function openProfile(uid){
     const profileCoverEl = $("#profileCover");
     if (coverUrl && (coverUrl.startsWith('http') || coverUrl.startsWith('data:image'))) {
       profileCoverEl.style.backgroundImage = `url('${coverUrl}')`;
-      profileCoverEl.innerHTML = '';
     } else {
       profileCoverEl.style.backgroundImage = '';
-      profileCoverEl.innerHTML = '';
     }
     
     const av = $("#profileAvatar");
@@ -1513,21 +1367,41 @@ async function openProfile(uid){
     const verifiedSeal = u.verified ? getVerifiedSealSVG('_profile') : "";
     $("#profileName").innerHTML = escapeHtml(`${u.name} ${u.lastName||""}`) + verifiedSeal;
     
+    // Actualizar contadores
     $("#statFollowers").textContent = (u.followers||[]).length;
     $("#statFollowing").textContent = (u.following||[]).length;
 
-    if (state.feedListener) state.feedListener();
+    // ════════════════════════════════════════════════════════════
+    // 🔧 CARGA DE APORTES: Consulta SIN orderBy para evitar
+    // requerir índice compuesto en Firestore. Ordenamos en cliente.
+    // ════════════════════════════════════════════════════════════
+    if (state.profilePostsListener) { state.profilePostsListener(); state.profilePostsListener = null; }
+    
     if (FIREBASE_OK){
-      const q = query(collection(fbDb,"posts"), where("authorId","==",uid), orderBy("createdAt","desc"));
-      state.feedListener = onSnapshot(q, snap2 => {
-        $("#statPosts").textContent = snap2.size;
+      // Consulta simple por authorId (no requiere índice compuesto)
+      const q = query(collection(fbDb,"posts"), where("authorId","==",uid));
+      state.profilePostsListener = onSnapshot(q, snap2 => {
+        // Ordenar en cliente por fecha descendente
+        const posts = snap2.docs.map(d => ({ id: d.id, ...d.data() })).sort((a,b) => {
+          const ta = a.createdAt?.toMillis?.() || a.createdAt || 0;
+          const tb = b.createdAt?.toMillis?.() || b.createdAt || 0;
+          return tb - ta;
+        });
+        
+        $("#statPosts").textContent = posts.length;
         const list = $("#profilePosts");
         list.innerHTML = "";
-        if(snap2.empty){
+        if(!posts.length){
           list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-inbox"></i><h3>SIN APORTES</h3><p>Sin publicaciones aún.</p></div>`;
           return;
         }
-        snap2.forEach(d => list.appendChild(renderPost(d.data(), d.id)));
+        posts.forEach(p => {
+          try { list.appendChild(renderPost(p, p.id)); }
+          catch(err) { console.error('Error render post perfil:', err); }
+        });
+      }, err => {
+        console.error('Error posts perfil:', err);
+        toast("Error al cargar aportes", 'err');
       });
     } else {
       const posts = DemoDB.getPostsByUser(uid);
@@ -1537,7 +1411,10 @@ async function openProfile(uid){
       if(!posts.length){
         list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-inbox"></i><h3>SIN APORTES</h3><p>Sin publicaciones aún.</p></div>`;
       } else {
-        posts.forEach(p => list.appendChild(renderPost(p, p.id)));
+        posts.forEach(p => {
+          try { list.appendChild(renderPost(p, p.id)); }
+          catch(err) { console.error(err); }
+        });
       }
     }
 
@@ -1557,12 +1434,13 @@ async function openProfile(uid){
     }
 
     showView("viewProfile");
-  } catch (err){
-    console.error(err);
-    toast("Error al cargar perfil", 'err');
-  }
+  } catch (err){ console.error(err); toast("Error al cargar perfil", 'err'); }
 }
 
+/* ════════════════════════════════════════════════════════════════
+   🔧 toggleFollow CORREGIDO: Recarga el perfil tras el cambio
+   para actualizar contadores y botones en tiempo real.
+   ════════════════════════════════════════════════════════════════ */
 async function toggleFollow(uid){
   if(!state.profile) return;
   const isFollowing = (state.profile.following||[]).includes(uid);
@@ -1592,10 +1470,244 @@ async function toggleFollow(uid){
     }
     await loadMyProfile();
     toast(isFollowing ? "Dejaste de seguir" : "Ahora sigues a este usuario");
+    // Recargar el perfil que se está viendo para actualizar contadores
     openProfile(uid);
-  }catch(e){
-    console.error(e);
-    toast("Error", 'err');
+  }catch(e){ console.error(e); toast("Error", 'err'); }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   🔧 NUEVO: LISTA INTERACTIVA DE SEGUIDORES / SEGUIDOS
+   ════════════════════════════════════════════════════════════════ */
+
+// Hacer contadores clickeables
+$("#statFollowersBox").addEventListener("click", () => {
+  if (!state.viewingUserId) return;
+  openFollowList('followers', state.viewingUserId);
+});
+
+$("#statFollowingBox").addEventListener("click", () => {
+  if (!state.viewingUserId) return;
+  openFollowList('following', state.viewingUserId);
+});
+
+// Cambiar entre pestañas del modal
+$$(".follow-list-tabs button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    $$(".follow-list-tabs button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const type = btn.dataset.followTab;
+    if (state.followListContext.uid) {
+      openFollowList(type, state.followListContext.uid);
+    }
+  });
+});
+
+async function openFollowList(type, uid){
+  state.followListContext = { uid, type };
+  
+  // Actualizar pestaña activa
+  $$(".follow-list-tabs button").forEach(b => {
+    b.classList.toggle("active", b.dataset.followTab === type);
+  });
+  
+  // Actualizar título
+  const titleEl = $("#followListTitle");
+  if (type === 'followers') {
+    titleEl.innerHTML = '<i class="fa-solid fa-user-group"></i> SEGUIDORES';
+  } else {
+    titleEl.innerHTML = '<i class="fa-solid fa-user-plus"></i> SIGUIENDO';
+  }
+  
+  openModal("modalFollowList");
+  const content = $("#followListContent");
+  content.innerHTML = '<div style="text-align:center;padding:20px"><span class="loader"></span></div>';
+  
+  try {
+    // Obtener datos del usuario
+    let targetUser;
+    if (FIREBASE_OK) {
+      const snap = await getDoc(doc(fbDb, "users", uid));
+      if (!snap.exists()) { content.innerHTML = '<div class="empty-state"><h3>USUARIO NO ENCONTRADO</h3></div>'; return; }
+      targetUser = snap.data();
+    } else {
+      targetUser = DemoDB.findUserById(uid);
+      if (!targetUser) { content.innerHTML = '<div class="empty-state"><h3>USUARIO NO ENCONTRADO</h3></div>'; return; }
+    }
+    
+    const uids = type === 'followers' ? (targetUser.followers || []) : (targetUser.following || []);
+    
+    if (!uids.length) {
+      const emptyMsg = type === 'followers' ? 'Aún no tiene seguidores' : 'Aún no sigue a nadie';
+      content.innerHTML = `<div class="empty-state"><i class="fa-solid fa-${type === 'followers' ? 'user-group' : 'user-plus'}"></i><h3>SIN ${type === 'followers' ? 'SEGUIDORES' : 'SEGUIDOS'}</h3><p>${emptyMsg}</p></div>`;
+      return;
+    }
+    
+    // Obtener datos de cada usuario de la lista
+    const usersData = await Promise.all(uids.map(async (userUid) => {
+      try {
+        if (FIREBASE_OK) {
+          const snap = await getDoc(doc(fbDb, "users", userUid));
+          return snap.exists() ? snap.data() : null;
+        } else {
+          return DemoDB.findUserById(userUid);
+        }
+      } catch (e) {
+        console.warn(`No se pudo cargar usuario ${userUid}:`, e);
+        return null;
+      }
+    }));
+    
+    const validUsers = usersData.filter(u => u !== null);
+    
+    if (!validUsers.length) {
+      content.innerHTML = `<div class="empty-state"><i class="fa-solid fa-ghost"></i><h3>SIN DATOS</h3><p>No se pudo cargar la lista</p></div>`;
+      return;
+    }
+    
+    // Renderizar lista
+    content.innerHTML = '';
+    validUsers.forEach(u => {
+      content.appendChild(renderFollowUserItem(u));
+    });
+    
+  } catch (err) {
+    console.error('Error al cargar lista:', err);
+    content.innerHTML = `<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><h3>ERROR</h3><p>${escapeHtml(err.message)}</p></div>`;
+  }
+}
+
+function renderFollowUserItem(u){
+  const el = document.createElement("div");
+  el.className = "follow-user-item";
+  
+  const verifiedSeal = u.verified ? getVerifiedSealSVG('_fl'+sealCounter++) : "";
+  const isMe = u.uid === state.user.uid;
+  const isFollowing = (state.profile.following || []).includes(u.uid);
+  
+  let followBtnHTML = '';
+  if (!isMe) {
+    followBtnHTML = `
+      <button class="btn-follow-mini ${isFollowing ? 'following' : ''}" data-uid="${u.uid}">
+        ${isFollowing ? 'SIGUIENDO' : 'SEGUIR'}
+      </button>`;
+  }
+  
+  el.innerHTML = `
+    <div class="avatar"></div>
+    <div class="info" data-uid="${u.uid}">
+      <div class="n">${escapeHtml(u.name)} ${escapeHtml(u.lastName||"")} ${verifiedSeal}</div>
+    </div>
+    ${followBtnHTML}`;
+  
+  // Aplicar avatar
+  const avEl = el.querySelector(".avatar");
+  const avUrl = u.avatar || "";
+  applyAvatar(avEl, (avUrl.startsWith('http') || avUrl.startsWith('data:image')) ? avUrl : "", `${u.name} ${u.lastName||""}`);
+  
+  // Click en info → ver perfil
+  el.querySelector(".info").addEventListener("click", () => {
+    closeModal("modalFollowList");
+    openProfile(u.uid);
+  });
+  
+  // Click en botón seguir
+  const followBtn = el.querySelector(".btn-follow-mini");
+  if (followBtn) {
+    followBtn.addEventListener("click", async (e) => {
+      e.stopPropagation();
+      await quickToggleFollow(u.uid, followBtn);
+    });
+    
+    // Efecto hover: al pasar el mouse sobre "SIGUIENDO" cambia a "DEJAR DE SEGUIR"
+    followBtn.addEventListener("mouseenter", () => {
+      if (followBtn.classList.contains('following')) {
+        followBtn.innerHTML = 'DEJAR DE SEGUIR';
+      }
+    });
+    followBtn.addEventListener("mouseleave", () => {
+      if (followBtn.classList.contains('following')) {
+        followBtn.innerHTML = 'SIGUIENDO';
+      }
+    });
+  }
+  
+  return el;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   🔧 quickToggleFollow: Cambia el estado de seguimiento
+   desde el modal sin cerrar la ventana, actualizando el botón
+   en tiempo real.
+   ════════════════════════════════════════════════════════════════ */
+async function quickToggleFollow(targetUid, btnEl){
+  if (!state.profile) return;
+  const isFollowing = (state.profile.following || []).includes(targetUid);
+  
+  btnEl.disabled = true;
+  btnEl.innerHTML = '<span class="loader" style="width:10px;height:10px;border-width:2px"></span>';
+  
+  try {
+    if (FIREBASE_OK) {
+      const meRef = doc(fbDb, "users", state.user.uid);
+      const themRef = doc(fbDb, "users", targetUid);
+      if (isFollowing) {
+        await updateDoc(meRef, { following: arrayRemove(targetUid) });
+        await updateDoc(themRef, { followers: arrayRemove(state.user.uid) });
+      } else {
+        await updateDoc(meRef, { following: arrayUnion(targetUid) });
+        await updateDoc(themRef, { followers: arrayUnion(state.user.uid) });
+      }
+    } else {
+      const me = DemoDB.findUserById(state.user.uid);
+      const them = DemoDB.findUserById(targetUid);
+      if (isFollowing) {
+        me.following = (me.following||[]).filter(x => x !== targetUid);
+        them.followers = (them.followers||[]).filter(x => x !== state.user.uid);
+      } else {
+        me.following = [...(me.following||[]), targetUid];
+        them.followers = [...(them.followers||[]), state.user.uid];
+      }
+      DemoDB.updateUser(state.user.uid, { following: me.following });
+      DemoDB.updateUser(targetUid, { followers: them.followers });
+    }
+    
+    // Recargar perfil actual
+    await loadMyProfile();
+    
+    // Actualizar botón
+    const nowFollowing = !isFollowing;
+    btnEl.disabled = false;
+    btnEl.classList.toggle('following', nowFollowing);
+    btnEl.innerHTML = nowFollowing ? 'SIGUIENDO' : 'SEGUIR';
+    
+    toast(nowFollowing ? "✓ Ahora sigues a este usuario" : "Dejaste de seguir");
+    
+    // Actualizar contadores del perfil actual si estamos viéndolo
+    if (state.viewingUserId) {
+      // Actualizar contador de seguidores del usuario objetivo
+      const targetUserEl = document.querySelector(`.follow-user-item [data-uid="${state.viewingUserId}"]`);
+      // Refrescar contadores del perfil que estamos viendo
+      if (FIREBASE_OK) {
+        const snap = await getDoc(doc(fbDb, "users", state.viewingUserId));
+        if (snap.exists()) {
+          const vu = snap.data();
+          $("#statFollowers").textContent = (vu.followers || []).length;
+          $("#statFollowing").textContent = (vu.following || []).length;
+        }
+      } else {
+        const vu = DemoDB.findUserById(state.viewingUserId);
+        if (vu) {
+          $("#statFollowers").textContent = (vu.followers || []).length;
+          $("#statFollowing").textContent = (vu.following || []).length;
+        }
+      }
+    }
+    
+  } catch (err) {
+    console.error('Error toggle follow:', err);
+    btnEl.disabled = false;
+    btnEl.innerHTML = isFollowing ? 'SIGUIENDO' : 'SEGUIR';
+    toast("Error al actualizar", 'err');
   }
 }
 
@@ -1603,29 +1715,16 @@ async function doSearch(){
   const q = $("#searchInput").value.trim().toLowerCase();
   const out = $("#searchResults");
   out.innerHTML = "";
-  if(!q){
-    out.innerHTML = `<div class="empty-state"><i class="fa-solid fa-magnifying-glass"></i><h3>BUSCA USUARIOS</h3><p>Escribe un nombre.</p></div>`;
-    return;
-  }
+  if(!q){ out.innerHTML = `<div class="empty-state"><i class="fa-solid fa-magnifying-glass"></i><h3>BUSCA USUARIOS</h3><p>Escribe un nombre.</p></div>`; return; }
   try{
     let results = [];
     if (FIREBASE_OK){
       const snap = await getDocs(collection(fbDb,"users"));
-      snap.forEach(d=>{
-        const u = d.data();
-        const full = `${u.name} ${u.lastName||""}`.toLowerCase();
-        if(full.includes(q)) results.push(u);
-      });
+      snap.forEach(d=>{ const u = d.data(); const full = `${u.name} ${u.lastName||""}`.toLowerCase(); if(full.includes(q)) results.push(u); });
     } else {
-      DemoDB.getUsers().forEach(u => {
-        const full = `${u.name} ${u.lastName||""}`.toLowerCase();
-        if(full.includes(q)) results.push(u);
-      });
+      DemoDB.getUsers().forEach(u => { const full = `${u.name} ${u.lastName||""}`.toLowerCase(); if(full.includes(q)) results.push(u); });
     }
-    if(!results.length){
-      out.innerHTML = `<div class="empty-state"><i class="fa-solid fa-ghost"></i><h3>SIN RESULTADOS</h3><p>Ningún usuario coincide.</p></div>`;
-      return;
-    }
+    if(!results.length){ out.innerHTML = `<div class="empty-state"><i class="fa-solid fa-ghost"></i><h3>SIN RESULTADOS</h3><p>Ningún usuario coincide.</p></div>`; return; }
     results.forEach(u=>{
       const el = document.createElement("div");
       el.className = "admin-user";
@@ -1642,10 +1741,7 @@ async function doSearch(){
       el.addEventListener("click",()=>openProfile(u.uid));
       out.appendChild(el);
     });
-  }catch(e){
-    console.error(e);
-    toast("Error de búsqueda",'err');
-  }
+  }catch(e){ console.error(e); toast("Error de búsqueda",'err'); }
 }
 $("#searchBtn").addEventListener("click", doSearch);
 $("#searchInput").addEventListener("keydown", e => { if(e.key==="Enter") doSearch(); });
@@ -1660,42 +1756,27 @@ $("#saveProfileBtn").addEventListener("click", async () => {
   const name = $("#editName").value.trim();
   const last = $("#editLast").value.trim();
   if(!name){ toast("El nombre es obligatorio",'err'); return; }
-  
   const btn = $("#saveProfileBtn");
   btn.disabled = true; 
   btn.innerHTML = '<span class="loader"></span> GUARDANDO...';
-  
   try {
     const updates = { name, lastName: last };
     const cvFile = $("#coverEditInput").files[0];
-    
     if (cvFile) {
-      if (cvFile.size > 3 * 1024 * 1024) {
-        toast("La portada es demasiado grande. Máx 3MB.", 'err');
-        throw new Error("File too large");
-      }
+      if (cvFile.size > 3 * 1024 * 1024) { toast("La portada es demasiado grande. Máx 3MB.", 'err'); throw new Error("File too large"); }
       toast("Procesando portada...");
       updates.coverData = await compressImageToBase64(cvFile, 800, 400, 0.7);
     }
-    
     if (FIREBASE_OK) {
       await updateDoc(doc(fbDb, "users", state.user.uid), updates);
       await updateProfile(fbAuth.currentUser, { displayName: `${name} ${last}` });
-    } else {
-      DemoDB.updateUser(state.user.uid, updates);
-    }
-    
+    } else { DemoDB.updateUser(state.user.uid, updates); }
     await loadMyProfile();
     refreshAllAvatars();
     toast("✓ Perfil actualizado");
     $("#coverEditInput").value = "";
-  } catch (e) {
-    console.error(e);
-    toast("Error al guardar: " + e.message, 'err');
-  } finally {
-    btn.disabled = false; 
-    btn.innerHTML = "GUARDAR CAMBIOS";
-  }
+  } catch (e) { console.error(e); toast("Error al guardar: " + e.message, 'err'); }
+  finally { btn.disabled = false; btn.innerHTML = "GUARDAR CAMBIOS"; }
 });
 
 $("#brandLogo").addEventListener("click", () => {
@@ -1730,17 +1811,10 @@ async function openAdminPanel(){
   list.innerHTML = '<div style="text-align:center;padding:20px"><span class="loader"></span></div>';
   try{
     let users = [];
-    if (FIREBASE_OK){
-      const snap = await getDocs(collection(fbDb,"users"));
-      snap.forEach(d => users.push(d.data()));
-    } else {
-      users = DemoDB.getUsers();
-    }
+    if (FIREBASE_OK){ const snap = await getDocs(collection(fbDb,"users")); snap.forEach(d => users.push(d.data())); }
+    else { users = DemoDB.getUsers(); }
     list.innerHTML = "";
-    if(!users.length){ 
-      list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-users-slash"></i><h3>SIN USUARIOS</h3></div>`; 
-      return; 
-    }
+    if(!users.length){ list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-users-slash"></i><h3>SIN USUARIOS</h3></div>`; return; }
     users.forEach(u=>{
       const el = document.createElement("div");
       el.className = "admin-user";
@@ -1758,43 +1832,24 @@ async function openAdminPanel(){
         const uid = t.dataset.uid;
         try {
           let current = false;
-          if (FIREBASE_OK){
-            const s = await getDoc(doc(fbDb,"users",uid));
-            current = s.data().verified || false;
-            await updateDoc(doc(fbDb,"users",uid), { verified: !current });
-          } else {
-            const user = DemoDB.findUserById(uid);
-            current = user.verified || false;
-            DemoDB.updateUser(uid, { verified: !current });
-          }
+          if (FIREBASE_OK){ const s = await getDoc(doc(fbDb,"users",uid)); current = s.data().verified || false; await updateDoc(doc(fbDb,"users",uid), { verified: !current }); }
+          else { const user = DemoDB.findUserById(uid); current = user.verified || false; DemoDB.updateUser(uid, { verified: !current }); }
           t.classList.toggle("on");
           toast(`Verificación ${!current?"activada":"desactivada"}`);
           openAdminPanel();
-        } catch (err){
-          console.error(err);
-          toast("Error", 'err');
-        }
+        } catch (err){ console.error(err); toast("Error", 'err'); }
       });
       list.appendChild(el);
     });
-  }catch(e){
-    console.error(e);
-    list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><h3>ERROR</h3></div>`;
-  }
+  }catch(e){ console.error(e); list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><h3>ERROR</h3></div>`; }
 }
 
 (async function init(){
-  console.log("%c ═══ 𝘿𝙍𝙉 𝙈𝙊𝘿𝕃 v4.1 ═══ ", 'background:#00FF66;color:#000;font-size:14px;padding:6px 12px');
-  console.log("%c Corrección: Portadas con object-fit:cover y altura fija 320px ", 'color:#00e0ff;font-size:11px');
-  
+  console.log("%c ═══ 𝘿𝙍𝙉 𝙈𝙊𝘿𝕃 v4.2 ═══ ", 'background:#00FF66;color:#000;font-size:14px;padding:6px 12px');
+  console.log("%c Perfil completo: Aportes + Lista interactiva de seguidores ", 'color:#00e0ff;font-size:11px');
   FIREBASE_OK = await tryInitFirebase();
-  
-  if (FIREBASE_OK){
-    showBanner('Modo Cloud activo · Almacenamiento directo en Firestore (Base64)', 'ok');
-  } else {
-    showBanner('Modo Demo · Configura firebaseConfig para usar la plataforma', 'demo');
-  }
-  
+  if (FIREBASE_OK){ showBanner('Modo Cloud activo · Firestore + Base64', 'ok'); }
+  else { showBanner('Modo Demo · Configura firebaseConfig', 'demo'); }
   if (FIREBASE_OK){
     onAuthStateChanged(fbAuth, async (user) => {
       try {
@@ -1805,35 +1860,19 @@ async function openAdminPanel(){
           subscribeFeed();
           prefillEditForm();
           refreshAllAvatars();
-        } else {
-          showAuthScreen();
-        }
-      } catch (err){
-        console.error('Auth state error:', err);
-        showAuthScreen();
-      }
+        } else { showAuthScreen(); }
+      } catch (err){ console.error('Auth state error:', err); showAuthScreen(); }
     });
   } else {
     const session = DemoDB.getSession();
     if (session){
       const user = DemoDB.findUserById(session.uid);
-      if (user){
-        state.user = { uid: user.uid, email: user.email };
-        state.profile = user;
-        showMainApp();
-        subscribeFeed();
-        prefillEditForm();
-        refreshAllAvatars();
-      } else {
-        DemoDB.saveSession(null);
-        showAuthScreen();
-      }
-    } else {
-      showAuthScreen();
-    }
+      if (user){ state.user = { uid: user.uid, email: user.email }; state.profile = user; showMainApp(); subscribeFeed(); prefillEditForm(); refreshAllAvatars(); }
+      else { DemoDB.saveSession(null); showAuthScreen(); }
+    } else { showAuthScreen(); }
   }
   console.log("%c ✓ Sistema listo ", 'background:#00FF66;color:#000;padding:4px 10px;border-radius:4px');
 })();
 </script>
 </body>
-</html>
+  </html>
