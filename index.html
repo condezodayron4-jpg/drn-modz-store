@@ -2,678 +2,1122 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>DRN MODZ // Underground APK Vault</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>DRN MODZ // Underground Network</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&family=Share+Tech+Mono&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
 <style>
-  /* ============ RESET & BASE ============ */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg-0: #03050a;
-    --bg-1: #070b14;
-    --bg-2: #0c1220;
-    --bg-3: #111a2e;
-    --neon-green: #39ff14;
-    --neon-cyan: #00f0ff;
-    --neon-purple: #b026ff;
-    --neon-pink: #ff2e97;
-    --text-0: #e6f7ff;
-    --text-1: #9fb3c8;
-    --text-2: #5a6b80;
-    --danger: #ff3860;
-    --border: rgba(57, 255, 20, 0.15);
-    --border-strong: rgba(57, 255, 20, 0.45);
-    --shadow-green: 0 0 12px rgba(57, 255, 20, 0.5), 0 0 30px rgba(57, 255, 20, 0.2);
-    --shadow-cyan: 0 0 12px rgba(0, 240, 255, 0.5), 0 0 30px rgba(0, 240, 255, 0.2);
-    --shadow-purple: 0 0 12px rgba(176, 38, 255, 0.5), 0 0 30px rgba(176, 38, 255, 0.2);
-  }
-  html, body {
-    background: var(--bg-0);
-    color: var(--text-0);
-    font-family: 'JetBrains Mono', 'Share Tech Mono', monospace;
-    min-height: 100vh;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-  }
-  body::before {
-    content: "";
-    position: fixed; inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 0%, rgba(57, 255, 20, 0.08), transparent 50%),
-      radial-gradient(ellipse at 80% 100%, rgba(176, 38, 255, 0.08), transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(0, 240, 255, 0.04), transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
-  body::after {
-    content: "";
-    position: fixed; inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0) 0px,
-      rgba(0, 0, 0, 0) 2px,
-      rgba(57, 255, 20, 0.025) 3px,
-      rgba(0, 0, 0, 0) 4px
-    );
-    pointer-events: none;
-    z-index: 1;
-    animation: scan 8s linear infinite;
-  }
-  @keyframes scan {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(4px); }
-  }
+/* ============ RESET & TOKENS ============ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg-0: #050505;
+  --bg-1: #0a0a0a;
+  --bg-2: #0f0f0f;
+  --bg-3: #151515;
+  --bg-4: #1c1c1c;
+  --neon: #00FF66;
+  --neon-dim: #00cc52;
+  --cyan: #00E5FF;
+  --purple: #B026FF;
+  --pink: #FF2E97;
+  --danger: #FF3860;
+  --text-0: #E6F7FF;
+  --text-1: #9FB3C8;
+  --text-2: #5a6b80;
+  --border: rgba(0, 255, 102, 0.15);
+  --border-strong: rgba(0, 255, 102, 0.4);
+  --shadow-neon: 0 0 12px rgba(0, 255, 102, 0.5), 0 0 30px rgba(0, 255, 102, 0.2);
+  --shadow-cyan: 0 0 12px rgba(0, 229, 255, 0.5), 0 0 30px rgba(0, 229, 255, 0.2);
+  --shadow-purple: 0 0 12px rgba(176, 38, 255, 0.5);
+}
+html, body {
+  background: var(--bg-0);
+  color: var(--text-0);
+  font-family: 'JetBrains Mono', 'Share Tech Mono', monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(0, 255, 102, 0.06), transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(176, 38, 255, 0.05), transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(0, 229, 255, 0.03), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: "";
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 255, 102, 0.02) 3px,
+    rgba(0, 0, 0, 0) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+  animation: scan 8s linear infinite;
+}
+@keyframes scan { 100% { transform: translateY(4px); } }
 
-  /* ============ MATRIX CANVAS ============ */
-  #matrix {
-    position: fixed; inset: 0;
-    z-index: 0;
-    opacity: 0.18;
-    pointer-events: none;
-  }
+/* ============ MATRIX BG ============ */
+#matrix {
+  position: fixed; inset: 0;
+  z-index: 0;
+  opacity: 0.15;
+  pointer-events: none;
+}
 
-  /* ============ LAYOUT ============ */
-  .app { position: relative; z-index: 2; min-height: 100vh; display: flex; flex-direction: column; }
+/* ============ APP ============ */
+.app { position: relative; z-index: 2; min-height: 100vh; display: flex; flex-direction: column; padding-bottom: 80px; }
 
-  /* ============ HEADER ============ */
-  header {
-    position: sticky; top: 0; z-index: 50;
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    background: rgba(3, 5, 10, 0.75);
-    border-bottom: 1px solid var(--border);
-    padding: 14px 24px;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 16px;
-  }
-  .logo {
-    display: flex; align-items: center; gap: 12px;
-    cursor: pointer;
-    user-select: none;
-  }
-  .logo-mark {
-    width: 42px; height: 42px;
-    border: 1px solid var(--neon-green);
-    border-radius: 8px;
-    display: grid; place-items: center;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    font-size: 18px;
-    color: var(--neon-green);
-    background: linear-gradient(135deg, rgba(57, 255, 20, 0.12), rgba(176, 38, 255, 0.12));
-    box-shadow: var(--shadow-green);
-    position: relative;
-    overflow: hidden;
-  }
-  .logo-mark::before {
-    content: ""; position: absolute; inset: 0;
-    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
-    transform: translateX(-100%);
-    animation: shine 3.5s infinite;
-  }
-  @keyframes shine { 100% { transform: translateX(100%); } }
-  .logo-text {
-    display: flex; flex-direction: column; line-height: 1;
-  }
-  .logo-text .name {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    font-size: 20px;
-    letter-spacing: 3px;
-    color: var(--text-0);
-    text-shadow: 0 0 10px rgba(57, 255, 20, 0.6);
-  }
-  .logo-text .name span.g { color: var(--neon-green); }
-  .logo-text .name span.c { color: var(--neon-cyan); }
-  .logo-text .name span.p { color: var(--neon-purple); }
-  .logo-text .sub {
-    font-size: 9px; letter-spacing: 4px;
-    color: var(--text-2);
-    margin-top: 3px;
-    text-transform: uppercase;
-  }
-  .header-actions { display: flex; align-items: center; gap: 10px; }
-  .user-chip {
-    display: flex; align-items: center; gap: 10px;
-    padding: 6px 12px 6px 6px;
-    border: 1px solid var(--border-strong);
-    border-radius: 999px;
-    background: rgba(57, 255, 20, 0.05);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .user-chip:hover { background: rgba(57, 255, 20, 0.1); box-shadow: var(--shadow-green); }
-  .user-avatar {
-    width: 30px; height: 30px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--neon-green), var(--neon-cyan));
-    display: grid; place-items: center;
-    font-weight: 800; color: var(--bg-0); font-size: 13px;
-  }
-  .user-chip .uname { font-size: 12px; color: var(--neon-green); letter-spacing: 1px; }
+/* ============ HEADER ============ */
+header {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: rgba(5, 5, 5, 0.85);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+}
+.logo-mark {
+  width: 38px; height: 38px;
+  border: 1px solid var(--neon);
+  border-radius: 8px;
+  display: grid; place-items: center;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 16px;
+  color: var(--neon);
+  background: linear-gradient(135deg, rgba(0, 255, 102, 0.1), rgba(0, 229, 255, 0.05));
+  box-shadow: var(--shadow-neon);
+  position: relative;
+  overflow: hidden;
+}
+.logo-mark::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+  transform: translateX(-100%);
+  animation: shine 3s infinite;
+}
+@keyframes shine { 100% { transform: translateX(100%); } }
+.logo-text {
+  display: flex; flex-direction: column; line-height: 1;
+}
+.logo-text .name {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 17px;
+  letter-spacing: 2px;
+  color: var(--text-0);
+  text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+}
+.logo-text .name .g { color: var(--neon); }
+.logo-text .name .c { color: var(--cyan); }
+.logo-text .sub {
+  font-size: 8px; letter-spacing: 3px;
+  color: var(--text-2);
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+.header-center {
+  flex: 1;
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.8);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.header-center:hover, .header-center:focus-within {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-neon);
+}
+.header-center svg { color: var(--neon); flex-shrink: 0; }
+.header-center input {
+  background: transparent; border: none; outline: none;
+  color: var(--text-0);
+  font-family: inherit; font-size: 12px;
+  width: 100%;
+}
+.header-center input::placeholder { color: var(--text-2); }
+.header-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 
-  /* ============ BUTTONS ============ */
-  .btn {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px; font-weight: 600;
-    letter-spacing: 1.5px; text-transform: uppercase;
-    padding: 10px 18px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: inline-flex; align-items: center; gap: 8px;
-    border: 1px solid transparent;
-    background: transparent;
-    color: var(--text-0);
-    position: relative;
-    overflow: hidden;
-  }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--neon-green), #1fa80a);
-    color: var(--bg-0);
-    border-color: var(--neon-green);
-    box-shadow: var(--shadow-green);
-  }
-  .btn-primary:hover { transform: translateY(-1px); filter: brightness(1.15); }
-  .btn-ghost {
-    border-color: var(--border-strong);
-    color: var(--neon-green);
-  }
-  .btn-ghost:hover { background: rgba(57, 255, 20, 0.08); box-shadow: var(--shadow-green); }
-  .btn-danger {
-    border-color: rgba(255, 56, 96, 0.5);
-    color: var(--danger);
-  }
-  .btn-danger:hover { background: rgba(255, 56, 96, 0.1); box-shadow: 0 0 12px rgba(255, 56, 96, 0.5); }
-  .btn-cyan {
-    border-color: var(--neon-cyan);
-    color: var(--neon-cyan);
-  }
-  .btn-cyan:hover { background: rgba(0, 240, 255, 0.08); box-shadow: var(--shadow-cyan); }
-  .btn-sm { padding: 6px 10px; font-size: 10px; }
+/* ============ BUTTONS ============ */
+.btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 9px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-0);
+  white-space: nowrap;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--neon), var(--neon-dim));
+  color: var(--bg-0);
+  border-color: var(--neon);
+  box-shadow: var(--shadow-neon);
+  font-weight: 700;
+}
+.btn-primary:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.15); }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+.btn-ghost {
+  border-color: var(--border-strong);
+  color: var(--neon);
+}
+.btn-ghost:hover { background: rgba(0, 255, 102, 0.08); box-shadow: var(--shadow-neon); }
+.btn-danger {
+  border-color: rgba(255, 56, 96, 0.5);
+  color: var(--danger);
+}
+.btn-danger:hover { background: rgba(255, 56, 96, 0.1); box-shadow: 0 0 12px rgba(255, 56, 96, 0.5); }
+.btn-cyan {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+.btn-cyan:hover { background: rgba(0, 229, 255, 0.08); box-shadow: var(--shadow-cyan); }
+.btn-sm { padding: 6px 10px; font-size: 10px; }
+.btn-icon {
+  width: 36px; height: 36px;
+  padding: 0;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  color: var(--neon);
+  background: rgba(0, 255, 102, 0.05);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-icon:hover { background: rgba(0, 255, 102, 0.15); box-shadow: var(--shadow-neon); }
 
-  /* ============ HERO ============ */
-  .hero {
-    padding: 60px 24px 40px;
-    text-align: center;
-    position: relative;
-  }
-  .hero h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    font-size: clamp(32px, 6vw, 64px);
-    letter-spacing: 6px;
-    background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan), var(--neon-purple));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 40px rgba(57, 255, 20, 0.3);
-    margin-bottom: 14px;
-    position: relative;
-  }
-  .hero h1::after {
-    content: "_";
-    -webkit-text-fill-color: var(--neon-green);
-    animation: blink 1s infinite;
-  }
-  @keyframes blink { 50% { opacity: 0; } }
-  .hero .tagline {
-    color: var(--text-1);
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    max-width: 640px;
-    margin: 0 auto 24px;
-  }
-  .hero .tagline .hl { color: var(--neon-green); }
-  .stats {
-    display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
-    margin-top: 20px;
-  }
-  .stat {
-    padding: 10px 18px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: rgba(7, 11, 20, 0.6);
-    min-width: 140px;
-  }
-  .stat .v {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 22px; font-weight: 800;
-    color: var(--neon-green);
-    text-shadow: 0 0 10px rgba(57, 255, 20, 0.6);
-  }
-  .stat .l {
-    font-size: 10px; letter-spacing: 2px;
-    color: var(--text-2); text-transform: uppercase;
-    margin-top: 4px;
-  }
+/* ============ AVATAR ============ */
+.avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--neon), var(--cyan));
+  display: grid; place-items: center;
+  font-weight: 800;
+  color: var(--bg-0);
+  font-size: 13px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid var(--neon);
+  box-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.avatar:hover { transform: scale(1.05); box-shadow: var(--shadow-neon); }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.avatar.lg { width: 96px; height: 96px; font-size: 32px; border-width: 2px; }
+.avatar.md { width: 56px; height: 56px; font-size: 20px; }
 
-  /* ============ TOOLBAR ============ */
-  .toolbar {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 12px; flex-wrap: wrap;
-    padding: 0 24px 20px;
-  }
-  .toolbar .left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .tab {
-    padding: 8px 14px;
-    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--text-1);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    cursor: pointer;
-    background: transparent;
-    transition: all 0.2s;
-  }
-  .tab:hover { color: var(--neon-green); border-color: var(--border-strong); }
-  .tab.active {
-    color: var(--bg-0);
-    background: var(--neon-green);
-    border-color: var(--neon-green);
-    box-shadow: var(--shadow-green);
-  }
-  .search {
-    display: flex; align-items: center; gap: 8px;
-    padding: 8px 12px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: rgba(7, 11, 20, 0.6);
-    min-width: 220px;
-  }
-  .search input {
-    background: transparent; border: none; outline: none;
-    color: var(--text-0);
-    font-family: inherit; font-size: 12px;
-    width: 100%;
-  }
-  .search input::placeholder { color: var(--text-2); }
-  .search svg { color: var(--neon-green); flex-shrink: 0; }
+/* ============ VIEWS ============ */
+.view { display: none; animation: fadeIn 0.3s; }
+.view.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* ============ GRID ============ */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
-    padding: 0 24px 60px;
-  }
-  .card {
-    background: linear-gradient(180deg, rgba(12, 18, 32, 0.85), rgba(7, 11, 20, 0.95));
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.3s;
-    position: relative;
-    display: flex; flex-direction: column;
-  }
-  .card::before {
-    content: "";
-    position: absolute; inset: 0;
-    border-radius: 12px;
-    padding: 1px;
-    background: linear-gradient(135deg, transparent, transparent);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    transition: background 0.3s;
-  }
-  .card:hover {
-    transform: translateY(-4px);
-    border-color: var(--border-strong);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), var(--shadow-green);
-  }
-  .card:hover::before {
-    background: linear-gradient(135deg, var(--neon-green), var(--neon-cyan), var(--neon-purple));
-  }
-  .card-banner {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    background: linear-gradient(135deg, #0a1224, #1a0a2e);
-    overflow: hidden;
-    display: grid; place-items: center;
-  }
-  .card-banner::after {
-    content: "";
-    position: absolute; inset: 0;
-    background:
-      repeating-linear-gradient(0deg, rgba(57, 255, 20, 0.04) 0 1px, transparent 1px 3px);
-    pointer-events: none;
-  }
-  .card-icon {
-    width: 72px; height: 72px;
-    border-radius: 18px;
-    display: grid; place-items: center;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    font-size: 26px;
-    color: var(--bg-0);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), 0 0 30px currentColor;
-    position: relative;
-    z-index: 2;
-  }
-  .card-body {
-    padding: 14px 16px 16px;
-    display: flex; flex-direction: column; gap: 10px;
-    flex: 1;
-  }
-  .card-title {
-    font-size: 15px; font-weight: 700;
-    color: var(--text-0);
-    letter-spacing: 0.5px;
-    line-height: 1.3;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .card-meta {
-    display: flex; gap: 6px; flex-wrap: wrap;
-  }
-  .tag {
-    font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 4px;
-    background: rgba(57, 255, 20, 0.1);
-    color: var(--neon-green);
-    border: 1px solid rgba(57, 255, 20, 0.25);
-  }
-  .tag.cyan { background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); border-color: rgba(0, 240, 255, 0.25); }
-  .tag.purple { background: rgba(176, 38, 255, 0.1); color: var(--neon-purple); border-color: rgba(176, 38, 255, 0.25); }
-  .card-desc {
-    font-size: 11px;
-    color: var(--text-1);
-    line-height: 1.5;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .card-footer {
-    margin-top: auto;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 8px;
-    padding-top: 10px;
-    border-top: 1px dashed var(--border);
-  }
-  .card-author {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 10px; color: var(--text-2);
-    letter-spacing: 1px; text-transform: uppercase;
-  }
-  .card-author .dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--neon-green);
-    box-shadow: 0 0 8px var(--neon-green);
-  }
-  .card-actions { display: flex; gap: 6px; }
+/* ============ FEED ============ */
+.feed-header {
+  padding: 24px 16px 16px;
+  text-align: center;
+}
+.feed-header h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(22px, 5vw, 32px);
+  font-weight: 900;
+  letter-spacing: 4px;
+  background: linear-gradient(90deg, var(--neon), var(--cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 6px;
+}
+.feed-header .sub {
+  font-size: 10px; letter-spacing: 3px;
+  color: var(--text-2);
+  text-transform: uppercase;
+}
+.feed-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.feed-tabs::-webkit-scrollbar { display: none; }
+.feed-tab {
+  padding: 8px 14px;
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-1);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.feed-tab:hover { color: var(--neon); border-color: var(--border-strong); }
+.feed-tab.active {
+  color: var(--bg-0);
+  background: var(--neon);
+  border-color: var(--neon);
+  box-shadow: var(--shadow-neon);
+  font-weight: 700;
+}
 
-  .badge-mine {
-    position: absolute; top: 10px; right: 10px;
-    background: var(--neon-purple);
-    color: var(--bg-0);
-    font-size: 9px; font-weight: 800;
-    letter-spacing: 1.5px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    z-index: 3;
-    box-shadow: var(--shadow-purple);
-  }
+/* ============ POSTS GRID ============ */
+.posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 0 16px 40px;
+}
+.post-card {
+  background: linear-gradient(180deg, var(--bg-2), var(--bg-1));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+.post-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), var(--shadow-neon);
+}
+.post-cover {
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(135deg, #0a1a10, #0a0a1a);
+  overflow: hidden;
+  position: relative;
+}
+.post-cover img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+.post-card:hover .post-cover img { transform: scale(1.05); }
+.post-cover::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(5, 5, 5, 0.9));
+  pointer-events: none;
+}
+.post-cover .file-badge {
+  position: absolute; top: 10px; left: 10px;
+  background: rgba(5, 5, 5, 0.85);
+  border: 1px solid var(--border-strong);
+  color: var(--neon);
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  z-index: 2;
+  backdrop-filter: blur(6px);
+}
+.post-body { padding: 12px 14px 14px; }
+.post-title {
+  font-size: 14px; font-weight: 700;
+  color: var(--text-0);
+  margin-bottom: 6px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.post-desc {
+  font-size: 11px;
+  color: var(--text-1);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.post-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+.post-author {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 10px;
+  color: var(--text-2);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.post-author:hover { color: var(--neon); }
+.post-author .avatar { width: 24px; height: 24px; font-size: 10px; border-width: 1px; }
+.post-stats {
+  display: flex; gap: 10px;
+  font-size: 10px;
+  color: var(--text-2);
+  letter-spacing: 1px;
+}
+.post-stats span { display: flex; align-items: center; gap: 3px; }
+.post-stats .hl { color: var(--neon); }
 
-  /* ============ EMPTY ============ */
-  .empty {
-    grid-column: 1 / -1;
-    padding: 60px 20px;
-    text-align: center;
-    border: 1px dashed var(--border);
-    border-radius: 12px;
-    color: var(--text-2);
-  }
-  .empty .big {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 18px;
-    color: var(--text-1);
-    letter-spacing: 3px;
-    margin-bottom: 8px;
-  }
+/* ============ PROFILE VIEW ============ */
+.profile-header {
+  position: relative;
+  padding: 24px 16px 16px;
+  text-align: center;
+}
+.profile-cover {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(0, 255, 102, 0.1), rgba(176, 38, 255, 0.08));
+  z-index: 0;
+  overflow: hidden;
+}
+.profile-cover::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 102, 0.03) 0 1px,
+    transparent 1px 4px
+  );
+}
+.profile-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.profile-avatar-wrap {
+  position: relative;
+  cursor: pointer;
+}
+.profile-avatar-wrap .avatar {
+  width: 110px; height: 110px;
+  font-size: 38px;
+  border-width: 2px;
+  box-shadow: 0 0 30px rgba(0, 255, 102, 0.4);
+}
+.profile-avatar-wrap .edit-badge {
+  position: absolute;
+  bottom: 4px; right: 4px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--neon);
+  color: var(--bg-0);
+  display: grid; place-items: center;
+  border: 2px solid var(--bg-0);
+  font-size: 14px;
+  font-weight: 900;
+  box-shadow: var(--shadow-neon);
+}
+.profile-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: var(--text-0);
+  text-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+}
+.profile-name .editable {
+  border-bottom: 1px dashed var(--border-strong);
+  cursor: text;
+  padding: 0 4px;
+  transition: all 0.2s;
+}
+.profile-name .editable:hover { color: var(--neon); border-color: var(--neon); }
+.profile-name .editable:focus {
+  outline: none;
+  color: var(--neon);
+  border-color: var(--neon);
+  background: rgba(0, 255, 102, 0.05);
+}
+.profile-email {
+  font-size: 11px;
+  color: var(--text-2);
+  letter-spacing: 1px;
+}
+.profile-stats {
+  display: flex;
+  gap: 24px;
+  margin-top: 4px;
+}
+.profile-stat {
+  text-align: center;
+}
+.profile-stat .v {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--neon);
+  text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+}
+.profile-stat .l {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--text-2);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.profile-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.follow-btn {
+  min-width: 140px;
+  justify-content: center;
+}
+.follow-btn.following {
+  background: transparent;
+  color: var(--text-1);
+  border-color: var(--border-strong);
+}
+.follow-btn.following:hover {
+  color: var(--danger);
+  border-color: var(--danger);
+}
 
-  /* ============ MODAL ============ */
-  .modal-backdrop {
-    position: fixed; inset: 0;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 100;
-    display: none;
-    align-items: center; justify-content: center;
-    padding: 20px;
-    animation: fadeIn 0.2s;
-  }
-  .modal-backdrop.show { display: flex; }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  .modal {
-    background: linear-gradient(180deg, var(--bg-2), var(--bg-1));
-    border: 1px solid var(--border-strong);
-    border-radius: 14px;
-    width: 100%;
-    max-width: 520px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 0 40px rgba(57, 255, 20, 0.2), 0 0 80px rgba(176, 38, 255, 0.1);
-    position: relative;
-    animation: slideUp 0.3s;
-  }
-  @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-  .modal-header {
-    padding: 18px 22px;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .modal-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 16px; font-weight: 800;
-    letter-spacing: 3px;
-    color: var(--neon-green);
-    text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
-  }
-  .modal-close {
-    background: transparent; border: none; cursor: pointer;
-    color: var(--text-1);
-    font-size: 22px; line-height: 1;
-    transition: color 0.2s;
-  }
-  .modal-close:hover { color: var(--danger); }
-  .modal-body { padding: 22px; }
+.profile-section {
+  padding: 16px;
+}
+.profile-section h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--neon);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.profile-section h3::before {
+  content: "//";
+  color: var(--text-2);
+}
 
-  /* ============ FORM ============ */
-  .field { margin-bottom: 16px; }
-  .field label {
-    display: block;
-    font-size: 10px; letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-2);
-    margin-bottom: 6px;
-  }
-  .field label .req { color: var(--neon-pink); }
-  .field input, .field textarea, .field select {
-    width: 100%;
-    background: rgba(3, 5, 10, 0.8);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 11px 12px;
-    color: var(--text-0);
-    font-family: inherit;
-    font-size: 13px;
-    outline: none;
-    transition: all 0.2s;
-  }
-  .field input:focus, .field textarea:focus, .field select:focus {
-    border-color: var(--neon-green);
-    box-shadow: 0 0 0 3px rgba(57, 255, 20, 0.15);
-  }
-  .field textarea { resize: vertical; min-height: 90px; }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+/* ============ SEARCH VIEW ============ */
+.search-results {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.user-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.user-row:hover {
+  border-color: var(--border-strong);
+  background: var(--bg-3);
+  box-shadow: var(--shadow-neon);
+}
+.user-row .info { flex: 1; min-width: 0; }
+.user-row .name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-0);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.user-row .meta {
+  font-size: 10px;
+  color: var(--text-2);
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
 
-  /* ============ DROPZONE ============ */
-  .dropzone {
-    border: 1.5px dashed var(--border-strong);
-    border-radius: 10px;
-    padding: 24px 16px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    background: rgba(3, 5, 10, 0.5);
-  }
-  .dropzone:hover, .dropzone.drag {
-    border-color: var(--neon-green);
-    background: rgba(57, 255, 20, 0.05);
-    box-shadow: inset 0 0 20px rgba(57, 255, 20, 0.1);
-  }
-  .dropzone .ico {
-    font-size: 32px;
-    color: var(--neon-green);
-    margin-bottom: 8px;
-  }
-  .dropzone .txt { font-size: 12px; color: var(--text-1); letter-spacing: 1px; }
-  .dropzone .sub { font-size: 10px; color: var(--text-2); margin-top: 4px; letter-spacing: 1px; }
-  .file-info {
-    margin-top: 10px;
-    padding: 10px 12px;
-    background: rgba(57, 255, 20, 0.08);
-    border: 1px solid rgba(57, 255, 20, 0.3);
-    border-radius: 6px;
-    font-size: 11px;
-    color: var(--neon-green);
-    display: none;
-    align-items: center; justify-content: space-between;
-    gap: 8px;
-  }
-  .file-info.show { display: flex; }
-  .file-info .fname {
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-    flex: 1;
-  }
+/* ============ EMPTY ============ */
+.empty {
+  padding: 60px 20px;
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  color: var(--text-2);
+  margin: 16px;
+}
+.empty .big {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  color: var(--text-1);
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
 
-  /* ============ AUTH ============ */
-  .auth-tabs {
-    display: flex; gap: 0;
-    margin-bottom: 20px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-  }
-  .auth-tab {
-    flex: 1;
-    padding: 10px;
-    background: transparent;
-    border: none;
-    color: var(--text-1);
-    font-family: inherit;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .auth-tab.active {
-    background: var(--neon-green);
-    color: var(--bg-0);
-    font-weight: 700;
-  }
+/* ============ MODAL ============ */
+.modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 100;
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 16px;
+  animation: fadeIn 0.2s;
+}
+.modal-backdrop.show { display: flex; }
+.modal {
+  background: linear-gradient(180deg, var(--bg-2), var(--bg-1));
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 92vh;
+  overflow-y: auto;
+  box-shadow: 0 0 40px rgba(0, 255, 102, 0.2), 0 0 80px rgba(176, 38, 255, 0.1);
+  position: relative;
+  animation: slideUp 0.3s;
+}
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0;
+  background: var(--bg-2);
+  z-index: 2;
+}
+.modal-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px; font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--neon);
+  text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+}
+.modal-close {
+  background: transparent; border: none; cursor: pointer;
+  color: var(--text-1);
+  font-size: 24px; line-height: 1;
+  transition: color 0.2s;
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+}
+.modal-close:hover { color: var(--danger); background: rgba(255, 56, 96, 0.1); }
+.modal-body { padding: 20px; }
 
-  /* ============ TOAST ============ */
-  .toast-wrap {
-    position: fixed;
-    top: 80px; right: 20px;
-    z-index: 200;
-    display: flex; flex-direction: column; gap: 10px;
-    pointer-events: none;
-  }
-  .toast {
-    background: linear-gradient(135deg, var(--bg-2), var(--bg-1));
-    border: 1px solid var(--border-strong);
-    border-left: 3px solid var(--neon-green);
-    padding: 12px 16px;
-    border-radius: 8px;
-    font-size: 12px;
-    color: var(--text-0);
-    box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
-    animation: toastIn 0.3s, toastOut 0.3s 2.7s forwards;
-    min-width: 240px;
-    max-width: 320px;
-  }
-  .toast.err { border-left-color: var(--danger); box-shadow: 0 0 20px rgba(255, 56, 96, 0.3); }
-  .toast.info { border-left-color: var(--neon-cyan); box-shadow: 0 0 20px rgba(0, 240, 255, 0.3); }
-  @keyframes toastIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-  @keyframes toastOut { to { transform: translateX(120%); opacity: 0; } }
+/* ============ FORMS ============ */
+.field { margin-bottom: 14px; }
+.field label {
+  display: block;
+  font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-2);
+  margin-bottom: 6px;
+}
+.field label .req { color: var(--pink); }
+.field input, .field textarea, .field select {
+  width: 100%;
+  background: rgba(5, 5, 5, 0.8);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 11px 12px;
+  color: var(--text-0);
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: all 0.2s;
+}
+.field input:focus, .field textarea:focus, .field select:focus {
+  border-color: var(--neon);
+  box-shadow: 0 0 0 3px rgba(0, 255, 102, 0.15);
+}
+.field textarea { resize: vertical; min-height: 80px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.field .hint {
+  font-size: 9px;
+  color: var(--text-2);
+  margin-top: 4px;
+  letter-spacing: 1px;
+}
 
-  /* ============ FOOTER ============ */
-  footer {
-    margin-top: auto;
-    padding: 24px;
-    text-align: center;
-    border-top: 1px solid var(--border);
-    background: rgba(3, 5, 10, 0.7);
-    font-size: 10px;
-    letter-spacing: 2px;
-    color: var(--text-2);
-    text-transform: uppercase;
-  }
-  footer .hl { color: var(--neon-green); }
+/* ============ DROPZONE ============ */
+.dropzone {
+  border: 1.5px dashed var(--border-strong);
+  border-radius: 10px;
+  padding: 22px 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: rgba(5, 5, 5, 0.5);
+}
+.dropzone:hover, .dropzone.drag {
+  border-color: var(--neon);
+  background: rgba(0, 255, 102, 0.05);
+  box-shadow: inset 0 0 20px rgba(0, 255, 102, 0.1);
+}
+.dropzone .ico {
+  font-size: 28px;
+  color: var(--neon);
+  margin-bottom: 6px;
+}
+.dropzone .txt { font-size: 11px; color: var(--text-1); letter-spacing: 1px; }
+.dropzone .sub { font-size: 9px; color: var(--text-2); margin-top: 4px; letter-spacing: 1px; }
+.file-info {
+  margin-top: 8px;
+  padding: 10px 12px;
+  background: rgba(0, 255, 102, 0.08);
+  border: 1px solid rgba(0, 255, 102, 0.3);
+  border-radius: 6px;
+  font-size: 11px;
+  color: var(--neon);
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+.file-info.show { display: flex; }
+.file-info .fname {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  flex: 1;
+}
+.file-info .remove {
+  background: transparent; border: none;
+  color: var(--danger); cursor: pointer;
+  font-size: 14px;
+  padding: 2px 6px;
+}
 
-  /* ============ SCROLLBAR ============ */
-  ::-webkit-scrollbar { width: 10px; height: 10px; }
-  ::-webkit-scrollbar-track { background: var(--bg-0); }
-  ::-webkit-scrollbar-thumb {
-    background: linear-gradient(var(--neon-green), var(--neon-cyan));
-    border-radius: 10px;
-    border: 2px solid var(--bg-0);
-  }
+.cover-preview {
+  margin-top: 10px;
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  display: none;
+  position: relative;
+}
+.cover-preview.show { display: block; }
+.cover-preview img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.cover-preview .remove {
+  position: absolute;
+  top: 6px; right: 6px;
+  background: rgba(5, 5, 5, 0.9);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-radius: 50%;
+  width: 26px; height: 26px;
+  display: grid; place-items: center;
+  cursor: pointer;
+  font-size: 14px;
+}
 
-  /* ============ RESPONSIVE ============ */
-  @media (max-width: 640px) {
-    header { padding: 10px 14px; }
-    .logo-text .name { font-size: 15px; letter-spacing: 2px; }
-    .logo-text .sub { font-size: 8px; letter-spacing: 2px; }
-    .logo-mark { width: 36px; height: 36px; font-size: 15px; }
-    .hero { padding: 40px 16px 24px; }
-    .toolbar { padding: 0 14px 16px; }
-    .grid { padding: 0 14px 40px; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-    .card-icon { width: 56px; height: 56px; font-size: 20px; }
-    .card-title { font-size: 13px; }
-    .card-desc { font-size: 10px; -webkit-line-clamp: 2; }
-    .field-row { grid-template-columns: 1fr; }
-    .user-chip .uname { display: none; }
-    .btn { padding: 8px 12px; font-size: 11px; }
-  }
+/* ============ AUTH TABS ============ */
+.auth-tabs {
+  display: flex; gap: 0;
+  margin-bottom: 18px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.auth-tab {
+  flex: 1;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  color: var(--text-1);
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.auth-tab.active {
+  background: var(--neon);
+  color: var(--bg-0);
+  font-weight: 700;
+}
 
-  /* ============ GLITCH ============ */
-  .glitch { position: relative; }
-  .glitch::before, .glitch::after {
-    content: attr(data-text);
-    position: absolute; inset: 0;
-  }
-  .glitch::before {
-    color: var(--neon-cyan);
-    animation: glitch1 3s infinite;
-    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-  }
-  .glitch::after {
-    color: var(--neon-pink);
-    animation: glitch2 3s infinite;
-    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-  }
-  @keyframes glitch1 {
-    0%, 90%, 100% { transform: translate(0); }
-    92% { transform: translate(-2px, 1px); }
-    94% { transform: translate(2px, -1px); }
-  }
-  @keyframes glitch2 {
-    0%, 90%, 100% { transform: translate(0); }
-    93% { transform: translate(2px, 1px); }
-    95% { transform: translate(-2px, -1px); }
-  }
+/* ============ AD GATE ============ */
+.ad-gate {
+  text-align: center;
+}
+.ad-gate .title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: var(--neon);
+  margin-bottom: 6px;
+}
+.ad-gate .sub {
+  font-size: 11px;
+  color: var(--text-2);
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+.ad-container {
+  background: var(--bg-3);
+  border: 1px dashed var(--border-strong);
+  border-radius: 10px;
+  padding: 24px 16px;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.ad-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent, rgba(0, 255, 102, 0.05), transparent);
+  animation: adShine 3s infinite;
+}
+@keyframes adShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.ad-placeholder {
+  text-align: center;
+  color: var(--text-2);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  z-index: 2;
+}
+.ad-placeholder .big {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  color: var(--cyan);
+  letter-spacing: 4px;
+  margin-bottom: 6px;
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+.ad-placeholder .note {
+  font-size: 9px;
+  color: var(--text-2);
+  margin-top: 8px;
+  opacity: 0.7;
+}
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  color: var(--text-1);
+  letter-spacing: 2px;
+}
+.timer .count {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--neon);
+  text-shadow: 0 0 12px rgba(0, 255, 102, 0.6);
+  min-width: 30px;
+  text-align: center;
+}
+.progress-bar {
+  height: 4px;
+  background: var(--bg-3);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.progress-bar .fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon), var(--cyan));
+  width: 0%;
+  transition: width 1s linear;
+  box-shadow: 0 0 10px var(--neon);
+}
+.file-ready {
+  padding: 12px;
+  background: rgba(0, 255, 102, 0.08);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+}
+.file-ready .ico {
+  font-size: 22px;
+  color: var(--neon);
+}
+.file-ready .info { flex: 1; text-align: left; }
+.file-ready .name {
+  color: var(--text-0);
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.file-ready .size {
+  color: var(--text-2);
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* ============ POST DETAIL ============ */
+.detail-cover {
+  aspect-ratio: 16 / 10;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  border: 1px solid var(--border);
+}
+.detail-cover img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.detail-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--text-0);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.detail-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: var(--bg-3);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.detail-author:hover { background: var(--bg-4); }
+.detail-author .info { flex: 1; }
+.detail-author .name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--neon);
+  letter-spacing: 1px;
+}
+.detail-author .date {
+  font-size: 10px;
+  color: var(--text-2);
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+.detail-desc {
+  font-size: 12px;
+  color: var(--text-1);
+  line-height: 1.6;
+  padding: 12px;
+  background: rgba(5, 5, 5, 0.6);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 14px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.detail-file-info {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-2);
+}
+.detail-file-info .chip {
+  padding: 4px 10px;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--cyan);
+}
+
+/* ============ TOAST ============ */
+.toast-wrap {
+  position: fixed;
+  top: 70px; right: 16px;
+  z-index: 200;
+  display: flex; flex-direction: column; gap: 10px;
+  pointer-events: none;
+  max-width: calc(100vw - 32px);
+}
+.toast {
+  background: linear-gradient(135deg, var(--bg-2), var(--bg-1));
+  border: 1px solid var(--border-strong);
+  border-left: 3px solid var(--neon);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 11px;
+  color: var(--text-0);
+  box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+  animation: toastIn 0.3s, toastOut 0.3s 2.7s forwards;
+  min-width: 200px;
+  max-width: 300px;
+  letter-spacing: 0.5px;
+}
+.toast.err { border-left-color: var(--danger); box-shadow: 0 0 20px rgba(255, 56, 96, 0.3); }
+.toast.info { border-left-color: var(--cyan); box-shadow: 0 0 20px rgba(0, 229, 255, 0.3); }
+@keyframes toastIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes toastOut { to { transform: translateX(120%); opacity: 0; } }
+
+/* ============ BOTTOM NAV (mobile) ============ */
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(5, 5, 5, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 4px;
+  z-index: 40;
+}
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 4px;
+  background: transparent;
+  border: none;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.nav-item svg { width: 20px; height: 20px; }
+.nav-item.active { color: var(--neon); }
+.nav-item.active svg { filter: drop-shadow(0 0 6px var(--neon)); }
+.nav-item.upload {
+  position: relative;
+}
+.nav-item.upload .plus {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--neon), var(--cyan));
+  color: var(--bg-0);
+  display: grid; place-items: center;
+  font-size: 22px;
+  font-weight: 900;
+  margin-top: -18px;
+  box-shadow: 0 0 20px rgba(0, 255, 102, 0.5);
+  border: 2px solid var(--bg-0);
+}
+
+/* ============ FOOTER ============ */
+footer {
+  padding: 20px 16px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--text-2);
+  text-transform: uppercase;
+}
+footer .hl { color: var(--neon); }
+
+/* ============ SCROLLBAR ============ */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-0); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--neon), var(--cyan));
+  border-radius: 10px;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 640px) {
+  header { padding: 10px 12px; gap: 8px; }
+  .logo-text .name { font-size: 14px; letter-spacing: 1.5px; }
+  .logo-text .sub { display: none; }
+  .logo-mark { width: 34px; height: 34px; font-size: 14px; }
+  .header-center { padding: 7px 10px; }
+  .header-center input { font-size: 11px; }
+  .posts { grid-template-columns: 1fr; gap: 14px; padding: 0 12px 40px; }
+  .field-row { grid-template-columns: 1fr; }
+  .profile-avatar-wrap .avatar { width: 90px; height: 90px; font-size: 30px; }
+  .profile-name { font-size: 18px; letter-spacing: 2px; }
+  .profile-stat .v { font-size: 18px; }
+  .modal { max-height: 95vh; }
+  .modal-body { padding: 16px; }
+}
+
+/* ============ GLITCH ============ */
+.glitch { position: relative; display: inline-block; }
+.glitch::before, .glitch::after {
+  content: attr(data-text);
+  position: absolute; inset: 0;
+  pointer-events: none;
+}
+.glitch::before {
+  color: var(--cyan);
+  animation: glitch1 4s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+.glitch::after {
+  color: var(--pink);
+  animation: glitch2 4s infinite;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+@keyframes glitch1 {
+  0%, 90%, 100% { transform: translate(0); }
+  92% { transform: translate(-2px, 1px); }
+  94% { transform: translate(2px, -1px); }
+}
+@keyframes glitch2 {
+  0%, 90%, 100% { transform: translate(0); }
+  93% { transform: translate(2px, 1px); }
+  95% { transform: translate(-2px, -1px); }
+}
+
+/* ============ UTIL ============ */
+.hidden { display: none !important; }
 </style>
 </head>
 <body>
@@ -684,57 +1128,93 @@
 
   <!-- ============ HEADER ============ -->
   <header>
-    <div class="logo" onclick="showFeed()">
+    <div class="logo" onclick="navigate('feed')">
       <div class="logo-mark">D</div>
       <div class="logo-text">
-        <div class="name"><span class="g">DRN</span> <span class="c">MOD</span><span class="p">Z</span></div>
-        <div class="sub">// underground apk vault</div>
+        <div class="name"><span class="g">DRN</span> <span class="c">MODZ</span></div>
+        <div class="sub">// underground network</div>
       </div>
     </div>
-    <div class="header-actions" id="headerActions"></div>
+    <div class="header-center" onclick="navigate('search'); setTimeout(()=>document.getElementById('searchInput').focus(),100);">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" id="searchInput" placeholder="buscar usuarios..." oninput="renderSearch()" onclick="event.stopPropagation()" />
+    </div>
+    <div class="header-right" id="headerRight"></div>
   </header>
 
-  <!-- ============ HERO ============ -->
-  <section class="hero">
-    <h1 class="glitch" data-text="DRN MODZ">DRN MODZ</h1>
-    <div class="tagline">
-      <span class="hl">[ SISTEMA ]</span> Red distribuida de APKs modificadas por la comunidad.
-      Sube, comparte y descarga. Sin censura. Sin límites.
+  <!-- ============ FEED VIEW ============ -->
+  <div class="view active" id="view-feed">
+    <div class="feed-header">
+      <h2 class="glitch" data-text="FEED GLOBAL">FEED GLOBAL</h2>
+      <div class="sub">// archivos publicados por la red</div>
     </div>
-    <div class="stats">
-      <div class="stat"><div class="v" id="statApps">0</div><div class="l">APKs activas</div></div>
-      <div class="stat"><div class="v" id="statUsers">0</div><div class="l">Operadores</div></div>
-      <div class="stat"><div class="v" id="statDl">0</div><div class="l">Descargas</div></div>
+    <div class="feed-tabs">
+      <button class="feed-tab active" data-tab="all" onclick="setFeedTab('all')">◉ Todo</button>
+      <button class="feed-tab" data-tab="recent" onclick="setFeedTab('recent')">⏱ Recientes</button>
+      <button class="feed-tab" data-tab="top" onclick="setFeedTab('top')">▲ Top descargas</button>
+      <button class="feed-tab" data-tab="following" onclick="setFeedTab('following')">★ Siguiendo</button>
     </div>
-  </section>
+    <div class="posts" id="postsGrid"></div>
+  </div>
 
-  <!-- ============ TOOLBAR ============ -->
-  <div class="toolbar">
-    <div class="left">
-      <button class="tab active" data-tab="all" onclick="setTab('all')">◉ Feed Global</button>
-      <button class="tab" data-tab="mine" onclick="setTab('mine')">⌬ Mis APKs</button>
-      <button class="tab" data-tab="games" onclick="setTab('games')">🎮 Juegos</button>
-      <button class="tab" data-tab="apps" onclick="setTab('apps')">📱 Apps</button>
-    </div>
-    <div class="left">
-      <div class="search">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-        <input type="text" id="searchInput" placeholder="buscar mod..." oninput="renderGrid()" />
+  <!-- ============ PROFILE VIEW ============ -->
+  <div class="view" id="view-profile">
+    <div class="profile-header">
+      <div class="profile-cover"></div>
+      <div class="profile-content">
+        <div class="profile-avatar-wrap" id="profileAvatarWrap">
+          <div class="avatar lg" id="profileAvatar">?</div>
+          <div class="edit-badge hidden" id="profileEditBadge">✎</div>
+        </div>
+        <div class="profile-name" id="profileName">—</div>
+        <div class="profile-email" id="profileEmail">—</div>
+        <div class="profile-stats">
+          <div class="profile-stat"><div class="v" id="statPosts">0</div><div class="l">Archivos</div></div>
+          <div class="profile-stat"><div class="v" id="statFollowers">0</div><div class="l">Seguidores</div></div>
+          <div class="profile-stat"><div class="v" id="statDownloads">0</div><div class="l">Descargas</div></div>
+        </div>
+        <div class="profile-actions" id="profileActions"></div>
       </div>
-      <button class="btn btn-primary" id="btnUpload" onclick="openUpload()" style="display:none;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>
-        Subir APK
-      </button>
+    </div>
+    <div class="profile-section">
+      <h3>Publicaciones</h3>
+      <div class="posts" id="profilePosts" style="padding:0;"></div>
     </div>
   </div>
 
-  <!-- ============ GRID ============ -->
-  <div class="grid" id="grid"></div>
+  <!-- ============ SEARCH VIEW ============ -->
+  <div class="view" id="view-search">
+    <div class="feed-header">
+      <h2>// BÚSQUEDA GLOBAL</h2>
+      <div class="sub">encuentra operadores en la red</div>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
 
   <footer>
-    <span class="hl">DRN MODZ</span> // build 2.0.26 // sesión cifrada localmente // © 2026
+    <span class="hl">DRN MODZ</span> // build 3.0.26 // red cifrada // © 2026
   </footer>
 </div>
+
+<!-- ============ BOTTOM NAV ============ -->
+<nav class="bottom-nav">
+  <button class="nav-item active" data-nav="feed" onclick="navigate('feed')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span>Feed</span>
+  </button>
+  <button class="nav-item" data-nav="search" onclick="navigate('search')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    <span>Buscar</span>
+  </button>
+  <button class="nav-item upload" onclick="openUpload()">
+    <div class="plus">+</div>
+    <span>Subir</span>
+  </button>
+  <button class="nav-item" data-nav="profile" onclick="openMyProfile()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span>Perfil</span>
+  </button>
+</nav>
 
 <!-- ============ AUTH MODAL ============ -->
 <div class="modal-backdrop" id="authModal">
@@ -748,8 +1228,6 @@
         <button class="auth-tab active" id="tabLogin" onclick="switchAuth('login')">Iniciar Sesión</button>
         <button class="auth-tab" id="tabRegister" onclick="switchAuth('register')">Registro</button>
       </div>
-
-      <!-- LOGIN -->
       <form id="loginForm" onsubmit="doLogin(event)">
         <div class="field">
           <label>Correo electrónico <span class="req">*</span></label>
@@ -761,8 +1239,6 @@
         </div>
         <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">▶ Iniciar Sesión</button>
       </form>
-
-      <!-- REGISTER -->
       <form id="registerForm" style="display:none;" onsubmit="doRegister(event)">
         <div class="field-row">
           <div class="field">
@@ -792,70 +1268,101 @@
 <div class="modal-backdrop" id="uploadModal">
   <div class="modal">
     <div class="modal-header">
-      <div class="modal-title">// SUBIR APK</div>
+      <div class="modal-title">// PUBLICAR ARCHIVO</div>
       <button class="modal-close" onclick="closeModal('uploadModal')">×</button>
     </div>
     <div class="modal-body">
       <form id="uploadForm" onsubmit="doUpload(event)">
         <div class="field">
-          <label>Archivo APK <span class="req">*</span></label>
-          <div class="dropzone" id="dropzone" onclick="document.getElementById('apkFile').click()">
+          <label>Título <span class="req">*</span></label>
+          <input type="text" id="upTitle" required maxlength="80" placeholder="Ej: Pack de scripts premium" />
+        </div>
+        <div class="field">
+          <label>Descripción</label>
+          <textarea id="upDesc" maxlength="500" placeholder="Detalles del archivo, contenido, instrucciones..."></textarea>
+        </div>
+        <div class="field">
+          <label>Archivo <span class="req">*</span> <span style="color:var(--cyan);">(máx 300MB)</span></label>
+          <div class="dropzone" id="fileDrop" onclick="document.getElementById('fileInput').click()">
             <div class="ico">⬆</div>
-            <div class="txt">Arrastra tu .apk aquí o haz clic</div>
-            <div class="sub">máx. 40MB · se procesará localmente</div>
+            <div class="txt">Toca para seleccionar archivo</div>
+            <div class="sub">documentos, scripts, packs · hasta 300MB</div>
           </div>
-          <input type="file" id="apkFile" accept=".apk" hidden onchange="handleApkFile(event)" />
+          <input type="file" id="fileInput" hidden onchange="handleFileInput(event)" />
           <div class="file-info" id="fileInfo">
+            <span>📦</span>
             <span class="fname" id="fileName">—</span>
             <span id="fileSize">0 KB</span>
+            <button type="button" class="remove" onclick="clearFile()">×</button>
           </div>
         </div>
-
         <div class="field">
-          <label>Título del Mod <span class="req">*</span></label>
-          <input type="text" id="apkTitle" required placeholder="Ej: Clash Royale Dinero Infinito" />
-        </div>
-
-        <div class="field-row">
-          <div class="field">
-            <label>Versión</label>
-            <input type="text" id="apkVersion" placeholder="v3.1.2" />
+          <label>Foto de portada <span class="req">*</span></label>
+          <div class="dropzone" onclick="document.getElementById('coverInput').click()">
+            <div class="ico">🖼</div>
+            <div class="txt">Selecciona imagen de portada</div>
+            <div class="sub">se ajustará automáticamente a las tarjetas</div>
           </div>
-          <div class="field">
-            <label>Categoría</label>
-            <select id="apkCategory">
-              <option value="game">🎮 Juego</option>
-              <option value="app">📱 Aplicación</option>
-            </select>
+          <input type="file" id="coverInput" accept="image/*" hidden onchange="handleCoverInput(event)" />
+          <div class="cover-preview" id="coverPreview">
+            <img id="coverImg" alt="cover" />
+            <button type="button" class="remove" onclick="clearCover()">×</button>
           </div>
         </div>
-
-        <div class="field">
-          <label>Descripción de trucos / mods</label>
-          <textarea id="apkDesc" placeholder="Dinero infinito, desbloqueado todo, sin anuncios..."></textarea>
-        </div>
-
-        <div class="field">
-          <label>Etiquetas (separadas por coma)</label>
-          <input type="text" id="apkTags" placeholder="dinero, infinito, desbloqueado" />
-        </div>
-
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" id="btnSubmitUpload">
-          ⚡ Publicar en la red
-        </button>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">⚡ Publicar en la red</button>
       </form>
     </div>
   </div>
 </div>
 
-<!-- ============ DETAIL MODAL ============ -->
+<!-- ============ POST DETAIL MODAL ============ -->
 <div class="modal-backdrop" id="detailModal">
   <div class="modal">
     <div class="modal-header">
-      <div class="modal-title" id="detailTitle">// DETALLE</div>
+      <div class="modal-title">// DETALLE</div>
       <button class="modal-close" onclick="closeModal('detailModal')">×</button>
     </div>
     <div class="modal-body" id="detailBody"></div>
+  </div>
+</div>
+
+<!-- ============ AD GATE MODAL ============ -->
+<div class="modal-backdrop" id="adModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">// DESBLOQUEO</div>
+      <button class="modal-close" onclick="closeAdGate()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="ad-gate">
+        <div class="title">PREPARANDO DESCARGA</div>
+        <div class="sub">visualiza el anuncio para habilitar el archivo</div>
+        <div class="ad-container" id="adContainer">
+          <!-- Google AdSense container -->
+          <div class="ad-placeholder">
+            <div class="big">AD SPACE</div>
+            <div>Google AdSense</div>
+            <div class="note">espacio publicitario · 300x250</div>
+          </div>
+        </div>
+        <div class="timer">
+          <span>Habilitar en</span>
+          <span class="count" id="adCount">5</span>
+          <span>s</span>
+        </div>
+        <div class="progress-bar"><div class="fill" id="adProgress"></div></div>
+        <div class="file-ready">
+          <div class="ico">📦</div>
+          <div class="info">
+            <div class="name" id="adFileName">—</div>
+            <div class="size" id="adFileSize">—</div>
+          </div>
+        </div>
+        <button class="btn btn-primary" id="adDownloadBtn" style="width:100%;justify-content:center;" disabled onclick="completeDownload()">
+          🔒 Esperando anuncio...
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -863,21 +1370,21 @@
 
 <script>
 /* =========================================================
-   DRN MODZ — Core Engine
-   Persistencia: localStorage
+   DRN MODZ — Core Engine v3
+   Persistencia: localStorage (metadata) + IndexedDB (archivos)
    ========================================================= */
 
-const STORAGE = {
-  USERS: 'drn_users',
-  SESSION: 'drn_session',
-  APPS: 'drn_apps',
-  STATS: 'drn_stats'
+const LS = {
+  USERS: 'drn_users_v3',
+  SESSION: 'drn_session_v3',
+  POSTS: 'drn_posts_v3',
+  FOLLOWS: 'drn_follows_v3' // { userId: [followerId, ...] }
 };
 
 /* ---------- helpers ---------- */
 const $ = id => document.getElementById(id);
 const uid = () => 'u_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-const aid = () => 'a_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const pid = () => 'p_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 const now = () => Date.now();
 const fmtSize = b => {
   if (b < 1024) return b + ' B';
@@ -890,27 +1397,74 @@ const fmtDate = ts => {
 };
 const escapeHtml = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
+/* ---------- IndexedDB for files ---------- */
+const IDB = {
+  db: null,
+  async init() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open('drn_modz_files', 1);
+      req.onupgradeneeded = e => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains('files')) {
+          db.createObjectStore('files');
+        }
+      };
+      req.onsuccess = e => { this.db = e.target.result; resolve(); };
+      req.onerror = e => reject(e);
+    });
+  },
+  async put(key, blob) {
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction('files', 'readwrite');
+      tx.objectStore('files').put(blob, key);
+      tx.oncomplete = () => resolve();
+      tx.onerror = e => reject(e);
+    });
+  },
+  async get(key) {
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction('files', 'readonly');
+      const req = tx.objectStore('files').get(key);
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = e => reject(e);
+    });
+  },
+  async del(key) {
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction('files', 'readwrite');
+      tx.objectStore('files').delete(key);
+      tx.oncomplete = () => resolve();
+      tx.onerror = e => reject(e);
+    });
+  }
+};
+
 /* ---------- storage ---------- */
 const db = {
-  getUsers: () => JSON.parse(localStorage.getItem(STORAGE.USERS) || '[]'),
-  setUsers: u => localStorage.setItem(STORAGE.USERS, JSON.stringify(u)),
-  getSession: () => JSON.parse(localStorage.getItem(STORAGE.SESSION) || 'null'),
-  setSession: s => s ? localStorage.setItem(STORAGE.SESSION, JSON.stringify(s)) : localStorage.removeItem(STORAGE.SESSION),
-  getApps: () => JSON.parse(localStorage.getItem(STORAGE.APPS) || '[]'),
-  setApps: a => localStorage.setItem(STORAGE.APPS, JSON.stringify(a)),
-  getStats: () => JSON.parse(localStorage.getItem(STORAGE.STATS) || '{"downloads":0}'),
-  setStats: s => localStorage.setItem(STORAGE.STATS, JSON.stringify(s)),
+  getUsers: () => JSON.parse(localStorage.getItem(LS.USERS) || '[]'),
+  setUsers: u => localStorage.setItem(LS.USERS, JSON.stringify(u)),
+  getSession: () => JSON.parse(localStorage.getItem(LS.SESSION) || 'null'),
+  setSession: s => s ? localStorage.setItem(LS.SESSION, JSON.stringify(s)) : localStorage.removeItem(LS.SESSION),
+  getPosts: () => JSON.parse(localStorage.getItem(LS.POSTS) || '[]'),
+  setPosts: p => localStorage.setItem(LS.POSTS, JSON.stringify(p)),
+  getFollows: () => JSON.parse(localStorage.getItem(LS.FOLLOWS) || '{}'),
+  setFollows: f => localStorage.setItem(LS.FOLLOWS, JSON.stringify(f)),
 };
 
 let currentUser = null;
-let currentTab = 'all';
-let pendingApkData = null; // { name, size, base64 }
+let currentView = 'feed';
+let currentFeedTab = 'all';
+let viewingUserId = null;
+let pendingFile = null; // { name, size, type, blob }
+let pendingCover = null; // base64 dataURL
+let adGateTimer = null;
+let adGatePostId = null;
 
 /* ---------- toast ---------- */
 function toast(msg, type='ok') {
   const t = document.createElement('div');
   t.className = 'toast ' + (type === 'err' ? 'err' : type === 'info' ? 'info' : '');
-  t.innerHTML = `<strong style="color:var(--neon-green);letter-spacing:2px;">&gt;_</strong> ${escapeHtml(msg)}`;
+  t.innerHTML = `<strong style="color:var(--neon);letter-spacing:2px;">&gt;_</strong> ${escapeHtml(msg)}`;
   $('toastWrap').appendChild(t);
   setTimeout(() => t.remove(), 3200);
 }
@@ -919,8 +1473,24 @@ function toast(msg, type='ok') {
 function openModal(id) { $(id).classList.add('show'); }
 function closeModal(id) { $(id).classList.remove('show'); }
 document.querySelectorAll('.modal-backdrop').forEach(m => {
-  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('show'); });
+  m.addEventListener('click', e => { if (e.target === m) {
+    if (m.id === 'adModal') closeAdGate();
+    else m.classList.remove('show');
+  }});
 });
+
+/* ---------- navigation ---------- */
+function navigate(view) {
+  currentView = view;
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  $('view-' + view).classList.add('active');
+  document.querySelectorAll('.nav-item[data-nav]').forEach(n => {
+    n.classList.toggle('active', n.dataset.nav === view);
+  });
+  if (view === 'feed') renderFeed();
+  if (view === 'search') renderSearch();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
 /* ---------- auth ---------- */
 function switchAuth(mode) {
@@ -947,14 +1517,18 @@ function doRegister(e) {
     toast('Ese correo ya está registrado', 'err');
     return;
   }
-  const user = { id: uid(), name, last, email, pass, createdAt: now() };
+  const user = {
+    id: uid(), name, last, email, pass,
+    avatar: null, // base64
+    createdAt: now()
+  };
   users.push(user);
   db.setUsers(users);
   db.setSession({ userId: user.id, loginAt: now() });
   currentUser = user;
   closeModal('authModal');
   renderHeader();
-  renderGrid();
+  renderFeed();
   toast(`Bienvenido a la red, ${name}`);
   e.target.reset();
 }
@@ -969,7 +1543,7 @@ function doLogin(e) {
   currentUser = user;
   closeModal('authModal');
   renderHeader();
-  renderGrid();
+  renderFeed();
   toast(`Sesión restaurada: ${user.name}`);
   e.target.reset();
 }
@@ -978,256 +1552,262 @@ function doLogout() {
   db.setSession(null);
   currentUser = null;
   renderHeader();
-  renderGrid();
+  navigate('feed');
   toast('Sesión cerrada', 'info');
-  if (currentTab === 'mine') setTab('all');
 }
 
 /* ---------- header ---------- */
 function renderHeader() {
-  const box = $('headerActions');
+  const box = $('headerRight');
   if (currentUser) {
-    const initial = (currentUser.name[0] || '?').toUpperCase();
     box.innerHTML = `
-      <div class="user-chip" onclick="setTab('mine')" title="Ver mis APKs">
-        <div class="user-avatar">${escapeHtml(initial)}</div>
-        <span class="uname">@${escapeHtml(currentUser.name.toLowerCase())}</span>
+      <div class="avatar" onclick="openMyProfile()" title="Mi perfil">
+        ${currentUser.avatar ? `<img src="${currentUser.avatar}" alt="">` : getInitials(currentUser.name, currentUser.last)}
       </div>
       <button class="btn btn-ghost btn-sm" onclick="doLogout()">Salir</button>
     `;
-    $('btnUpload').style.display = 'inline-flex';
   } else {
     box.innerHTML = `<button class="btn btn-primary" onclick="openAuth()">⚡ Acceder</button>`;
-    $('btnUpload').style.display = 'none';
   }
+}
+
+function getInitials(name, last) {
+  return ((name || '?')[0] + (last || '')[0] || '?').toUpperCase();
+}
+
+/* ---------- avatar helpers ---------- */
+function renderAvatar(user, size='') {
+  const cls = 'avatar' + (size ? ' ' + size : '');
+  if (user.avatar) {
+    return `<div class="${cls}"><img src="${user.avatar}" alt=""></div>`;
+  }
+  return `<div class="${cls}">${getInitials(user.name, user.last)}</div>`;
 }
 
 /* ---------- upload ---------- */
 function openUpload() {
   if (!currentUser) { openAuth(); return; }
-  pendingApkData = null;
+  pendingFile = null;
+  pendingCover = null;
   $('fileInfo').classList.remove('show');
+  $('coverPreview').classList.remove('show');
   $('uploadForm').reset();
   openModal('uploadModal');
 }
 
-const dropzone = $('dropzone');
-['dragenter','dragover'].forEach(ev => dropzone.addEventListener(ev, e => {
-  e.preventDefault(); dropzone.classList.add('drag');
+const fileDrop = $('fileDrop');
+['dragenter','dragover'].forEach(ev => fileDrop.addEventListener(ev, e => {
+  e.preventDefault(); fileDrop.classList.add('drag');
 }));
-['dragleave','drop'].forEach(ev => dropzone.addEventListener(ev, e => {
-  e.preventDefault(); dropzone.classList.remove('drag');
+['dragleave','drop'].forEach(ev => fileDrop.addEventListener(ev, e => {
+  e.preventDefault(); fileDrop.classList.remove('drag');
 }));
-dropzone.addEventListener('drop', e => {
+fileDrop.addEventListener('drop', e => {
   const f = e.dataTransfer.files[0];
-  if (f) processApkFile(f);
+  if (f) processFile(f);
 });
 
-function handleApkFile(e) {
+function handleFileInput(e) {
   const f = e.target.files[0];
-  if (f) processApkFile(f);
+  if (f) processFile(f);
 }
 
-function processApkFile(file) {
-  if (!file.name.toLowerCase().endsWith('.apk')) {
-    toast('Solo archivos .apk permitidos', 'err');
+function processFile(file) {
+  const MAX = 300 * 1024 * 1024;
+  if (file.size > MAX) {
+    toast('Archivo excede 300MB', 'err');
     return;
   }
-  if (file.size > 40 * 1024 * 1024) {
-    toast('Archivo demasiado grande (máx 40MB)', 'err');
-    return;
-  }
-  const reader = new FileReader();
-  reader.onload = ev => {
-    pendingApkData = {
-      name: file.name,
-      size: file.size,
-      base64: ev.target.result
-    };
-    $('fileName').textContent = file.name;
-    $('fileSize').textContent = fmtSize(file.size);
-    $('fileInfo').classList.add('show');
-    // auto-rellenar título si está vacío
-    if (!$('apkTitle').value) {
-      const base = file.name.replace(/\.apk$/i, '').replace(/[_-]/g, ' ').trim();
-      $('apkTitle').value = base;
-    }
+  pendingFile = {
+    name: file.name,
+    size: file.size,
+    type: file.type || 'application/octet-stream',
+    blob: file
   };
-  reader.readAsDataURL(file);
+  $('fileName').textContent = file.name;
+  $('fileSize').textContent = fmtSize(file.size);
+  $('fileInfo').classList.add('show');
 }
 
-function doUpload(e) {
+function clearFile() {
+  pendingFile = null;
+  $('fileInfo').classList.remove('show');
+  $('fileInput').value = '';
+}
+
+function handleCoverInput(e) {
+  const f = e.target.files[0];
+  if (!f) return;
+  if (!f.type.startsWith('image/')) {
+    toast('Selecciona una imagen', 'err');
+    return;
+  }
+  compressImage(f, 900, 0.85).then(dataUrl => {
+    pendingCover = dataUrl;
+    $('coverImg').src = dataUrl;
+    $('coverPreview').classList.add('show');
+  });
+}
+
+function clearCover() {
+  pendingCover = null;
+  $('coverPreview').classList.remove('show');
+  $('coverInput').value = '';
+}
+
+/* compress image via canvas */
+function compressImage(file, maxDim, quality) {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        let { width, height } = img;
+        if (width > height) {
+          if (width > maxDim) { height = height * (maxDim / width); width = maxDim; }
+        } else {
+          if (height > maxDim) { width = width * (maxDim / height); height = maxDim; }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+async function doUpload(e) {
   e.preventDefault();
   if (!currentUser) { openAuth(); return; }
-  if (!pendingApkData) { toast('Selecciona un archivo .apk', 'err'); return; }
+  if (!pendingFile) { toast('Selecciona un archivo', 'err'); return; }
+  if (!pendingCover) { toast('Selecciona una portada', 'err'); return; }
 
-  const title = $('apkTitle').value.trim();
-  const version = $('apkVersion').value.trim() || 'v1.0';
-  const category = $('apkCategory').value;
-  const desc = $('apkDesc').value.trim();
-  const tags = $('apkTags').value.split(',').map(s => s.trim()).filter(Boolean);
+  const title = $('upTitle').value.trim();
+  const desc = $('upDesc').value.trim();
 
-  const app = {
-    id: aid(),
+  const post = {
+    id: pid(),
     authorId: currentUser.id,
-    authorName: currentUser.name + ' ' + currentUser.last,
-    title, version, category, desc, tags,
-    fileName: pendingApkData.name,
-    fileSize: pendingApkData.size,
-    fileData: pendingApkData.base64,
-    iconSeed: Math.floor(Math.random() * 1000000),
+    title, desc,
+    fileName: pendingFile.name,
+    fileSize: pendingFile.size,
+    fileType: pendingFile.type,
+    cover: pendingCover,
     createdAt: now(),
     downloads: 0
   };
 
   try {
-    const apps = db.getApps();
-    apps.unshift(app);
-    db.setApps(apps);
+    // store blob in IndexedDB
+    await IDB.put(post.id, pendingFile.blob);
+    // store metadata in localStorage
+    const posts = db.getPosts();
+    posts.unshift(post);
+    db.setPosts(posts);
     closeModal('uploadModal');
-    pendingApkData = null;
-    renderGrid();
-    toast('APK publicada en la red');
+    pendingFile = null;
+    pendingCover = null;
+    renderFeed();
+    toast('Archivo publicado en la red');
   } catch (err) {
     console.error(err);
-    toast('Error: almacenamiento lleno. Reduce tamaño.', 'err');
+    toast('Error al guardar: almacenamiento lleno', 'err');
   }
 }
 
-/* ---------- delete ---------- */
-function deleteApp(id) {
-  if (!currentUser) return;
-  const apps = db.getApps();
-  const app = apps.find(a => a.id === id);
-  if (!app) return;
-  if (app.authorId !== currentUser.id) {
-    toast('Solo puedes borrar tus propias APKs', 'err');
-    return;
+/* ---------- follow system ---------- */
+function toggleFollow(userId) {
+  if (!currentUser) { openAuth(); return; }
+  if (userId === currentUser.id) return;
+  const follows = db.getFollows();
+  if (!follows[userId]) follows[userId] = [];
+  const idx = follows[userId].indexOf(currentUser.id);
+  if (idx >= 0) {
+    follows[userId].splice(idx, 1);
+    toast('Dejaste de seguir', 'info');
+  } else {
+    follows[userId].push(currentUser.id);
+    toast('Ahora sigues a este usuario');
   }
-  if (!confirm(`¿Eliminar "${app.title}"? Esta acción es irreversible.`)) return;
-  db.setApps(apps.filter(a => a.id !== id));
-  closeModal('detailModal');
-  renderGrid();
-  toast('APK eliminada', 'info');
+  db.setFollows(follows);
+  if (currentView === 'profile') renderProfile(viewingUserId);
 }
 
-/* ---------- download ---------- */
-function downloadApp(id) {
-  const apps = db.getApps();
-  const idx = apps.findIndex(a => a.id === id);
-  if (idx < 0) return;
-  const app = apps[idx];
-  const link = document.createElement('a');
-  link.href = app.fileData;
-  link.download = app.fileName || (app.title + '.apk');
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  app.downloads = (app.downloads || 0) + 1;
-  apps[idx] = app;
-  db.setApps(apps);
-  const stats = db.getStats();
-  stats.downloads = (stats.downloads || 0) + 1;
-  db.setStats(stats);
-  renderGrid();
-  toast('Descarga iniciada');
+function getFollowers(userId) {
+  const f = db.getFollows();
+  return (f[userId] || []).length;
 }
 
-/* ---------- grid / render ---------- */
-function setTab(t) {
-  currentTab = t;
-  document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.tab === t));
-  if (t === 'mine' && !currentUser) {
-    openAuth();
-    setTab('all');
-    return;
-  }
-  renderGrid();
+function isFollowing(userId) {
+  if (!currentUser) return false;
+  const f = db.getFollows();
+  return (f[userId] || []).includes(currentUser.id);
 }
 
-function showFeed() { setTab('all'); }
-
-function generateIcon(title, seed) {
-  // Gradiente determinista basado en seed + iniciales
-  const palettes = [
-    ['#39ff14', '#00f0ff'],
-    ['#b026ff', '#ff2e97'],
-    ['#00f0ff', '#39ff14'],
-    ['#ff2e97', '#b026ff'],
-    ['#39ff14', '#b026ff'],
-    ['#00f0ff', '#ff2e97'],
-  ];
-  const p = palettes[seed % palettes.length];
-  const initials = title.split(/\s+/).slice(0, 2).map(w => w[0] || '').join('').toUpperCase() || '?';
-  return { gradient: `linear-gradient(135deg, ${p[0]}, ${p[1]})`, initials, color: p[0] };
+/* ---------- feed ---------- */
+function setFeedTab(tab) {
+  currentFeedTab = tab;
+  document.querySelectorAll('.feed-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+  renderFeed();
 }
 
-function renderGrid() {
-  const grid = $('grid');
-  let apps = db.getApps();
-  const q = ($('searchInput').value || '').toLowerCase().trim();
+function renderFeed() {
+  let posts = db.getPosts();
+  const users = db.getUsers();
 
-  if (currentTab === 'mine') {
-    apps = apps.filter(a => currentUser && a.authorId === currentUser.id);
-  } else if (currentTab === 'games') {
-    apps = apps.filter(a => a.category === 'game');
-  } else if (currentTab === 'apps') {
-    apps = apps.filter(a => a.category === 'app');
+  if (currentFeedTab === 'recent') {
+    posts = [...posts].sort((a, b) => b.createdAt - a.createdAt);
+  } else if (currentFeedTab === 'top') {
+    posts = [...posts].sort((a, b) => (b.downloads || 0) - (a.downloads || 0));
+  } else if (currentFeedTab === 'following') {
+    if (!currentUser) {
+      posts = [];
+    } else {
+      const follows = db.getFollows();
+      const followingIds = new Set();
+      Object.keys(follows).forEach(uid => {
+        if (follows[uid].includes(currentUser.id)) followingIds.add(uid);
+      });
+      posts = posts.filter(p => followingIds.has(p.authorId));
+    }
   }
 
-  if (q) {
-    apps = apps.filter(a =>
-      a.title.toLowerCase().includes(q) ||
-      (a.desc || '').toLowerCase().includes(q) ||
-      (a.tags || []).some(t => t.toLowerCase().includes(q)) ||
-      a.authorName.toLowerCase().includes(q)
-    );
-  }
-
-  // stats
-  const allApps = db.getApps();
-  $('statApps').textContent = allApps.length;
-  $('statUsers').textContent = db.getUsers().length;
-  $('statDl').textContent = db.getStats().downloads || 0;
-
-  if (apps.length === 0) {
+  const grid = $('postsGrid');
+  if (posts.length === 0) {
     grid.innerHTML = `
-      <div class="empty">
-        <div class="big">${currentTab === 'mine' ? '// SIN PUBLICACIONES' : '// RED VACÍA'}</div>
-        <div>${currentTab === 'mine' ? 'Aún no has subido ninguna APK. ¡Sé el primero!' : 'La red está esperando contenido. Sé el primero en subir.'}</div>
+      <div class="empty" style="grid-column:1/-1;">
+        <div class="big">${currentFeedTab === 'following' ? '// SIN SEGUIMIENTOS' : '// RED VACÍA'}</div>
+        <div>${currentFeedTab === 'following' ? 'Sigue a usuarios para ver sus archivos' : 'Sé el primero en publicar en la red'}</div>
       </div>`;
     return;
   }
 
-  grid.innerHTML = apps.map(app => {
-    const icon = generateIcon(app.title, app.iconSeed || 0);
-    const isMine = currentUser && app.authorId === currentUser.id;
-    const catTag = app.category === 'game'
-      ? '<span class="tag">JUEGO</span>'
-      : '<span class="tag cyan">APP</span>';
-    const tagList = (app.tags || []).slice(0, 2).map(t => `<span class="tag purple">${escapeHtml(t)}</span>`).join('');
-
+  grid.innerHTML = posts.map(post => {
+    const author = users.find(u => u.id === post.authorId);
+    if (!author) return '';
+    const ext = (post.fileName || '').split('.').pop().toUpperCase().slice(0, 5) || 'FILE';
     return `
-      <div class="card" onclick="openDetail('${app.id}')">
-        ${isMine ? '<div class="badge-mine">TU MOD</div>' : ''}
-        <div class="card-banner">
-          <div class="card-icon" style="background:${icon.gradient};color:#000;">${escapeHtml(icon.initials)}</div>
+      <div class="post-card" onclick="openPostDetail('${post.id}')">
+        <div class="post-cover">
+          <div class="file-badge">${escapeHtml(ext)}</div>
+          <img src="${post.cover}" alt="" loading="lazy" />
         </div>
-        <div class="card-body">
-          <div class="card-title">${escapeHtml(app.title)}</div>
-          <div class="card-meta">
-            ${catTag}
-            <span class="tag">${escapeHtml(app.version || 'v1.0')}</span>
-            ${tagList}
-          </div>
-          <div class="card-desc">${escapeHtml(app.desc || 'Sin descripción.')}</div>
-          <div class="card-footer">
-            <div class="card-author">
-              <span class="dot"></span>
-              <span>@${escapeHtml(app.authorName.split(' ')[0].toLowerCase())}</span>
+        <div class="post-body">
+          <div class="post-title">${escapeHtml(post.title)}</div>
+          <div class="post-desc">${escapeHtml(post.desc || 'Sin descripción')}</div>
+          <div class="post-meta">
+            <div class="post-author" onclick="event.stopPropagation();openUserProfile('${author.id}')">
+              ${renderAvatar(author)}
+              <span>@${escapeHtml(author.name.toLowerCase())}</span>
             </div>
-            <div class="card-actions">
-              <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();downloadApp('${app.id}')">⬇</button>
+            <div class="post-stats">
+              <span><span class="hl">⬇</span> ${post.downloads || 0}</span>
+              <span>${fmtSize(post.fileSize)}</span>
             </div>
           </div>
         </div>
@@ -1236,34 +1816,325 @@ function renderGrid() {
   }).join('');
 }
 
-function openDetail(id) {
-  const app = db.getApps().find(a => a.id === id);
-  if (!app) return;
-  const icon = generateIcon(app.title, app.iconSeed || 0);
-  const isMine = currentUser && app.authorId === currentUser.id;
+/* ---------- post detail ---------- */
+function openPostDetail(postId) {
+  const post = db.getPosts().find(p => p.id === postId);
+  if (!post) return;
+  const author = db.getUsers().find(u => u.id === post.authorId);
+  if (!author) return;
+  const isMine = currentUser && currentUser.id === post.authorId;
+  const ext = (post.fileName || '').split('.').pop().toUpperCase();
 
-  $('detailTitle').textContent = '// ' + app.title.toUpperCase();
   $('detailBody').innerHTML = `
-    <div style="display:flex;gap:16px;align-items:center;margin-bottom:16px;">
-      <div style="width:72px;height:72px;border-radius:18px;background:${icon.gradient};display:grid;place-items:center;font-family:'Orbitron',sans-serif;font-weight:900;font-size:26px;color:#000;box-shadow:0 0 20px ${icon.color};">${escapeHtml(icon.initials)}</div>
-      <div style="flex:1;">
-        <div style="font-size:18px;font-weight:700;color:var(--text-0);line-height:1.2;">${escapeHtml(app.title)}</div>
-        <div style="font-size:11px;color:var(--text-2);margin-top:4px;letter-spacing:1px;">v${escapeHtml(app.version || '1.0')} · ${fmtSize(app.fileSize)} · ${fmtDate(app.createdAt)}</div>
-        <div style="font-size:11px;color:var(--neon-green);margin-top:4px;letter-spacing:1px;">por @${escapeHtml(app.authorName.toLowerCase())}</div>
+    <div class="detail-cover"><img src="${post.cover}" alt="" /></div>
+    <div class="detail-title">${escapeHtml(post.title)}</div>
+    <div class="detail-author" onclick="closeModal('detailModal');openUserProfile('${author.id}')">
+      ${renderAvatar(author, 'md')}
+      <div class="info">
+        <div class="name">@${escapeHtml(author.name.toLowerCase())}</div>
+        <div class="date">${fmtDate(post.createdAt)} · ${getFollowers(author.id)} seguidores</div>
       </div>
+      ${!isMine && currentUser ? `<button class="btn ${isFollowing(author.id) ? 'btn-ghost' : 'btn-primary'} btn-sm" onclick="event.stopPropagation();toggleFollow('${author.id}');openPostDetail('${postId}')">
+        ${isFollowing(author.id) ? '✓ Siguiendo' : '+ Seguir'}
+      </button>` : ''}
     </div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
-      <span class="tag">${app.category === 'game' ? 'JUEGO' : 'APP'}</span>
-      ${(app.tags || []).map(t => `<span class="tag purple">${escapeHtml(t)}</span>`).join('')}
-      <span class="tag cyan">⬇ ${app.downloads || 0}</span>
+    ${post.desc ? `<div class="detail-desc">${escapeHtml(post.desc)}</div>` : ''}
+    <div class="detail-file-info">
+      <span class="chip">📦 ${escapeHtml(ext)}</span>
+      <span class="chip">⚖ ${fmtSize(post.fileSize)}</span>
+      <span class="chip">⬇ ${post.downloads || 0} descargas</span>
     </div>
-    <div style="padding:12px;background:rgba(3,5,10,0.6);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--text-1);line-height:1.6;margin-bottom:16px;white-space:pre-wrap;">${escapeHtml(app.desc || 'Sin descripción.')}</div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      <button class="btn btn-primary" onclick="downloadApp('${app.id}')">⬇ Descargar APK</button>
-      ${isMine ? `<button class="btn btn-danger" onclick="deleteApp('${app.id}')">🗑 Eliminar</button>` : ''}
+      <button class="btn btn-primary" style="flex:1;justify-content:center;" onclick="startDownload('${post.id}')">⬇ Descargar</button>
+      ${isMine ? `<button class="btn btn-danger" onclick="deletePost('${post.id}')">🗑 Eliminar</button>` : ''}
     </div>
   `;
   openModal('detailModal');
+}
+
+async function deletePost(postId) {
+  if (!currentUser) return;
+  const posts = db.getPosts();
+  const post = posts.find(p => p.id === postId);
+  if (!post || post.authorId !== currentUser.id) {
+    toast('No puedes eliminar esto', 'err');
+    return;
+  }
+  if (!confirm(`¿Eliminar "${post.title}"?`)) return;
+  try {
+    await IDB.del(postId);
+  } catch (e) { console.warn(e); }
+  db.setPosts(posts.filter(p => p.id !== postId));
+  closeModal('detailModal');
+  renderFeed();
+  if (currentView === 'profile') renderProfile(viewingUserId);
+  toast('Publicación eliminada', 'info');
+}
+
+/* ---------- AD GATE / DOWNLOAD ---------- */
+async function startDownload(postId) {
+  const post = db.getPosts().find(p => p.id === postId);
+  if (!post) return;
+  adGatePostId = postId;
+  $('adFileName').textContent = post.fileName;
+  $('adFileSize').textContent = fmtSize(post.fileSize);
+  $('adDownloadBtn').disabled = true;
+  $('adDownloadBtn').innerHTML = '🔒 Esperando anuncio...';
+  $('adProgress').style.width = '0%';
+
+  // load AdSense placeholder (real implementation would inject ad script here)
+  loadAdSenseSlot();
+
+  openModal('adModal');
+
+  // countdown
+  let seconds = 5;
+  $('adCount').textContent = seconds;
+  if (adGateTimer) clearInterval(adGateTimer);
+  adGateTimer = setInterval(() => {
+    seconds--;
+    $('adCount').textContent = seconds;
+    $('adProgress').style.width = ((5 - seconds) / 5 * 100) + '%';
+    if (seconds <= 0) {
+      clearInterval(adGateTimer);
+      adGateTimer = null;
+      $('adDownloadBtn').disabled = false;
+      $('adDownloadBtn').innerHTML = '⬇ Descargar ahora';
+    }
+  }, 1000);
+}
+
+function loadAdSenseSlot() {
+  /* 
+    En producción aquí se inyectaría el script real de AdSense:
+    const s = document.createElement('script');
+    s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+    s.async = true;
+    document.head.appendChild(s);
+    ... y se crearía el <ins class="adsbygoogle"> con data-ad-client, data-ad-slot
+  */
+  const container = $('adContainer');
+  container.innerHTML = `
+    <div class="ad-placeholder">
+      <div class="big">GOOGLE ADSENSE</div>
+      <div>Contenedor publicitario</div>
+      <div class="note">ins · data-ad-client · data-ad-slot</div>
+    </div>
+  `;
+}
+
+function closeAdGate() {
+  if (adGateTimer) { clearInterval(adGateTimer); adGateTimer = null; }
+  closeModal('adModal');
+  adGatePostId = null;
+}
+
+async function completeDownload() {
+  if (!adGatePostId) return;
+  const posts = db.getPosts();
+  const idx = posts.findIndex(p => p.id === adGatePostId);
+  if (idx < 0) return;
+  const post = posts[idx];
+  try {
+    const blob = await IDB.get(post.id);
+    if (!blob) {
+      toast('Archivo no encontrado en storage', 'err');
+      return;
+    }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = post.fileName;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+    post.downloads = (post.downloads || 0) + 1;
+    posts[idx] = post;
+    db.setPosts(posts);
+    closeAdGate();
+    closeModal('detailModal');
+    renderFeed();
+    toast('Descarga iniciada');
+  } catch (err) {
+    console.error(err);
+    toast('Error al descargar', 'err');
+  }
+}
+
+/* ---------- profile ---------- */
+function openMyProfile() {
+  if (!currentUser) { openAuth(); return; }
+  openUserProfile(currentUser.id);
+}
+
+function openUserProfile(userId) {
+  viewingUserId = userId;
+  navigate('profile');
+  renderProfile(userId);
+}
+
+function renderProfile(userId) {
+  const user = db.getUsers().find(u => u.id === userId);
+  if (!user) { navigate('feed'); return; }
+  const isMe = currentUser && currentUser.id === userId;
+  const posts = db.getPosts().filter(p => p.authorId === userId);
+  const totalDl = posts.reduce((s, p) => s + (p.downloads || 0), 0);
+
+  // avatar
+  const avatarWrap = $('profileAvatarWrap');
+  const avatar = $('profileAvatar');
+  if (user.avatar) {
+    avatar.innerHTML = `<img src="${user.avatar}" alt="">`;
+  } else {
+    avatar.textContent = getInitials(user.name, user.last);
+  }
+  $('profileEditBadge').classList.toggle('hidden', !isMe);
+  avatarWrap.onclick = isMe ? () => triggerAvatarUpload() : () => {};
+
+  // name (editable if mine)
+  const nameEl = $('profileName');
+  if (isMe) {
+    nameEl.innerHTML = `<span class="editable" contenteditable="true" id="editableName" onblur="saveNameEdit()">${escapeHtml(user.name + ' ' + user.last)}</span>`;
+  } else {
+    nameEl.textContent = user.name + ' ' + user.last;
+  }
+
+  $('profileEmail').textContent = isMe ? user.email : '@' + user.name.toLowerCase();
+  $('statPosts').textContent = posts.length;
+  $('statFollowers').textContent = getFollowers(userId);
+  $('statDownloads').textContent = totalDl;
+
+  // actions
+  const actions = $('profileActions');
+  if (isMe) {
+    actions.innerHTML = `
+      <button class="btn btn-ghost" onclick="triggerAvatarUpload()">📷 Cambiar foto</button>
+      <button class="btn btn-ghost" onclick="openUpload()">⬆ Publicar archivo</button>
+    `;
+  } else if (currentUser) {
+    const following = isFollowing(userId);
+    actions.innerHTML = `
+      <button class="btn follow-btn ${following ? 'following btn-ghost' : 'btn-primary'}" onclick="toggleFollow('${userId}')">
+        ${following ? '✓ Siguiendo' : '+ Seguir'}
+      </button>
+    `;
+  } else {
+    actions.innerHTML = `<button class="btn btn-primary" onclick="openAuth()">⚡ Acceder para seguir</button>`;
+  }
+
+  // posts
+  const grid = $('profilePosts');
+  if (posts.length === 0) {
+    grid.innerHTML = `<div class="empty" style="grid-column:1/-1;"><div class="big">// SIN PUBLICACIONES</div><div>Este usuario aún no ha compartido archivos</div></div>`;
+  } else {
+    grid.innerHTML = posts.map(post => {
+      const ext = (post.fileName || '').split('.').pop().toUpperCase().slice(0, 5) || 'FILE';
+      return `
+        <div class="post-card" onclick="openPostDetail('${post.id}')">
+          <div class="post-cover">
+            <div class="file-badge">${escapeHtml(ext)}</div>
+            <img src="${post.cover}" alt="" loading="lazy" />
+          </div>
+          <div class="post-body">
+            <div class="post-title">${escapeHtml(post.title)}</div>
+            <div class="post-desc">${escapeHtml(post.desc || 'Sin descripción')}</div>
+            <div class="post-meta">
+              <div class="post-stats" style="margin-left:auto;">
+                <span><span class="hl">⬇</span> ${post.downloads || 0}</span>
+                <span>${fmtSize(post.fileSize)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+}
+
+function triggerAvatarUpload() {
+  if (!currentUser) return;
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.onchange = async e => {
+    const f = e.target.files[0];
+    if (!f) return;
+    const dataUrl = await compressImage(f, 300, 0.85);
+    currentUser.avatar = dataUrl;
+    const users = db.getUsers();
+    const idx = users.findIndex(u => u.id === currentUser.id);
+    if (idx >= 0) {
+      users[idx].avatar = dataUrl;
+      try {
+        db.setUsers(users);
+        renderHeader();
+        renderProfile(currentUser.id);
+        toast('Foto de perfil actualizada');
+      } catch (err) {
+        toast('Error: imagen muy pesada', 'err');
+      }
+    }
+  };
+  input.click();
+}
+
+function saveNameEdit() {
+  if (!currentUser) return;
+  const el = $('editableName');
+  if (!el) return;
+  const full = el.textContent.trim();
+  if (!full) {
+    el.textContent = currentUser.name + ' ' + currentUser.last;
+    return;
+  }
+  const parts = full.split(/\s+/);
+  const name = parts[0];
+  const last = parts.slice(1).join(' ') || currentUser.last;
+  currentUser.name = name;
+  currentUser.last = last;
+  const users = db.getUsers();
+  const idx = users.findIndex(u => u.id === currentUser.id);
+  if (idx >= 0) {
+    users[idx].name = name;
+    users[idx].last = last;
+    db.setUsers(users);
+    renderHeader();
+    renderProfile(currentUser.id);
+    toast('Nombre actualizado');
+  }
+}
+
+/* ---------- search ---------- */
+function renderSearch() {
+  const q = ($('searchInput').value || '').toLowerCase().trim();
+  const results = $('searchResults');
+  let users = db.getUsers();
+  if (currentUser) users = users.filter(u => u.id !== currentUser.id);
+  if (q) {
+    users = users.filter(u =>
+      u.name.toLowerCase().includes(q) ||
+      u.last.toLowerCase().includes(q) ||
+      u.email.toLowerCase().includes(q) ||
+      (u.name + ' ' + u.last).toLowerCase().includes(q)
+    );
+  }
+  if (users.length === 0) {
+    results.innerHTML = `<div class="empty"><div class="big">${q ? '// SIN RESULTADOS' : '// ESCRIBE PARA BUSCAR'}</div><div>${q ? 'No se encontraron operadores' : 'Busca por nombre, apellido o email'}</div></div>`;
+    return;
+  }
+  results.innerHTML = users.map(u => `
+    <div class="user-row" onclick="openUserProfile('${u.id}')">
+      ${renderAvatar(u, 'md')}
+      <div class="info">
+        <div class="name">${escapeHtml(u.name + ' ' + u.last)}</div>
+        <div class="meta">@${escapeHtml(u.name.toLowerCase())} · ${getFollowers(u.id)} seguidores</div>
+      </div>
+      ${currentUser && currentUser.id !== u.id ? `<button class="btn ${isFollowing(u.id) ? 'btn-ghost' : 'btn-primary'} btn-sm" onclick="event.stopPropagation();toggleFollow('${u.id}')">
+        ${isFollowing(u.id) ? '✓' : '+'}
+      </button>` : ''}
+    </div>
+  `).join('');
 }
 
 /* ---------- matrix rain ---------- */
@@ -1271,7 +2142,7 @@ function openDetail(id) {
   const c = $('matrix');
   const ctx = c.getContext('2d');
   let w, h, cols, drops;
-  const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ01DRNMODZ<>{}[]/*#$%&';
+  const chars = 'アイウエオ01DRNMODZ<>{}[]/*#$%&';
   function resize() {
     w = c.width = window.innerWidth;
     h = c.height = window.innerHeight;
@@ -1281,14 +2152,14 @@ function openDetail(id) {
   resize();
   window.addEventListener('resize', resize);
   function draw() {
-    ctx.fillStyle = 'rgba(3, 5, 10, 0.08)';
+    ctx.fillStyle = 'rgba(5, 5, 5, 0.08)';
     ctx.fillRect(0, 0, w, h);
     ctx.font = '14px JetBrains Mono';
     for (let i = 0; i < cols; i++) {
       const ch = chars[Math.floor(Math.random() * chars.length)];
       const x = i * 16;
       const y = drops[i] * 16;
-      ctx.fillStyle = Math.random() > 0.98 ? '#b026ff' : '#39ff14';
+      ctx.fillStyle = Math.random() > 0.98 ? '#B026FF' : '#00FF66';
       ctx.fillText(ch, x, y);
       if (y > h && Math.random() > 0.975) drops[i] = 0;
       drops[i] += 0.6;
@@ -1298,61 +2169,120 @@ function openDetail(id) {
   draw();
 })();
 
-/* ---------- seed demo data (solo si vacío) ---------- */
+/* ---------- seed demo ---------- */
 function seedDemo() {
-  if (db.getApps().length > 0) return;
-  const demo = [
+  if (db.getUsers().length > 0) return;
+  // create demo users
+  const demoUsers = [
+    { id: 'u_demo1', name: 'Neon', last: 'Ghost', email: 'neon@drn.net', pass: 'demo', avatar: null, createdAt: now() - 86400000 * 5 },
+    { id: 'u_demo2', name: 'Cipher', last: 'X', email: 'cipher@drn.net', pass: 'demo', avatar: null, createdAt: now() - 86400000 * 3 },
+    { id: 'u_demo3', name: 'Zero', last: 'Cool', email: 'zero@drn.net', pass: 'demo', avatar: null, createdAt: now() - 86400000 }
+  ];
+  db.setUsers(demoUsers);
+
+  // demo posts with generated covers
+  const covers = [
+    generateCover('PACK SCRIPTS', '#00FF66', '#00E5FF'),
+    generateCover('MOD TOOLS', '#B026FF', '#FF2E97'),
+    generateCover('PREMIUM KIT', '#00E5FF', '#00FF66')
+  ];
+  const demoPosts = [
     {
-      id: aid(), authorId: 'demo', authorName: 'System Root',
-      title: 'Clash Royale — Oro y Gemas Infinitas',
-      version: 'v3.2026.1', category: 'game',
-      desc: 'Mod completo con oro ilimitado, gemas infinitas y todas las cartas desbloqueadas al nivel máximo. Sin baneos, conexión anónima activada.',
-      tags: ['dinero','infinito','desbloqueado'],
-      fileName: 'clash-royale-mod.apk', fileSize: 185 * 1024 * 1024,
-      fileData: 'data:application/octet-stream;base64,',
-      iconSeed: 1, createdAt: now() - 86400000 * 2, downloads: 1240
+      id: 'p_demo1', authorId: 'u_demo1',
+      title: 'Pack de Scripts Premium v4.2',
+      desc: 'Colección curada de scripts para automatización avanzada. Incluye más de 50 utilidades verificadas y documentadas.',
+      fileName: 'scripts-premium-v4.zip',
+      fileSize: 14 * 1024 * 1024,
+      fileType: 'application/zip',
+      cover: covers[0],
+      createdAt: now() - 86400000 * 2,
+      downloads: 342
     },
     {
-      id: aid(), authorId: 'demo', authorName: 'Neon Ghost',
-      title: 'Spotify Premium — Sin Anuncios',
-      version: 'v8.9.40', category: 'app',
-      desc: 'Versión premium desbloqueada. Saltar canciones, calidad extrema, sin anuncios, sin límites. Cuenta no requerida.',
-      tags: ['premium','sin anuncios','música'],
-      fileName: 'spotify-prem.apk', fileSize: 42 * 1024 * 1024,
-      fileData: 'data:application/octet-stream;base64,',
-      iconSeed: 3, createdAt: now() - 86400000, downloads: 890
+      id: 'p_demo2', authorId: 'u_demo2',
+      title: 'Kit de Herramientas de Análisis',
+      desc: 'Herramientas para análisis de red, debugging y pentesting básico. Todo en un solo paquete.',
+      fileName: 'toolkit-analysis.tar.gz',
+      fileSize: 28 * 1024 * 1024,
+      fileType: 'application/gzip',
+      cover: covers[1],
+      createdAt: now() - 86400000,
+      downloads: 189
     },
     {
-      id: aid(), authorId: 'demo', authorName: 'Cipher',
-      title: 'Minecraft — Todo Desbloqueado',
-      version: 'v1.21.50', category: 'game',
-      desc: 'Todas las skins, mapas y texturas desbloqueadas. Modo creativo libre, sin compras in-app.',
-      tags: ['desbloqueado','skins','gratis'],
-      fileName: 'minecraft-unlocked.apk', fileSize: 220 * 1024 * 1024,
-      fileData: 'data:application/octet-stream;base64,',
-      iconSeed: 5, createdAt: now() - 3600000 * 5, downloads: 2103
+      id: 'p_demo3', authorId: 'u_demo3',
+      title: 'Documentación Técnica Completa',
+      desc: 'PDF con más de 400 páginas sobre arquitectura de sistemas distribuidos y seguridad.',
+      fileName: 'docs-tech.pdf',
+      fileSize: 8 * 1024 * 1024,
+      fileType: 'application/pdf',
+      cover: covers[2],
+      createdAt: now() - 3600000 * 5,
+      downloads: 521
     }
   ];
-  db.setApps(demo);
+  db.setPosts(demoPosts);
+
+  // seed actual blobs for demo posts (small text files)
+  demoPosts.forEach(async p => {
+    const blob = new Blob([`Demo file for: ${p.title}\n\nThis is a placeholder for the real file content.\nIn production, this would be the actual uploaded file.`], { type: p.fileType });
+    try { await IDB.put(p.id, blob); } catch(e) { console.warn(e); }
+  });
+
+  // seed some follows
+  db.setFollows({
+    'u_demo1': ['u_demo2'],
+    'u_demo2': ['u_demo1', 'u_demo3'],
+    'u_demo3': ['u_demo1']
+  });
+}
+
+function generateCover(text, c1, c2) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 800; canvas.height = 500;
+  const ctx = canvas.getContext('2d');
+  const grad = ctx.createLinearGradient(0, 0, 800, 500);
+  grad.addColorStop(0, c1);
+  grad.addColorStop(1, c2);
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 800, 500);
+  // grid
+  ctx.strokeStyle = 'rgba(5,5,5,0.3)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i < 800; i += 40) {
+    ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 500); ctx.stroke();
+  }
+  for (let i = 0; i < 500; i += 40) {
+    ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(800, i); ctx.stroke();
+  }
+  // text
+  ctx.fillStyle = 'rgba(5,5,5,0.9)';
+  ctx.font = 'bold 64px Orbitron, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(text, 400, 250);
+  return canvas.toDataURL('image/jpeg', 0.85);
 }
 
 /* ---------- init ---------- */
-function init() {
+async function init() {
+  try {
+    await IDB.init();
+  } catch (e) {
+    console.warn('IndexedDB no disponible', e);
+  }
   seedDemo();
   const sess = db.getSession();
   if (sess) {
     const u = db.getUsers().find(x => x.id === sess.userId);
-    if (u) {
-      currentUser = u;
-    } else {
-      db.setSession(null);
-    }
+    if (u) currentUser = u;
+    else db.setSession(null);
   }
   renderHeader();
-  renderGrid();
+  renderFeed();
 }
 
 init();
 </script>
 </body>
-</html>
+  </html>
