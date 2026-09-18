@@ -166,11 +166,41 @@ input,textarea,select{font-family:inherit;color:inherit}
   overflow:hidden;transition:all .25s;position:relative;
 }
 .post-card:hover{border-color:#2a2a2a;transform:translateY(-2px)}
-.post-cover{width:100%;aspect-ratio:1/1;background:#0a0a0a;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
-.post-cover img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
-.post-cover.no-cover{display:grid;place-items:center;background:linear-gradient(135deg,#0a0a0a 25%,#111 50%,#0a0a0a 75%)}
+
+/* ════════════════════════════════════════════════════════════════
+   🔧 CORRECCIÓN: POST COVER CON ALTURA FIJA Y OBJECT-FIT
+   Se establece una altura fija de 320px y se fuerza object-fit: cover
+   para que la imagen se recorte sin deformarse, respetando sus
+   proporciones originales.
+   ════════════════════════════════════════════════════════════════ */
+.post-cover{
+  width:100%;
+  height:320px;
+  background:#0a0a0a;
+  position:relative;
+  overflow:hidden;
+  border-bottom:1px solid var(--border);
+  display:block;
+}
+.post-cover img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+  display:block;
+  background:#0a0a0a;
+}
+.post-cover.no-cover{
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#0a0a0a 25%,#111 50%,#0a0a0a 75%);
+}
 .post-cover.no-cover i{font-size:48px;color:#1a1a1a}
-.post-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.7));pointer-events:none}
+.post-cover::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.7));
+  pointer-events:none;
+}
 .post-size-badge{
   position:absolute;top:10px;right:10px;z-index:2;
   background:rgba(0,0,0,.8);border:1px solid var(--neon);color:var(--neon);
@@ -284,7 +314,8 @@ input,textarea,select{font-family:inherit;color:inherit}
 .progress-bar{height:100%;background:var(--neon);box-shadow:var(--glow);width:0%;transition:width .3s}
 
 .profile-head{background:linear-gradient(180deg,#0a0a0a,#070707);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:14px}
-.cover{height:140px;background:#0a0a0a;background-size:cover;background-position:center;position:relative}
+.cover{height:140px;background:#0a0a0a;background-size:cover;background-position:center;position:relative;overflow:hidden}
+.cover img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(5,5,5,.9))}
 .profile-info{padding:0 18px 18px;display:flex;align-items:flex-end;gap:14px;margin-top:-44px;position:relative;z-index:2}
 .profile-info .avatar{border:3px solid var(--bg);box-shadow:0 0 0 1px var(--border)}
@@ -369,6 +400,7 @@ input,textarea,select{font-family:inherit;color:inherit}
   .brand{font-size:15px;letter-spacing:1.5px}
   .brand-tag{display:none}
   .post-title{font-size:14px}
+  .post-cover{height:240px}
   .profile-info{flex-direction:column;align-items:flex-start;gap:10px}
   .profile-info .avatar{margin-top:-34px}
   .top-avatar{width:34px;height:34px;font-size:12px}
@@ -388,7 +420,7 @@ input,textarea,select{font-family:inherit;color:inherit}
     <div class="brand" id="brandLogo" title="DRN MODZ">
       <span class="dot"></span>
       <span>DRN <span class="accent">MODZ</span></span>
-      <span class="brand-tag">v4.0</span>
+      <span class="brand-tag">v4.1</span>
     </div>
     <div class="top-actions">
       <button class="icon-btn search" id="btnSearch" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -623,9 +655,6 @@ input,textarea,select{font-family:inherit;color:inherit}
 <div class="toast" id="toast"></div>
 
 <script type="module">
-/* ════════════════════════════════════════════════════════════════
-   🔥 FIREBASE SDK (Solo Auth y Firestore, SIN Storage)
-   ════════════════════════════════════════════════════════════════ */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -679,9 +708,6 @@ async function tryInitFirebase(){
   }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   🖼️ CONVERSIÓN A BASE64 (Para guardar en Firestore)
-   ════════════════════════════════════════════════════════════════ */
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -731,9 +757,6 @@ function compressImageToBase64(file, maxWidth, maxHeight, quality = 0.7) {
   });
 }
 
-/* ════════════════════════════════════════════════════════════════
-   MODO DEMO (solo metadata local)
-   ════════════════════════════════════════════════════════════════ */
 const LS = {
   USERS: 'drn_modz_users_v3',
   POSTS: 'drn_modz_posts_v3',
@@ -794,18 +817,12 @@ const DemoDB = {
   getPostsByUser(uid){ return this.getPosts().filter(p => p.authorId === uid).sort((a,b) => b.createdAt - a.createdAt); }
 };
 
-/* ════════════════════════════════════════════════════════════════
-   ESTADO GLOBAL
-   ════════════════════════════════════════════════════════════════ */
 const state = {
   user: null, profile: null, viewingUserId: null, selectedFile: null,
   brandClicks: 0, brandTimer: null, currentDownloadData: null,
   feedListener: null, authenticating: false
 };
 
-/* ════════════════════════════════════════════════════════════════
-   UTILIDADES
-   ════════════════════════════════════════════════════════════════ */
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 
@@ -891,9 +908,6 @@ function getVerifiedSealSVG(idSuffix = ''){
   `;
 }
 
-/* ════════════════════════════════════════════════════════════════
-   NAVEGACIÓN
-   ════════════════════════════════════════════════════════════════ */
 function showView(id){
   $$(".view").forEach(v=>v.classList.remove("active"));
   $("#"+id).classList.add("active");
@@ -939,9 +953,6 @@ function showMainApp(){
   showView("viewFeed");
 }
 
-/* ════════════════════════════════════════════════════════════════
-   AVATAR GLOBAL
-   ════════════════════════════════════════════════════════════════ */
 function openAvatarPicker(){
   $("#globalAvatarInput").click();
 }
@@ -991,9 +1002,6 @@ function refreshAllAvatars(){
   }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   AUTH TABS
-   ════════════════════════════════════════════════════════════════ */
 $$(".auth-tabs button").forEach(b=>{
   b.addEventListener("click",()=>{
     $$(".auth-tabs button").forEach(x=>x.classList.remove("active"));
@@ -1006,9 +1014,6 @@ $$(".auth-tabs button").forEach(b=>{
   });
 });
 
-/* ════════════════════════════════════════════════════════════════
-   REGISTRO
-   ════════════════════════════════════════════════════════════════ */
 $("#formRegister").addEventListener("submit", async e => {
   e.preventDefault();
   if (state.authenticating) return;
@@ -1083,9 +1088,6 @@ $("#formRegister").addEventListener("submit", async e => {
   }
 });
 
-/* ════════════════════════════════════════════════════════════════
-   LOGIN
-   ════════════════════════════════════════════════════════════════ */
 $("#formLogin").addEventListener("submit", async e => {
   e.preventDefault();
   if (state.authenticating) return;
@@ -1171,9 +1173,6 @@ function getFriendlyAuthError(err){
   return '⚠ Ocurrió un error. Intenta de nuevo.';
 }
 
-/* ════════════════════════════════════════════════════════════════
-   CARGAR PERFIL
-   ════════════════════════════════════════════════════════════════ */
 async function loadMyProfile(){
   try {
     if (FIREBASE_OK){
@@ -1202,9 +1201,6 @@ async function loadMyProfile(){
   }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   FEED
-   ════════════════════════════════════════════════════════════════ */
 function subscribeFeed(){
   if (state.feedListener){ state.feedListener(); state.feedListener = null; }
   if (FIREBASE_OK){
@@ -1239,9 +1235,6 @@ function renderFeed(posts){
   });
 }
 
-/* ════════════════════════════════════════════════════════════════
-   RENDER POST
-   ════════════════════════════════════════════════════════════════ */
 let sealCounter = 0;
 
 function renderPost(p, id){
@@ -1311,9 +1304,6 @@ function renderPost(p, id){
   return el;
 }
 
-/* ════════════════════════════════════════════════════════════════
-   DELETE POST
-   ════════════════════════════════════════════════════════════════ */
 async function deletePost(id){
   if(!confirm("¿Eliminar esta publicación?")) return;
   try{
@@ -1331,9 +1321,6 @@ async function deletePost(id){
   }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   UPLOAD
-   ════════════════════════════════════════════════════════════════ */
 const dropZone = $("#dropZone");
 const fileInput = $("#fileInput");
 
@@ -1356,8 +1343,7 @@ fileInput.addEventListener("change",e=>{
 });
 
 function handleFile(f){
-  // Límite estricto para Firestore (1MB por documento)
-  const MAX = 800 * 1024; // 800 KB
+  const MAX = 800 * 1024;
   if(f.size > MAX){
     toast(`Límite estricto: ${fmtSize(MAX)} (Requisito de Firestore)`, 'err');
     state.selectedFile = null;
@@ -1370,9 +1356,6 @@ function handleFile(f){
   $("#fileInfo").classList.add("show");
 }
 
-/* ════════════════════════════════════════════════════════════════
-   PUBLISH — Todo en Base64 directo a Firestore
-   ════════════════════════════════════════════════════════════════ */
 $("#publishBtn").addEventListener("click", async () => {
   if (!FIREBASE_OK) {
     toast("⚠ Configura Firebase para publicar", 'err');
@@ -1403,11 +1386,11 @@ $("#publishBtn").addEventListener("click", async () => {
     await addDoc(collection(fbDb, "posts"), {
       title, 
       description: desc, 
-      fileData: fileBase64,    // Guardado directamente en Firestore
+      fileData: fileBase64,
       fileName: state.selectedFile.name,
       fileType: state.selectedFile.type,
       size: state.selectedFile.size, 
-      coverData: coverBase64,  // Guardado directamente en Firestore
+      coverData: coverBase64,
       authorId: state.user.uid,
       authorName: `${state.profile.name} ${state.profile.lastName}`,
       authorAvatar: state.profile.avatar || "",
@@ -1444,9 +1427,6 @@ $("#publishBtn").addEventListener("click", async () => {
   }
 });
 
-/* ════════════════════════════════════════════════════════════════
-   DOWNLOAD + ADSENSE (Reconstrucción desde Base64)
-   ════════════════════════════════════════════════════════════════ */
 function startDownload(postData) {
   if (!postData || !postData.fileData) { 
     toast("⚠ Archivo no disponible", 'warn'); 
@@ -1501,9 +1481,6 @@ $("#btnFinalDownload").addEventListener("click", ()=>{
   }
 });
 
-/* ════════════════════════════════════════════════════════════════
-   PROFILE
-   ════════════════════════════════════════════════════════════════ */
 async function openProfile(uid){
   state.viewingUserId = uid;
   try {
@@ -1518,7 +1495,14 @@ async function openProfile(uid){
     }
 
     const coverUrl = u.coverData || u.cover;
-    $("#profileCover").style.backgroundImage = (coverUrl && (coverUrl.startsWith('http') || coverUrl.startsWith('data:image'))) ? `url('${coverUrl}')` : "";
+    const profileCoverEl = $("#profileCover");
+    if (coverUrl && (coverUrl.startsWith('http') || coverUrl.startsWith('data:image'))) {
+      profileCoverEl.style.backgroundImage = `url('${coverUrl}')`;
+      profileCoverEl.innerHTML = '';
+    } else {
+      profileCoverEl.style.backgroundImage = '';
+      profileCoverEl.innerHTML = '';
+    }
     
     const av = $("#profileAvatar");
     const avUrl = u.avatar || "";
@@ -1615,9 +1599,6 @@ async function toggleFollow(uid){
   }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   SEARCH
-   ════════════════════════════════════════════════════════════════ */
 async function doSearch(){
   const q = $("#searchInput").value.trim().toLowerCase();
   const out = $("#searchResults");
@@ -1669,9 +1650,6 @@ async function doSearch(){
 $("#searchBtn").addEventListener("click", doSearch);
 $("#searchInput").addEventListener("keydown", e => { if(e.key==="Enter") doSearch(); });
 
-/* ════════════════════════════════════════════════════════════════
-   EDIT PROFILE
-   ════════════════════════════════════════════════════════════════ */
 function prefillEditForm(){
   if(!state.profile) return;
   $("#editName").value = state.profile.name || "";
@@ -1720,9 +1698,6 @@ $("#saveProfileBtn").addEventListener("click", async () => {
   }
 });
 
-/* ════════════════════════════════════════════════════════════════
-   🥚 EASTER EGG: 10 CLICKS → ADMIN
-   ════════════════════════════════════════════════════════════════ */
 $("#brandLogo").addEventListener("click", () => {
   state.brandClicks++;
   clearTimeout(state.brandTimer);
@@ -1808,12 +1783,9 @@ async function openAdminPanel(){
   }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   🚀 ARRANQUE
-   ════════════════════════════════════════════════════════════════ */
 (async function init(){
-  console.log("%c ═══ 𝘿𝙍𝙉 𝙈𝙊𝘿𝕃 v4.0 ═══ ", 'background:#00FF66;color:#000;font-size:14px;padding:6px 12px');
-  console.log("%c 100% Firestore: Archivos y portadas guardados como Base64. Sin Cloud Storage. ", 'color:#00e0ff;font-size:11px');
+  console.log("%c ═══ 𝘿𝙍𝙉 𝙈𝙊𝘿𝕃 v4.1 ═══ ", 'background:#00FF66;color:#000;font-size:14px;padding:6px 12px');
+  console.log("%c Corrección: Portadas con object-fit:cover y altura fija 320px ", 'color:#00e0ff;font-size:11px');
   
   FIREBASE_OK = await tryInitFirebase();
   
@@ -1864,4 +1836,4 @@ async function openAdminPanel(){
 })();
 </script>
 </body>
-  </html>
+</html>
