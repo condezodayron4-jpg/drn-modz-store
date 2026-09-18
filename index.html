@@ -49,32 +49,17 @@ input,textarea,select{font-family:inherit;color:inherit}
 
 #app{position:relative;z-index:2;max-width:720px;margin:0 auto;padding:0 0 90px 0;min-height:100vh}
 
-/* STATUS BANNER */
 .status-banner{
   position:fixed;top:0;left:0;right:0;z-index:1000;
-  padding:10px 14px;
-  display:none;
-  animation:slideDown .4s;
-  font-size:11px;letter-spacing:1px;
-  border-bottom:1px solid;
+  padding:10px 14px;display:none;animation:slideDown .4s;
+  font-size:11px;letter-spacing:1px;border-bottom:1px solid;
 }
 .status-banner.show{display:block}
-.status-banner.demo{
-  background:linear-gradient(135deg,rgba(255,180,0,.15),rgba(255,180,0,.05));
-  border-color:var(--warn);color:var(--warn);
-}
-.status-banner.error{
-  background:linear-gradient(135deg,rgba(255,42,85,.15),rgba(255,42,85,.05));
-  border-color:var(--danger);color:var(--danger);
-}
-.status-banner.ok{
-  background:linear-gradient(135deg,rgba(0,255,102,.12),rgba(0,255,102,.04));
-  border-color:var(--neon);color:var(--neon);
-}
+.status-banner.demo{background:linear-gradient(135deg,rgba(255,180,0,.15),rgba(255,180,0,.05));border-color:var(--warn);color:var(--warn)}
+.status-banner.error{background:linear-gradient(135deg,rgba(255,42,85,.15),rgba(255,42,85,.05));border-color:var(--danger);color:var(--danger)}
+.status-banner.ok{background:linear-gradient(135deg,rgba(0,255,102,.12),rgba(0,255,102,.04));border-color:var(--neon);color:var(--neon)}
 .status-banner i{margin-right:6px}
-.status-banner .dismiss{
-  float:right;opacity:.7;margin-left:10px;
-}
+.status-banner .dismiss{float:right;opacity:.7;margin-left:10px}
 .status-banner .dismiss:hover{opacity:1}
 @keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
 
@@ -82,8 +67,7 @@ input,textarea,select{font-family:inherit;color:inherit}
   position:sticky;top:0;z-index:50;
   background:rgba(5,5,5,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid var(--border);
-  padding:12px 14px;
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;
 }
 .brand{
   font-family:var(--font-display);font-weight:900;font-size:18px;letter-spacing:2px;
@@ -91,17 +75,10 @@ input,textarea,select{font-family:inherit;color:inherit}
   display:flex;align-items:center;gap:8px;transition:transform .2s;
 }
 .brand:hover{transform:translateY(-1px)}
-.brand .dot{
-  width:9px;height:9px;border-radius:50%;
-  background:var(--neon);box-shadow:var(--glow);
-  animation:pulse 1.6s infinite;
-}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--neon);box-shadow:var(--glow);animation:pulse 1.6s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
 .brand .accent{color:var(--neon);text-shadow:var(--glow)}
-.brand-tag{
-  font-size:9px;letter-spacing:2px;color:var(--text-dim);
-  border:1px solid var(--border);padding:2px 6px;border-radius:3px;margin-left:4px;
-}
+.brand-tag{font-size:9px;letter-spacing:2px;color:var(--text-dim);border:1px solid var(--border);padding:2px 6px;border-radius:3px;margin-left:4px}
 .top-actions{display:flex;gap:8px;align-items:center}
 .icon-btn{
   width:38px;height:38px;border-radius:10px;
@@ -109,10 +86,7 @@ input,textarea,select{font-family:inherit;color:inherit}
   display:grid;place-items:center;color:var(--text);transition:all .2s;font-size:14px;
 }
 .icon-btn:hover{border-color:var(--neon);color:var(--neon);box-shadow:var(--glow)}
-.icon-btn.search{
-  background:linear-gradient(135deg,rgba(0,255,102,.1),rgba(0,224,255,.08));
-  border-color:rgba(0,255,102,.4);color:var(--neon);
-}
+.icon-btn.search{background:linear-gradient(135deg,rgba(0,255,102,.1),rgba(0,224,255,.08));border-color:rgba(0,255,102,.4);color:var(--neon)}
 .top-avatar{
   width:36px;height:36px;border-radius:50%;
   background:#1a1a1a;border:1.5px solid var(--neon);
@@ -126,8 +100,7 @@ input,textarea,select{font-family:inherit;color:inherit}
 .top-avatar::after{
   content:"\f030";font-family:"Font Awesome 6 Free";font-weight:900;
   position:absolute;inset:0;background:rgba(0,0,0,.75);color:var(--neon);
-  display:grid;place-items:center;font-size:12px;
-  opacity:0;transition:opacity .2s;
+  display:grid;place-items:center;font-size:12px;opacity:0;transition:opacity .2s;
 }
 .top-avatar:hover::after{opacity:1}
 
@@ -135,119 +108,57 @@ input,textarea,select{font-family:inherit;color:inherit}
 .view.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-.auth-wrap{
-  min-height:calc(100vh - 70px);
-  display:flex;flex-direction:column;justify-content:center;align-items:center;
-  padding:20px;
-}
+.auth-wrap{min-height:calc(100vh - 70px);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px}
 .auth-card{
   width:100%;max-width:420px;
   background:linear-gradient(180deg,#0a0a0a,#070707);
-  border:1px solid var(--border);border-radius:14px;padding:28px 22px;
-  position:relative;overflow:hidden;
+  border:1px solid var(--border);border-radius:14px;padding:28px 22px;position:relative;overflow:hidden;
 }
-.auth-card::before{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(0,255,102,.04),transparent 40%);
-  pointer-events:none;
-}
+.auth-card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,255,102,.04),transparent 40%);pointer-events:none}
 .auth-logo{text-align:center;margin-bottom:22px}
-.auth-logo .big{
-  font-family:var(--font-display);font-size:28px;font-weight:900;letter-spacing:4px;
-  color:var(--text-bright);
-}
+.auth-logo .big{font-family:var(--font-display);font-size:28px;font-weight:900;letter-spacing:4px;color:var(--text-bright)}
 .auth-logo .big .g{color:var(--neon);text-shadow:var(--glow)}
-.auth-logo .sub{
-  font-size:10px;letter-spacing:3px;color:var(--text-dim);
-  margin-top:6px;font-family:var(--font-cyber);
-}
-.auth-tabs{
-  display:flex;gap:4px;margin-bottom:18px;
-  background:#070707;border:1px solid var(--border);
-  border-radius:10px;padding:4px;
-}
-.auth-tabs button{
-  flex:1;padding:10px;border-radius:8px;
-  font-size:12px;letter-spacing:2px;color:var(--text-dim);transition:all .2s;
-}
-.auth-tabs button.active{
-  background:var(--neon);color:#000;font-weight:700;box-shadow:var(--glow);
-}
+.auth-logo .sub{font-size:10px;letter-spacing:3px;color:var(--text-dim);margin-top:6px;font-family:var(--font-cyber)}
+.auth-tabs{display:flex;gap:4px;margin-bottom:18px;background:#070707;border:1px solid var(--border);border-radius:10px;padding:4px}
+.auth-tabs button{flex:1;padding:10px;border-radius:8px;font-size:12px;letter-spacing:2px;color:var(--text-dim);transition:all .2s}
+.auth-tabs button.active{background:var(--neon);color:#000;font-weight:700;box-shadow:var(--glow)}
 .field{margin-bottom:14px}
-.field label{
-  display:block;font-size:10px;letter-spacing:2px;
-  color:var(--text-dim);margin-bottom:6px;text-transform:uppercase;
-}
+.field label{display:block;font-size:10px;letter-spacing:2px;color:var(--text-dim);margin-bottom:6px;text-transform:uppercase}
 .field input, .field textarea{
-  width:100%;padding:12px 14px;
-  background:#070707;border:1px solid var(--border);
-  border-radius:8px;color:var(--text-bright);
-  font-size:13px;outline:none;transition:all .2s;
+  width:100%;padding:12px 14px;background:#070707;border:1px solid var(--border);
+  border-radius:8px;color:var(--text-bright);font-size:13px;outline:none;transition:all .2s;
 }
-.field input:focus, .field textarea:focus{
-  border-color:var(--neon);box-shadow:0 0 0 3px rgba(0,255,102,.12);
-}
+.field input:focus, .field textarea:focus{border-color:var(--neon);box-shadow:0 0 0 3px rgba(0,255,102,.12)}
 .btn-primary{
-  width:100%;padding:13px;
-  background:var(--neon);color:#000;
-  font-weight:800;letter-spacing:3px;font-size:12px;
-  border-radius:8px;text-transform:uppercase;
-  transition:all .2s;box-shadow:var(--glow);
-  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:13px;background:var(--neon);color:#000;
+  font-weight:800;letter-spacing:3px;font-size:12px;border-radius:8px;text-transform:uppercase;
+  transition:all .2s;box-shadow:var(--glow);display:flex;align-items:center;justify-content:center;gap:8px;
 }
 .btn-primary:hover:not(:disabled){transform:translateY(-1px);filter:brightness(1.1)}
 .btn-primary:disabled{opacity:.6;cursor:not-allowed}
-.auth-msg{
-  font-size:11px;text-align:center;margin-top:12px;
-  min-height:16px;line-height:1.5;
-}
+.auth-msg{font-size:11px;text-align:center;margin-top:12px;min-height:16px;line-height:1.5}
 .auth-msg.err{color:var(--danger)}
 .auth-msg.ok{color:var(--neon)}
 .auth-msg.warn{color:var(--warn)}
 
-.sec-head{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:14px;padding-bottom:10px;
-  border-bottom:1px dashed var(--border);
-}
-.sec-title{
-  font-family:var(--font-display);font-size:13px;letter-spacing:3px;
-  color:var(--text-bright);display:flex;align-items:center;gap:10px;
-}
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px dashed var(--border)}
+.sec-title{font-family:var(--font-display);font-size:13px;letter-spacing:3px;color:var(--text-bright);display:flex;align-items:center;gap:10px}
 .sec-title i{color:var(--neon);text-shadow:var(--glow)}
 .sec-title::before{content:">";color:var(--neon)}
 
 .search-bar{display:flex;gap:8px;margin-bottom:16px;position:relative}
-.search-bar i.search-icon{
-  position:absolute;left:14px;top:50%;transform:translateY(-50%);
-  color:var(--neon);font-size:14px;text-shadow:var(--glow);pointer-events:none;
-}
+.search-bar i.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--neon);font-size:14px;text-shadow:var(--glow);pointer-events:none}
 .search-bar input{
-  flex:1;padding:12px 14px 12px 40px;
-  background:#070707;border:1px solid var(--border);
-  border-radius:10px;color:var(--text-bright);
-  font-size:13px;outline:none;transition:all .2s;
+  flex:1;padding:12px 14px 12px 40px;background:#070707;border:1px solid var(--border);
+  border-radius:10px;color:var(--text-bright);font-size:13px;outline:none;transition:all .2s;
 }
 .search-bar input:focus{border-color:var(--neon);box-shadow:0 0 0 3px rgba(0,255,102,.12)}
-.search-bar button{
-  padding:0 16px;background:var(--neon);color:#000;
-  border-radius:10px;font-weight:700;
-}
+.search-bar button{padding:0 16px;background:var(--neon);color:#000;border-radius:10px;font-weight:700}
 
-.empty-state{
-  text-align:center;padding:60px 20px;
-  border:1px dashed var(--border);border-radius:12px;
-  background:rgba(0,0,0,.3);
-}
-.empty-state i{
-  font-size:42px;color:var(--neon);text-shadow:var(--glow);
-  margin-bottom:14px;animation:float 3s ease-in-out infinite;
-}
+.empty-state{text-align:center;padding:60px 20px;border:1px dashed var(--border);border-radius:12px;background:rgba(0,0,0,.3)}
+.empty-state i{font-size:42px;color:var(--neon);text-shadow:var(--glow);margin-bottom:14px;animation:float 3s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.empty-state h3{
-  font-family:var(--font-display);font-size:14px;letter-spacing:3px;
-  color:var(--text-bright);margin-bottom:8px;
-}
+.empty-state h3{font-family:var(--font-display);font-size:14px;letter-spacing:3px;color:var(--text-bright);margin-bottom:8px}
 .empty-state p{font-size:11px;color:var(--text-dim);letter-spacing:1px}
 
 .post-card{
@@ -256,26 +167,15 @@ input,textarea,select{font-family:inherit;color:inherit}
   overflow:hidden;transition:all .25s;position:relative;
 }
 .post-card:hover{border-color:#2a2a2a;transform:translateY(-2px)}
-.post-cover{
-  width:100%;aspect-ratio:1/1;background:#0a0a0a;
-  position:relative;overflow:hidden;border-bottom:1px solid var(--border);
-}
+.post-cover{width:100%;aspect-ratio:1/1;background:#0a0a0a;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
 .post-cover img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
-.post-cover.no-cover{
-  display:grid;place-items:center;
-  background:linear-gradient(135deg,#0a0a0a 25%,#111 50%,#0a0a0a 75%);
-}
+.post-cover.no-cover{display:grid;place-items:center;background:linear-gradient(135deg,#0a0a0a 25%,#111 50%,#0a0a0a 75%)}
 .post-cover.no-cover i{font-size:48px;color:#1a1a1a}
-.post-cover::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.7));
-  pointer-events:none;
-}
+.post-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.7));pointer-events:none}
 .post-size-badge{
   position:absolute;top:10px;right:10px;z-index:2;
-  background:rgba(0,0,0,.8);border:1px solid var(--neon);
-  color:var(--neon);padding:4px 8px;border-radius:4px;
-  font-size:10px;letter-spacing:1px;font-weight:700;
+  background:rgba(0,0,0,.8);border:1px solid var(--neon);color:var(--neon);
+  padding:4px 8px;border-radius:4px;font-size:10px;letter-spacing:1px;font-weight:700;
   text-shadow:var(--glow);backdrop-filter:blur(4px);
 }
 .post-body{padding:14px}
@@ -287,9 +187,7 @@ input,textarea,select{font-family:inherit;color:inherit}
   font-weight:800;font-size:14px;font-family:var(--font-cyber);
   color:var(--neon);text-shadow:var(--glow);
   position:relative;overflow:hidden;transition:all .2s;
-  background-image:
-    linear-gradient(135deg, rgba(0,255,102,.15), rgba(0,224,255,.1)),
-    radial-gradient(circle at 30% 30%, rgba(0,255,102,.2), transparent 60%);
+  background-image:linear-gradient(135deg, rgba(0,255,102,.15), rgba(0,224,255,.1)), radial-gradient(circle at 30% 30%, rgba(0,255,102,.2), transparent 60%);
 }
 .avatar.lg{width:88px;height:88px;font-size:28px;border-width:2px}
 .avatar.has-img{background-image:none;border-color:var(--neon)}
@@ -298,8 +196,7 @@ input,textarea,select{font-family:inherit;color:inherit}
 .avatar.clickable::after{
   content:"\f030";font-family:"Font Awesome 6 Free";font-weight:900;
   position:absolute;inset:0;background:rgba(0,0,0,.75);color:var(--neon);
-  display:grid;place-items:center;font-size:14px;
-  opacity:0;transition:opacity .2s;
+  display:grid;place-items:center;font-size:14px;opacity:0;transition:opacity .2s;
 }
 .avatar.clickable:hover::after{opacity:1}
 .avatar.lg.clickable::after{font-size:22px}
@@ -309,10 +206,7 @@ input,textarea,select{font-family:inherit;color:inherit}
   50%{text-shadow:0 0 12px rgba(0,255,102,.9), 2px 0 0 rgba(0,224,255,.3), -2px 0 0 rgba(255,42,85,.2)}
 }
 .post-user{display:flex;flex-direction:column;flex:1;min-width:0}
-.post-user .name{
-  font-size:13px;color:var(--text-bright);font-weight:600;
-  display:flex;align-items:center;gap:6px;cursor:pointer;
-}
+.post-user .name{font-size:13px;color:var(--text-bright);font-weight:600;display:flex;align-items:center;gap:6px;cursor:pointer}
 .post-user .name:hover{color:var(--neon)}
 .verified{color:var(--verify);font-size:12px;text-shadow:var(--verify-glow)}
 .post-user .meta{font-size:10px;color:var(--text-dim);letter-spacing:1px}
@@ -320,78 +214,38 @@ input,textarea,select{font-family:inherit;color:inherit}
 .post-desc{font-size:12px;color:var(--text);line-height:1.55;margin-bottom:12px;word-wrap:break-word}
 .post-actions{display:flex;gap:8px;padding-top:10px;border-top:1px dashed var(--border)}
 .btn{
-  flex:1;padding:10px;border-radius:8px;
-  font-size:11px;letter-spacing:2px;font-weight:700;text-transform:uppercase;
-  border:1px solid var(--border);background:#070707;color:var(--text);
-  transition:all .2s;
+  flex:1;padding:10px;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;text-transform:uppercase;
+  border:1px solid var(--border);background:#070707;color:var(--text);transition:all .2s;
   display:flex;align-items:center;justify-content:center;gap:6px;
 }
 .btn:hover{border-color:var(--neon);color:var(--neon)}
-.btn.download{
-  background:var(--neon);color:#000;border-color:var(--neon);box-shadow:var(--glow);
-}
+.btn.download{background:var(--neon);color:#000;border-color:var(--neon);box-shadow:var(--glow)}
 .btn.download:hover{filter:brightness(1.15)}
 .btn.danger{color:var(--danger);border-color:#2a0a12}
 .btn.danger:hover{background:var(--danger);color:#fff}
 
-.upload-card{
-  background:linear-gradient(180deg,#0a0a0a,#070707);
-  border:1px solid var(--border);border-radius:14px;padding:18px;
-}
-.drop-zone{
-  border:2px dashed var(--border);border-radius:12px;padding:30px 16px;
-  text-align:center;transition:all .25s;cursor:pointer;background:rgba(0,0,0,.3);
-}
+.upload-card{background:linear-gradient(180deg,#0a0a0a,#070707);border:1px solid var(--border);border-radius:14px;padding:18px}
+.drop-zone{border:2px dashed var(--border);border-radius:12px;padding:30px 16px;text-align:center;transition:all .25s;cursor:pointer;background:rgba(0,0,0,.3)}
 .drop-zone:hover,.drop-zone.drag{border-color:var(--neon);background:rgba(0,255,102,.04)}
 .drop-zone i{font-size:36px;color:var(--neon);text-shadow:var(--glow);margin-bottom:10px}
-.drop-zone h4{
-  font-family:var(--font-display);font-size:12px;letter-spacing:2px;
-  color:var(--text-bright);margin-bottom:4px;
-}
+.drop-zone h4{font-family:var(--font-display);font-size:12px;letter-spacing:2px;color:var(--text-bright);margin-bottom:4px}
 .drop-zone p{font-size:10px;color:var(--text-dim);letter-spacing:1px}
-.file-info{
-  margin-top:12px;padding:10px 12px;
-  background:#070707;border:1px solid var(--border);
-  border-radius:8px;font-size:11px;
-  display:none;align-items:center;gap:10px;
-}
+.file-info{margin-top:12px;padding:10px 12px;background:#070707;border:1px solid var(--border);border-radius:8px;font-size:11px;display:none;align-items:center;gap:10px}
 .file-info.show{display:flex}
 .file-info i{color:var(--neon)}
 .file-info .name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .file-info .size{color:var(--text-dim)}
-.progress{
-  height:4px;background:#111;border-radius:2px;
-  margin-top:10px;overflow:hidden;display:none;
-}
+.progress{height:4px;background:#111;border-radius:2px;margin-top:10px;overflow:hidden;display:none}
 .progress.show{display:block}
-.progress-bar{
-  height:100%;background:var(--neon);box-shadow:var(--glow);width:0%;
-  transition:width .3s;
-}
+.progress-bar{height:100%;background:var(--neon);box-shadow:var(--glow);width:0%;transition:width .3s}
 
-.profile-head{
-  background:linear-gradient(180deg,#0a0a0a,#070707);
-  border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:14px;
-}
-.cover{
-  height:140px;background:#0a0a0a;
-  background-size:cover;background-position:center;position:relative;
-}
-.cover::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 40%,rgba(5,5,5,.9));
-}
-.profile-info{
-  padding:0 18px 18px;display:flex;align-items:flex-end;gap:14px;
-  margin-top:-44px;position:relative;z-index:2;
-}
+.profile-head{background:linear-gradient(180deg,#0a0a0a,#070707);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:14px}
+.cover{height:140px;background:#0a0a0a;background-size:cover;background-position:center;position:relative}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(5,5,5,.9))}
+.profile-info{padding:0 18px 18px;display:flex;align-items:flex-end;gap:14px;margin-top:-44px;position:relative;z-index:2}
 .profile-info .avatar{border:3px solid var(--bg);box-shadow:0 0 0 1px var(--border)}
 .profile-meta{flex:1;min-width:0;padding-bottom:4px}
-.profile-meta h2{
-  font-family:var(--font-display);font-size:16px;letter-spacing:2px;
-  color:var(--text-bright);display:flex;align-items:center;gap:6px;word-break:break-word;
-}
-.profile-meta .email{font-size:10px;color:var(--text-dim);letter-spacing:1px;margin-top:2px}
+.profile-meta h2{font-family:var(--font-display);font-size:16px;letter-spacing:2px;color:var(--text-bright);display:flex;align-items:center;gap:6px;word-break:break-word}
 .stats{display:flex;gap:16px;padding:0 18px 14px;border-bottom:1px dashed var(--border)}
 .stat{text-align:center;flex:1}
 .stat .n{font-size:16px;font-weight:800;color:var(--neon);text-shadow:var(--glow)}
@@ -406,27 +260,19 @@ input,textarea,select{font-family:inherit;color:inherit}
   padding:8px 4px calc(8px + env(safe-area-inset-bottom));
   max-width:720px;margin:0 auto;
 }
-.nav-btn{
-  flex:1;padding:8px 4px;
-  display:flex;flex-direction:column;align-items:center;gap:4px;
-  color:var(--text-dim);font-size:10px;letter-spacing:1px;
-  transition:all .2s;border-radius:8px;
-}
+.nav-btn{flex:1;padding:8px 4px;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--text-dim);font-size:10px;letter-spacing:1px;transition:all .2s;border-radius:8px}
 .nav-btn i{font-size:18px}
 .nav-btn.active{color:var(--neon);text-shadow:var(--glow)}
 .nav-btn.active i{transform:translateY(-2px)}
 .nav-btn.upload-btn i{
-  background:var(--neon);color:#000;
-  width:42px;height:42px;border-radius:50%;
-  display:grid;place-items:center;box-shadow:var(--glow);
-  margin-top:-18px;font-size:18px;
+  background:var(--neon);color:#000;width:42px;height:42px;border-radius:50%;
+  display:grid;place-items:center;box-shadow:var(--glow);margin-top:-18px;font-size:18px;
 }
 
 .modal-bg{
   position:fixed;inset:0;background:rgba(0,0,0,.88);
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  z-index:100;display:none;align-items:center;justify-content:center;
-  padding:16px;animation:fadeIn .25s;
+  z-index:100;display:none;align-items:center;justify-content:center;padding:16px;animation:fadeIn .25s;
 }
 .modal-bg.show{display:flex}
 .modal{
@@ -436,85 +282,43 @@ input,textarea,select{font-family:inherit;color:inherit}
   animation:modalIn .3s;max-height:90vh;overflow-y:auto;
 }
 @keyframes modalIn{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
-.modal h3{
-  font-family:var(--font-display);font-size:14px;letter-spacing:3px;
-  color:var(--neon);text-shadow:var(--glow);margin-bottom:14px;
-  display:flex;align-items:center;gap:10px;
-}
+.modal h3{font-family:var(--font-display);font-size:14px;letter-spacing:3px;color:var(--neon);text-shadow:var(--glow);margin-bottom:14px;display:flex;align-items:center;gap:10px}
 .modal-close{float:right;color:var(--text-dim);font-size:18px;padding:4px}
 .modal-close:hover{color:var(--danger)}
 
-.ad-container{
-  background:#000;border:1px solid var(--neon);
-  border-radius:10px;padding:20px;text-align:center;margin:14px 0;
-  position:relative;overflow:hidden;
-}
-.ad-container::before{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent,rgba(0,255,102,.08),transparent);
-  animation:sweep 2s infinite;
-}
+.ad-container{background:#000;border:1px solid var(--neon);border-radius:10px;padding:20px;text-align:center;margin:14px 0;position:relative;overflow:hidden}
+.ad-container::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(0,255,102,.08),transparent);animation:sweep 2s infinite}
 @keyframes sweep{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 .ad-container .ad-label{font-size:9px;letter-spacing:3px;color:var(--text-dim);margin-bottom:10px}
 .ad-slot{
-  min-height:200px;background:#0a0a0a;
-  border:1px dashed var(--border);border-radius:8px;
-  display:grid;place-items:center;
-  color:var(--text-dim);font-size:11px;letter-spacing:2px;
-  position:relative;z-index:1;
+  min-height:200px;background:#0a0a0a;border:1px dashed var(--border);border-radius:8px;
+  display:grid;place-items:center;color:var(--text-dim);font-size:11px;letter-spacing:2px;position:relative;z-index:1;
 }
 .ad-timer{margin-top:12px;font-size:11px;color:var(--neon);letter-spacing:2px}
 .ad-timer i{margin-right:6px}
 .download-ready{display:none;margin-top:14px;animation:fadeIn .4s}
 .download-ready.show{display:block}
 
-.admin-user{
-  display:flex;align-items:center;gap:10px;
-  padding:10px;background:#070707;
-  border:1px solid var(--border);border-radius:10px;margin-bottom:8px;
-  transition:all .2s;
-}
+.admin-user{display:flex;align-items:center;gap:10px;padding:10px;background:#070707;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:all .2s}
 .admin-user:hover{border-color:#2a2a2a}
 .admin-user .info{flex:1;min-width:0}
-.admin-user .info .n{
-  font-size:12px;color:var(--text-bright);font-weight:600;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-  display:flex;align-items:center;gap:6px;
-}
-.admin-user .info .e{
-  font-size:10px;color:var(--text-dim);
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-}
-.toggle{
-  width:44px;height:24px;border-radius:12px;
-  background:#1a1a1a;border:1px solid var(--border);
-  position:relative;cursor:pointer;transition:all .2s;flex-shrink:0;
-}
-.toggle::after{
-  content:"";position:absolute;top:2px;left:2px;
-  width:18px;height:18px;border-radius:50%;
-  background:var(--text-dim);transition:all .2s;
-}
+.admin-user .info .n{font-size:12px;color:var(--text-bright);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.toggle{width:44px;height:24px;border-radius:12px;background:#1a1a1a;border:1px solid var(--border);position:relative;cursor:pointer;transition:all .2s;flex-shrink:0}
+.toggle::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--text-dim);transition:all .2s}
 .toggle.on{background:rgba(29,155,240,.15);border-color:var(--verify)}
 .toggle.on::after{left:22px;background:var(--verify);box-shadow:var(--verify-glow)}
 
 .toast{
   position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);
-  background:#0a0a0a;border:1px solid var(--neon);
-  padding:12px 20px;border-radius:10px;
-  font-size:11px;letter-spacing:2px;color:var(--neon);
-  box-shadow:var(--glow);z-index:200;transition:transform .3s;
-  max-width:90vw;text-align:center;
+  background:#0a0a0a;border:1px solid var(--neon);padding:12px 20px;border-radius:10px;
+  font-size:11px;letter-spacing:2px;color:var(--neon);box-shadow:var(--glow);
+  z-index:200;transition:transform .3s;max-width:90vw;text-align:center;
 }
 .toast.show{transform:translateX(-50%) translateY(0)}
 .toast.err{border-color:var(--danger);color:var(--danger);box-shadow:0 0 8px rgba(255,42,85,.5)}
 .toast.warn{border-color:var(--warn);color:var(--warn)}
 
-.loader{
-  display:inline-block;width:14px;height:14px;
-  border:2px solid var(--border);border-top-color:var(--neon);
-  border-radius:50%;animation:spin .8s linear infinite;
-}
+.loader{display:inline-block;width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--neon);border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 @media (max-width:480px){
@@ -529,7 +333,6 @@ input,textarea,select{font-family:inherit;color:inherit}
 </head>
 <body>
 
-<!-- STATUS BANNER -->
 <div class="status-banner" id="statusBanner">
   <span id="statusText"></span>
   <button class="dismiss" id="dismissBanner"><i class="fa-solid fa-xmark"></i></button>
@@ -541,7 +344,7 @@ input,textarea,select{font-family:inherit;color:inherit}
     <div class="brand" id="brandLogo" title="DRN MODZ">
       <span class="dot"></span>
       <span>DRN <span class="accent">MODZ</span></span>
-      <span class="brand-tag">v3.2</span>
+      <span class="brand-tag">v3.3</span>
     </div>
     <div class="top-actions">
       <button class="icon-btn search" id="btnSearch" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -568,7 +371,7 @@ input,textarea,select{font-family:inherit;color:inherit}
             <input type="email" id="loginEmail" required placeholder="user@darknet.io" />
           </div>
           <div class="field">
-            <label>Contraseña (cualquier longitud)</label>
+            <label>Contraseña</label>
             <input type="password" id="loginPass" required placeholder="••••••••" />
           </div>
           <button class="btn-primary" type="submit" id="loginBtn">
@@ -591,7 +394,7 @@ input,textarea,select{font-family:inherit;color:inherit}
             <input type="email" id="regEmail" required placeholder="user@darknet.io" />
           </div>
           <div class="field">
-            <label>Contraseña (cualquier longitud)</label>
+            <label>Contraseña</label>
             <input type="password" id="regPass" required placeholder="libre elección" />
           </div>
           <button class="btn-primary" type="submit" id="regBtn">
@@ -615,7 +418,7 @@ input,textarea,select{font-family:inherit;color:inherit}
     <div class="sec-head"><div class="sec-title">BUSCAR USUARIOS</div></div>
     <div class="search-bar">
       <i class="fa-solid fa-magnifying-glass search-icon"></i>
-      <input type="text" id="searchInput" placeholder="@usuario, nombre o correo..." />
+      <input type="text" id="searchInput" placeholder="@usuario, nombre..." />
       <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
     <div id="searchResults"></div>
@@ -660,7 +463,6 @@ input,textarea,select{font-family:inherit;color:inherit}
         <div class="avatar lg" id="profileAvatar">U</div>
         <div class="profile-meta">
           <h2 id="profileName">Usuario <span class="verified" id="profileVerified" style="display:none"><i class="fa-solid fa-circle-check"></i></span></h2>
-          <div class="email" id="profileEmail"></div>
         </div>
       </div>
       <div class="stats">
@@ -756,21 +558,10 @@ input,textarea,select{font-family:inherit;color:inherit}
 <div class="toast" id="toast"></div>
 
 <script type="module">
-/* ════════════════════════════════════════════════════════════════
-   🔥 FIREBASE SDK (opcional — si falla, modo demo automático)
-   ════════════════════════════════════════════════════════════════ */
 let fbModules = null;
 let fbApp = null, fbAuth = null, fbDb = null, fbStorage = null;
 let FIREBASE_OK = false;
 
-/* ════════════════════════════════════════════════════════════════
-   🔧 CONFIGURACIÓN FIREBASE — EDITA ESTOS VALORES
-   ════════════════════════════════════════════════════════════════
-   Si dejas los valores por defecto, la app funcionará en MODO DEMO
-   (datos guardados en localStorage del navegador).
-   Para usar Firebase real, reemplaza estos valores con los de tu
-   proyecto en https://console.firebase.google.com/
-   ════════════════════════════════════════════════════════════════ */
 const firebaseConfig = {
   apiKey: "TU_API_KEY_AQUI",
   authDomain: "TU_PROYECTO.firebaseapp.com",
@@ -780,9 +571,6 @@ const firebaseConfig = {
   appId: "1:123456789:web:abc123def456"
 };
 
-/* ════════════════════════════════════════════════════════════════
-   DETECCIÓN DE CONFIGURACIÓN
-   ════════════════════════════════════════════════════════════════ */
 function isConfigValid(cfg){
   const required = ['apiKey','authDomain','projectId','storageBucket','messagingSenderId','appId'];
   for (const k of required){
@@ -792,9 +580,6 @@ function isConfigValid(cfg){
 }
 const CONFIG_VALID = isConfigValid(firebaseConfig);
 
-/* ════════════════════════════════════════════════════════════════
-   INICIALIZACIÓN FIREBASE (con fallback silencioso)
-   ════════════════════════════════════════════════════════════════ */
 async function tryInitFirebase(){
   if (!CONFIG_VALID){
     console.warn('%c ⚠ Firebase no configurado → Modo Demo activado ', 'background:#ffb400;color:#000;padding:4px 10px;border-radius:4px');
@@ -812,7 +597,6 @@ async function tryInitFirebase(){
     fbDb = fbModules.firestore.getFirestore(fbApp);
     fbStorage = fbModules.storage.getStorage(fbApp);
     
-    // Verificar conexión real intentando una operación simple
     await new Promise((resolve, reject) => {
       const timeout = setTimeout(() => reject(new Error('timeout')), 5000);
       fbModules.auth.onAuthStateChanged(fbAuth, () => {
@@ -829,9 +613,6 @@ async function tryInitFirebase(){
   }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   MODO DEMO (localStorage) — Fallback completo
-   ════════════════════════════════════════════════════════════════ */
 const LS = {
   USERS: 'drn_modz_users_v3',
   POSTS: 'drn_modz_posts_v3',
@@ -848,15 +629,12 @@ const DemoDB = {
     if (s) localStorage.setItem(LS.SESSION, JSON.stringify(s));
     else localStorage.removeItem(LS.SESSION);
   },
-  
   createUser({name, lastName, email, password}){
     const users = this.getUsers();
-    if (users.find(u => u.email === email)) {
-      throw new Error('Este correo ya está registrado');
-    }
+    if (users.find(u => u.email === email)) throw new Error('Este correo ya está registrado');
     const user = {
       uid: 'demo_' + Date.now() + '_' + Math.random().toString(36).substr(2,6),
-      name, lastName, email, password, // En demo se guarda plano (solo local)
+      name, lastName, email, password,
       avatar: '', cover: '', verified: false,
       followers: [], following: [], postCount: 0,
       createdAt: Date.now()
@@ -865,15 +643,8 @@ const DemoDB = {
     this.saveUsers(users);
     return user;
   },
-  
-  findUserByEmail(email){
-    return this.getUsers().find(u => u.email === email);
-  },
-  
-  findUserById(uid){
-    return this.getUsers().find(u => u.uid === uid);
-  },
-  
+  findUserByEmail(email){ return this.getUsers().find(u => u.email === email); },
+  findUserById(uid){ return this.getUsers().find(u => u.uid === uid); },
   updateUser(uid, updates){
     const users = this.getUsers();
     const idx = users.findIndex(u => u.uid === uid);
@@ -882,22 +653,15 @@ const DemoDB = {
     this.saveUsers(users);
     return users[idx];
   },
-  
   createPost(post){
     const posts = this.getPosts();
-    const newPost = {
-      id: 'post_' + Date.now() + '_' + Math.random().toString(36).substr(2,6),
-      ...post,
-      createdAt: Date.now()
-    };
+    const newPost = { id: 'post_' + Date.now() + '_' + Math.random().toString(36).substr(2,6), ...post, createdAt: Date.now() };
     posts.unshift(newPost);
     this.savePosts(posts);
-    // Actualizar contador
     const user = this.findUserById(post.authorId);
     if (user) this.updateUser(post.authorId, { postCount: (user.postCount||0) + 1 });
     return newPost;
   },
-  
   deletePost(postId, authorId){
     let posts = this.getPosts();
     posts = posts.filter(p => p.id !== postId);
@@ -905,37 +669,16 @@ const DemoDB = {
     const user = this.findUserById(authorId);
     if (user) this.updateUser(authorId, { postCount: Math.max(0, (user.postCount||1) - 1) });
   },
-  
-  getAllPosts(){
-    return this.getPosts().sort((a,b) => b.createdAt - a.createdAt);
-  },
-  
-  getPostsByUser(uid){
-    return this.getPosts().filter(p => p.authorId === uid).sort((a,b) => b.createdAt - a.createdAt);
-  }
+  getAllPosts(){ return this.getPosts().sort((a,b) => b.createdAt - a.createdAt); },
+  getPostsByUser(uid){ return this.getPosts().filter(p => p.authorId === uid).sort((a,b) => b.createdAt - a.createdAt); }
 };
 
-/* ════════════════════════════════════════════════════════════════
-   ESTADO GLOBAL
-   ════════════════════════════════════════════════════════════════ */
 const state = {
-  user: null,           // { uid, name, lastName, email, avatar, ... }
-  profile: null,        // igual que user pero con todos los datos
-  viewingUserId: null,
-  selectedFile: null,
-  brandClicks: 0,
-  brandTimer: null,
-  currentDownloadUrl: null,
-  currentDownloadName: null,
-  unsubFeed: null,
-  unsubProfilePosts: null,
-  authenticating: false, // 🔒 CLAVE: evita bucles y submits múltiples
-  feedListener: null
+  user: null, profile: null, viewingUserId: null, selectedFile: null,
+  brandClicks: 0, brandTimer: null, currentDownloadUrl: null, currentDownloadName: null,
+  feedListener: null, authenticating: false
 };
 
-/* ════════════════════════════════════════════════════════════════
-   UTILIDADES
-   ════════════════════════════════════════════════════════════════ */
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 
@@ -988,9 +731,6 @@ function applyAvatar(el, url, name){
   }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   STATUS BANNER
-   ════════════════════════════════════════════════════════════════ */
 function showBanner(msg, type='ok'){
   const banner = $("#statusBanner");
   const text = $("#statusText");
@@ -998,15 +738,8 @@ function showBanner(msg, type='ok'){
   text.innerHTML = `<i class="fa-solid ${icons[type]||'fa-info'}"></i> ${msg}`;
   banner.className = `status-banner show ${type}`;
 }
-$("#dismissBanner").addEventListener("click", () => {
-  $("#statusBanner").classList.remove("show");
-});
+$("#dismissBanner").addEventListener("click", () => { $("#statusBanner").classList.remove("show"); });
 
-/* ════════════════════════════════════════════════════════════════
-   🔑 PASSWORD PADDING — Permite cualquier longitud
-   Firebase Auth exige mínimo 6 caracteres. Para liberar esta
-   restricción sin romper Firebase, añadimos padding transparente.
-   ════════════════════════════════════════════════════════════════ */
 function padPassword(pass){
   const MIN = 6;
   if (!pass) return '______';
@@ -1014,9 +747,6 @@ function padPassword(pass){
   return pass + '_'.repeat(MIN - pass.length);
 }
 
-/* ════════════════════════════════════════════════════════════════
-   NAVEGACIÓN
-   ════════════════════════════════════════════════════════════════ */
 function showView(id){
   $$(".view").forEach(v=>v.classList.remove("active"));
   $("#"+id).classList.add("active");
@@ -1027,11 +757,8 @@ function showView(id){
 $$(".nav-btn").forEach(b=>{
   b.addEventListener("click",()=>{
     const v = b.dataset.view;
-    if(v==="viewProfile" && state.user){
-      openProfile(state.user.uid);
-    } else {
-      showView(v);
-    }
+    if(v==="viewProfile" && state.user) openProfile(state.user.uid);
+    else showView(v);
   });
 });
 
@@ -1039,12 +766,9 @@ $("#btnSearch").addEventListener("click",()=>showView("viewSearch"));
 
 $("#btnLogout").addEventListener("click", async () => {
   try {
-    if (FIREBASE_OK && fbAuth){
-      await fbModules.auth.signOut(fbAuth);
-    }
+    if (FIREBASE_OK && fbAuth) await fbModules.auth.signOut(fbAuth);
     DemoDB.saveSession(null);
-    state.user = null;
-    state.profile = null;
+    state.user = null; state.profile = null;
     if (state.feedListener) state.feedListener();
     showAuthScreen();
     toast("Sesión cerrada");
@@ -1068,9 +792,6 @@ function showMainApp(){
   showView("viewFeed");
 }
 
-/* ════════════════════════════════════════════════════════════════
-   AVATAR GLOBAL
-   ════════════════════════════════════════════════════════════════ */
 function openAvatarPicker(){ $("#globalAvatarInput").click(); }
 $("#topAvatar").addEventListener("click", openAvatarPicker);
 $("#profileAvatar").addEventListener("click", () => {
@@ -1081,10 +802,8 @@ $("#globalAvatarInput").addEventListener("change", async e => {
   const file = e.target.files[0];
   if(!file || !state.user) return;
   if(!file.type.startsWith("image/")){ toast("Selecciona una imagen",'err'); return; }
-  
   try{
     toast("Actualizando avatar...");
-    
     if (FIREBASE_OK){
       const r = fbModules.storage.ref(fbStorage, `avatars/${state.user.uid}/${Date.now()}_${file.name}`);
       await fbModules.storage.uploadBytesResumable(r, file);
@@ -1092,12 +811,10 @@ $("#globalAvatarInput").addEventListener("change", async e => {
       await fbModules.firestore.updateDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid), { avatar: url });
       state.profile.avatar = url;
     } else {
-      // Modo demo: convertir a dataURL
       const dataUrl = await fileToDataURL(file);
       DemoDB.updateUser(state.user.uid, { avatar: dataUrl });
       state.profile.avatar = dataUrl;
     }
-    
     refreshAllAvatars();
     toast("✓ Avatar actualizado");
   }catch(err){
@@ -1124,9 +841,6 @@ function refreshAllAvatars(){
   }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   AUTH TABS
-   ════════════════════════════════════════════════════════════════ */
 $$(".auth-tabs button").forEach(b=>{
   b.addEventListener("click",()=>{
     $$(".auth-tabs button").forEach(x=>x.classList.remove("active"));
@@ -1139,13 +853,8 @@ $$(".auth-tabs button").forEach(b=>{
   });
 });
 
-/* ════════════════════════════════════════════════════════════════
-   🔐 REGISTRO — Blindado contra bucles
-   ════════════════════════════════════════════════════════════════ */
 $("#formRegister").addEventListener("submit", async e => {
   e.preventDefault();
-  
-  // 🔒 Protección contra submits múltiples
   if (state.authenticating) return;
   
   const name = $("#regName").value.trim();
@@ -1155,14 +864,11 @@ $("#formRegister").addEventListener("submit", async e => {
   const msg = $("#regMsg");
   const btn = $("#regBtn");
   
-  // Validación frontend
   if(!name || !last || !email || !pass){
     msg.textContent = "⚠ Todos los campos son obligatorios";
     msg.className = "auth-msg warn";
     return;
   }
-  
-  // Email válido
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
     msg.textContent = "⚠ Correo electrónico inválido";
     msg.className = "auth-msg warn";
@@ -1176,40 +882,31 @@ $("#formRegister").addEventListener("submit", async e => {
   
   try {
     if (FIREBASE_OK){
-      // Firebase real
       const paddedPass = padPassword(pass);
       const cred = await fbModules.auth.createUserWithEmailAndPassword(fbAuth, email, paddedPass);
       await fbModules.auth.updateProfile(cred.user, { displayName: `${name} ${last}` });
-      
       await fbModules.firestore.setDoc(fbModules.firestore.doc(fbDb,"users",cred.user.uid), {
         uid: cred.user.uid, name, lastName: last, email,
         avatar: "", cover: "", verified: false,
         followers: [], following: [], postCount: 0,
         createdAt: fbModules.firestore.serverTimestamp()
       });
-      
       state.user = { uid: cred.user.uid, email };
       await loadMyProfile();
     } else {
-      // Modo demo
       const user = DemoDB.createUser({ name, lastName: last, email, password: pass });
       state.user = { uid: user.uid, email: user.email };
       state.profile = user;
       DemoDB.saveSession({ uid: user.uid });
     }
     
-    // ✅ ÉXITO → Redirección automática al feed
     toast("✓ ¡Bienvenido a DRN MODZ!");
     msg.textContent = "✓ Cuenta creada · Redirigiendo...";
     msg.className = "auth-msg ok";
     
-    // Limpiar formulario
-    $("#regName").value = "";
-    $("#regLast").value = "";
-    $("#regEmail").value = "";
-    $("#regPass").value = "";
+    $("#regName").value = ""; $("#regLast").value = "";
+    $("#regEmail").value = ""; $("#regPass").value = "";
     
-    // Redirección automática
     setTimeout(() => {
       showMainApp();
       subscribeFeed();
@@ -1224,19 +921,14 @@ $("#formRegister").addEventListener("submit", async e => {
     msg.className = "auth-msg err";
     toast(errorMsg, 'err');
   } finally {
-    // 🔓 SIEMPRE liberar el flag — NUNCA dejar la UI bloqueada
     state.authenticating = false;
     btn.disabled = false;
     btn.innerHTML = '<i class="fa-solid fa-user-plus"></i> CREAR CUENTA';
   }
 });
 
-/* ════════════════════════════════════════════════════════════════
-   🔐 LOGIN — Blindado contra bucles
-   ════════════════════════════════════════════════════════════════ */
 $("#formLogin").addEventListener("submit", async e => {
   e.preventDefault();
-  
   if (state.authenticating) return;
   
   const email = $("#loginEmail").value.trim().toLowerCase();
@@ -1262,14 +954,9 @@ $("#formLogin").addEventListener("submit", async e => {
       state.user = { uid: cred.user.uid, email: cred.user.email };
       await loadMyProfile();
     } else {
-      // Modo demo
       const user = DemoDB.findUserByEmail(email);
-      if (!user){
-        throw new Error('No existe una cuenta con este correo');
-      }
-      if (user.password !== pass){
-        throw new Error('Contraseña incorrecta');
-      }
+      if (!user) throw new Error('No existe una cuenta con este correo');
+      if (user.password !== pass) throw new Error('Contraseña incorrecta');
       state.user = { uid: user.uid, email: user.email };
       state.profile = user;
       DemoDB.saveSession({ uid: user.uid });
@@ -1302,13 +989,9 @@ $("#formLogin").addEventListener("submit", async e => {
   }
 });
 
-/* ════════════════════════════════════════════════════════════════
-   MENSAJES DE ERROR AMIGABLES
-   ════════════════════════════════════════════════════════════════ */
 function getFriendlyAuthError(err){
   const code = err.code || '';
   const msg = err.message || '';
-  
   const map = {
     'auth/invalid-api-key': '⚠ Error de configuración. Contacta al administrador.',
     'auth/api-key-not-valid': '⚠ Error de configuración. Contacta al administrador.',
@@ -1324,20 +1007,11 @@ function getFriendlyAuthError(err){
     'auth/operation-not-allowed': '⚠ Método de acceso no habilitado',
     'auth/internal-error': '⚠ Error interno. Intenta de nuevo'
   };
-  
   if (map[code]) return map[code];
-  
-  // Errores personalizados del modo demo
-  if (msg.includes('No existe') || msg.includes('Contraseña incorrecta') || msg.includes('ya está registrado')){
-    return '⚠ ' + msg;
-  }
-  
+  if (msg.includes('No existe') || msg.includes('Contraseña incorrecta') || msg.includes('ya está registrado')) return '⚠ ' + msg;
   return '⚠ Ocurrió un error. Intenta de nuevo.';
 }
 
-/* ════════════════════════════════════════════════════════════════
-   CARGAR PERFIL
-   ════════════════════════════════════════════════════════════════ */
 async function loadMyProfile(){
   try {
     if (FIREBASE_OK){
@@ -1350,13 +1024,11 @@ async function loadMyProfile(){
         const name = parts[0];
         const last = parts.slice(1).join(" ") || "";
         await fbModules.firestore.setDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid), {
-          uid: state.user.uid, name, lastName: last,
-          email: state.user.email, avatar:"", cover:"",
-          verified:false, followers:[], following:[],
-          postCount:0, createdAt: fbModules.firestore.serverTimestamp()
+          uid: state.user.uid, name, lastName: last, email: state.user.email, 
+          avatar:"", cover:"", verified:false, followers:[], following:[], postCount:0, 
+          createdAt: fbModules.firestore.serverTimestamp()
         });
-        state.profile = { uid:state.user.uid, name, lastName:last, email:state.user.email,
-          avatar:"",cover:"",verified:false,followers:[],following:[],postCount:0 };
+        state.profile = { uid:state.user.uid, name, lastName:last, email:state.user.email, avatar:"",cover:"",verified:false,followers:[],following:[],postCount:0 };
       }
     } else {
       const user = DemoDB.findUserById(state.user.uid);
@@ -1368,12 +1040,8 @@ async function loadMyProfile(){
   }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   FEED
-   ════════════════════════════════════════════════════════════════ */
 function subscribeFeed(){
   if (state.feedListener){ state.feedListener(); state.feedListener = null; }
-  
   if (FIREBASE_OK){
     try {
       const q = fbModules.firestore.query(
@@ -1392,7 +1060,6 @@ function subscribeFeed(){
       toast("Error al suscribirse al feed", 'err');
     }
   } else {
-    // Modo demo: render directo
     renderFeed(DemoDB.getAllPosts());
   }
 }
@@ -1401,41 +1068,21 @@ function renderFeed(posts){
   const list = $("#feedList");
   list.innerHTML = "";
   $("#feedCount").textContent = `${posts.length} POSTS`;
-  
   if(!posts.length){
-    list.innerHTML = `
-      <div class="empty-state">
-        <i class="fa-solid fa-satellite-dish"></i>
-        <h3>FEED VACÍO</h3>
-        <p>La red está en silencio. Sé el primero en publicar.</p>
-      </div>`;
+    list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-satellite-dish"></i><h3>FEED VACÍO</h3><p>La red está en silencio. Sé el primero en publicar.</p></div>`;
     return;
   }
-  
   posts.forEach(p => {
-    try {
-      list.appendChild(renderPost(p, p.id));
-    } catch (err){
-      console.error('Error render post:', err);
-    }
+    try { list.appendChild(renderPost(p, p.id)); } 
+    catch (err){ console.error('Error render post:', err); }
   });
 }
 
-/* ════════════════════════════════════════════════════════════════
-   RENDER POST
-   ════════════════════════════════════════════════════════════════ */
 function renderPost(p, id){
   const el = document.createElement("div");
   el.className = "post-card";
-
-  let coverHTML;
-  if(p.cover){
-    coverHTML = `<img src="${p.cover}" alt="cover" loading="lazy" />`;
-  } else {
-    coverHTML = `<i class="fa-solid fa-cube"></i>`;
-  }
+  let coverHTML = p.cover ? `<img src="${p.cover}" alt="cover" loading="lazy" />` : `<i class="fa-solid fa-cube"></i>`;
   const coverClass = p.cover ? "post-cover" : "post-cover no-cover";
-
   const verified = p.authorVerified ? `<span class="verified" title="Verificado"><i class="fa-solid fa-circle-check"></i></span>` : "";
 
   el.innerHTML = `
@@ -1472,22 +1119,15 @@ function renderPost(p, id){
   }
 
   el.querySelector(".post-user .name").addEventListener("click", () => openProfile(p.authorId));
-  
   const dlBtn = el.querySelector(".btn.download");
   if(dlBtn) dlBtn.addEventListener("click", () => startDownload(dlBtn.dataset.url, dlBtn.dataset.name));
-  
   const delBtn = el.querySelector("[data-del]");
   if(delBtn) delBtn.addEventListener("click", () => deletePost(delBtn.dataset.del, p.fileUrl));
-  
   return el;
 }
 
-/* ════════════════════════════════════════════════════════════════
-   DELETE POST
-   ════════════════════════════════════════════════════════════════ */
 async function deletePost(id, fileUrl){
   if(!confirm("¿Eliminar esta publicación?")) return;
-  
   try{
     if (FIREBASE_OK){
       await fbModules.firestore.deleteDoc(fbModules.firestore.doc(fbDb,"posts",id));
@@ -1497,11 +1137,10 @@ async function deletePost(id, fileUrl){
           await fbModules.storage.deleteObject(fbModules.storage.ref(fbStorage, path));
         }catch(e){ console.warn("No se pudo borrar archivo",e); }
       }
-      await fbModules.firestore.updateDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid), 
-        { postCount: fbModules.firestore.increment(-1) });
+      await fbModules.firestore.updateDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid), { postCount: fbModules.firestore.increment(-1) });
     } else {
       DemoDB.deletePost(id, state.user.uid);
-      subscribeFeed(); // refrescar
+      subscribeFeed();
     }
     toast("✓ Publicación eliminada");
   }catch(e){
@@ -1510,9 +1149,6 @@ async function deletePost(id, fileUrl){
   }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   UPLOAD
-   ════════════════════════════════════════════════════════════════ */
 const dropZone = $("#dropZone");
 const fileInput = $("#fileInput");
 dropZone.addEventListener("click",()=>fileInput.click());
@@ -1540,9 +1176,6 @@ function handleFile(f){
   $("#fileInfo").classList.add("show");
 }
 
-/* ════════════════════════════════════════════════════════════════
-   PUBLISH
-   ════════════════════════════════════════════════════════════════ */
 $("#publishBtn").addEventListener("click", async () => {
   if(!state.selectedFile){ toast("Selecciona un archivo",'err'); return; }
   const title = $("#postTitle").value.trim();
@@ -1557,9 +1190,7 @@ $("#publishBtn").addEventListener("click", async () => {
   try{
     let fileUrl = '';
     let coverUrl = '';
-    
     if (FIREBASE_OK){
-      // Subir archivo
       const fileRef = fbModules.storage.ref(fbStorage, `files/${state.user.uid}/${Date.now()}_${state.selectedFile.name}`);
       const task = fbModules.storage.uploadBytesResumable(fileRef, state.selectedFile);
       fileUrl = await new Promise((res,rej)=>{
@@ -1569,42 +1200,33 @@ $("#publishBtn").addEventListener("click", async () => {
           async () => res(await fbModules.storage.getDownloadURL(task.snapshot.ref))
         );
       });
-      // Cover
       const coverFile = $("#coverInput").files[0];
       if(coverFile){
         const cRef = fbModules.storage.ref(fbStorage, `covers/${state.user.uid}/${Date.now()}_${coverFile.name}`);
         await fbModules.storage.uploadBytesResumable(cRef, coverFile);
         coverUrl = await fbModules.storage.getDownloadURL(cRef);
       }
-      // Crear post
       await fbModules.firestore.addDoc(fbModules.firestore.collection(fbDb,"posts"), {
         title, description: desc, fileUrl, fileName: state.selectedFile.name,
         size: state.selectedFile.size || 0, cover: coverUrl,
         authorId: state.user.uid,
         authorName: `${state.profile.name} ${state.profile.lastName}`,
-        authorEmail: state.profile.email,
         authorAvatar: state.profile.avatar || "",
         authorVerified: !!state.profile.verified,
         downloads: 0,
         createdAt: fbModules.firestore.serverTimestamp()
       });
-      await fbModules.firestore.updateDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid), 
-        { postCount: fbModules.firestore.increment(1) });
+      await fbModules.firestore.updateDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid), { postCount: fbModules.firestore.increment(1) });
     } else {
-      // Modo demo: convertir archivo a dataURL (limitado a archivos pequeños para demo)
-      if (state.selectedFile.size > 5 * 1024 * 1024){
-        toast("Modo Demo: archivos hasta 5 MB. Configura Firebase para archivos grandes.", 'warn');
-      }
+      if (state.selectedFile.size > 5 * 1024 * 1024) toast("Modo Demo: archivos hasta 5 MB. Configura Firebase para archivos grandes.", 'warn');
       fileUrl = await fileToDataURL(state.selectedFile);
       const coverFile = $("#coverInput").files[0];
       if(coverFile) coverUrl = await fileToDataURL(coverFile);
-      
       DemoDB.createPost({
         title, description: desc, fileUrl, fileName: state.selectedFile.name,
         size: state.selectedFile.size || 0, cover: coverUrl,
         authorId: state.user.uid,
         authorName: `${state.profile.name} ${state.profile.lastName}`,
-        authorEmail: state.profile.email,
         authorAvatar: state.profile.avatar || "",
         authorVerified: !!state.profile.verified,
         downloads: 0
@@ -1620,7 +1242,6 @@ $("#publishBtn").addEventListener("click", async () => {
     $("#uploadProgress").classList.remove("show");
     $("#uploadBar").style.width="0%";
     showView("viewFeed");
-    
   }catch(e){
     console.error(e);
     toast("Error al publicar: " + e.message, 'err');
@@ -1630,21 +1251,16 @@ $("#publishBtn").addEventListener("click", async () => {
   }
 });
 
-/* ════════════════════════════════════════════════════════════════
-   DOWNLOAD + ADSENSE
-   ════════════════════════════════════════════════════════════════ */
 function startDownload(url, name){
   if(!url){ toast("URL no disponible", 'err'); return; }
   state.currentDownloadUrl = url;
   state.currentDownloadName = name || 'archivo';
   openModal("modalAd");
-  
   let sec = 5;
   $("#adCount").textContent = sec;
   $("#downloadReady").classList.remove("show");
   $("#adTimer").style.display="block";
   $("#adTimer").innerHTML = `<i class="fa-solid fa-clock"></i> Espera <span id="adCount">${sec}</span>s`;
-  
   const iv = setInterval(()=>{
     sec--;
     $("#adCount").textContent = sec;
@@ -1673,12 +1289,8 @@ $("#btnFinalDownload").addEventListener("click", ()=>{
   }
 });
 
-/* ════════════════════════════════════════════════════════════════
-   PROFILE
-   ════════════════════════════════════════════════════════════════ */
 async function openProfile(uid){
   state.viewingUserId = uid;
-  
   try {
     let u;
     if (FIREBASE_OK){
@@ -1698,11 +1310,10 @@ async function openProfile(uid){
 
     $("#profileName").innerHTML = escapeHtml(`${u.name} ${u.lastName||""}`) +
       (u.verified ? ` <span class="verified"><i class="fa-solid fa-circle-check"></i></span>` : "");
-    $("#profileEmail").textContent = u.email || "";
+    
     $("#statFollowers").textContent = (u.followers||[]).length;
     $("#statFollowing").textContent = (u.following||[]).length;
 
-    // Posts
     if (state.feedListener) state.feedListener();
     if (FIREBASE_OK){
       const q = fbModules.firestore.query(
@@ -1757,7 +1368,6 @@ async function openProfile(uid){
 async function toggleFollow(uid){
   if(!state.profile) return;
   const isFollowing = (state.profile.following||[]).includes(uid);
-  
   try{
     if (FIREBASE_OK){
       const meRef = fbModules.firestore.doc(fbDb,"users",state.user.uid);
@@ -1782,7 +1392,6 @@ async function toggleFollow(uid){
       DemoDB.updateUser(state.user.uid, { following: me.following });
       DemoDB.updateUser(uid, { followers: them.followers });
     }
-    
     await loadMyProfile();
     toast(isFollowing ? "Dejaste de seguir" : "Ahora sigues a este usuario");
     openProfile(uid);
@@ -1792,40 +1401,33 @@ async function toggleFollow(uid){
   }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   SEARCH
-   ════════════════════════════════════════════════════════════════ */
 async function doSearch(){
   const q = $("#searchInput").value.trim().toLowerCase();
   const out = $("#searchResults");
   out.innerHTML = "";
-  
   if(!q){
-    out.innerHTML = `<div class="empty-state"><i class="fa-solid fa-magnifying-glass"></i><h3>BUSCA USUARIOS</h3><p>Escribe un nombre o correo.</p></div>`;
+    out.innerHTML = `<div class="empty-state"><i class="fa-solid fa-magnifying-glass"></i><h3>BUSCA USUARIOS</h3><p>Escribe un nombre.</p></div>`;
     return;
   }
-  
   try{
     let results = [];
     if (FIREBASE_OK){
       const snap = await fbModules.firestore.getDocs(fbModules.firestore.collection(fbDb,"users"));
       snap.forEach(d=>{
         const u = d.data();
-        const full = `${u.name} ${u.lastName||""} ${u.email||""}`.toLowerCase();
+        const full = `${u.name} ${u.lastName||""}`.toLowerCase();
         if(full.includes(q)) results.push(u);
       });
     } else {
       DemoDB.getUsers().forEach(u => {
-        const full = `${u.name} ${u.lastName||""} ${u.email||""}`.toLowerCase();
+        const full = `${u.name} ${u.lastName||""}`.toLowerCase();
         if(full.includes(q)) results.push(u);
       });
     }
-    
     if(!results.length){
       out.innerHTML = `<div class="empty-state"><i class="fa-solid fa-ghost"></i><h3>SIN RESULTADOS</h3><p>Ningún usuario coincide.</p></div>`;
       return;
     }
-    
     results.forEach(u=>{
       const el = document.createElement("div");
       el.className = "admin-user";
@@ -1835,7 +1437,6 @@ async function doSearch(){
         <div class="avatar"></div>
         <div class="info">
           <div class="n">${escapeHtml(u.name)} ${escapeHtml(u.lastName||"")} ${verified}</div>
-          <div class="e">${escapeHtml(u.email||"")}</div>
         </div>
         <i class="fa-solid fa-chevron-right" style="color:var(--text-dim)"></i>`;
       applyAvatar(el.querySelector(".avatar"), u.avatar, `${u.name} ${u.lastName||""}`);
@@ -1850,9 +1451,6 @@ async function doSearch(){
 $("#searchBtn").addEventListener("click", doSearch);
 $("#searchInput").addEventListener("keydown", e => { if(e.key==="Enter") doSearch(); });
 
-/* ════════════════════════════════════════════════════════════════
-   EDIT PROFILE
-   ════════════════════════════════════════════════════════════════ */
 function prefillEditForm(){
   if(!state.profile) return;
   $("#editName").value = state.profile.name || "";
@@ -1863,14 +1461,11 @@ $("#saveProfileBtn").addEventListener("click", async () => {
   const name = $("#editName").value.trim();
   const last = $("#editLast").value.trim();
   if(!name){ toast("El nombre es obligatorio",'err'); return; }
-  
   const btn = $("#saveProfileBtn");
   btn.disabled = true; 
   btn.innerHTML = '<span class="loader"></span> GUARDANDO...';
-  
   try{
     const updates = { name, lastName: last };
-    
     if (FIREBASE_OK){
       const cvFile = $("#coverEditInput").files[0];
       if(cvFile){
@@ -1882,12 +1477,9 @@ $("#saveProfileBtn").addEventListener("click", async () => {
       await fbModules.auth.updateProfile(fbAuth.currentUser, { displayName: `${name} ${last}` });
     } else {
       const cvFile = $("#coverEditInput").files[0];
-      if(cvFile){
-        updates.cover = await fileToDataURL(cvFile);
-      }
+      if(cvFile) updates.cover = await fileToDataURL(cvFile);
       DemoDB.updateUser(state.user.uid, updates);
     }
-    
     await loadMyProfile();
     refreshAllAvatars();
     toast("✓ Perfil actualizado");
@@ -1901,9 +1493,6 @@ $("#saveProfileBtn").addEventListener("click", async () => {
   }
 });
 
-/* ════════════════════════════════════════════════════════════════
-   🥚 EASTER EGG: 10 CLICKS → ADMIN
-   ════════════════════════════════════════════════════════════════ */
 $("#brandLogo").addEventListener("click", () => {
   state.brandClicks++;
   clearTimeout(state.brandTimer);
@@ -1922,10 +1511,7 @@ $("#adminLoginBtn").addEventListener("click", () => {
   if(k === "AdminCodix2026*"){
     msg.textContent = "✓ Acceso Autorizado";
     msg.className = "auth-msg ok";
-    setTimeout(()=>{
-      closeModal("modalAdminLogin");
-      openAdminPanel();
-    }, 700);
+    setTimeout(()=>{ closeModal("modalAdminLogin"); openAdminPanel(); }, 700);
   } else {
     msg.textContent = "✗ Clave incorrecta";
     msg.className = "auth-msg err";
@@ -1937,7 +1523,6 @@ async function openAdminPanel(){
   openModal("modalAdminPanel");
   const list = $("#adminUserList");
   list.innerHTML = '<div style="text-align:center;padding:20px"><span class="loader"></span></div>';
-  
   try{
     let users = [];
     if (FIREBASE_OK){
@@ -1946,13 +1531,11 @@ async function openAdminPanel(){
     } else {
       users = DemoDB.getUsers();
     }
-    
     list.innerHTML = "";
     if(!users.length){ 
       list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-users-slash"></i><h3>SIN USUARIOS</h3></div>`; 
       return; 
     }
-    
     users.forEach(u=>{
       const el = document.createElement("div");
       el.className = "admin-user";
@@ -1961,7 +1544,6 @@ async function openAdminPanel(){
         <div class="avatar"></div>
         <div class="info">
           <div class="n">${escapeHtml(u.name)} ${escapeHtml(u.lastName||"")} ${verified}</div>
-          <div class="e">${escapeHtml(u.email||"")}</div>
         </div>
         <div class="toggle ${u.verified?"on":""}" data-uid="${u.uid}"></div>`;
       applyAvatar(el.querySelector(".avatar"), u.avatar, `${u.name} ${u.lastName||""}`);
@@ -1994,25 +1576,13 @@ async function openAdminPanel(){
   }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   🚀 ARRANQUE
-   ════════════════════════════════════════════════════════════════ */
 (async function init(){
-  console.log("%c ═══ 𝘿𝙍𝙉 𝙈𝙊𝘿𝕃 v3.2 ═══ ", 'background:#00FF66;color:#000;font-size:14px;padding:6px 12px');
-  
-  // 1. Intentar inicializar Firebase
+  console.log("%c ═══ 𝘿𝙍𝙉 𝙈𝙊𝘿𝕃 v3.3 ═══ ", 'background:#00FF66;color:#000;font-size:14px;padding:6px 12px');
   FIREBASE_OK = await tryInitFirebase();
+  if (FIREBASE_OK) showBanner('Modo Cloud activo · Firebase conectado', 'ok');
+  else showBanner('Modo Demo activo · Datos guardados localmente · Configura Firebase para modo Cloud', 'demo');
   
-  // 2. Mostrar banner de estado
   if (FIREBASE_OK){
-    showBanner('Modo Cloud activo · Firebase conectado', 'ok');
-  } else {
-    showBanner('Modo Demo activo · Datos guardados localmente · Configura Firebase para modo Cloud', 'demo');
-  }
-  
-  // 3. Restaurar sesión si existe
-  if (FIREBASE_OK){
-    // Firebase maneja la sesión automáticamente via onAuthStateChanged
     fbModules.auth.onAuthStateChanged(fbAuth, async (user) => {
       try {
         if (user){
@@ -2031,7 +1601,6 @@ async function openAdminPanel(){
       }
     });
   } else {
-    // Modo demo: sesión manual
     const session = DemoDB.getSession();
     if (session){
       const user = DemoDB.findUserById(session.uid);
@@ -2050,10 +1619,8 @@ async function openAdminPanel(){
       showAuthScreen();
     }
   }
-  
   console.log("%c ✓ Sistema listo ", 'background:#00FF66;color:#000;padding:4px 10px;border-radius:4px');
 })();
 </script>
-
 </body>
-   </html>
+</html>
