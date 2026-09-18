@@ -245,9 +245,9 @@ input,textarea,select{font-family:inherit;color:inherit}
 
 .upload-card{background:linear-gradient(180deg,#0a0a0a,#070707);border:1px solid var(--border);border-radius:14px;padding:18px}
 
-.firebase-info-alert{
-  background:linear-gradient(135deg,rgba(0,255,102,.08),rgba(0,224,255,.04));
-  border:1px solid var(--neon);
+.firestore-info-alert{
+  background:linear-gradient(135deg,rgba(0,224,255,.08),rgba(29,155,240,.04));
+  border:1px solid var(--verify);
   border-radius:10px;
   padding:16px;
   margin-bottom:14px;
@@ -255,23 +255,22 @@ input,textarea,select{font-family:inherit;color:inherit}
   align-items:flex-start;
   gap:12px;
 }
-.firebase-info-alert i{
-  color:var(--neon);font-size:20px;
-  text-shadow:var(--glow);
+.firestore-info-alert i{
+  color:var(--verify);font-size:20px;
+  text-shadow:var(--verify-glow);
   flex-shrink:0;margin-top:2px;
 }
-.firebase-info-alert .content{flex:1}
-.firebase-info-alert h4{
+.firestore-info-alert .content{flex:1}
+.firestore-info-alert h4{
   font-family:var(--font-display);font-size:11px;letter-spacing:2px;
-  color:var(--neon);margin-bottom:6px;
+  color:var(--verify);margin-bottom:6px;
 }
-.firebase-info-alert p{
+.firestore-info-alert p{
   font-size:10px;color:var(--text);line-height:1.5;
 }
 
 .drop-zone{border:2px dashed var(--border);border-radius:12px;padding:30px 16px;text-align:center;transition:all .25s;cursor:pointer;background:rgba(0,0,0,.3)}
 .drop-zone:hover,.drop-zone.drag{border-color:var(--neon);background:rgba(0,255,102,.04)}
-.drop-zone.disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
 .drop-zone i{font-size:36px;color:var(--neon);text-shadow:var(--glow);margin-bottom:10px}
 .drop-zone h4{font-family:var(--font-display);font-size:12px;letter-spacing:2px;color:var(--text-bright);margin-bottom:4px}
 .drop-zone p{font-size:10px;color:var(--text-dim);letter-spacing:1px}
@@ -389,7 +388,7 @@ input,textarea,select{font-family:inherit;color:inherit}
     <div class="brand" id="brandLogo" title="DRN MODZ">
       <span class="dot"></span>
       <span>DRN <span class="accent">MODZ</span></span>
-      <span class="brand-tag">v3.8</span>
+      <span class="brand-tag">v4.0</span>
     </div>
     <div class="top-actions">
       <button class="icon-btn search" id="btnSearch" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -472,11 +471,14 @@ input,textarea,select{font-family:inherit;color:inherit}
   <section class="view" id="viewUpload">
     <div class="sec-head"><div class="sec-title">PUBLICAR ARCHIVO</div></div>
     
-    <div class="firebase-info-alert">
-      <i class="fa-solid fa-circle-info"></i>
+    <div class="firestore-info-alert">
+      <i class="fa-solid fa-database"></i>
       <div class="content">
-        <h4>IMÁGENES OPTIMIZADAS</h4>
-        <p>Las portadas se comprimen y guardan directamente en Firestore (Base64) para funcionar en el plan gratuito Spark sin necesidad de Cloud Storage.</p>
+        <h4>ALMACENAMIENTO DIRECTO EN FIRESTORE</h4>
+        <p>
+          Para funcionar sin costos de Cloud Storage, los archivos y portadas se convierten a Base64 y se guardan en la base de datos.<br>
+          <strong>Límite estricto:</strong> El archivo no debe superar los <strong>800 KB</strong> para respetar el límite de 1 MB por documento de Firestore.
+        </p>
       </div>
     </div>
     
@@ -484,7 +486,7 @@ input,textarea,select{font-family:inherit;color:inherit}
       <div class="drop-zone" id="dropZone">
         <i class="fa-solid fa-cloud-arrow-up"></i>
         <h4>ARRASTRA TU ARCHIVO</h4>
-        <p>o haz clic para seleccionar · máx 300 MB</p>
+        <p>o haz clic para seleccionar · máx 800 KB</p>
         <input type="file" id="fileInput" style="display:none" />
       </div>
       <div class="file-info" id="fileInfo">
@@ -503,7 +505,7 @@ input,textarea,select{font-family:inherit;color:inherit}
         <textarea id="postDesc" rows="3" placeholder="Detalles del archivo..."></textarea>
       </div>
       <div class="field">
-        <label>Foto de portada (opcional, máx 3MB)</label>
+        <label>Foto de portada (opcional, se comprime auto.)</label>
         <input type="file" id="coverInput" accept="image/*" style="font-size:11px;color:var(--text-dim)" />
       </div>
       <button class="btn-primary" id="publishBtn">PUBLICAR</button>
@@ -533,11 +535,11 @@ input,textarea,select{font-family:inherit;color:inherit}
   <section class="view" id="viewEdit">
     <div class="sec-head"><div class="sec-title">EDITAR PERFIL</div></div>
     
-    <div class="firebase-info-alert">
-      <i class="fa-solid fa-circle-info"></i>
+    <div class="firestore-info-alert">
+      <i class="fa-solid fa-database"></i>
       <div class="content">
-        <h4>IMÁGENES OPTIMIZADAS</h4>
-        <p>Tu avatar y portada se comprimen automáticamente y se guardan en Firestore, sin costos de Storage.</p>
+        <h4>ALMACENAMIENTO DIRECTO EN FIRESTORE</h4>
+        <p>Tu avatar y portada se comprimen automáticamente y se guardan como texto en la base de datos, sin costos adicionales.</p>
       </div>
     </div>
     
@@ -622,15 +624,14 @@ input,textarea,select{font-family:inherit;color:inherit}
 
 <script type="module">
 /* ════════════════════════════════════════════════════════════════
-   🔥 FIREBASE SDK & CONFIGURACIÓN
+   🔥 FIREBASE SDK (Solo Auth y Firestore, SIN Storage)
    ════════════════════════════════════════════════════════════════ */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, query, orderBy, limit, onSnapshot, where, getDocs, addDoc, serverTimestamp, deleteDoc, arrayUnion, arrayRemove, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-let fbApp = null, fbAuth = null, fbDb = null, fbStorage = null;
+let fbApp = null, fbAuth = null, fbDb = null;
 let FIREBASE_OK = false;
 
 const firebaseConfig = {
@@ -644,7 +645,7 @@ const firebaseConfig = {
 };
 
 function isConfigValid(cfg){
-  const required = ['apiKey','authDomain','projectId','storageBucket','messagingSenderId','appId'];
+  const required = ['apiKey','authDomain','projectId','messagingSenderId','appId'];
   for (const k of required){
     if (!cfg[k] || String(cfg[k]).startsWith('TU_') || cfg[k]==='123456789' || String(cfg[k]).includes('XXX')) return false;
   }
@@ -661,7 +662,6 @@ async function tryInitFirebase(){
     getAnalytics(fbApp);
     fbAuth = getAuth(fbApp);
     fbDb = getFirestore(fbApp);
-    fbStorage = getStorage(fbApp);
     
     await new Promise((resolve, reject) => {
       const timeout = setTimeout(() => reject(new Error('timeout')), 5000);
@@ -671,7 +671,7 @@ async function tryInitFirebase(){
       }, reject);
     });
     
-    console.log('%c ✓ Firebase conectado ', 'background:#00FF66;color:#000;padding:4px 10px;border-radius:4px');
+    console.log('%c ✓ Firebase conectado (Auth + Firestore) ', 'background:#00FF66;color:#000;padding:4px 10px;border-radius:4px');
     return true;
   } catch (err){
     console.error('%c ✗ Firebase falló → Modo Demo ', 'background:#ff2a55;color:#fff;padding:4px 10px;border-radius:4px', err.message);
@@ -680,10 +680,17 @@ async function tryInitFirebase(){
 }
 
 /* ════════════════════════════════════════════════════════════════
-   🖼️ COMPRESIÓN DE IMÁGENES A BASE64 (Para Firestore)
-   Evita el límite de 1MB por documento en Firestore comprimiendo
-   la imagen a dimensiones razonables y calidad JPEG optimizada.
+   🖼️ CONVERSIÓN A BASE64 (Para guardar en Firestore)
    ════════════════════════════════════════════════════════════════ */
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+}
+
 function compressImageToBase64(file, maxWidth, maxHeight, quality = 0.7) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -711,7 +718,7 @@ function compressImageToBase64(file, maxWidth, maxHeight, quality = 0.7) {
         canvas.width = width;
         canvas.height = height;
         const ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#FFFFFF'; // Prevenir fondos negros en JPEG
+        ctx.fillStyle = '#FFFFFF';
         ctx.fillRect(0, 0, width, height);
         ctx.drawImage(img, 0, 0, width, height);
         
@@ -725,7 +732,7 @@ function compressImageToBase64(file, maxWidth, maxHeight, quality = 0.7) {
 }
 
 /* ════════════════════════════════════════════════════════════════
-   MODO DEMO (solo metadata)
+   MODO DEMO (solo metadata local)
    ════════════════════════════════════════════════════════════════ */
 const LS = {
   USERS: 'drn_modz_users_v3',
@@ -792,7 +799,7 @@ const DemoDB = {
    ════════════════════════════════════════════════════════════════ */
 const state = {
   user: null, profile: null, viewingUserId: null, selectedFile: null,
-  brandClicks: 0, brandTimer: null, currentDownloadUrl: null, currentDownloadName: null,
+  brandClicks: 0, brandTimer: null, currentDownloadData: null,
   feedListener: null, authenticating: false
 };
 
@@ -840,7 +847,6 @@ function getInitials(name){
 
 function applyAvatar(el, url, name){
   if(!el) return;
-  // Acepta URLs http o cadenas Base64 (data:image)
   if(url && (url.startsWith('http') || url.startsWith('data:image'))){
     el.style.backgroundImage = `url('${url}')`;
     el.textContent = "";
@@ -934,7 +940,7 @@ function showMainApp(){
 }
 
 /* ════════════════════════════════════════════════════════════════
-   AVATAR GLOBAL — Guardado como Base64 en Firestore
+   AVATAR GLOBAL
    ════════════════════════════════════════════════════════════════ */
 function openAvatarPicker(){
   $("#globalAvatarInput").click();
@@ -958,7 +964,6 @@ $("#globalAvatarInput").addEventListener("change", async e => {
 
   try {
     toast("Comprimiendo y guardando en Firestore...");
-    // Comprimir a máx 300x300 para avatar
     const base64 = await compressImageToBase64(file, 300, 300, 0.8);
     
     if (FIREBASE_OK) {
@@ -1244,13 +1249,14 @@ function renderPost(p, id){
   el.className = "post-card";
   
   let coverHTML;
-  // Acepta URLs http o cadenas Base64
-  if(p.cover && (p.cover.startsWith('http') || p.cover.startsWith('data:image'))){
+  if(p.coverData && p.coverData.startsWith('data:image')){
+    coverHTML = `<img src="${p.coverData}" alt="cover" loading="lazy" />`;
+  } else if (p.cover && p.cover.startsWith('http')) {
     coverHTML = `<img src="${p.cover}" alt="cover" loading="lazy" />`;
   } else {
     coverHTML = `<i class="fa-solid fa-cube"></i>`;
   }
-  const coverClass = (p.cover && (p.cover.startsWith('http') || p.cover.startsWith('data:image'))) ? "post-cover" : "post-cover no-cover";
+  const coverClass = (p.coverData || (p.cover && p.cover.startsWith('http'))) ? "post-cover" : "post-cover no-cover";
   
   const verifiedSeal = p.authorVerified ? getVerifiedSealSVG('_' + (sealCounter++)) : "";
 
@@ -1270,7 +1276,7 @@ function renderPost(p, id){
       <div class="post-title">${escapeHtml(p.title||"Sin título")}</div>
       <div class="post-desc">${escapeHtml(p.description||"")}</div>
       <div class="post-actions">
-        <button class="btn download" data-url="${escapeHtml(p.fileUrl||'')}" data-name="${escapeHtml(p.fileName||'archivo')}">
+        <button class="btn download" data-id="${id}">
           <i class="fa-solid fa-download"></i> DESCARGAR
         </button>
         ${p.authorId===state.user.uid ? `<button class="btn danger" data-del="${id}"><i class="fa-solid fa-trash"></i></button>` : ""}
@@ -1278,7 +1284,8 @@ function renderPost(p, id){
     </div>`;
 
   const avEl = el.querySelector(".avatar");
-  applyAvatar(avEl, (p.authorAvatar && (p.authorAvatar.startsWith('http') || p.authorAvatar.startsWith('data:image'))) ? p.authorAvatar : "", p.authorName||"U");
+  const avUrl = p.authorAvatar || "";
+  applyAvatar(avEl, (avUrl.startsWith('http') || avUrl.startsWith('data:image')) ? avUrl : "", p.authorName||"U");
   
   if(p.authorId === state.user.uid){
     avEl.classList.add("clickable");
@@ -1288,28 +1295,30 @@ function renderPost(p, id){
   }
 
   el.querySelector(".post-user .name").addEventListener("click", () => openProfile(p.authorId));
+  
   const dlBtn = el.querySelector(".btn.download");
-  if(dlBtn) dlBtn.addEventListener("click", () => startDownload(dlBtn.dataset.url, dlBtn.dataset.name));
+  if(dlBtn) {
+    dlBtn.addEventListener("click", () => startDownload({
+      fileData: p.fileData,
+      fileName: p.fileName,
+      fileType: p.fileType || 'application/octet-stream'
+    }));
+  }
+  
   const delBtn = el.querySelector("[data-del]");
-  if(delBtn) delBtn.addEventListener("click", () => deletePost(delBtn.dataset.del, p.fileUrl));
+  if(delBtn) delBtn.addEventListener("click", () => deletePost(delBtn.dataset.del));
+  
   return el;
 }
 
 /* ════════════════════════════════════════════════════════════════
    DELETE POST
    ════════════════════════════════════════════════════════════════ */
-async function deletePost(id, fileUrl){
+async function deletePost(id){
   if(!confirm("¿Eliminar esta publicación?")) return;
   try{
     if (FIREBASE_OK){
       await deleteDoc(doc(fbDb,"posts",id));
-      // Las imágenes en Base64 se eliminan automáticamente al borrar el documento
-      if(fileUrl && fileUrl.startsWith('http')){
-        try{
-          const path = decodeURIComponent(new URL(fileUrl).pathname.split("/o/")[1].split("?")[0]);
-          await deleteObject(ref(fbStorage, path));
-        }catch(e){ console.warn("No se pudo borrar archivo",e); }
-      }
       await updateDoc(doc(fbDb,"users",state.user.uid), { postCount: increment(-1) });
     } else {
       DemoDB.deletePost(id, state.user.uid);
@@ -1347,9 +1356,10 @@ fileInput.addEventListener("change",e=>{
 });
 
 function handleFile(f){
-  const MAX = 300 * 1024 * 1024;
+  // Límite estricto para Firestore (1MB por documento)
+  const MAX = 800 * 1024; // 800 KB
   if(f.size > MAX){
-    toast("Límite estricto: 300 MB", 'err');
+    toast(`Límite estricto: ${fmtSize(MAX)} (Requisito de Firestore)`, 'err');
     state.selectedFile = null;
     $("#fileInfo").classList.remove("show");
     return;
@@ -1361,7 +1371,7 @@ function handleFile(f){
 }
 
 /* ════════════════════════════════════════════════════════════════
-   PUBLISH — Imágenes en Base64, Archivo principal en Storage
+   PUBLISH — Todo en Base64 directo a Firestore
    ════════════════════════════════════════════════════════════════ */
 $("#publishBtn").addEventListener("click", async () => {
   if (!FIREBASE_OK) {
@@ -1380,44 +1390,24 @@ $("#publishBtn").addEventListener("click", async () => {
   $("#uploadProgress").classList.add("show");
 
   try {
-    let fileUrl = '';
+    toast("Convirtiendo archivo a Base64...");
+    const fileBase64 = await fileToBase64(state.selectedFile);
     
-    // Intentar subir el archivo principal a Storage
-    try {
-      const fileRef = ref(fbStorage, `files/${state.user.uid}/${Date.now()}_${state.selectedFile.name}`);
-      const task = uploadBytesResumable(fileRef, state.selectedFile);
-      fileUrl = await new Promise((res, rej) => {
-        task.on("state_changed",
-          s => { $("#uploadBar").style.width = ((s.bytesLoaded/s.totalBytes)*100)+"%"; },
-          err => rej(err),
-          async () => res(await getDownloadURL(task.snapshot.ref))
-        );
-      });
-    } catch (storageErr) {
-      console.warn("Storage no disponible para el archivo principal.", storageErr);
-      toast("⚠ Cloud Storage no disponible. El post se creará sin enlace de descarga.", 'warn');
-      fileUrl = "NO_STORAGE_AVAILABLE";
-    }
-
-    let coverUrl = '';
+    let coverBase64 = '';
     const coverFile = $("#coverInput").files[0];
     if (coverFile) {
-      if (coverFile.size > 3 * 1024 * 1024) {
-        toast("La portada es demasiado grande. Máx 3MB.", 'err');
-        throw new Error("Cover file too large");
-      }
-      toast("Procesando portada del post...");
-      // Comprimir a máx 800x800 para portada de post
-      coverUrl = await compressImageToBase64(coverFile, 800, 800, 0.7);
+      toast("Procesando portada...");
+      coverBase64 = await compressImageToBase64(coverFile, 600, 600, 0.7);
     }
 
     await addDoc(collection(fbDb, "posts"), {
       title, 
       description: desc, 
-      fileUrl, 
+      fileData: fileBase64,    // Guardado directamente en Firestore
       fileName: state.selectedFile.name,
-      size: state.selectedFile.size || 0, 
-      cover: coverUrl, // Guardado como Base64 en Firestore
+      fileType: state.selectedFile.type,
+      size: state.selectedFile.size, 
+      coverData: coverBase64,  // Guardado directamente en Firestore
       authorId: state.user.uid,
       authorName: `${state.profile.name} ${state.profile.lastName}`,
       authorAvatar: state.profile.avatar || "",
@@ -1430,7 +1420,7 @@ $("#publishBtn").addEventListener("click", async () => {
       postCount: increment(1) 
     });
 
-    toast("✓ Publicación creada");
+    toast("✓ Publicación creada en la base de datos");
     state.selectedFile = null;
     $("#postTitle").value = ""; 
     $("#postDesc").value = "";
@@ -1443,7 +1433,11 @@ $("#publishBtn").addEventListener("click", async () => {
     
   } catch (e) {
     console.error('Error al publicar:', e);
-    toast("Error al publicar: " + e.message, 'err');
+    if (e.message && (e.message.includes('1MiB') || e.message.includes('1 MB'))) {
+      toast("Error: El documento supera el límite de 1MB de Firestore. Usa un archivo más pequeño.", 'err');
+    } else {
+      toast("Error al publicar: " + e.message, 'err');
+    }
   } finally {
     btn.disabled = false; 
     btn.innerHTML = "PUBLICAR";
@@ -1451,15 +1445,14 @@ $("#publishBtn").addEventListener("click", async () => {
 });
 
 /* ════════════════════════════════════════════════════════════════
-   DOWNLOAD + ADSENSE
+   DOWNLOAD + ADSENSE (Reconstrucción desde Base64)
    ════════════════════════════════════════════════════════════════ */
-function startDownload(url, name){
-  if(!url || url === "NO_STORAGE_AVAILABLE"){ 
-    toast("⚠ Archivo no disponible (Storage no configurado)", 'warn'); 
+function startDownload(postData) {
+  if (!postData || !postData.fileData) { 
+    toast("⚠ Archivo no disponible", 'warn'); 
     return; 
   }
-  state.currentDownloadUrl = url;
-  state.currentDownloadName = name || 'archivo';
+  state.currentDownloadData = postData;
   openModal("modalAd");
   let sec = 5;
   $("#adCount").textContent = sec;
@@ -1478,19 +1471,33 @@ function startDownload(url, name){
 }
 
 $("#btnFinalDownload").addEventListener("click", ()=>{
-  if(!state.currentDownloadUrl) return;
+  if(!state.currentDownloadData || !state.currentDownloadData.fileData) return;
   try {
+    const base64Data = state.currentDownloadData.fileData;
+    const mimeType = state.currentDownloadData.fileType || 'application/octet-stream';
+    const base64WithoutHeader = base64Data.split(',')[1];
+    const byteCharacters = atob(base64WithoutHeader);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: mimeType });
+    
+    const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    a.href = state.currentDownloadUrl;
-    a.target = "_blank";
-    a.rel = "noopener";
-    a.download = state.currentDownloadName;
-    document.body.appendChild(a); a.click(); a.remove();
+    a.href = url;
+    a.download = state.currentDownloadData.fileName || 'archivo_descargado';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    
     closeModal("modalAd");
     toast("✓ Descarga iniciada");
   } catch (err){
     console.error(err);
-    toast("Error al descargar", 'err');
+    toast("Error al procesar la descarga", 'err');
   }
 });
 
@@ -1510,11 +1517,12 @@ async function openProfile(uid){
       if(!u){ toast("Usuario no encontrado",'err'); return; }
     }
 
-    // Acepta URLs http o cadenas Base64
-    $("#profileCover").style.backgroundImage = (u.cover && (u.cover.startsWith('http') || u.cover.startsWith('data:image'))) ? `url('${u.cover}')` : "";
+    const coverUrl = u.coverData || u.cover;
+    $("#profileCover").style.backgroundImage = (coverUrl && (coverUrl.startsWith('http') || coverUrl.startsWith('data:image'))) ? `url('${coverUrl}')` : "";
     
     const av = $("#profileAvatar");
-    applyAvatar(av, (u.avatar && (u.avatar.startsWith('http') || u.avatar.startsWith('data:image'))) ? u.avatar : "", `${u.name} ${u.lastName||""}`);
+    const avUrl = u.avatar || "";
+    applyAvatar(av, (avUrl.startsWith('http') || avUrl.startsWith('data:image')) ? avUrl : "", `${u.name} ${u.lastName||""}`);
     if(uid === state.user.uid) av.classList.add("clickable");
     else av.classList.remove("clickable");
 
@@ -1648,7 +1656,8 @@ async function doSearch(){
           <div class="n">${escapeHtml(u.name)} ${escapeHtml(u.lastName||"")}${verifiedSeal}</div>
         </div>
         <i class="fa-solid fa-chevron-right" style="color:var(--text-dim)"></i>`;
-      applyAvatar(el.querySelector(".avatar"), (u.avatar && (u.avatar.startsWith('http') || u.avatar.startsWith('data:image'))) ? u.avatar : "", `${u.name} ${u.lastName||""}`);
+      const avUrl = u.avatar || "";
+      applyAvatar(el.querySelector(".avatar"), (avUrl.startsWith('http') || avUrl.startsWith('data:image')) ? avUrl : "", `${u.name} ${u.lastName||""}`);
       el.addEventListener("click",()=>openProfile(u.uid));
       out.appendChild(el);
     });
@@ -1688,8 +1697,7 @@ $("#saveProfileBtn").addEventListener("click", async () => {
         throw new Error("File too large");
       }
       toast("Procesando portada...");
-      // Comprimir a máx 800x400 para portada de perfil
-      updates.cover = await compressImageToBase64(cvFile, 800, 400, 0.7);
+      updates.coverData = await compressImageToBase64(cvFile, 800, 400, 0.7);
     }
     
     if (FIREBASE_OK) {
@@ -1768,7 +1776,8 @@ async function openAdminPanel(){
           <div class="n">${escapeHtml(u.name)} ${escapeHtml(u.lastName||"")}${verifiedSeal}</div>
         </div>
         <div class="toggle ${u.verified?"on":""}" data-uid="${u.uid}"></div>`;
-      applyAvatar(el.querySelector(".avatar"), (u.avatar && (u.avatar.startsWith('http') || u.avatar.startsWith('data:image'))) ? u.avatar : "", `${u.name} ${u.lastName||""}`);
+      const avUrl = u.avatar || "";
+      applyAvatar(el.querySelector(".avatar"), (avUrl.startsWith('http') || avUrl.startsWith('data:image')) ? avUrl : "", `${u.name} ${u.lastName||""}`);
       el.querySelector(".toggle").addEventListener("click", async (e)=>{
         const t = e.currentTarget;
         const uid = t.dataset.uid;
@@ -1803,13 +1812,13 @@ async function openAdminPanel(){
    🚀 ARRANQUE
    ════════════════════════════════════════════════════════════════ */
 (async function init(){
-  console.log("%c ═══ 𝘿𝙍𝙉 𝙈𝙊𝘿𝕃 v3.8 ═══ ", 'background:#00FF66;color:#000;font-size:14px;padding:6px 12px');
-  console.log("%c Imágenes optimizadas a Base64 para funcionar en Plan Spark gratuito ", 'color:#00e0ff;font-size:11px');
+  console.log("%c ═══ 𝘿𝙍𝙉 𝙈𝙊𝘿𝕃 v4.0 ═══ ", 'background:#00FF66;color:#000;font-size:14px;padding:6px 12px');
+  console.log("%c 100% Firestore: Archivos y portadas guardados como Base64. Sin Cloud Storage. ", 'color:#00e0ff;font-size:11px');
   
   FIREBASE_OK = await tryInitFirebase();
   
   if (FIREBASE_OK){
-    showBanner('Modo Cloud activo · Imágenes guardadas en Firestore (Base64)', 'ok');
+    showBanner('Modo Cloud activo · Almacenamiento directo en Firestore (Base64)', 'ok');
   } else {
     showBanner('Modo Demo · Configura firebaseConfig para usar la plataforma', 'demo');
   }
