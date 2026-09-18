@@ -15,11 +15,10 @@
   --bg:#050505;--bg-2:#0a0a0a;--bg-3:#111;--panel:#0c0c0c;--border:#1a1a1a;
   --border-hi:#00FF66;--neon:#00FF66;--neon-2:#00e0ff;
   --verify:#1d9bf0;
-  --verify-glow:0 0 8px rgba(29,155,240,.6), 0 0 20px rgba(29,155,240,.3);
+  --verify-glow:0 0 8px rgba(0,224,255,.7), 0 0 16px rgba(29,155,240,.5);
   --danger:#ff2a55;--warn:#ffb400;
   --text:#d8d8d8;--text-dim:#7a7a7a;--text-bright:#ffffff;
   --glow:0 0 8px rgba(0,255,102,.55), 0 0 22px rgba(0,255,102,.25);
-  --glow-cyan:0 0 8px rgba(0,224,255,.55), 0 0 22px rgba(0,224,255,.25);
   --font-mono:'JetBrains Mono', ui-monospace, Menlo, monospace;
   --font-display:'Orbitron', sans-serif;
   --font-cyber:'Share Tech Mono', monospace;
@@ -180,6 +179,27 @@ input,textarea,select{font-family:inherit;color:inherit}
 }
 .post-body{padding:14px}
 .post-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+
+.verified-seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-left: 4px;
+  position: relative;
+  top: -1px;
+  flex-shrink: 0;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: default;
+}
+.verified-seal:hover {
+  transform: scale(1.2) rotate(5deg);
+  filter: drop-shadow(0 0 8px rgba(0, 224, 255, 0.9));
+}
+.verified-seal svg { width: 100%; height: 100%; display: block; }
+
 .avatar{
   width:40px;height:40px;border-radius:50%;background:#1a1a1a;
   border:1.5px solid var(--border);background-size:cover;background-position:center;
@@ -206,9 +226,8 @@ input,textarea,select{font-family:inherit;color:inherit}
   50%{text-shadow:0 0 12px rgba(0,255,102,.9), 2px 0 0 rgba(0,224,255,.3), -2px 0 0 rgba(255,42,85,.2)}
 }
 .post-user{display:flex;flex-direction:column;flex:1;min-width:0}
-.post-user .name{font-size:13px;color:var(--text-bright);font-weight:600;display:flex;align-items:center;gap:6px;cursor:pointer}
+.post-user .name{font-size:13px;color:var(--text-bright);font-weight:600;display:flex;align-items:center;gap:2px;cursor:pointer;flex-wrap:wrap}
 .post-user .name:hover{color:var(--neon)}
-.verified{color:var(--verify);font-size:12px;text-shadow:var(--verify-glow)}
 .post-user .meta{font-size:10px;color:var(--text-dim);letter-spacing:1px}
 .post-title{font-size:15px;font-weight:700;color:var(--text-bright);margin-bottom:6px;line-height:1.35}
 .post-desc{font-size:12px;color:var(--text);line-height:1.55;margin-bottom:12px;word-wrap:break-word}
@@ -225,8 +244,38 @@ input,textarea,select{font-family:inherit;color:inherit}
 .btn.danger:hover{background:var(--danger);color:#fff}
 
 .upload-card{background:linear-gradient(180deg,#0a0a0a,#070707);border:1px solid var(--border);border-radius:14px;padding:18px}
+
+.firebase-required-alert{
+  background:linear-gradient(135deg,rgba(255,42,85,.1),rgba(255,42,85,.03));
+  border:1px solid var(--danger);
+  border-radius:10px;
+  padding:16px;
+  margin-bottom:14px;
+  display:none;
+  align-items:flex-start;
+  gap:12px;
+}
+.firebase-required-alert i{
+  color:var(--danger);font-size:20px;
+  text-shadow:0 0 8px rgba(255,42,85,.6);
+  flex-shrink:0;margin-top:2px;
+}
+.firebase-required-alert .content{flex:1}
+.firebase-required-alert h4{
+  font-family:var(--font-display);font-size:11px;letter-spacing:2px;
+  color:var(--danger);margin-bottom:6px;
+}
+.firebase-required-alert p{
+  font-size:10px;color:var(--text);line-height:1.5;
+}
+.firebase-required-alert code{
+  background:#0a0a0a;padding:2px 6px;border-radius:3px;
+  color:var(--neon);font-size:10px;
+}
+
 .drop-zone{border:2px dashed var(--border);border-radius:12px;padding:30px 16px;text-align:center;transition:all .25s;cursor:pointer;background:rgba(0,0,0,.3)}
 .drop-zone:hover,.drop-zone.drag{border-color:var(--neon);background:rgba(0,255,102,.04)}
+.drop-zone.disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
 .drop-zone i{font-size:36px;color:var(--neon);text-shadow:var(--glow);margin-bottom:10px}
 .drop-zone h4{font-family:var(--font-display);font-size:12px;letter-spacing:2px;color:var(--text-bright);margin-bottom:4px}
 .drop-zone p{font-size:10px;color:var(--text-dim);letter-spacing:1px}
@@ -245,7 +294,7 @@ input,textarea,select{font-family:inherit;color:inherit}
 .profile-info{padding:0 18px 18px;display:flex;align-items:flex-end;gap:14px;margin-top:-44px;position:relative;z-index:2}
 .profile-info .avatar{border:3px solid var(--bg);box-shadow:0 0 0 1px var(--border)}
 .profile-meta{flex:1;min-width:0;padding-bottom:4px}
-.profile-meta h2{font-family:var(--font-display);font-size:16px;letter-spacing:2px;color:var(--text-bright);display:flex;align-items:center;gap:6px;word-break:break-word}
+.profile-meta h2{font-family:var(--font-display);font-size:16px;letter-spacing:2px;color:var(--text-bright);display:flex;align-items:center;gap:2px;word-break:break-word;flex-wrap:wrap}
 .stats{display:flex;gap:16px;padding:0 18px 14px;border-bottom:1px dashed var(--border)}
 .stat{text-align:center;flex:1}
 .stat .n{font-size:16px;font-weight:800;color:var(--neon);text-shadow:var(--glow)}
@@ -302,7 +351,7 @@ input,textarea,select{font-family:inherit;color:inherit}
 .admin-user{display:flex;align-items:center;gap:10px;padding:10px;background:#070707;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:all .2s}
 .admin-user:hover{border-color:#2a2a2a}
 .admin-user .info{flex:1;min-width:0}
-.admin-user .info .n{font-size:12px;color:var(--text-bright);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.admin-user .info .n{font-size:12px;color:var(--text-bright);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;align-items:center;gap:2px;flex-wrap:wrap}
 .toggle{width:44px;height:24px;border-radius:12px;background:#1a1a1a;border:1px solid var(--border);position:relative;cursor:pointer;transition:all .2s;flex-shrink:0}
 .toggle::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--text-dim);transition:all .2s}
 .toggle.on{background:rgba(29,155,240,.15);border-color:var(--verify)}
@@ -344,7 +393,7 @@ input,textarea,select{font-family:inherit;color:inherit}
     <div class="brand" id="brandLogo" title="DRN MODZ">
       <span class="dot"></span>
       <span>DRN <span class="accent">MODZ</span></span>
-      <span class="brand-tag">v3.3</span>
+      <span class="brand-tag">v3.7</span>
     </div>
     <div class="top-actions">
       <button class="icon-btn search" id="btnSearch" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -426,6 +475,18 @@ input,textarea,select{font-family:inherit;color:inherit}
 
   <section class="view" id="viewUpload">
     <div class="sec-head"><div class="sec-title">PUBLICAR ARCHIVO</div></div>
+    
+    <div class="firebase-required-alert" id="firebaseAlert">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <div class="content">
+        <h4>FIREBASE NO CONFIGURADO</h4>
+        <p>
+          La subida de archivos requiere Firebase Cloud Storage.<br>
+          Edita el objeto <code>firebaseConfig</code> al inicio del script con tus credenciales reales.
+        </p>
+      </div>
+    </div>
+    
     <div class="upload-card">
       <div class="drop-zone" id="dropZone">
         <i class="fa-solid fa-cloud-arrow-up"></i>
@@ -462,7 +523,7 @@ input,textarea,select{font-family:inherit;color:inherit}
       <div class="profile-info">
         <div class="avatar lg" id="profileAvatar">U</div>
         <div class="profile-meta">
-          <h2 id="profileName">Usuario <span class="verified" id="profileVerified" style="display:none"><i class="fa-solid fa-circle-check"></i></span></h2>
+          <h2 id="profileName">Usuario</h2>
         </div>
       </div>
       <div class="stats">
@@ -478,6 +539,15 @@ input,textarea,select{font-family:inherit;color:inherit}
 
   <section class="view" id="viewEdit">
     <div class="sec-head"><div class="sec-title">EDITAR PERFIL</div></div>
+    
+    <div class="firebase-required-alert" id="firebaseAlertEdit">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <div class="content">
+        <h4>FIREBASE NO CONFIGURADO</h4>
+        <p>La edición de avatar y portada requiere Firebase Storage. Configura tus credenciales para habilitar esta función.</p>
+      </div>
+    </div>
+    
     <div class="upload-card">
       <div class="field">
         <label>Nombre</label>
@@ -558,17 +628,27 @@ input,textarea,select{font-family:inherit;color:inherit}
 <div class="toast" id="toast"></div>
 
 <script type="module">
-let fbModules = null;
+/* ════════════════════════════════════════════════════════════════
+   🔥 FIREBASE SDK & CONFIGURACIÓN REAL
+   ════════════════════════════════════════════════════════════════ */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, query, orderBy, limit, onSnapshot, where, getDocs, addDoc, serverTimestamp, deleteDoc, arrayUnion, arrayRemove, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
 let fbApp = null, fbAuth = null, fbDb = null, fbStorage = null;
 let FIREBASE_OK = false;
 
+// TU CONFIGURACIÓN REAL DE FIREBASE
 const firebaseConfig = {
-  apiKey: "TU_API_KEY_AQUI",
-  authDomain: "TU_PROYECTO.firebaseapp.com",
-  projectId: "TU_PROYECTO",
-  storageBucket: "TU_PROYECTO.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abc123def456"
+  apiKey: "AIzaSyDsDlIslxJg10H9eVwg2paavxFU32eZk7s",
+  authDomain: "drn-modz.firebaseapp.com",
+  projectId: "drn-modz",
+  storageBucket: "drn-modz.firebasestorage.app",
+  messagingSenderId: "993042669982",
+  appId: "1:993042669982:web:62fcc8ccfdca414526768f",
+  measurementId: "G-Y2KDKQNGZC"
 };
 
 function isConfigValid(cfg){
@@ -578,41 +658,40 @@ function isConfigValid(cfg){
   }
   return true;
 }
-const CONFIG_VALID = isConfigValid(firebaseConfig);
 
 async function tryInitFirebase(){
-  if (!CONFIG_VALID){
-    console.warn('%c ⚠ Firebase no configurado → Modo Demo activado ', 'background:#ffb400;color:#000;padding:4px 10px;border-radius:4px');
+  if (!isConfigValid(firebaseConfig)){
+    console.warn('%c ⚠ Firebase no configurado → Modo Demo (sin archivos) ', 'background:#ffb400;color:#000;padding:4px 10px;border-radius:4px');
     return false;
   }
   try {
-    fbModules = {
-      app: await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"),
-      auth: await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"),
-      firestore: await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"),
-      storage: await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js")
-    };
-    fbApp = fbModules.app.initializeApp(firebaseConfig);
-    fbAuth = fbModules.auth.getAuth(fbApp);
-    fbDb = fbModules.firestore.getFirestore(fbApp);
-    fbStorage = fbModules.storage.getStorage(fbApp);
+    fbApp = initializeApp(firebaseConfig);
+    getAnalytics(fbApp); // Analytics inicializado
+    fbAuth = getAuth(fbApp);
+    fbDb = getFirestore(fbApp);
+    fbStorage = getStorage(fbApp);
     
     await new Promise((resolve, reject) => {
       const timeout = setTimeout(() => reject(new Error('timeout')), 5000);
-      fbModules.auth.onAuthStateChanged(fbAuth, () => {
+      onAuthStateChanged(fbAuth, () => {
         clearTimeout(timeout);
         resolve();
       }, reject);
     });
     
-    console.log('%c ✓ Firebase conectado ', 'background:#00FF66;color:#000;padding:4px 10px;border-radius:4px');
+    console.log('%c ✓ Firebase conectado · Cloud Storage activo ', 'background:#00FF66;color:#000;padding:4px 10px;border-radius:4px');
     return true;
   } catch (err){
-    console.error('%c ✗ Firebase falló → Modo Demo ', 'background:#ff2a55;color:#fff;padding:4px 10px;border-radius:4px', err.message);
+    console.error('%c ✗ Firebase falló → Modo Demo (sin archivos) ', 'background:#ff2a55;color:#fff;padding:4px 10px;border-radius:4px', err.message);
     return false;
   }
 }
 
+/* ════════════════════════════════════════════════════════════════
+   MODO DEMO (solo metadata — SIN archivos binarios)
+   localStorage se usa ÚNICAMENTE para metadata de usuarios y sesiones.
+   ❌ NUNCA se guardan archivos binarios, imágenes ni dataURLs
+   ════════════════════════════════════════════════════════════════ */
 const LS = {
   USERS: 'drn_modz_users_v3',
   POSTS: 'drn_modz_posts_v3',
@@ -673,12 +752,18 @@ const DemoDB = {
   getPostsByUser(uid){ return this.getPosts().filter(p => p.authorId === uid).sort((a,b) => b.createdAt - a.createdAt); }
 };
 
+/* ════════════════════════════════════════════════════════════════
+   ESTADO GLOBAL
+   ════════════════════════════════════════════════════════════════ */
 const state = {
   user: null, profile: null, viewingUserId: null, selectedFile: null,
   brandClicks: 0, brandTimer: null, currentDownloadUrl: null, currentDownloadName: null,
   feedListener: null, authenticating: false
 };
 
+/* ════════════════════════════════════════════════════════════════
+   UTILIDADES
+   ════════════════════════════════════════════════════════════════ */
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 
@@ -720,7 +805,7 @@ function getInitials(name){
 
 function applyAvatar(el, url, name){
   if(!el) return;
-  if(url){
+  if(url && url.startsWith('http')){
     el.style.backgroundImage = `url('${url}')`;
     el.textContent = "";
     el.classList.add("has-img");
@@ -747,11 +832,40 @@ function padPassword(pass){
   return pass + '_'.repeat(MIN - pass.length);
 }
 
+function getVerifiedSealSVG(idSuffix = ''){
+  return `
+    <span class="verified-seal" title="Usuario Verificado">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sealGrad${idSuffix}" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#1d9bf0"/>
+            <stop offset="1" stop-color="#00e0ff"/>
+          </linearGradient>
+        </defs>
+        <path d="M12 2L14.3 8.3L21 9.3L16.1 14.2L17.2 21L12 17.6L6.8 21L7.9 14.2L3 9.3L9.7 8.3L12 2Z" fill="url(#sealGrad${idSuffix})" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/>
+        <path d="M9 12.5L11 14.5L15.5 9.5" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  `;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   NAVEGACIÓN
+   ════════════════════════════════════════════════════════════════ */
 function showView(id){
   $$(".view").forEach(v=>v.classList.remove("active"));
   $("#"+id).classList.add("active");
   $$(".nav-btn").forEach(b=>b.classList.toggle("active", b.dataset.view===id));
   window.scrollTo({top:0,behavior:"smooth"});
+  
+  if (id === 'viewUpload' || id === 'viewEdit'){
+    const showAlert = !FIREBASE_OK;
+    $("#firebaseAlert").style.display = showAlert ? 'flex' : 'none';
+    $("#firebaseAlertEdit").style.display = showAlert ? 'flex' : 'none';
+    const dropZone = $("#dropZone");
+    if (showAlert) dropZone.classList.add('disabled');
+    else dropZone.classList.remove('disabled');
+  }
 }
 
 $$(".nav-btn").forEach(b=>{
@@ -766,7 +880,7 @@ $("#btnSearch").addEventListener("click",()=>showView("viewSearch"));
 
 $("#btnLogout").addEventListener("click", async () => {
   try {
-    if (FIREBASE_OK && fbAuth) await fbModules.auth.signOut(fbAuth);
+    if (FIREBASE_OK && fbAuth) await signOut(fbAuth);
     DemoDB.saveSession(null);
     state.user = null; state.profile = null;
     if (state.feedListener) state.feedListener();
@@ -792,7 +906,17 @@ function showMainApp(){
   showView("viewFeed");
 }
 
-function openAvatarPicker(){ $("#globalAvatarInput").click(); }
+/* ════════════════════════════════════════════════════════════════
+   AVATAR GLOBAL — Solo con Firebase
+   ════════════════════════════════════════════════════════════════ */
+function openAvatarPicker(){
+  if (!FIREBASE_OK){
+    toast("⚠ Configura Firebase para cambiar el avatar", 'warn');
+    return;
+  }
+  $("#globalAvatarInput").click();
+}
+
 $("#topAvatar").addEventListener("click", openAvatarPicker);
 $("#profileAvatar").addEventListener("click", () => {
   if(state.viewingUserId === state.user.uid) openAvatarPicker();
@@ -802,36 +926,36 @@ $("#globalAvatarInput").addEventListener("change", async e => {
   const file = e.target.files[0];
   if(!file || !state.user) return;
   if(!file.type.startsWith("image/")){ toast("Selecciona una imagen",'err'); return; }
+  
+  if (!FIREBASE_OK){
+    toast("⚠ Firebase requerido para subir avatares", 'err');
+    e.target.value = "";
+    return;
+  }
+  
   try{
-    toast("Actualizando avatar...");
-    if (FIREBASE_OK){
-      const r = fbModules.storage.ref(fbStorage, `avatars/${state.user.uid}/${Date.now()}_${file.name}`);
-      await fbModules.storage.uploadBytesResumable(r, file);
-      const url = await fbModules.storage.getDownloadURL(r);
-      await fbModules.firestore.updateDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid), { avatar: url });
-      state.profile.avatar = url;
-    } else {
-      const dataUrl = await fileToDataURL(file);
-      DemoDB.updateUser(state.user.uid, { avatar: dataUrl });
-      state.profile.avatar = dataUrl;
-    }
+    toast("Subiendo avatar a Cloud Storage...");
+    const r = ref(fbStorage, `avatars/${state.user.uid}/${Date.now()}_${file.name}`);
+    const task = uploadBytesResumable(r, file);
+    
+    const url = await new Promise((resolve, reject) => {
+      task.on("state_changed",
+        snapshot => { /* progreso silencioso */ },
+        err => reject(err),
+        async () => resolve(await getDownloadURL(task.snapshot.ref))
+      );
+    });
+    
+    await updateDoc(doc(fbDb,"users",state.user.uid), { avatar: url });
+    state.profile.avatar = url;
     refreshAllAvatars();
-    toast("✓ Avatar actualizado");
+    toast("✓ Avatar subido a la nube");
   }catch(err){
     console.error(err);
-    toast("Error al subir avatar", 'err');
+    toast("Error al subir avatar: " + err.message, 'err');
   }
   e.target.value = "";
 });
-
-function fileToDataURL(file){
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
 
 function refreshAllAvatars(){
   if(!state.profile) return;
@@ -841,6 +965,9 @@ function refreshAllAvatars(){
   }
 }
 
+/* ════════════════════════════════════════════════════════════════
+   AUTH TABS
+   ════════════════════════════════════════════════════════════════ */
 $$(".auth-tabs button").forEach(b=>{
   b.addEventListener("click",()=>{
     $$(".auth-tabs button").forEach(x=>x.classList.remove("active"));
@@ -853,6 +980,9 @@ $$(".auth-tabs button").forEach(b=>{
   });
 });
 
+/* ════════════════════════════════════════════════════════════════
+   REGISTRO
+   ════════════════════════════════════════════════════════════════ */
 $("#formRegister").addEventListener("submit", async e => {
   e.preventDefault();
   if (state.authenticating) return;
@@ -883,13 +1013,13 @@ $("#formRegister").addEventListener("submit", async e => {
   try {
     if (FIREBASE_OK){
       const paddedPass = padPassword(pass);
-      const cred = await fbModules.auth.createUserWithEmailAndPassword(fbAuth, email, paddedPass);
-      await fbModules.auth.updateProfile(cred.user, { displayName: `${name} ${last}` });
-      await fbModules.firestore.setDoc(fbModules.firestore.doc(fbDb,"users",cred.user.uid), {
+      const cred = await createUserWithEmailAndPassword(fbAuth, email, paddedPass);
+      await updateProfile(cred.user, { displayName: `${name} ${last}` });
+      await setDoc(doc(fbDb,"users",cred.user.uid), {
         uid: cred.user.uid, name, lastName: last, email,
         avatar: "", cover: "", verified: false,
         followers: [], following: [], postCount: 0,
-        createdAt: fbModules.firestore.serverTimestamp()
+        createdAt: serverTimestamp()
       });
       state.user = { uid: cred.user.uid, email };
       await loadMyProfile();
@@ -927,6 +1057,9 @@ $("#formRegister").addEventListener("submit", async e => {
   }
 });
 
+/* ════════════════════════════════════════════════════════════════
+   LOGIN
+   ════════════════════════════════════════════════════════════════ */
 $("#formLogin").addEventListener("submit", async e => {
   e.preventDefault();
   if (state.authenticating) return;
@@ -950,7 +1083,7 @@ $("#formLogin").addEventListener("submit", async e => {
   try {
     if (FIREBASE_OK){
       const paddedPass = padPassword(pass);
-      const cred = await fbModules.auth.signInWithEmailAndPassword(fbAuth, email, paddedPass);
+      const cred = await signInWithEmailAndPassword(fbAuth, email, paddedPass);
       state.user = { uid: cred.user.uid, email: cred.user.email };
       await loadMyProfile();
     } else {
@@ -1012,10 +1145,13 @@ function getFriendlyAuthError(err){
   return '⚠ Ocurrió un error. Intenta de nuevo.';
 }
 
+/* ════════════════════════════════════════════════════════════════
+   CARGAR PERFIL
+   ════════════════════════════════════════════════════════════════ */
 async function loadMyProfile(){
   try {
     if (FIREBASE_OK){
-      const snap = await fbModules.firestore.getDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid));
+      const snap = await getDoc(doc(fbDb,"users",state.user.uid));
       if(snap.exists()){
         state.profile = snap.data();
       } else {
@@ -1023,10 +1159,10 @@ async function loadMyProfile(){
         const parts = n.split(" ");
         const name = parts[0];
         const last = parts.slice(1).join(" ") || "";
-        await fbModules.firestore.setDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid), {
+        await setDoc(doc(fbDb,"users",state.user.uid), {
           uid: state.user.uid, name, lastName: last, email: state.user.email, 
           avatar:"", cover:"", verified:false, followers:[], following:[], postCount:0, 
-          createdAt: fbModules.firestore.serverTimestamp()
+          createdAt: serverTimestamp()
         });
         state.profile = { uid:state.user.uid, name, lastName:last, email:state.user.email, avatar:"",cover:"",verified:false,followers:[],following:[],postCount:0 };
       }
@@ -1040,16 +1176,15 @@ async function loadMyProfile(){
   }
 }
 
+/* ════════════════════════════════════════════════════════════════
+   FEED
+   ════════════════════════════════════════════════════════════════ */
 function subscribeFeed(){
   if (state.feedListener){ state.feedListener(); state.feedListener = null; }
   if (FIREBASE_OK){
     try {
-      const q = fbModules.firestore.query(
-        fbModules.firestore.collection(fbDb,"posts"),
-        fbModules.firestore.orderBy("createdAt","desc"),
-        fbModules.firestore.limit(50)
-      );
-      state.feedListener = fbModules.firestore.onSnapshot(q, snap => {
+      const q = query(collection(fbDb,"posts"), orderBy("createdAt","desc"), limit(50));
+      state.feedListener = onSnapshot(q, snap => {
         renderFeed(snap.docs.map(d => ({ id: d.id, ...d.data() })));
       }, err => {
         console.error('Feed error:', err);
@@ -1078,12 +1213,24 @@ function renderFeed(posts){
   });
 }
 
+/* ════════════════════════════════════════════════════════════════
+   RENDER POST
+   ════════════════════════════════════════════════════════════════ */
+let sealCounter = 0;
+
 function renderPost(p, id){
   const el = document.createElement("div");
   el.className = "post-card";
-  let coverHTML = p.cover ? `<img src="${p.cover}" alt="cover" loading="lazy" />` : `<i class="fa-solid fa-cube"></i>`;
-  const coverClass = p.cover ? "post-cover" : "post-cover no-cover";
-  const verified = p.authorVerified ? `<span class="verified" title="Verificado"><i class="fa-solid fa-circle-check"></i></span>` : "";
+  
+  let coverHTML;
+  if(p.cover && p.cover.startsWith('http')){
+    coverHTML = `<img src="${p.cover}" alt="cover" loading="lazy" />`;
+  } else {
+    coverHTML = `<i class="fa-solid fa-cube"></i>`;
+  }
+  const coverClass = (p.cover && p.cover.startsWith('http')) ? "post-cover" : "post-cover no-cover";
+  
+  const verifiedSeal = p.authorVerified ? getVerifiedSealSVG('_' + (sealCounter++)) : "";
 
   el.innerHTML = `
     <div class="${coverClass}">
@@ -1094,7 +1241,7 @@ function renderPost(p, id){
       <div class="post-head">
         <div class="avatar" data-uid="${p.authorId}"></div>
         <div class="post-user">
-          <div class="name" data-uid="${p.authorId}">${escapeHtml(p.authorName||"Anon")} ${verified}</div>
+          <div class="name" data-uid="${p.authorId}">${escapeHtml(p.authorName||"Anon")}${verifiedSeal}</div>
           <div class="meta">${fmtDate(p.createdAt)}</div>
         </div>
       </div>
@@ -1109,7 +1256,7 @@ function renderPost(p, id){
     </div>`;
 
   const avEl = el.querySelector(".avatar");
-  applyAvatar(avEl, p.authorAvatar||"", p.authorName||"U");
+  applyAvatar(avEl, (p.authorAvatar && p.authorAvatar.startsWith('http')) ? p.authorAvatar : "", p.authorName||"U");
   
   if(p.authorId === state.user.uid){
     avEl.classList.add("clickable");
@@ -1126,18 +1273,21 @@ function renderPost(p, id){
   return el;
 }
 
+/* ════════════════════════════════════════════════════════════════
+   DELETE POST
+   ════════════════════════════════════════════════════════════════ */
 async function deletePost(id, fileUrl){
   if(!confirm("¿Eliminar esta publicación?")) return;
   try{
     if (FIREBASE_OK){
-      await fbModules.firestore.deleteDoc(fbModules.firestore.doc(fbDb,"posts",id));
-      if(fileUrl){
+      await deleteDoc(doc(fbDb,"posts",id));
+      if(fileUrl && fileUrl.startsWith('http')){
         try{
           const path = decodeURIComponent(new URL(fileUrl).pathname.split("/o/")[1].split("?")[0]);
-          await fbModules.storage.deleteObject(fbModules.storage.ref(fbStorage, path));
+          await deleteObject(ref(fbStorage, path));
         }catch(e){ console.warn("No se pudo borrar archivo",e); }
       }
-      await fbModules.firestore.updateDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid), { postCount: fbModules.firestore.increment(-1) });
+      await updateDoc(doc(fbDb,"users",state.user.uid), { postCount: increment(-1) });
     } else {
       DemoDB.deletePost(id, state.user.uid);
       subscribeFeed();
@@ -1149,13 +1299,32 @@ async function deletePost(id, fileUrl){
   }
 }
 
+/* ════════════════════════════════════════════════════════════════
+   UPLOAD — SOLO FIREBASE (streaming con uploadBytesResumable)
+   ════════════════════════════════════════════════════════════════ */
 const dropZone = $("#dropZone");
 const fileInput = $("#fileInput");
-dropZone.addEventListener("click",()=>fileInput.click());
-dropZone.addEventListener("dragover",e=>{e.preventDefault();dropZone.classList.add("drag")});
+
+dropZone.addEventListener("click", e => {
+  if (!FIREBASE_OK){
+    toast("⚠ Configura Firebase para publicar archivos", 'warn');
+    return;
+  }
+  fileInput.click();
+});
+
+dropZone.addEventListener("dragover",e=>{
+  e.preventDefault();
+  if (FIREBASE_OK) dropZone.classList.add("drag");
+});
 dropZone.addEventListener("dragleave",()=>dropZone.classList.remove("drag"));
 dropZone.addEventListener("drop",e=>{
-  e.preventDefault();dropZone.classList.remove("drag");
+  e.preventDefault();
+  dropZone.classList.remove("drag");
+  if (!FIREBASE_OK){
+    toast("⚠ Configura Firebase para publicar archivos", 'warn');
+    return;
+  }
   if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
 });
 fileInput.addEventListener("change",e=>{
@@ -1176,7 +1345,16 @@ function handleFile(f){
   $("#fileInfo").classList.add("show");
 }
 
+/* ════════════════════════════════════════════════════════════════
+   PUBLISH — Firebase obligatorio para archivos
+   ════════════════════════════════════════════════════════════════ */
 $("#publishBtn").addEventListener("click", async () => {
+  if (!FIREBASE_OK){
+    toast("⚠ Configura Firebase para publicar archivos", 'err');
+    showBanner('Configura firebaseConfig en el script para habilitar la publicación de archivos', 'error');
+    return;
+  }
+  
   if(!state.selectedFile){ toast("Selecciona un archivo",'err'); return; }
   const title = $("#postTitle").value.trim();
   const desc  = $("#postDesc").value.trim();
@@ -1184,57 +1362,64 @@ $("#publishBtn").addEventListener("click", async () => {
 
   const btn = $("#publishBtn");
   btn.disabled = true;
-  btn.innerHTML = '<span class="loader"></span> SUBIENDO...';
+  btn.innerHTML = '<span class="loader"></span> SUBIENDO A LA NUBE...';
   $("#uploadProgress").classList.add("show");
 
   try{
-    let fileUrl = '';
+    // 1. SUBIR ARCHIVO PRINCIPAL (streaming a Cloud Storage)
+    const fileRef = ref(fbStorage, `files/${state.user.uid}/${Date.now()}_${state.selectedFile.name}`);
+    const task = uploadBytesResumable(fileRef, state.selectedFile);
+    
+    const fileUrl = await new Promise((res,rej)=>{
+      task.on("state_changed",
+        s => { 
+          const p = (s.bytesLoaded/s.totalBytes)*100;
+          $("#uploadBar").style.width = p+"%";
+        },
+        err => {
+          console.error('Error upload file:', err);
+          rej(err);
+        },
+        async () => res(await getDownloadURL(task.snapshot.ref))
+      );
+    });
+
+    // 2. SUBIR PORTADA (si existe) a Cloud Storage
     let coverUrl = '';
-    if (FIREBASE_OK){
-      const fileRef = fbModules.storage.ref(fbStorage, `files/${state.user.uid}/${Date.now()}_${state.selectedFile.name}`);
-      const task = fbModules.storage.uploadBytesResumable(fileRef, state.selectedFile);
-      fileUrl = await new Promise((res,rej)=>{
-        task.on("state_changed",
-          s => { $("#uploadBar").style.width = ((s.bytesLoaded/s.totalBytes)*100)+"%"; },
-          rej,
-          async () => res(await fbModules.storage.getDownloadURL(task.snapshot.ref))
+    const coverFile = $("#coverInput").files[0];
+    if(coverFile){
+      const cRef = ref(fbStorage, `covers/${state.user.uid}/${Date.now()}_${coverFile.name}`);
+      const coverTask = uploadBytesResumable(cRef, coverFile);
+      coverUrl = await new Promise((res,rej)=>{
+        coverTask.on("state_changed",
+          () => {},
+          err => rej(err),
+          async () => res(await getDownloadURL(coverTask.snapshot.ref))
         );
       });
-      const coverFile = $("#coverInput").files[0];
-      if(coverFile){
-        const cRef = fbModules.storage.ref(fbStorage, `covers/${state.user.uid}/${Date.now()}_${coverFile.name}`);
-        await fbModules.storage.uploadBytesResumable(cRef, coverFile);
-        coverUrl = await fbModules.storage.getDownloadURL(cRef);
-      }
-      await fbModules.firestore.addDoc(fbModules.firestore.collection(fbDb,"posts"), {
-        title, description: desc, fileUrl, fileName: state.selectedFile.name,
-        size: state.selectedFile.size || 0, cover: coverUrl,
-        authorId: state.user.uid,
-        authorName: `${state.profile.name} ${state.profile.lastName}`,
-        authorAvatar: state.profile.avatar || "",
-        authorVerified: !!state.profile.verified,
-        downloads: 0,
-        createdAt: fbModules.firestore.serverTimestamp()
-      });
-      await fbModules.firestore.updateDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid), { postCount: fbModules.firestore.increment(1) });
-    } else {
-      if (state.selectedFile.size > 5 * 1024 * 1024) toast("Modo Demo: archivos hasta 5 MB. Configura Firebase para archivos grandes.", 'warn');
-      fileUrl = await fileToDataURL(state.selectedFile);
-      const coverFile = $("#coverInput").files[0];
-      if(coverFile) coverUrl = await fileToDataURL(coverFile);
-      DemoDB.createPost({
-        title, description: desc, fileUrl, fileName: state.selectedFile.name,
-        size: state.selectedFile.size || 0, cover: coverUrl,
-        authorId: state.user.uid,
-        authorName: `${state.profile.name} ${state.profile.lastName}`,
-        authorAvatar: state.profile.avatar || "",
-        authorVerified: !!state.profile.verified,
-        downloads: 0
-      });
-      subscribeFeed();
     }
 
-    toast("✓ Publicación creada");
+    // 3. CREAR METADATA DEL POST EN FIRESTORE
+    await addDoc(collection(fbDb,"posts"), {
+      title, 
+      description: desc, 
+      fileUrl, 
+      fileName: state.selectedFile.name,
+      size: state.selectedFile.size || 0, 
+      cover: coverUrl,
+      authorId: state.user.uid,
+      authorName: `${state.profile.name} ${state.profile.lastName}`,
+      authorAvatar: state.profile.avatar || "",
+      authorVerified: !!state.profile.verified,
+      downloads: 0,
+      createdAt: serverTimestamp()
+    });
+    
+    await updateDoc(doc(fbDb,"users",state.user.uid), { 
+      postCount: increment(1) 
+    });
+
+    toast("✓ Publicación creada en la nube");
     state.selectedFile = null;
     $("#postTitle").value=""; $("#postDesc").value="";
     $("#coverInput").value=""; $("#fileInput").value="";
@@ -1242,8 +1427,9 @@ $("#publishBtn").addEventListener("click", async () => {
     $("#uploadProgress").classList.remove("show");
     $("#uploadBar").style.width="0%";
     showView("viewFeed");
+    
   }catch(e){
-    console.error(e);
+    console.error('Error al publicar:', e);
     toast("Error al publicar: " + e.message, 'err');
   }finally{
     btn.disabled=false; 
@@ -1251,8 +1437,14 @@ $("#publishBtn").addEventListener("click", async () => {
   }
 });
 
+/* ════════════════════════════════════════════════════════════════
+   DOWNLOAD + ADSENSE
+   ════════════════════════════════════════════════════════════════ */
 function startDownload(url, name){
-  if(!url){ toast("URL no disponible", 'err'); return; }
+  if(!url || !url.startsWith('http')){ 
+    toast("⚠ Archivo no disponible (requiere Firebase)", 'warn'); 
+    return; 
+  }
   state.currentDownloadUrl = url;
   state.currentDownloadName = name || 'archivo';
   openModal("modalAd");
@@ -1289,12 +1481,15 @@ $("#btnFinalDownload").addEventListener("click", ()=>{
   }
 });
 
+/* ════════════════════════════════════════════════════════════════
+   PROFILE
+   ════════════════════════════════════════════════════════════════ */
 async function openProfile(uid){
   state.viewingUserId = uid;
   try {
     let u;
     if (FIREBASE_OK){
-      const snap = await fbModules.firestore.getDoc(fbModules.firestore.doc(fbDb,"users",uid));
+      const snap = await getDoc(doc(fbDb,"users",uid));
       if(!snap.exists()){ toast("Usuario no encontrado",'err'); return; }
       u = snap.data();
     } else {
@@ -1302,26 +1497,23 @@ async function openProfile(uid){
       if(!u){ toast("Usuario no encontrado",'err'); return; }
     }
 
-    $("#profileCover").style.backgroundImage = u.cover ? `url('${u.cover}')` : "";
+    $("#profileCover").style.backgroundImage = (u.cover && u.cover.startsWith('http')) ? `url('${u.cover}')` : "";
+    
     const av = $("#profileAvatar");
-    applyAvatar(av, u.avatar, `${u.name} ${u.lastName||""}`);
+    applyAvatar(av, (u.avatar && u.avatar.startsWith('http')) ? u.avatar : "", `${u.name} ${u.lastName||""}`);
     if(uid === state.user.uid) av.classList.add("clickable");
     else av.classList.remove("clickable");
 
-    $("#profileName").innerHTML = escapeHtml(`${u.name} ${u.lastName||""}`) +
-      (u.verified ? ` <span class="verified"><i class="fa-solid fa-circle-check"></i></span>` : "");
+    const verifiedSeal = u.verified ? getVerifiedSealSVG('_profile') : "";
+    $("#profileName").innerHTML = escapeHtml(`${u.name} ${u.lastName||""}`) + verifiedSeal;
     
     $("#statFollowers").textContent = (u.followers||[]).length;
     $("#statFollowing").textContent = (u.following||[]).length;
 
     if (state.feedListener) state.feedListener();
     if (FIREBASE_OK){
-      const q = fbModules.firestore.query(
-        fbModules.firestore.collection(fbDb,"posts"),
-        fbModules.firestore.where("authorId","==",uid),
-        fbModules.firestore.orderBy("createdAt","desc")
-      );
-      state.feedListener = fbModules.firestore.onSnapshot(q, snap2 => {
+      const q = query(collection(fbDb,"posts"), where("authorId","==",uid), orderBy("createdAt","desc"));
+      state.feedListener = onSnapshot(q, snap2 => {
         $("#statPosts").textContent = snap2.size;
         const list = $("#profilePosts");
         list.innerHTML = "";
@@ -1370,14 +1562,14 @@ async function toggleFollow(uid){
   const isFollowing = (state.profile.following||[]).includes(uid);
   try{
     if (FIREBASE_OK){
-      const meRef = fbModules.firestore.doc(fbDb,"users",state.user.uid);
-      const themRef = fbModules.firestore.doc(fbDb,"users",uid);
+      const meRef = doc(fbDb,"users",state.user.uid);
+      const themRef = doc(fbDb,"users",uid);
       if(isFollowing){
-        await fbModules.firestore.updateDoc(meRef, { following: fbModules.firestore.arrayRemove(uid) });
-        await fbModules.firestore.updateDoc(themRef, { followers: fbModules.firestore.arrayRemove(state.user.uid) });
+        await updateDoc(meRef, { following: arrayRemove(uid) });
+        await updateDoc(themRef, { followers: arrayRemove(state.user.uid) });
       } else {
-        await fbModules.firestore.updateDoc(meRef, { following: fbModules.firestore.arrayUnion(uid) });
-        await fbModules.firestore.updateDoc(themRef, { followers: fbModules.firestore.arrayUnion(state.user.uid) });
+        await updateDoc(meRef, { following: arrayUnion(uid) });
+        await updateDoc(themRef, { followers: arrayUnion(state.user.uid) });
       }
     } else {
       const me = DemoDB.findUserById(state.user.uid);
@@ -1401,6 +1593,9 @@ async function toggleFollow(uid){
   }
 }
 
+/* ════════════════════════════════════════════════════════════════
+   SEARCH
+   ════════════════════════════════════════════════════════════════ */
 async function doSearch(){
   const q = $("#searchInput").value.trim().toLowerCase();
   const out = $("#searchResults");
@@ -1412,7 +1607,7 @@ async function doSearch(){
   try{
     let results = [];
     if (FIREBASE_OK){
-      const snap = await fbModules.firestore.getDocs(fbModules.firestore.collection(fbDb,"users"));
+      const snap = await getDocs(collection(fbDb,"users"));
       snap.forEach(d=>{
         const u = d.data();
         const full = `${u.name} ${u.lastName||""}`.toLowerCase();
@@ -1432,14 +1627,14 @@ async function doSearch(){
       const el = document.createElement("div");
       el.className = "admin-user";
       el.style.cursor = "pointer";
-      const verified = u.verified?'<span class="verified"><i class="fa-solid fa-circle-check"></i></span>':"";
+      const verifiedSeal = u.verified ? getVerifiedSealSVG('_s'+sealCounter++) : "";
       el.innerHTML = `
         <div class="avatar"></div>
         <div class="info">
-          <div class="n">${escapeHtml(u.name)} ${escapeHtml(u.lastName||"")} ${verified}</div>
+          <div class="n">${escapeHtml(u.name)} ${escapeHtml(u.lastName||"")}${verifiedSeal}</div>
         </div>
         <i class="fa-solid fa-chevron-right" style="color:var(--text-dim)"></i>`;
-      applyAvatar(el.querySelector(".avatar"), u.avatar, `${u.name} ${u.lastName||""}`);
+      applyAvatar(el.querySelector(".avatar"), (u.avatar && u.avatar.startsWith('http')) ? u.avatar : "", `${u.name} ${u.lastName||""}`);
       el.addEventListener("click",()=>openProfile(u.uid));
       out.appendChild(el);
     });
@@ -1451,6 +1646,9 @@ async function doSearch(){
 $("#searchBtn").addEventListener("click", doSearch);
 $("#searchInput").addEventListener("keydown", e => { if(e.key==="Enter") doSearch(); });
 
+/* ════════════════════════════════════════════════════════════════
+   EDIT PROFILE
+   ════════════════════════════════════════════════════════════════ */
 function prefillEditForm(){
   if(!state.profile) return;
   $("#editName").value = state.profile.name || "";
@@ -1464,35 +1662,48 @@ $("#saveProfileBtn").addEventListener("click", async () => {
   const btn = $("#saveProfileBtn");
   btn.disabled = true; 
   btn.innerHTML = '<span class="loader"></span> GUARDANDO...';
+  
   try{
     const updates = { name, lastName: last };
+    
     if (FIREBASE_OK){
       const cvFile = $("#coverEditInput").files[0];
       if(cvFile){
-        const r = fbModules.storage.ref(fbStorage, `covers/${state.user.uid}/${Date.now()}_profile_${cvFile.name}`);
-        await fbModules.storage.uploadBytesResumable(r, cvFile);
-        updates.cover = await fbModules.storage.getDownloadURL(r);
+        const r = ref(fbStorage, `covers/${state.user.uid}/${Date.now()}_profile_${cvFile.name}`);
+        const task = uploadBytesResumable(r, cvFile);
+        updates.cover = await new Promise((res,rej)=>{
+          task.on("state_changed",
+            () => {},
+            err => rej(err),
+            async () => res(await getDownloadURL(task.snapshot.ref))
+          );
+        });
       }
-      await fbModules.firestore.updateDoc(fbModules.firestore.doc(fbDb,"users",state.user.uid), updates);
-      await fbModules.auth.updateProfile(fbAuth.currentUser, { displayName: `${name} ${last}` });
+      await updateDoc(doc(fbDb,"users",state.user.uid), updates);
+      await updateProfile(fbAuth.currentUser, { displayName: `${name} ${last}` });
     } else {
-      const cvFile = $("#coverEditInput").files[0];
-      if(cvFile) updates.cover = await fileToDataURL(cvFile);
+      if ($("#coverEditInput").files[0]){
+        toast("⚠ Firebase requerido para subir portadas", 'warn');
+      }
       DemoDB.updateUser(state.user.uid, updates);
     }
+    
     await loadMyProfile();
     refreshAllAvatars();
     toast("✓ Perfil actualizado");
     $("#coverEditInput").value="";
   }catch(e){
     console.error(e);
-    toast("Error al guardar", 'err');
+    toast("Error al guardar: " + e.message, 'err');
   }finally{
     btn.disabled=false; 
     btn.innerHTML="GUARDAR CAMBIOS";
   }
 });
 
+/* ════════════════════════════════════════════════════════════════
+   🥚 EASTER EGG: 10 CLICKS → ADMIN
+   ════════════════════════════════════════════════════════════════ */
 $("#brandLogo").addEventListener("click", () => {
   state.brandClicks++;
   clearTimeout(state.brandTimer);
@@ -1526,7 +1737,7 @@ async function openAdminPanel(){
   try{
     let users = [];
     if (FIREBASE_OK){
-      const snap = await fbModules.firestore.getDocs(fbModules.firestore.collection(fbDb,"users"));
+      const snap = await getDocs(collection(fbDb,"users"));
       snap.forEach(d => users.push(d.data()));
     } else {
       users = DemoDB.getUsers();
@@ -1539,23 +1750,23 @@ async function openAdminPanel(){
     users.forEach(u=>{
       const el = document.createElement("div");
       el.className = "admin-user";
-      const verified = u.verified?'<span class="verified"><i class="fa-solid fa-circle-check"></i></span>':"";
+      const verifiedSeal = u.verified ? getVerifiedSealSVG('_a'+sealCounter++) : "";
       el.innerHTML = `
         <div class="avatar"></div>
         <div class="info">
-          <div class="n">${escapeHtml(u.name)} ${escapeHtml(u.lastName||"")} ${verified}</div>
+          <div class="n">${escapeHtml(u.name)} ${escapeHtml(u.lastName||"")}${verifiedSeal}</div>
         </div>
         <div class="toggle ${u.verified?"on":""}" data-uid="${u.uid}"></div>`;
-      applyAvatar(el.querySelector(".avatar"), u.avatar, `${u.name} ${u.lastName||""}`);
+      applyAvatar(el.querySelector(".avatar"), (u.avatar && u.avatar.startsWith('http')) ? u.avatar : "", `${u.name} ${u.lastName||""}`);
       el.querySelector(".toggle").addEventListener("click", async (e)=>{
         const t = e.currentTarget;
         const uid = t.dataset.uid;
         try {
           let current = false;
           if (FIREBASE_OK){
-            const s = await fbModules.firestore.getDoc(fbModules.firestore.doc(fbDb,"users",uid));
+            const s = await getDoc(doc(fbDb,"users",uid));
             current = s.data().verified || false;
-            await fbModules.firestore.updateDoc(fbModules.firestore.doc(fbDb,"users",uid), { verified: !current });
+            await updateDoc(doc(fbDb,"users",uid), { verified: !current });
           } else {
             const user = DemoDB.findUserById(uid);
             current = user.verified || false;
@@ -1563,6 +1774,7 @@ async function openAdminPanel(){
           }
           t.classList.toggle("on");
           toast(`Verificación ${!current?"activada":"desactivada"}`);
+          openAdminPanel();
         } catch (err){
           console.error(err);
           toast("Error", 'err');
@@ -1576,14 +1788,23 @@ async function openAdminPanel(){
   }
 }
 
+/* ════════════════════════════════════════════════════════════════
+   🚀 ARRANQUE
+   ════════════════════════════════════════════════════════════════ */
 (async function init(){
-  console.log("%c ═══ 𝘿𝙍𝙉 𝙈𝙊𝘿𝕃 v3.3 ═══ ", 'background:#00FF66;color:#000;font-size:14px;padding:6px 12px');
+  console.log("%c ═══ 𝘿𝙍𝙉 𝙈𝙊𝘿𝕃 v3.7 ═══ ", 'background:#00FF66;color:#000;font-size:14px;padding:6px 12px');
+  console.log("%c Corrección: localStorage SOLO para metadata. Archivos → Firebase Storage ", 'color:#ffb400;font-size:11px');
+  
   FIREBASE_OK = await tryInitFirebase();
-  if (FIREBASE_OK) showBanner('Modo Cloud activo · Firebase conectado', 'ok');
-  else showBanner('Modo Demo activo · Datos guardados localmente · Configura Firebase para modo Cloud', 'demo');
   
   if (FIREBASE_OK){
-    fbModules.auth.onAuthStateChanged(fbAuth, async (user) => {
+    showBanner('Modo Cloud activo · Firebase + Storage conectados', 'ok');
+  } else {
+    showBanner('Modo Demo · Sin archivos · Configura firebaseConfig para publicar', 'demo');
+  }
+  
+  if (FIREBASE_OK){
+    onAuthStateChanged(fbAuth, async (user) => {
       try {
         if (user){
           state.user = { uid: user.uid, email: user.email };
@@ -1623,4 +1844,4 @@ async function openAdminPanel(){
 })();
 </script>
 </body>
-</html>
+  </html>
