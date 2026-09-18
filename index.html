@@ -276,19 +276,12 @@ input,textarea,select{font-family:inherit;color:inherit}
 .profile-meta h2{font-family:var(--font-display);font-size:16px;letter-spacing:2px;color:var(--text-bright);display:flex;align-items:center;gap:2px;word-break:break-word;flex-wrap:wrap}
 .stats{display:flex;gap:16px;padding:0 18px 14px;border-bottom:1px dashed var(--border)}
 .stat{text-align:center;flex:1}
-.stat .n{
-  font-size:16px;font-weight:800;color:var(--neon);text-shadow:var(--glow);
-}
+.stat .n{font-size:16px;font-weight:800;color:var(--neon);text-shadow:var(--glow)}
 .stat .l{font-size:9px;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
-
-/* ════════════════════════════════════════════════════════════════
-   🔧 CONTADORES CLICKEABLES (Seguidores / Siguiendo)
-   ════════════════════════════════════════════════════════════════ */
 .stat.clickable{cursor:pointer;transition:all .2s;border-radius:8px;padding:6px 4px}
 .stat.clickable:hover{background:rgba(0,255,102,.05)}
 .stat.clickable:hover .n{transform:scale(1.1)}
 .stat.clickable .n{transition:transform .2s}
-.stat.disabled{cursor:default;opacity:.7}
 
 .profile-actions{padding:14px 18px;display:flex;gap:8px}
 
@@ -326,31 +319,198 @@ input,textarea,select{font-family:inherit;color:inherit}
 .modal-close{float:right;color:var(--text-dim);font-size:18px;padding:4px}
 .modal-close:hover{color:var(--danger)}
 
-.ad-container{background:#000;border:1px solid var(--neon);border-radius:10px;padding:20px;text-align:center;margin:14px 0;position:relative;overflow:hidden}
-.ad-container::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(0,255,102,.08),transparent);animation:sweep 2s infinite}
-@keyframes sweep{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-.ad-container .ad-label{font-size:9px;letter-spacing:3px;color:var(--text-dim);margin-bottom:10px}
-.ad-slot{
-  min-height:200px;background:#0a0a0a;border:1px dashed var(--border);border-radius:8px;
-  display:grid;place-items:center;color:var(--text-dim);font-size:11px;letter-spacing:2px;position:relative;z-index:1;
-}
-.ad-timer{margin-top:12px;font-size:11px;color:var(--neon);letter-spacing:2px}
-.ad-timer i{margin-right:6px}
-.download-ready{display:none;margin-top:14px;animation:fadeIn .4s}
-.download-ready.show{display:block}
-
-.admin-user{display:flex;align-items:center;gap:10px;padding:10px;background:#070707;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:all .2s}
-.admin-user:hover{border-color:#2a2a2a}
-.admin-user .info{flex:1;min-width:0}
-.admin-user .info .n{font-size:12px;color:var(--text-bright);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;align-items:center;gap:2px;flex-wrap:wrap}
-.toggle{width:44px;height:24px;border-radius:12px;background:#1a1a1a;border:1px solid var(--border);position:relative;cursor:pointer;transition:all .2s;flex-shrink:0}
-.toggle::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--text-dim);transition:all .2s}
-.toggle.on{background:rgba(29,155,240,.15);border-color:var(--verify)}
-.toggle.on::after{left:22px;background:var(--verify);box-shadow:var(--verify-glow)}
-
 /* ════════════════════════════════════════════════════════════════
-   🔧 MODAL DE LISTA DE USUARIOS (Seguidores / Siguiendo)
+   🔧 MODAL DE DESCARGA PROTEGIDA — TIMER CIRCULAR PREMIUM
+   Sin espacio publicitario. Solo timer + botón de descarga.
    ════════════════════════════════════════════════════════════════ */
+.download-modal-content{
+  text-align:center;
+  padding:10px 0 0 0;
+}
+.download-modal-content .subtitle{
+  font-size:11px;
+  color:var(--text-dim);
+  letter-spacing:1px;
+  line-height:1.6;
+  margin-bottom:24px;
+}
+.download-modal-content .file-info-preview{
+  background:#070707;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px 14px;
+  margin-bottom:24px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-align:left;
+}
+.download-modal-content .file-info-preview i{
+  font-size:24px;
+  color:var(--neon);
+  text-shadow:var(--glow);
+  flex-shrink:0;
+}
+.download-modal-content .file-info-preview .file-details{
+  flex:1;
+  min-width:0;
+}
+.download-modal-content .file-info-preview .file-name{
+  font-size:12px;
+  color:var(--text-bright);
+  font-weight:600;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  margin-bottom:2px;
+}
+.download-modal-content .file-info-preview .file-size{
+  font-size:10px;
+  color:var(--text-dim);
+  letter-spacing:1px;
+}
+
+/* Timer circular SVG */
+.timer-circle-wrap{
+  position:relative;
+  width:160px;
+  height:160px;
+  margin:0 auto 20px;
+}
+.timer-circle-wrap svg{
+  width:100%;
+  height:100%;
+  transform:rotate(-90deg);
+}
+.timer-circle-bg{
+  fill:none;
+  stroke:#1a1a1a;
+  stroke-width:6;
+}
+.timer-circle-progress{
+  fill:none;
+  stroke:url(#timerGradient);
+  stroke-width:6;
+  stroke-linecap:round;
+  stroke-dasharray:440;
+  stroke-dashoffset:440;
+  transition:stroke-dashoffset 1s linear;
+  filter:drop-shadow(0 0 6px rgba(0,255,102,.6));
+}
+.timer-number{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-family:var(--font-display);
+  font-size:42px;
+  font-weight:900;
+  color:var(--neon);
+  text-shadow:var(--glow);
+  letter-spacing:2px;
+  line-height:1;
+}
+.timer-label{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, 20px);
+  font-size:9px;
+  color:var(--text-dim);
+  letter-spacing:3px;
+  text-transform:uppercase;
+  font-family:var(--font-cyber);
+}
+
+/* Estado completado */
+.timer-circle-wrap.completed .timer-circle-progress{
+  stroke:var(--neon);
+  stroke-dashoffset:0;
+}
+.timer-circle-wrap.completed .timer-number{
+  color:var(--neon);
+  animation:completePulse 1s ease;
+}
+@keyframes completePulse{
+  0%{transform:translate(-50%,-50%) scale(1)}
+  50%{transform:translate(-50%,-50%) scale(1.3)}
+  100%{transform:translate(-50%,-50%) scale(1)}
+}
+
+/* Mensaje de estado */
+.download-status{
+  font-size:11px;
+  letter-spacing:2px;
+  color:var(--text-dim);
+  margin-bottom:20px;
+  min-height:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+.download-status i{
+  color:var(--neon);
+  text-shadow:var(--glow);
+}
+.download-status.ready{
+  color:var(--neon);
+}
+.download-status.ready i{
+  animation:completePulse 1s ease;
+}
+
+/* Botón de descarga final */
+.btn-download-final{
+  width:100%;
+  padding:15px;
+  background:var(--neon);
+  color:#000;
+  font-weight:800;
+  letter-spacing:3px;
+  font-size:13px;
+  border-radius:10px;
+  text-transform:uppercase;
+  box-shadow:var(--glow);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  opacity:0;
+  transform:translateY(10px);
+  pointer-events:none;
+  transition:all .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.btn-download-final.show{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+.btn-download-final:hover{
+  filter:brightness(1.15);
+  transform:translateY(-2px);
+}
+.btn-download-final:active{
+  transform:translateY(0);
+}
+
+/* Estados de carga */
+.download-status .pulse-dot{
+  display:inline-block;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--neon);
+  box-shadow:var(--glow);
+  animation:pulseDot 1.4s infinite;
+}
+@keyframes pulseDot{
+  0%,80%,100%{opacity:.3;transform:scale(.8)}
+  40%{opacity:1;transform:scale(1.2)}
+}
+.download-status .pulse-dot:nth-child(2){animation-delay:.2s}
+.download-status .pulse-dot:nth-child(3){animation-delay:.4s}
+
 .follow-list-modal{max-width:480px}
 .follow-list-tabs{
   display:flex;gap:4px;margin-bottom:14px;
@@ -362,9 +522,7 @@ input,textarea,select{font-family:inherit;color:inherit}
   font-size:11px;letter-spacing:2px;color:var(--text-dim);
   transition:all .2s;font-weight:600;
 }
-.follow-list-tabs button.active{
-  background:var(--neon);color:#000;box-shadow:var(--glow);
-}
+.follow-list-tabs button.active{background:var(--neon);color:#000;box-shadow:var(--glow)}
 .follow-list-content{max-height:50vh;overflow-y:auto;padding-right:4px}
 .follow-user-item{
   display:flex;align-items:center;gap:10px;
@@ -389,15 +547,21 @@ input,textarea,select{font-family:inherit;color:inherit}
   transition:all .2s;flex-shrink:0;
 }
 .btn-follow-mini:hover{background:rgba(0,255,102,.1)}
-.btn-follow-mini.following{
-  background:var(--neon);color:#000;
-  box-shadow:var(--glow);
-}
+.btn-follow-mini.following{background:var(--neon);color:#000;box-shadow:var(--glow)}
 .btn-follow-mini.following:hover{
   background:var(--danger);border-color:var(--danger);color:#fff;
   box-shadow:0 0 8px rgba(255,42,85,.5);
 }
 .btn-follow-mini:disabled{opacity:.5;cursor:not-allowed}
+
+.admin-user{display:flex;align-items:center;gap:10px;padding:10px;background:#070707;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:all .2s}
+.admin-user:hover{border-color:#2a2a2a}
+.admin-user .info{flex:1;min-width:0}
+.admin-user .info .n{font-size:12px;color:var(--text-bright);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;align-items:center;gap:2px;flex-wrap:wrap}
+.toggle{width:44px;height:24px;border-radius:12px;background:#1a1a1a;border:1px solid var(--border);position:relative;cursor:pointer;transition:all .2s;flex-shrink:0}
+.toggle::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--text-dim);transition:all .2s}
+.toggle.on{background:rgba(29,155,240,.15);border-color:var(--verify)}
+.toggle.on::after{left:22px;background:var(--verify);box-shadow:var(--verify-glow)}
 
 .toast{
   position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);
@@ -422,6 +586,8 @@ input,textarea,select{font-family:inherit;color:inherit}
   .top-avatar{width:34px;height:34px;font-size:12px}
   .follow-list-modal{max-width:100%}
   .follow-list-content{max-height:45vh}
+  .timer-circle-wrap{width:140px;height:140px}
+  .timer-number{font-size:36px}
 }
 </style>
 </head>
@@ -438,7 +604,7 @@ input,textarea,select{font-family:inherit;color:inherit}
     <div class="brand" id="brandLogo" title="DRN MODZ">
       <span class="dot"></span>
       <span>DRN <span class="accent">MODZ</span></span>
-      <span class="brand-tag">v4.2</span>
+      <span class="brand-tag">v4.3</span>
     </div>
     <div class="top-actions">
       <button class="icon-btn search" id="btnSearch" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -629,44 +795,69 @@ input,textarea,select{font-family:inherit;color:inherit}
   <button class="nav-btn" data-view="viewEdit"><i class="fa-solid fa-gear"></i><span>EDITAR</span></button>
 </nav>
 
+<!-- ════════════════════════════════════════════════════════════════
+     🔧 MODAL DE DESCARGA PROTEGIDA — VERSIÓN SIMPLIFICADA
+     Sin espacio publicitario. Solo timer circular + botón descarga.
+     ════════════════════════════════════════════════════════════════ -->
 <div class="modal-bg" id="modalAd">
   <div class="modal">
     <button class="modal-close" data-close="modalAd"><i class="fa-solid fa-xmark"></i></button>
     <h3><i class="fa-solid fa-shield-halved"></i> DESCARGA PROTEGIDA</h3>
-    <p style="font-size:11px;color:var(--text-dim);margin-bottom:10px;line-height:1.5">Visualiza el anuncio para liberar el archivo.</p>
-    <div class="ad-container">
-      <div class="ad-label">PUBLICIDAD · ADSENSE</div>
-      <div class="ad-slot" id="adSlot">
-        <div id="adsensePlaceholder">
-          <i class="fa-solid fa-rectangle-ad" style="font-size:28px;color:var(--neon);margin-bottom:8px;display:block;text-shadow:var(--glow)"></i>
-          ESPACIO PUBLICITARIO
+    
+    <div class="download-modal-content">
+      <p class="subtitle">
+        Espera el tiempo de seguridad para liberar el archivo.
+      </p>
+      
+      <!-- Preview del archivo -->
+      <div class="file-info-preview">
+        <i class="fa-solid fa-file-zipper"></i>
+        <div class="file-details">
+          <div class="file-name" id="dlFileName">archivo</div>
+          <div class="file-size" id="dlFileSize">— KB</div>
         </div>
       </div>
-      <div class="ad-timer" id="adTimer"><i class="fa-solid fa-clock"></i> Espera <span id="adCount">5</span>s</div>
-    </div>
-    <div class="download-ready" id="downloadReady">
-      <button class="btn-primary" id="btnFinalDownload"><i class="fa-solid fa-download"></i> DESCARGAR AHORA</button>
+      
+      <!-- Timer circular SVG -->
+      <div class="timer-circle-wrap" id="timerWrap">
+        <svg viewBox="0 0 160 160">
+          <defs>
+            <linearGradient id="timerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00FF66"/>
+              <stop offset="100%" stop-color="#00e0ff"/>
+            </linearGradient>
+          </defs>
+          <circle class="timer-circle-bg" cx="80" cy="80" r="70"/>
+          <circle class="timer-circle-progress" id="timerProgress" cx="80" cy="80" r="70"/>
+        </svg>
+        <div class="timer-number" id="timerNumber">15</div>
+        <div class="timer-label">SEGUNDOS</div>
+      </div>
+      
+      <!-- Estado actual -->
+      <div class="download-status" id="downloadStatus">
+        <span class="pulse-dot"></span>
+        <span class="pulse-dot"></span>
+        <span class="pulse-dot"></span>
+        <span style="margin-left:4px">PREPARANDO DESCARGA</span>
+      </div>
+      
+      <!-- Botón de descarga (oculto hasta completar timer) -->
+      <button class="btn-download-final" id="btnFinalDownload">
+        <i class="fa-solid fa-download"></i> DESCARGAR AHORA
+      </button>
     </div>
   </div>
 </div>
 
-<!-- ════════════════════════════════════════════════════════════════
-     🔧 NUEVO: MODAL DE LISTA DE SEGUIDORES / SEGUIDOS
-     ════════════════════════════════════════════════════════════════ -->
 <div class="modal-bg" id="modalFollowList">
   <div class="modal follow-list-modal">
     <button class="modal-close" data-close="modalFollowList"><i class="fa-solid fa-xmark"></i></button>
     <h3 id="followListTitle"><i class="fa-solid fa-users"></i> USUARIOS</h3>
-    
     <div class="follow-list-tabs">
-      <button class="active" data-follow-tab="followers">
-        <i class="fa-solid fa-user-group"></i> SEGUIDORES
-      </button>
-      <button data-follow-tab="following">
-        <i class="fa-solid fa-user-plus"></i> SIGUIENDO
-      </button>
+      <button class="active" data-follow-tab="followers"><i class="fa-solid fa-user-group"></i> SEGUIDORES</button>
+      <button data-follow-tab="following"><i class="fa-solid fa-user-plus"></i> SIGUIENDO</button>
     </div>
-    
     <div class="follow-list-content" id="followListContent">
       <div style="text-align:center;padding:20px"><span class="loader"></span></div>
     </div>
@@ -736,15 +927,10 @@ async function tryInitFirebase(){
     getAnalytics(fbApp);
     fbAuth = getAuth(fbApp);
     fbDb = getFirestore(fbApp);
-    
     await new Promise((resolve, reject) => {
       const timeout = setTimeout(() => reject(new Error('timeout')), 5000);
-      onAuthStateChanged(fbAuth, () => {
-        clearTimeout(timeout);
-        resolve();
-      }, reject);
+      onAuthStateChanged(fbAuth, () => { clearTimeout(timeout); resolve(); }, reject);
     });
-    
     console.log('%c ✓ Firebase conectado (Auth + Firestore) ', 'background:#00FF66;color:#000;padding:4px 10px;border-radius:4px');
     return true;
   } catch (err){
@@ -843,7 +1029,8 @@ const state = {
   user: null, profile: null, viewingUserId: null, selectedFile: null,
   brandClicks: 0, brandTimer: null, currentDownloadData: null,
   feedListener: null, profilePostsListener: null, authenticating: false,
-  followListContext: { uid: null, type: 'followers' }
+  followListContext: { uid: null, type: 'followers' },
+  downloadTimerInterval: null
 };
 
 const $ = s => document.querySelector(s);
@@ -873,7 +1060,14 @@ const fmtDate = ts => {
 
 const openModal = id => $("#"+id).classList.add("show");
 const closeModal = id => $("#"+id).classList.remove("show");
-$$("[data-close]").forEach(b=>b.addEventListener("click",()=>closeModal(b.dataset.close)));
+$$("[data-close]").forEach(b=>b.addEventListener("click",()=>{
+  closeModal(b.dataset.close);
+  // Limpiar timer de descarga al cerrar el modal
+  if (b.dataset.close === 'modalAd' && state.downloadTimerInterval) {
+    clearInterval(state.downloadTimerInterval);
+    state.downloadTimerInterval = null;
+  }
+}));
 
 const escapeHtml = s => String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
@@ -951,10 +1145,7 @@ $("#btnLogout").addEventListener("click", async () => {
     if (state.profilePostsListener) state.profilePostsListener();
     showAuthScreen();
     toast("Sesión cerrada");
-  } catch (err){
-    console.error(err);
-    toast("Error al cerrar sesión", 'err');
-  }
+  } catch (err){ console.error(err); toast("Error al cerrar sesión", 'err'); }
 });
 
 function showAuthScreen(){
@@ -1221,7 +1412,7 @@ function renderPost(p, id){
   }
   el.querySelector(".post-user .name").addEventListener("click", () => openProfile(p.authorId));
   const dlBtn = el.querySelector(".btn.download");
-  if(dlBtn) dlBtn.addEventListener("click", () => startDownload({ fileData: p.fileData, fileName: p.fileName, fileType: p.fileType || 'application/octet-stream' }));
+  if(dlBtn) dlBtn.addEventListener("click", () => startDownload({ fileData: p.fileData, fileName: p.fileName, fileType: p.fileType || 'application/octet-stream', fileSize: p.size || 0 }));
   const delBtn = el.querySelector("[data-del]");
   if(delBtn) delBtn.addEventListener("click", () => deletePost(delBtn.dataset.del));
   return el;
@@ -1294,23 +1485,117 @@ $("#publishBtn").addEventListener("click", async () => {
   } finally { btn.disabled = false; btn.innerHTML = "PUBLICAR"; }
 });
 
+/* ════════════════════════════════════════════════════════════════
+   🔧 DESCARGA PROTEGIDA — TIMER CIRCULAR 15 SEGUNDOS
+   Sin espacio publicitario. Solo timer + botón final.
+   ════════════════════════════════════════════════════════════════ */
+const DOWNLOAD_WAIT_TIME = 15; // segundos
+const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * 70; // ≈ 440
+
 function startDownload(postData) {
-  if (!postData || !postData.fileData) { toast("⚠ Archivo no disponible", 'warn'); return; }
+  if (!postData || !postData.fileData) { 
+    toast("⚠ Archivo no disponible", 'warn'); 
+    return; 
+  }
+  
   state.currentDownloadData = postData;
+  
+  // Limpiar timer previo si existe
+  if (state.downloadTimerInterval) {
+    clearInterval(state.downloadTimerInterval);
+    state.downloadTimerInterval = null;
+  }
+  
+  // Resetear UI del modal
+  const timerWrap = $("#timerWrap");
+  const timerNumber = $("#timerNumber");
+  const timerProgress = $("#timerProgress");
+  const downloadStatus = $("#downloadStatus");
+  const btnFinal = $("#btnFinalDownload");
+  
+  timerWrap.classList.remove("completed");
+  timerNumber.textContent = DOWNLOAD_WAIT_TIME;
+  timerProgress.style.strokeDasharray = CIRCLE_CIRCUMFERENCE;
+  timerProgress.style.strokeDashoffset = CIRCLE_CIRCUMFERENCE;
+  
+  downloadStatus.className = "download-status";
+  downloadStatus.innerHTML = `
+    <span class="pulse-dot"></span>
+    <span class="pulse-dot"></span>
+    <span class="pulse-dot"></span>
+    <span style="margin-left:4px">PREPARANDO DESCARGA</span>
+  `;
+  
+  btnFinal.classList.remove("show");
+  
+  // Mostrar info del archivo
+  $("#dlFileName").textContent = postData.fileName || "archivo";
+  $("#dlFileSize").textContent = fmtSize(postData.fileSize || 0);
+  
+  // Abrir modal
   openModal("modalAd");
-  let sec = 5;
-  $("#adCount").textContent = sec;
-  $("#downloadReady").classList.remove("show");
-  $("#adTimer").style.display="block";
-  $("#adTimer").innerHTML = `<i class="fa-solid fa-clock"></i> Espera <span id="adCount">${sec}</span>s`;
-  const iv = setInterval(()=>{
-    sec--;
-    $("#adCount").textContent = sec;
-    if(sec<=0){ clearInterval(iv); $("#adTimer").innerHTML = '<i class="fa-solid fa-check"></i> Anuncio completado'; $("#downloadReady").classList.add("show"); }
-  },1000);
+  
+  // Iniciar timer
+  let remaining = DOWNLOAD_WAIT_TIME;
+  
+  state.downloadTimerInterval = setInterval(() => {
+    remaining--;
+    
+    // Actualizar número
+    timerNumber.textContent = remaining;
+    
+    // Actualizar progreso del círculo (de 440 a 0)
+    const progress = (DOWNLOAD_WAIT_TIME - remaining) / DOWNLOAD_WAIT_TIME;
+    const offset = CIRCLE_CIRCUMFERENCE * (1 - progress);
+    timerProgress.style.strokeDashoffset = offset;
+    
+    // Actualizar mensaje de estado
+    if (remaining > 10) {
+      downloadStatus.innerHTML = `
+        <span class="pulse-dot"></span>
+        <span class="pulse-dot"></span>
+        <span class="pulse-dot"></span>
+        <span style="margin-left:4px">VERIFICANDO SEGURIDAD</span>
+      `;
+    } else if (remaining > 5) {
+      downloadStatus.innerHTML = `
+        <span class="pulse-dot"></span>
+        <span class="pulse-dot"></span>
+        <span class="pulse-dot"></span>
+        <span style="margin-left:4px">PREPARANDO ARCHIVO</span>
+      `;
+    } else if (remaining > 0) {
+      downloadStatus.innerHTML = `
+        <span class="pulse-dot"></span>
+        <span class="pulse-dot"></span>
+        <span class="pulse-dot"></span>
+        <span style="margin-left:4px">FINALIZANDO...</span>
+      `;
+    }
+    
+    // Timer completado
+    if (remaining <= 0) {
+      clearInterval(state.downloadTimerInterval);
+      state.downloadTimerInterval = null;
+      
+      timerWrap.classList.add("completed");
+      timerNumber.innerHTML = '<i class="fa-solid fa-check" style="font-size:36px"></i>';
+      
+      downloadStatus.className = "download-status ready";
+      downloadStatus.innerHTML = `
+        <i class="fa-solid fa-circle-check"></i>
+        <span>ARCHIVO LISTO PARA DESCARGAR</span>
+      `;
+      
+      // Mostrar botón con animación
+      setTimeout(() => {
+        btnFinal.classList.add("show");
+      }, 200);
+    }
+  }, 1000);
 }
 
-$("#btnFinalDownload").addEventListener("click", ()=>{
+$("#btnFinalDownload").addEventListener("click", () => {
   if(!state.currentDownloadData || !state.currentDownloadData.fileData) return;
   try {
     const base64Data = state.currentDownloadData.fileData;
@@ -1329,14 +1614,12 @@ $("#btnFinalDownload").addEventListener("click", ()=>{
     URL.revokeObjectURL(url);
     closeModal("modalAd");
     toast("✓ Descarga iniciada");
-  } catch (err){ console.error(err); toast("Error al procesar la descarga", 'err'); }
+  } catch (err){ 
+    console.error(err); 
+    toast("Error al procesar la descarga", 'err'); 
+  }
 });
 
-/* ════════════════════════════════════════════════════════════════
-   🔧 openProfile CORREGIDO: Carga aportes sin índice compuesto
-   Se elimina orderBy("createdAt") para evitar el error de índice
-   compuesto en Firestore. Se ordena en cliente.
-   ════════════════════════════════════════════════════════════════ */
 async function openProfile(uid){
   state.viewingUserId = uid;
   try {
@@ -1354,9 +1637,7 @@ async function openProfile(uid){
     const profileCoverEl = $("#profileCover");
     if (coverUrl && (coverUrl.startsWith('http') || coverUrl.startsWith('data:image'))) {
       profileCoverEl.style.backgroundImage = `url('${coverUrl}')`;
-    } else {
-      profileCoverEl.style.backgroundImage = '';
-    }
+    } else { profileCoverEl.style.backgroundImage = ''; }
     
     const av = $("#profileAvatar");
     const avUrl = u.avatar || "";
@@ -1367,27 +1648,19 @@ async function openProfile(uid){
     const verifiedSeal = u.verified ? getVerifiedSealSVG('_profile') : "";
     $("#profileName").innerHTML = escapeHtml(`${u.name} ${u.lastName||""}`) + verifiedSeal;
     
-    // Actualizar contadores
     $("#statFollowers").textContent = (u.followers||[]).length;
     $("#statFollowing").textContent = (u.following||[]).length;
 
-    // ════════════════════════════════════════════════════════════
-    // 🔧 CARGA DE APORTES: Consulta SIN orderBy para evitar
-    // requerir índice compuesto en Firestore. Ordenamos en cliente.
-    // ════════════════════════════════════════════════════════════
     if (state.profilePostsListener) { state.profilePostsListener(); state.profilePostsListener = null; }
     
     if (FIREBASE_OK){
-      // Consulta simple por authorId (no requiere índice compuesto)
       const q = query(collection(fbDb,"posts"), where("authorId","==",uid));
       state.profilePostsListener = onSnapshot(q, snap2 => {
-        // Ordenar en cliente por fecha descendente
         const posts = snap2.docs.map(d => ({ id: d.id, ...d.data() })).sort((a,b) => {
           const ta = a.createdAt?.toMillis?.() || a.createdAt || 0;
           const tb = b.createdAt?.toMillis?.() || b.createdAt || 0;
           return tb - ta;
         });
-        
         $("#statPosts").textContent = posts.length;
         const list = $("#profilePosts");
         list.innerHTML = "";
@@ -1399,10 +1672,7 @@ async function openProfile(uid){
           try { list.appendChild(renderPost(p, p.id)); }
           catch(err) { console.error('Error render post perfil:', err); }
         });
-      }, err => {
-        console.error('Error posts perfil:', err);
-        toast("Error al cargar aportes", 'err');
-      });
+      }, err => { console.error('Error posts perfil:', err); toast("Error al cargar aportes", 'err'); });
     } else {
       const posts = DemoDB.getPostsByUser(uid);
       $("#statPosts").textContent = posts.length;
@@ -1437,10 +1707,6 @@ async function openProfile(uid){
   } catch (err){ console.error(err); toast("Error al cargar perfil", 'err'); }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   🔧 toggleFollow CORREGIDO: Recarga el perfil tras el cambio
-   para actualizar contadores y botones en tiempo real.
-   ════════════════════════════════════════════════════════════════ */
 async function toggleFollow(uid){
   if(!state.profile) return;
   const isFollowing = (state.profile.following||[]).includes(uid);
@@ -1470,16 +1736,10 @@ async function toggleFollow(uid){
     }
     await loadMyProfile();
     toast(isFollowing ? "Dejaste de seguir" : "Ahora sigues a este usuario");
-    // Recargar el perfil que se está viendo para actualizar contadores
     openProfile(uid);
   }catch(e){ console.error(e); toast("Error", 'err'); }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   🔧 NUEVO: LISTA INTERACTIVA DE SEGUIDORES / SEGUIDOS
-   ════════════════════════════════════════════════════════════════ */
-
-// Hacer contadores clickeables
 $("#statFollowersBox").addEventListener("click", () => {
   if (!state.viewingUserId) return;
   openFollowList('followers', state.viewingUserId);
@@ -1490,40 +1750,24 @@ $("#statFollowingBox").addEventListener("click", () => {
   openFollowList('following', state.viewingUserId);
 });
 
-// Cambiar entre pestañas del modal
 $$(".follow-list-tabs button").forEach(btn => {
   btn.addEventListener("click", () => {
     $$(".follow-list-tabs button").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
     const type = btn.dataset.followTab;
-    if (state.followListContext.uid) {
-      openFollowList(type, state.followListContext.uid);
-    }
+    if (state.followListContext.uid) openFollowList(type, state.followListContext.uid);
   });
 });
 
 async function openFollowList(type, uid){
   state.followListContext = { uid, type };
-  
-  // Actualizar pestaña activa
-  $$(".follow-list-tabs button").forEach(b => {
-    b.classList.toggle("active", b.dataset.followTab === type);
-  });
-  
-  // Actualizar título
+  $$(".follow-list-tabs button").forEach(b => b.classList.toggle("active", b.dataset.followTab === type));
   const titleEl = $("#followListTitle");
-  if (type === 'followers') {
-    titleEl.innerHTML = '<i class="fa-solid fa-user-group"></i> SEGUIDORES';
-  } else {
-    titleEl.innerHTML = '<i class="fa-solid fa-user-plus"></i> SIGUIENDO';
-  }
-  
+  titleEl.innerHTML = type === 'followers' ? '<i class="fa-solid fa-user-group"></i> SEGUIDORES' : '<i class="fa-solid fa-user-plus"></i> SIGUIENDO';
   openModal("modalFollowList");
   const content = $("#followListContent");
   content.innerHTML = '<div style="text-align:center;padding:20px"><span class="loader"></span></div>';
-  
   try {
-    // Obtener datos del usuario
     let targetUser;
     if (FIREBASE_OK) {
       const snap = await getDoc(doc(fbDb, "users", uid));
@@ -1533,119 +1777,77 @@ async function openFollowList(type, uid){
       targetUser = DemoDB.findUserById(uid);
       if (!targetUser) { content.innerHTML = '<div class="empty-state"><h3>USUARIO NO ENCONTRADO</h3></div>'; return; }
     }
-    
     const uids = type === 'followers' ? (targetUser.followers || []) : (targetUser.following || []);
-    
     if (!uids.length) {
       const emptyMsg = type === 'followers' ? 'Aún no tiene seguidores' : 'Aún no sigue a nadie';
       content.innerHTML = `<div class="empty-state"><i class="fa-solid fa-${type === 'followers' ? 'user-group' : 'user-plus'}"></i><h3>SIN ${type === 'followers' ? 'SEGUIDORES' : 'SEGUIDOS'}</h3><p>${emptyMsg}</p></div>`;
       return;
     }
-    
-    // Obtener datos de cada usuario de la lista
     const usersData = await Promise.all(uids.map(async (userUid) => {
       try {
         if (FIREBASE_OK) {
           const snap = await getDoc(doc(fbDb, "users", userUid));
           return snap.exists() ? snap.data() : null;
-        } else {
-          return DemoDB.findUserById(userUid);
-        }
-      } catch (e) {
-        console.warn(`No se pudo cargar usuario ${userUid}:`, e);
-        return null;
-      }
+        } else { return DemoDB.findUserById(userUid); }
+      } catch (e) { return null; }
     }));
-    
     const validUsers = usersData.filter(u => u !== null);
-    
     if (!validUsers.length) {
-      content.innerHTML = `<div class="empty-state"><i class="fa-solid fa-ghost"></i><h3>SIN DATOS</h3><p>No se pudo cargar la lista</p></div>`;
+      content.innerHTML = `<div class="empty-state"><i class="fa-solid fa-ghost"></i><h3>SIN DATOS</h3></div>`;
       return;
     }
-    
-    // Renderizar lista
     content.innerHTML = '';
-    validUsers.forEach(u => {
-      content.appendChild(renderFollowUserItem(u));
-    });
-    
+    validUsers.forEach(u => content.appendChild(renderFollowUserItem(u)));
   } catch (err) {
     console.error('Error al cargar lista:', err);
-    content.innerHTML = `<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><h3>ERROR</h3><p>${escapeHtml(err.message)}</p></div>`;
+    content.innerHTML = `<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><h3>ERROR</h3></div>`;
   }
 }
 
 function renderFollowUserItem(u){
   const el = document.createElement("div");
   el.className = "follow-user-item";
-  
   const verifiedSeal = u.verified ? getVerifiedSealSVG('_fl'+sealCounter++) : "";
   const isMe = u.uid === state.user.uid;
   const isFollowing = (state.profile.following || []).includes(u.uid);
-  
   let followBtnHTML = '';
   if (!isMe) {
-    followBtnHTML = `
-      <button class="btn-follow-mini ${isFollowing ? 'following' : ''}" data-uid="${u.uid}">
-        ${isFollowing ? 'SIGUIENDO' : 'SEGUIR'}
-      </button>`;
+    followBtnHTML = `<button class="btn-follow-mini ${isFollowing ? 'following' : ''}" data-uid="${u.uid}">${isFollowing ? 'SIGUIENDO' : 'SEGUIR'}</button>`;
   }
-  
   el.innerHTML = `
     <div class="avatar"></div>
     <div class="info" data-uid="${u.uid}">
       <div class="n">${escapeHtml(u.name)} ${escapeHtml(u.lastName||"")} ${verifiedSeal}</div>
     </div>
     ${followBtnHTML}`;
-  
-  // Aplicar avatar
   const avEl = el.querySelector(".avatar");
   const avUrl = u.avatar || "";
   applyAvatar(avEl, (avUrl.startsWith('http') || avUrl.startsWith('data:image')) ? avUrl : "", `${u.name} ${u.lastName||""}`);
-  
-  // Click en info → ver perfil
   el.querySelector(".info").addEventListener("click", () => {
     closeModal("modalFollowList");
     openProfile(u.uid);
   });
-  
-  // Click en botón seguir
   const followBtn = el.querySelector(".btn-follow-mini");
   if (followBtn) {
     followBtn.addEventListener("click", async (e) => {
       e.stopPropagation();
       await quickToggleFollow(u.uid, followBtn);
     });
-    
-    // Efecto hover: al pasar el mouse sobre "SIGUIENDO" cambia a "DEJAR DE SEGUIR"
     followBtn.addEventListener("mouseenter", () => {
-      if (followBtn.classList.contains('following')) {
-        followBtn.innerHTML = 'DEJAR DE SEGUIR';
-      }
+      if (followBtn.classList.contains('following')) followBtn.innerHTML = 'DEJAR DE SEGUIR';
     });
     followBtn.addEventListener("mouseleave", () => {
-      if (followBtn.classList.contains('following')) {
-        followBtn.innerHTML = 'SIGUIENDO';
-      }
+      if (followBtn.classList.contains('following')) followBtn.innerHTML = 'SIGUIENDO';
     });
   }
-  
   return el;
 }
 
-/* ════════════════════════════════════════════════════════════════
-   🔧 quickToggleFollow: Cambia el estado de seguimiento
-   desde el modal sin cerrar la ventana, actualizando el botón
-   en tiempo real.
-   ════════════════════════════════════════════════════════════════ */
 async function quickToggleFollow(targetUid, btnEl){
   if (!state.profile) return;
   const isFollowing = (state.profile.following || []).includes(targetUid);
-  
   btnEl.disabled = true;
   btnEl.innerHTML = '<span class="loader" style="width:10px;height:10px;border-width:2px"></span>';
-  
   try {
     if (FIREBASE_OK) {
       const meRef = doc(fbDb, "users", state.user.uid);
@@ -1670,39 +1872,26 @@ async function quickToggleFollow(targetUid, btnEl){
       DemoDB.updateUser(state.user.uid, { following: me.following });
       DemoDB.updateUser(targetUid, { followers: them.followers });
     }
-    
-    // Recargar perfil actual
     await loadMyProfile();
-    
-    // Actualizar botón
     const nowFollowing = !isFollowing;
     btnEl.disabled = false;
     btnEl.classList.toggle('following', nowFollowing);
     btnEl.innerHTML = nowFollowing ? 'SIGUIENDO' : 'SEGUIR';
-    
     toast(nowFollowing ? "✓ Ahora sigues a este usuario" : "Dejaste de seguir");
-    
-    // Actualizar contadores del perfil actual si estamos viéndolo
-    if (state.viewingUserId) {
-      // Actualizar contador de seguidores del usuario objetivo
-      const targetUserEl = document.querySelector(`.follow-user-item [data-uid="${state.viewingUserId}"]`);
-      // Refrescar contadores del perfil que estamos viendo
-      if (FIREBASE_OK) {
-        const snap = await getDoc(doc(fbDb, "users", state.viewingUserId));
-        if (snap.exists()) {
-          const vu = snap.data();
-          $("#statFollowers").textContent = (vu.followers || []).length;
-          $("#statFollowing").textContent = (vu.following || []).length;
-        }
-      } else {
-        const vu = DemoDB.findUserById(state.viewingUserId);
-        if (vu) {
-          $("#statFollowers").textContent = (vu.followers || []).length;
-          $("#statFollowing").textContent = (vu.following || []).length;
-        }
+    if (state.viewingUserId && FIREBASE_OK) {
+      const snap = await getDoc(doc(fbDb, "users", state.viewingUserId));
+      if (snap.exists()) {
+        const vu = snap.data();
+        $("#statFollowers").textContent = (vu.followers || []).length;
+        $("#statFollowing").textContent = (vu.following || []).length;
+      }
+    } else if (state.viewingUserId) {
+      const vu = DemoDB.findUserById(state.viewingUserId);
+      if (vu) {
+        $("#statFollowers").textContent = (vu.followers || []).length;
+        $("#statFollowing").textContent = (vu.following || []).length;
       }
     }
-    
   } catch (err) {
     console.error('Error toggle follow:', err);
     btnEl.disabled = false;
@@ -1845,8 +2034,8 @@ async function openAdminPanel(){
 }
 
 (async function init(){
-  console.log("%c ═══ 𝘿𝙍𝙉 𝙈𝙊𝘿𝕃 v4.2 ═══ ", 'background:#00FF66;color:#000;font-size:14px;padding:6px 12px');
-  console.log("%c Perfil completo: Aportes + Lista interactiva de seguidores ", 'color:#00e0ff;font-size:11px');
+  console.log("%c ═══ 𝘿𝙍𝙉 𝙈𝙊𝘿𝕃 v4.3 ═══ ", 'background:#00FF66;color:#000;font-size:14px;padding:6px 12px');
+  console.log("%c Descarga Protegida: Timer circular 15s sin publicidad ", 'color:#00e0ff;font-size:11px');
   FIREBASE_OK = await tryInitFirebase();
   if (FIREBASE_OK){ showBanner('Modo Cloud activo · Firestore + Base64', 'ok'); }
   else { showBanner('Modo Demo · Configura firebaseConfig', 'demo'); }
@@ -1875,4 +2064,4 @@ async function openAdminPanel(){
 })();
 </script>
 </body>
-  </html>
+</html>
